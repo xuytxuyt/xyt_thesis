@@ -1,0 +1,325 @@
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.5.23)  23 MAY 2023 17:31
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**main.tex
+(./main.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-05-15> (/usr/local/texlive/2023/texmf-dist/tex/latex/base/report.cls
+Document Class: report 2022/07/02 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2023/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count181
+\c@chapter=\count182
+\c@section=\count183
+\c@subsection=\count184
+\c@subsubsection=\count185
+\c@paragraph=\count186
+\c@subparagraph=\count187
+\c@figure=\count188
+\c@table=\count189
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+) (/usr/local/texlive/2023/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+ (/usr/local/texlive/2023/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+))
+\Gm@cnth=\count190
+\Gm@cntv=\count191
+\c@Gm@tempcnt=\count192
+\Gm@bindingoffset=\dimen141
+\Gm@wd@mp=\dimen142
+\Gm@odd@mp=\dimen143
+\Gm@even@mp=\dimen144
+\Gm@layoutwidth=\dimen145
+\Gm@layoutheight=\dimen146
+\Gm@layouthoffset=\dimen147
+\Gm@layoutvoffset=\dimen148
+\Gm@dimlist=\toks17
+)
+./main.tex:17: Undefined control sequence.
+l.17 \setmainfont
+                 {Times New Roman}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+./main.tex:17: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.17 \setmainfont{T
+                   imes New Roman}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+./main.tex:18: Undefined control sequence.
+l.18 \setCJKmainfont
+                    {Songti SC}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+(/usr/local/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
+File: l3backend-xetex.def 2023-04-19 L3 backend support: XeTeX
+\g__graphics_track_int=\count193
+\l__pdf_internal_box=\box51
+\g__pdf_backend_object_int=\count194
+\g__pdf_backend_annotation_int=\count195
+\g__pdf_backend_link_int=\count196
+) (./main.aux)
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 19.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+*geometry* verbose mode - [ preamble ] result:
+* driver: xetex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: twoside 
+* h-part:(L,W,R)=(91.04872pt, 415.41043pt, 91.04872pt)
+* v-part:(T,H,B)=(108.12054pt, 628.80576pt, 108.12054pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=415.41043pt
+* \textheight=628.80576pt
+* \oddsidemargin=18.77873pt
+* \evensidemargin=18.77873pt
+* \topmargin=-1.14944pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=28.45274pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidetrue
+* \@mparswitchtrue
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+[1
+
+]
+Missing character: There is no 学 (U+5B66) in font [lmroman12-bold]:mapping=tex-text;!
+Missing character: There is no 位 (U+4F4D) in font [lmroman12-bold]:mapping=tex-text;!
+Missing character: There is no 论 (U+8BBA) in font [lmroman12-bold]:mapping=tex-text;!
+Missing character: There is no 文 (U+6587) in font [lmroman12-bold]:mapping=tex-text;!
+Missing character: There is no 答 (U+7B54) in font [lmroman12-bold]:mapping=tex-text;!
+Missing character: There is no 辩 (U+8FA9) in font [lmroman12-bold]:mapping=tex-text;!
+Missing character: There is no 委 (U+59D4) in font [lmroman12-bold]:mapping=tex-text;!
+Missing character: There is no 员 (U+5458) in font [lmroman12-bold]:mapping=tex-text;!
+Missing character: There is no 会 (U+4F1A) in font [lmroman12-bold]:mapping=tex-text;!
+Missing character: There is no 决 (U+51B3) in font [lmroman12-bold]:mapping=tex-text;!
+Missing character: There is no 议 (U+8BAE) in font [lmroman12-bold]:mapping=tex-text;!
+Missing character: There is no 根 (U+6839) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 据 (U+636E) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 《 (U+300A) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 中 (U+4E2D) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 华 (U+534E) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 人 (U+4EBA) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 民 (U+6C11) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 共 (U+5171) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 和 (U+548C) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 国 (U+56FD) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 学 (U+5B66) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 位 (U+4F4D) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 条 (U+6761) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 例 (U+4F8B) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 》 (U+300B) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 《 (U+300A) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 中 (U+4E2D) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 华 (U+534E) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 人 (U+4EBA) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 民 (U+6C11) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 共 (U+5171) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 和 (U+548C) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 国 (U+56FD) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 学 (U+5B66) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 位 (U+4F4D) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 条 (U+6761) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 例 (U+4F8B) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 暂 (U+6682) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 行 (U+884C) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 实 (U+5B9E) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 施 (U+65BD) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 办 (U+529E) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 法 (U+6CD5) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 》 (U+300B) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 《 (U+300A) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 华 (U+534E) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 侨 (U+4FA8) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 大 (U+5927) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 学 (U+5B66) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 学 (U+5B66) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 位 (U+4F4D) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 授 (U+6388) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 予 (U+4E88) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 工 (U+5DE5) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 作 (U+4F5C) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 细 (U+7EC6) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 则 (U+5219) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 》 (U+300B) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 及 (U+53CA) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 《 (U+300A) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 华 (U+534E) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 侨 (U+4FA8) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 大 (U+5927) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 学 (U+5B66) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 研 (U+7814) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 究 (U+7A76) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 生 (U+751F) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 学 (U+5B66) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 位 (U+4F4D) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 论 (U+8BBA) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 文 (U+6587) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 质 (U+8D28) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 量 (U+91CF) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 监 (U+76D1) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 控 (U+63A7) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 与 (U+4E0E) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 评 (U+8BC4) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 阅 (U+9605) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 答 (U+7B54) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 辩 (U+8FA9) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 的 (U+7684) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 管 (U+7BA1) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 理 (U+7406) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 规 (U+89C4) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 定 (U+5B9A) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 》 (U+300B) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 的 (U+7684) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 规 (U+89C4) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 定 (U+5B9A) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ， (U+FF0C) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 学 (U+5B66) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 位 (U+4F4D) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 论 (U+8BBA) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 文 (U+6587) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 答 (U+7B54) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 辩 (U+8FA9) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 委 (U+59D4) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 员 (U+5458) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 会 (U+4F1A) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 经 (U+7ECF) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 充 (U+5145) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 分 (U+5206) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 交 (U+4EA4) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 换 (U+6362) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 意 (U+610F) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 见 (U+89C1) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ， (U+FF0C) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 对 (U+5BF9) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 论 (U+8BBA) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 文 (U+6587) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 做 (U+505A) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 出 (U+51FA) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 评 (U+8BC4) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 价 (U+4EF7) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ， (U+FF0C) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 并 (U+5E76) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 以 (U+4EE5) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 无 (U+65E0) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 记 (U+8BB0) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 名 (U+540D) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 投 (U+6295) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 票 (U+7968) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 方 (U+65B9) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 式 (U+5F0F) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 进 (U+8FDB) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 行 (U+884C) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 表 (U+8868) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 决 (U+51B3) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ， (U+FF0C) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 同 (U+540C) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 意 (U+610F) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 该 (U+8BE5) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 同 (U+540C) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 学 (U+5B66) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 通 (U+901A) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 过 (U+8FC7) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 博 (U+535A) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 士 (U+58EB) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 硕 (U+7855) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 士 (U+58EB) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 学 (U+5B66) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 位 (U+4F4D) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 论 (U+8BBA) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 文 (U+6587) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 答 (U+7B54) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 辩 (U+8FA9) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ， (U+FF0C) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 同 (U+540C) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 意 (U+610F) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 授 (U+6388) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 予 (U+4E88) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 博 (U+535A) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 士 (U+58EB) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 硕 (U+7855) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 士 (U+58EB) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 学 (U+5B66) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 位 (U+4F4D) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 。 (U+3002) in font [lmroman10-regular]:mapping=tex-text;!
+
+Overfull \hbox (14.58957pt too wide) in paragraph at lines 21--22
+\TU/lmr/m/n/10 根据《中华人民共和国学位条例》、《中华人民共和国学位条例暂行实施办法》、《华侨大学学位授予工作细则》及《华侨大学研究生学位论文质量监控与评阅答辩的管理规定》的规定，学位论文答辩委员会经充分交换意见，对论文做出评价，并以无记名投票方式进行表决，同意该同学通过博士/硕士学位论文答辩，同意授予博士/硕士学位。 
+ []
+
+[2
+
+] (./main.aux) ) 
+Here is how much of TeX's memory you used:
+ 1099 strings out of 476760
+ 19736 string characters out of 5805258
+ 1844482 words of memory out of 5000000
+ 21328 multiletter control sequences out of 15000+600000
+ 512311 words of font info for 35 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 55i,5n,62p,182b,119s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+Output written on main.pdf (2 pages).
