@@ -1,20 +1,40 @@
 # Fdb version 4
-["pdflatex"] 1684834305 "main.tex" "main.pdf" "main" 1684834306 2
+["xdvipdfmx"] 1685011090 "main.xdv" "main.pdf" "main" 1685011090 0
+  "main.xdv" 1685011090 692 5ad5a80cf006dcd934f56f7dbb9b2706 "xelatex"
+  (generated)
+  "main.pdf"
+  (rewritten before read)
+["xelatex"] 1685011090 "main.tex" "main.xdv" "main" 1685011090 0
+  "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
+  "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmr10.tfm" 1136768653 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
   "/usr/local/texlive/2023/texmf-dist/tex/generic/iftex/iftex.sty" 1644112042 7237 bdd120a32c8fdb4b433cf9ca2e7cd98a ""
   "/usr/local/texlive/2023/texmf-dist/tex/generic/iftex/ifvtex.sty" 1572645307 1057 525c2192b5febbd8c1f662c9468335bb ""
+  "/usr/local/texlive/2023/texmf-dist/tex/latex/base/fontenc.sty" 1654720880 5119 4ce42f43368f652f9c9522d943cce8e4 ""
   "/usr/local/texlive/2023/texmf-dist/tex/latex/base/report.cls" 1667332637 23203 3d69f4661dd74a5edb1507ff18e40fb9 ""
   "/usr/local/texlive/2023/texmf-dist/tex/latex/base/size10.clo" 1667332637 8448 c33a4e1cb35cee9b33c2b21033b73e39 ""
   "/usr/local/texlive/2023/texmf-dist/tex/latex/base/ts1cmr.fd" 1667332637 2430 8418b3f1835e588625becbcac4dbce56 ""
+  "/usr/local/texlive/2023/texmf-dist/tex/latex/base/tuenc.def" 1654720880 26445 9ed4a9401f29cbb58ef6909cd5aec01f ""
+  "/usr/local/texlive/2023/texmf-dist/tex/latex/cjk/texinput/CJKfntef.sty" 1634853225 12851 25a9b5cc006609feb5c9a20ce24a5392 ""
+  "/usr/local/texlive/2023/texmf-dist/tex/latex/ctex/ctexhook.sty" 1657829894 6505 33157acfddefdd8fd513e2308e07a435 ""
+  "/usr/local/texlive/2023/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty" 1642282977 162076 2f6d31c4632f2730c57b9c0fda038e15 ""
+  "/usr/local/texlive/2023/texmf-dist/tex/latex/fontspec/fontspec.cfg" 1532898934 549 c4adac819276241fea8eb79c5ab7b99e ""
+  "/usr/local/texlive/2023/texmf-dist/tex/latex/fontspec/fontspec.sty" 1642282977 1656 7e824878bad4df5a3e8bba4e463d9126 ""
   "/usr/local/texlive/2023/texmf-dist/tex/latex/geometry/geometry.sty" 1578002852 41601 9cf6c5257b1bc7af01a58859749dd37a ""
   "/usr/local/texlive/2023/texmf-dist/tex/latex/graphics/keyval.sty" 1654720880 2671 7e67d78d9b88c845599a85b2d41f2e39 ""
   "/usr/local/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-xetex.def" 1681935207 31866 ab7ff58e8b7eb91f5882424abf292263 ""
+  "/usr/local/texlive/2023/texmf-dist/tex/latex/l3kernel/expl3.sty" 1684268520 6107 c38c46d6a45f8f3acdca81aa23b2a527 ""
+  "/usr/local/texlive/2023/texmf-dist/tex/latex/l3packages/xparse/xparse.sty" 1675461949 6812 3c152a1c8d562d7b7291c4839b61a5c3 ""
+  "/usr/local/texlive/2023/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty" 1675461949 49781 fc3b70ac7ed10b5696546be4bd28ddd0 ""
+  "/usr/local/texlive/2023/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg" 1659735237 408 7369c27beaa819c5f46de3795b22ee3e ""
+  "/usr/local/texlive/2023/texmf-dist/tex/xelatex/xecjk/xeCJK.sty" 1659735237 183137 ed372550124703b2b73cbcc0b47cb20f ""
+  "/usr/local/texlive/2023/texmf-dist/tex/xelatex/xecjk/xeCJKfntef.sty" 1659735237 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
   "/usr/local/texlive/2023/texmf-dist/web2c/texmf.cnf" 1681165822 40967 d940221f8762fd5848760382d97d1226 ""
   "/usr/local/texlive/2023/texmf-var/web2c/xetex/xelatex.fmt" 1684821778 10507342 1d9fc6ee9d6568070b254b51bd736dfb ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
-  "main.aux" 1684834305 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
-  "main.tex" 1684834291 869 7a295b999cb8cffdd487a235b71597cf ""
+  "main.aux" 1685011090 32 3985256e7290058c681f74d7a3565a19 "xelatex"
+  "main.tex" 1685011088 608 ead6352dc55eff5f1fa2c565fb919ca0 ""
   (generated)
   "main.aux"
   "main.log"
-  "main.pdf"
+  "main.xdv"
   (rewritten before read)
