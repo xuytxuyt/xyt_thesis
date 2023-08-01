@@ -1,108 +1,101 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.9.30)  4 JUN 2023 23:54
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.5.23)  2 AUG 2023 01:11
 entering extended mode
- restricted \write18 enabled.
+ \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
 **main.tex
 (./main.tex
-LaTeX2e <2020-10-01> patch level 4
-L3 programming layer <2021-02-18> (./hquThesis.cls
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-05-15> (./hquThesis.cls
 Document Class: hquThesis 2023/05/26 Huaqiao University Thesis document class
-(/usr/local/texlive/2021/texmf-dist/tex/latex/base/book.cls
-Document Class: book 2020/04/10 v1.4m Standard LaTeX document class
-(/usr/local/texlive/2021/texmf-dist/tex/latex/base/bk10.clo
-File: bk10.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
+(/usr/local/texlive/2023/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2022/07/02 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2023/texmf-dist/tex/latex/base/bk10.clo
+File: bk10.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count175
-\c@chapter=\count176
-\c@section=\count177
-\c@subsection=\count178
-\c@subsubsection=\count179
-\c@paragraph=\count180
-\c@subparagraph=\count181
-\c@figure=\count182
-\c@table=\count183
-\abovecaptionskip=\skip47
-\belowcaptionskip=\skip48
-\bibindent=\dimen138
-) (/usr/local/texlive/2021/texmf-dist/tex/latex/geometry/geometry.sty
+\c@part=\count181
+\c@chapter=\count182
+\c@section=\count183
+\c@subsection=\count184
+\c@subsubsection=\count185
+\c@paragraph=\count186
+\c@subparagraph=\count187
+\c@figure=\count188
+\c@table=\count189
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
- (/usr/local/texlive/2021/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks15
-) (/usr/local/texlive/2021/texmf-dist/tex/generic/iftex/ifvtex.sty
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+) (/usr/local/texlive/2023/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
- (/usr/local/texlive/2021/texmf-dist/tex/generic/iftex/iftex.sty
-Package: iftex 2020/03/06 v1.0d TeX engine tests
+ (/usr/local/texlive/2023/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
 ))
-\Gm@cnth=\count184
-\Gm@cntv=\count185
-\c@Gm@tempcnt=\count186
-\Gm@bindingoffset=\dimen139
-\Gm@wd@mp=\dimen140
-\Gm@odd@mp=\dimen141
-\Gm@even@mp=\dimen142
-\Gm@layoutwidth=\dimen143
-\Gm@layoutheight=\dimen144
-\Gm@layouthoffset=\dimen145
-\Gm@layoutvoffset=\dimen146
-\Gm@dimlist=\toks16
-) (/usr/local/texlive/2021/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
- (/usr/local/texlive/2021/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2020/08/30 v1.4c Standard LaTeX Graphics (DPC,SPQR)
- (/usr/local/texlive/2021/texmf-dist/tex/latex/graphics/trig.sty
-Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
-) (/usr/local/texlive/2021/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+\Gm@cnth=\count190
+\Gm@cntv=\count191
+\c@Gm@tempcnt=\count192
+\Gm@bindingoffset=\dimen141
+\Gm@wd@mp=\dimen142
+\Gm@odd@mp=\dimen143
+\Gm@even@mp=\dimen144
+\Gm@layoutwidth=\dimen145
+\Gm@layoutheight=\dimen146
+\Gm@layouthoffset=\dimen147
+\Gm@layoutvoffset=\dimen148
+\Gm@dimlist=\toks17
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: xetex.def on input line 105.
- (/usr/local/texlive/2021/texmf-dist/tex/latex/graphics-def/xetex.def
-File: xetex.def 2021/03/18 v5.0k Graphics/color driver for xetex
+Package graphics Info: Driver file: xetex.def on input line 107.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/graphics-def/xetex.def
+File: xetex.def 2022/09/22 v5.0n Graphics/color driver for xetex
 ))
-\Gin@req@height=\dimen147
-\Gin@req@width=\dimen148
-) (/usr/local/texlive/2021/texmf-dist/tex/latex/float/float.sty
+\Gin@req@height=\dimen149
+\Gin@req@width=\dimen150
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count187
-\float@exts=\toks17
-\float@box=\box47
-\@float@everytoks=\toks18
-\@floatcapt=\box48
-) (/usr/local/texlive/2021/texmf-dist/tex/xelatex/xecjk/xeCJK.sty (/usr/local/texlive/2021/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2021-02-18 L3 programming layer (loader) 
- (/usr/local/texlive/2021/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
-File: l3backend-xetex.def 2021-03-18 L3 backend support: XeTeX
- (|extractbb --version)
-\c__kernel_sys_dvipdfmx_version_int=\count188
-\l__color_backend_stack_int=\count189
-\g__color_backend_stack_int=\count190
-\g__graphics_track_int=\count191
-\l__pdf_internal_box=\box49
-\g__pdf_backend_object_int=\count192
-\g__pdf_backend_annotation_int=\count193
-\g__pdf_backend_link_int=\count194
+\c@float@type=\count193
+\float@exts=\toks18
+\float@box=\box51
+\@float@everytoks=\toks19
+\@floatcapt=\box52
+) (/usr/local/texlive/2023/texmf-dist/tex/xelatex/xecjk/xeCJK.sty (/usr/local/texlive/2023/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2023-05-15 L3 programming layer (loader) 
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
+File: l3backend-xetex.def 2023-04-19 L3 backend support: XeTeX
+\g__graphics_track_int=\count194
+\l__pdf_internal_box=\box53
+\g__pdf_backend_object_int=\count195
+\g__pdf_backend_annotation_int=\count196
+\g__pdf_backend_link_int=\count197
 ))
-Package: xeCJK 2020/10/19 v3.8.6 Typesetting CJK scripts with XeLaTeX
- (/usr/local/texlive/2021/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
-Package: l3keys2e 2021-03-12 LaTeX2e option processing using LaTeX3 keys
-) (/usr/local/texlive/2021/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty
-Package: xtemplate 2021-03-12 L3 Experimental prototype document functions
-\l__xtemplate_tmp_dim=\dimen149
-\l__xtemplate_tmp_int=\count195
+Package: xeCJK 2022/08/05 v3.9.1 Typesetting CJK scripts with XeLaTeX
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/ctex/ctexhook.sty
+Package: ctexhook 2022/07/14 v2.5.10 Document and package hooks (CTEX)
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty
+Package: xtemplate 2023-02-02 L3 Experimental prototype document functions
+\l__xtemplate_tmp_dim=\dimen151
+\l__xtemplate_tmp_int=\count198
 \l__xtemplate_tmp_muskip=\muskip16
-\l__xtemplate_tmp_skip=\skip49
-) (/usr/local/texlive/2021/texmf-dist/tex/latex/l3packages/xparse/xparse.sty (/usr/local/texlive/2021/texmf-dist/tex/latex/l3packages/xparse/xparse-2020-10-01.sty (/usr/local/texlive/2021/texmf-dist/tex/latex/l3packages/xparse/xparse-generic.tex)))
-\l__xeCJK_tmp_int=\count196
-\l__xeCJK_tmp_box=\box50
-\l__xeCJK_tmp_dim=\dimen150
-\l__xeCJK_tmp_skip=\skip50
- (/usr/local/texlive/2021/texmf-dist/tex/latex/ctex/ctexhook.sty
-Package: ctexhook 2021/03/14 v2.5.6 Document and package hooks (CTEX)
+\l__xtemplate_tmp_skip=\skip50
 )
-\g__xeCJK_space_factor_int=\count197
-\l__xeCJK_begin_int=\count198
-\l__xeCJK_end_int=\count199
+\l__xeCJK_tmp_int=\count199
+\l__xeCJK_tmp_box=\box54
+\l__xeCJK_tmp_dim=\dimen152
+\l__xeCJK_tmp_skip=\skip51
+\g__xeCJK_space_factor_int=\count266
+\l__xeCJK_begin_int=\count267
+\l__xeCJK_end_int=\count268
 \c__xeCJK_CJK_class_int=\XeTeXcharclass1
 \c__xeCJK_FullLeft_class_int=\XeTeXcharclass2
 \c__xeCJK_FullRight_class_int=\XeTeXcharclass3
@@ -111,101 +104,104 @@ Package: ctexhook 2021/03/14 v2.5.6 Document and package hooks (CTEX)
 \c__xeCJK_NormalSpace_class_int=\XeTeXcharclass6
 \c__xeCJK_CM_class_int=\XeTeXcharclass7
 \c__xeCJK_HangulJamo_class_int=\XeTeXcharclass8
-\l__xeCJK_last_skip=\skip51
-\g__xeCJK_node_int=\count266
-\c__xeCJK_CJK_node_dim=\dimen151
-\c__xeCJK_CJK-space_node_dim=\dimen152
-\c__xeCJK_default_node_dim=\dimen153
-\c__xeCJK_default-space_node_dim=\dimen154
-\c__xeCJK_CJK-widow_node_dim=\dimen155
-\c__xeCJK_normalspace_node_dim=\dimen156
-\l__xeCJK_ccglue_skip=\skip52
-\l__xeCJK_ecglue_skip=\skip53
-\l__xeCJK_punct_kern_skip=\skip54
-\l__xeCJK_last_penalty_int=\count267
-\l__xeCJK_last_bound_dim=\dimen157
-\l__xeCJK_last_kern_dim=\dimen158
-\l__xeCJK_widow_penalty_int=\count268
+\l__xeCJK_last_skip=\skip52
+\c__xeCJK_none_node=\count269
+\g__xeCJK_node_int=\count270
+\c__xeCJK_CJK_node_dim=\dimen153
+\c__xeCJK_CJK-space_node_dim=\dimen154
+\c__xeCJK_default_node_dim=\dimen155
+\c__xeCJK_CJK-widow_node_dim=\dimen156
+\c__xeCJK_normalspace_node_dim=\dimen157
+\c__xeCJK_default-space_node_skip=\skip53
+\l__xeCJK_ccglue_skip=\skip54
+\l__xeCJK_ecglue_skip=\skip55
+\l__xeCJK_punct_kern_skip=\skip56
+\l__xeCJK_indent_box=\box55
+\l__xeCJK_last_penalty_int=\count271
+\l__xeCJK_last_bound_dim=\dimen158
+\l__xeCJK_last_kern_dim=\dimen159
+\l__xeCJK_widow_penalty_int=\count272
 
 Package xtemplate Info: Declaring object type 'xeCJK/punctuation' taking 0
-(xtemplate)             argument(s) on line 2341.
+(xtemplate)             argument(s) on line 2396.
 
-\l__xeCJK_fixed_punct_width_dim=\dimen159
-\l__xeCJK_mixed_punct_width_dim=\dimen160
-\l__xeCJK_middle_punct_width_dim=\dimen161
-\l__xeCJK_fixed_margin_width_dim=\dimen162
-\l__xeCJK_mixed_margin_width_dim=\dimen163
-\l__xeCJK_middle_margin_width_dim=\dimen164
-\l__xeCJK_bound_punct_width_dim=\dimen165
-\l__xeCJK_bound_margin_width_dim=\dimen166
-\l__xeCJK_margin_minimum_dim=\dimen167
-\l__xeCJK_kerning_total_width_dim=\dimen168
-\l__xeCJK_same_align_margin_dim=\dimen169
-\l__xeCJK_different_align_margin_dim=\dimen170
-\l__xeCJK_kerning_margin_width_dim=\dimen171
-\l__xeCJK_kerning_margin_minimum_dim=\dimen172
-\l__xeCJK_bound_dim=\dimen173
-\l__xeCJK_reverse_bound_dim=\dimen174
-\l__xeCJK_margin_dim=\dimen175
-\l__xeCJK_minimum_bound_dim=\dimen176
-\l__xeCJK_kerning_margin_dim=\dimen177
-\g__xeCJK_family_int=\count269
-\l__xeCJK_fam_int=\count270
-\g__xeCJK_fam_allocation_int=\count271
-\l__xeCJK_verb_case_int=\count272
-\l__xeCJK_verb_exspace_skip=\skip55
- (/usr/local/texlive/2021/texmf-dist/tex/latex/fontspec/fontspec.sty
-Package: fontspec 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTeX
- (/usr/local/texlive/2021/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
-Package: fontspec-xetex 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTeX
-\l__fontspec_script_int=\count273
-\l__fontspec_language_int=\count274
-\l__fontspec_strnum_int=\count275
-\l__fontspec_tmp_int=\count276
-\l__fontspec_tmpa_int=\count277
-\l__fontspec_tmpb_int=\count278
-\l__fontspec_tmpc_int=\count279
-\l__fontspec_em_int=\count280
-\l__fontspec_emdef_int=\count281
-\l__fontspec_strong_int=\count282
-\l__fontspec_strongdef_int=\count283
-\l__fontspec_tmpa_dim=\dimen178
-\l__fontspec_tmpb_dim=\dimen179
-\l__fontspec_tmpc_dim=\dimen180
- (/usr/local/texlive/2021/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2020/08/10 v2.0s Standard LaTeX package
-) (/usr/local/texlive/2021/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (/usr/local/texlive/2021/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg
-File: xeCJK.cfg 2020/10/19 v3.8.6 Configuration file for xeCJK package
-)) (/usr/local/texlive/2021/texmf-dist/tex/latex/tools/indentfirst.sty
-Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
-) (/usr/local/texlive/2021/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
-Package: fancyhdr 2021/01/28 v4.0.1 Extensive control of page headers and footers
-\f@nch@headwidth=\skip56
-\f@nch@O@elh=\skip57
-\f@nch@O@erh=\skip58
-\f@nch@O@olh=\skip59
-\f@nch@O@orh=\skip60
-\f@nch@O@elf=\skip61
-\f@nch@O@erf=\skip62
-\f@nch@O@olf=\skip63
-\f@nch@O@orf=\skip64
-) (/usr/local/texlive/2021/texmf-dist/tex/latex/setspace/setspace.sty
-Package: setspace 2011/12/19 v6.7a set line spacing
+\l__xeCJK_fixed_punct_width_dim=\dimen160
+\l__xeCJK_mixed_punct_width_dim=\dimen161
+\l__xeCJK_middle_punct_width_dim=\dimen162
+\l__xeCJK_fixed_margin_width_dim=\dimen163
+\l__xeCJK_mixed_margin_width_dim=\dimen164
+\l__xeCJK_middle_margin_width_dim=\dimen165
+\l__xeCJK_bound_punct_width_dim=\dimen166
+\l__xeCJK_bound_margin_width_dim=\dimen167
+\l__xeCJK_margin_minimum_dim=\dimen168
+\l__xeCJK_kerning_total_width_dim=\dimen169
+\l__xeCJK_same_align_margin_dim=\dimen170
+\l__xeCJK_different_align_margin_dim=\dimen171
+\l__xeCJK_kerning_margin_width_dim=\dimen172
+\l__xeCJK_kerning_margin_minimum_dim=\dimen173
+\l__xeCJK_bound_dim=\dimen174
+\l__xeCJK_reverse_bound_dim=\dimen175
+\l__xeCJK_margin_dim=\dimen176
+\l__xeCJK_minimum_bound_dim=\dimen177
+\l__xeCJK_kerning_margin_dim=\dimen178
+\g__xeCJK_family_int=\count273
+\l__xeCJK_fam_int=\count274
+\g__xeCJK_fam_allocation_int=\count275
+\l__xeCJK_verb_case_int=\count276
+\l__xeCJK_verb_exspace_skip=\skip57
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/fontspec/fontspec.sty (/usr/local/texlive/2023/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+Package: xparse 2023-02-02 L3 Experimental document command parser
 )
-(/usr/local/texlive/2021/texmf-dist/tex/latex/titlesec/titlesec.sty
-Package: titlesec 2019/10/16 v2.13 Sectioning titles
-\ttl@box=\box51
-\beforetitleunit=\skip65
-\aftertitleunit=\skip66
-\ttl@plus=\dimen181
-\ttl@minus=\dimen182
-\ttl@toksa=\toks19
-\titlewidth=\dimen183
-\titlewidthlast=\dimen184
-\titlewidthfirst=\dimen185
-) (/usr/local/texlive/2021/texmf-dist/tex/latex/titlesec/titletoc.sty
-Package: titletoc 2019/10/16 v2.13 TOC entries
-\ttl@leftsep=\dimen186
+Package: fontspec 2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTeX
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+Package: fontspec-xetex 2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTeX
+\l__fontspec_script_int=\count277
+\l__fontspec_language_int=\count278
+\l__fontspec_strnum_int=\count279
+\l__fontspec_tmp_int=\count280
+\l__fontspec_tmpa_int=\count281
+\l__fontspec_tmpb_int=\count282
+\l__fontspec_tmpc_int=\count283
+\l__fontspec_em_int=\count284
+\l__fontspec_emdef_int=\count285
+\l__fontspec_strong_int=\count286
+\l__fontspec_strongdef_int=\count287
+\l__fontspec_tmpa_dim=\dimen179
+\l__fontspec_tmpb_dim=\dimen180
+\l__fontspec_tmpc_dim=\dimen181
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (/usr/local/texlive/2023/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg
+File: xeCJK.cfg 2022/08/05 v3.9.1 Configuration file for xeCJK package
+)) (/usr/local/texlive/2023/texmf-dist/tex/latex/tools/indentfirst.sty
+Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
+\f@nch@headwidth=\skip58
+\f@nch@O@elh=\skip59
+\f@nch@O@erh=\skip60
+\f@nch@O@olh=\skip61
+\f@nch@O@orh=\skip62
+\f@nch@O@elf=\skip63
+\f@nch@O@erf=\skip64
+\f@nch@O@olf=\skip65
+\f@nch@O@orf=\skip66
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/titlesec/titlesec.sty
+Package: titlesec 2021/07/05 v2.14 Sectioning titles
+\ttl@box=\box56
+\beforetitleunit=\skip67
+\aftertitleunit=\skip68
+\ttl@plus=\dimen182
+\ttl@minus=\dimen183
+\ttl@toksa=\toks20
+\titlewidth=\dimen184
+\titlewidthlast=\dimen185
+\titlewidthfirst=\dimen186
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/titlesec/titletoc.sty
+Package: titletoc 2021/07/05 v2.14 TOC entries
+\ttl@leftsep=\dimen187
 )
 
 Package fontspec Info: Font family 'TimesNewRoman(0)' created for font 'Times
@@ -271,7 +267,7 @@ Package fontspec Info: Font family 'simsun.ttc(0)' created for font
 )
 
 LaTeX Warning: Unused global option(s):
-    [UTF8,scheme=plain].
+    [UTF8,scheme].
 
 (./main.aux)
 \openout1 = `main.aux'.
@@ -286,8 +282,8 @@ LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
 LaTeX Font Info:    ... okay on input line 20.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 20.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 20.
- (/usr/local/texlive/2021/texmf-dist/tex/latex/base/ts1cmr.fd
-File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 20.
 LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 20.
@@ -562,19 +558,53 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [4
 
-] (./main.aux)
+]
+Chapter 1.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 12.21332pt, for example:
+(fancyhdr)                \setlength{\headheight}{12.21332pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-0.21332pt}.
+
+[1
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 12.21332pt, for example:
+(fancyhdr)                \setlength{\headheight}{12.21332pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-0.21332pt}.
+
+[2]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 12.21332pt, for example:
+(fancyhdr)                \setlength{\headheight}{12.21332pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-0.21332pt}.
+
+[3] (./main.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.45pt have occurred.
 
  ) 
 Here is how much of TeX's memory you used:
- 6414 strings out of 476919
- 178794 string characters out of 5821840
- 524712 words of memory out of 5000000
- 26305 multiletter control sequences out of 15000+600000
- 405779 words of font info for 98 fonts, out of 8000000 for 9000
+ 7066 strings out of 476760
+ 204185 string characters out of 5805258
+ 1867482 words of memory out of 5000000
+ 27128 multiletter control sequences out of 15000+600000
+ 515218 words of font info for 108 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 97i,10n,102p,315b,393s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 85i,12n,95p,377b,392s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.xdv (10 pages, 18620 bytes).
+Output written on main.xdv (13 pages, 47724 bytes).

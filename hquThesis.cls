@@ -43,6 +43,8 @@
 \setCJKsansfont{simhei.ttf}[AutoFakeSlant,AutoFakeBold={2}]
 \setCJKmonofont{Kaiti_GB2312.ttf}[AutoFakeSlant,AutoFakeBold={2}]
 \newCJKfontfamily\declarationfont{simfang.ttf}[AutoFakeSlant,AutoFakeBold={2}]
+\fontsize{12pt}{20pt}\selectfont
+\setlength{\parindent}{24pt}
 
 \newcommand\titleZh[1]{\def\@titleZh{#1}}
 \newcommand\titleEn[1]{\def\@titleEn{#1}}
@@ -135,7 +137,26 @@
     \cleardoublepage
 }
 
+\renewcommand{\chaptermark}[1]{
+    \markboth{第\ \thechapter\ 章\ #1}{}
+}
 \renewcommand{\frontmatter}{
+    \setcounter{page}{1}
+    \pagestyle{fancy}
+    \fancyhf{}
+    \fancyfoot[C]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont \@Roman\thepage}
+    \fancyhead[CO]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont \leftmark}
+    \fancyhead[CE]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont 华侨大学\degree 学位论文}
+}
+\renewcommand{\mainmatter}{
+    \setcounter{page}{1}
+    \pagestyle{fancy}
+    \fancyhf{}
+    \fancyfoot[C]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont \@arabic\thepage}
+    \fancyhead[CO]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont \leftmark}
+    \fancyhead[CE]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont 华侨大学\degree 学位论文}
+}
+\renewcommand{\backmatter}{
     \setcounter{page}{1}
     \pagestyle{fancy}
     \fancyhf{}
@@ -171,3 +192,18 @@
     \noindent\rmfamily\fontsize{12pt}{20pt}\selectfont \textbf{Keywords:} #1
     \cleardoublepage
 }
+\setcounter{tocdepth}{3}
+
+\setcounter{secnumdepth}{3}
+\setlength{\parskip}{0pt}
+\titleformat{\chapter}[block]{\centering\sffamily\bfseries\fontsize{16pt}{\baselineskip}\selectfont}{第\ \arabic{chapter}\ 章}{16pt}{}
+\titlespacing{\chapter}{0pt}{24pt}{18pt}
+\assignpagestyle{\chapter}{fancy}
+\titleformat{\section}[hang]{\sffamily\bfseries\fontsize{14pt}{20pt}\selectfont}{\arabic{chapter}.\arabic{section}}{14pt}{}
+\titlespacing{\section}{0pt}{24pt}{6pt}
+\titleformat{\subsection}[hang]{\sffamily\bfseries\fontsize{12pt}{20pt}\selectfont}{\arabic{chapter}.\arabic{section}.\arabic{subsection}}{12pt}{}
+\titlespacing{\subsection}{0pt}{12pt}{6pt}
+\titleformat{\subsubsection}[hang]{\sffamily\bfseries\fontsize{12pt}{20pt}\selectfont}{\arabic{chapter}.\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}{12pt}{}
+\titlespacing{\subsubsection}{0pt}{12pt}{6pt}
+\titleformat{\paragraph}[runin]{\rmfamily\fontsize{12pt}{20pt}\selectfont}{}{}{}
+\titlespacing{\paragraph}{0pt}{0pt}{0pt}
