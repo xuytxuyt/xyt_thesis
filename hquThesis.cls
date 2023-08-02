@@ -1,6 +1,6 @@
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{hquThesis}[2023/05/26 Huaqiao University Thesis document class]
+\ProvidesClass{hquThesis}[2023/08/02 Huaqiao University Thesis document class]
 
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
@@ -24,7 +24,7 @@
 }
 
 \ProcessOptions\relax
-\LoadClass[twoside,openright,UTF8,scheme=plain]{book}
+\LoadClass[twoside, openright, UTF8, scheme=plain]{book}
 
 \RequirePackage{geometry}
 \RequirePackage{graphicx}
@@ -35,14 +35,15 @@
 \RequirePackage{setspace}
 \RequirePackage{titlesec}
 \RequirePackage{titletoc}
+\RequirePackage{tocloft}
 
-\geometry{a4paper,top=3.8cm,bottom=3.8cm,left=3.2cm,right=3.2cm,bindingoffset=0cm,voffset=0.3cm,footskip=1cm}
+\geometry{a4paper,top=3.8cm,bottom=3.8cm,left=3.2cm,right=3.2cm,bindingoffset=0cm,voffset=0.3cm,footskip=1cm,headheight=14pt}
 \setmainfont{Times New Roman}
 \setsansfont{Arial}
-\setCJKmainfont{simsun.ttc}[AutoFakeSlant,AutoFakeBold={2}]
-\setCJKsansfont{simhei.ttf}[AutoFakeSlant,AutoFakeBold={2}]
-\setCJKmonofont{Kaiti_GB2312.ttf}[AutoFakeSlant,AutoFakeBold={2}]
-\newCJKfontfamily\declarationfont{simfang.ttf}[AutoFakeSlant,AutoFakeBold={2}]
+\setCJKmainfont{simsun.ttc}[AutoFakeSlant, AutoFakeBold={2}]
+\setCJKsansfont{simhei.ttf}[AutoFakeSlant, AutoFakeBold={2}]
+\setCJKmonofont{Kaiti_GB2312.ttf}[AutoFakeSlant, AutoFakeBold={2}]
+\newCJKfontfamily\declarationfont{simfang.ttf}[AutoFakeSlant, AutoFakeBold={2}]
 \fontsize{12pt}{20pt}\selectfont
 \setlength{\parindent}{24pt}
 
@@ -69,7 +70,7 @@
         \noindent 学校代码：\hspace{6pt}\underline{\textrm{10385}}\hfill 分类号：\underline{\hspace{72pt}}\par
         \noindent 研究生学号：\underline{\makebox[72pt]{\textrm{\@id}}}\hfill 密\hspace{10.5pt}集：\underline{\hspace{72pt}}\par
     }
-    
+
     \begin{figure}[H]
         \makebox[\textwidth]{\includegraphics[width=\paperwidth]{\coverfig}}
     \end{figure}
@@ -116,17 +117,19 @@
     }
     \restoregeometry
     \cleardoublepage
-    \noindent\fbox{
-        \parbox{\textwidth}{
-            \vspace{24pt}\begin{center}\sffamily\fontsize{16pt}{\baselineskip}\selectfont 学位论文独创性声明\end{center}\par\vspace{18pt}
-            \hspace{28pt}\declarationfont\fontsize{14pt}{28pt}\selectfont 
-            本人声明兹呈交的学位论文是本人在导师指导下完成的研究成果。论文写作中不包含其他人已经发表或撰写过的研究内容，如参考他人或集体的科研成果，均在论文中以明确的方式说明。本人依法享有和承担由此论文所产生的权利和责任。\par\vspace{28pt}
-            \hspace{28pt} 论文作者签名：\underline{\hspace{112pt}}\hspace{7pt}签名日期：\underline{\hspace{77pt}}\par\vspace{7pt}
-        }
-    }\par
+    % \noindent\framebox[\linewidth]{%
+    \noindent\fbox{%
+        \parbox{14.3cm}{
+            \vspace{24pt}\begin{center}\sffamily\fontsize{16pt}{\baselineskip}\selectfont 学位论文独创性声明\end{center}\vspace{18pt}
+            \hspace{28pt}\declarationfont\fontsize{14pt}{28pt}\selectfont
+            本人声明兹呈交的学位论文是本人在导师指导下完成的研究成果。论文写作中不包含其他人已经发表或撰写过的研究内容，如参考他人或集体的科研成果，均在论文中以明确的方式说明。本人依法享有和承担由此论文所产生的权利和责任。\par
+            \vspace{28pt}\hspace{28pt} 论文作者签名：\underline{\hspace{112pt}}\hspace{7pt}签名日期：\underline{\hspace{77pt}}\par\vspace{7pt}
+        }%
+    }
+    \par
     \vspace{44pt}
-    \noindent\fbox{
-        \parbox{\textwidth}{
+    \noindent\framebox[\linewidth]{
+        \parbox{14.3cm}{
             \vspace{24pt}\begin{center}\sffamily\fontsize{16pt}{\baselineskip}\selectfont 学位论文版权使用授权声明\par\end{center}\vspace{18pt}
             \hspace{28pt}\declarationfont\fontsize{14pt}{28pt}\selectfont 
             本人同意授权华侨大学有权保留并向国家机关或机构送交学位论文的复印件和电子版，允许学位论文被查阅和借阅。本人授权华侨大学可以将本学位论文的全部内容或部分内容编入有关数据库进行检索，可以采用影印、缩印或扫描等复制手段保存和汇编本学位论文。\par\vspace{28pt}
@@ -192,7 +195,26 @@
     \noindent\rmfamily\fontsize{12pt}{20pt}\selectfont \textbf{Keywords:} #1
     \cleardoublepage
 }
-\setcounter{tocdepth}{3}
+\tocloftpagestyle{fancy}
+\renewcommand{\contentsname}{\centerline{目\hspace{16pt}录}}
+\renewcommand{\cfttoctitlefont}{\sffamily\bfseries\fontsize{16pt}{\baselineskip}\selectfont}
+\renewcommand{\cftbeforetoctitleskip}{24pt}
+\renewcommand{\cftaftertoctitleskip}{18pt}
+\renewcommand{\cftchapdotsep}{4.5}
+\setlength{\cftparskip}{0pt}
+\setlength{\cftchapindent}{0pt}
+\setlength{\cftsecindent}{12pt}
+\setlength{\cftsubsecindent}{24pt}
+\setlength{\cftchapnumwidth}{48pt}
+\renewcommand{\cftchappresnum}{第}
+\renewcommand{\cftchapaftersnum}{章}
+\renewcommand{\cftchapfont}{\sffamily\fontsize{12pt}{20pt}\selectfont}
+\renewcommand{\cftsecfont}{\rmfamily\fontsize{12pt}{20pt}\selectfont}
+\renewcommand{\cftsubsecfont}{\rmfamily\fontsize{12pt}{20pt}\selectfont}
+\setlength{\cftbeforechapskip}{6pt}
+\setlength{\cftbeforesecskip}{0pt}
+\setlength{\cftbeforesubsecskip}{0pt}
+\setcounter{tocdepth}{2}
 
 \setcounter{secnumdepth}{3}
 \setlength{\parskip}{0pt}
@@ -203,7 +225,7 @@
 \titlespacing{\section}{0pt}{24pt}{6pt}
 \titleformat{\subsection}[hang]{\sffamily\bfseries\fontsize{12pt}{20pt}\selectfont}{\arabic{chapter}.\arabic{section}.\arabic{subsection}}{12pt}{}
 \titlespacing{\subsection}{0pt}{12pt}{6pt}
-\titleformat{\subsubsection}[hang]{\sffamily\bfseries\fontsize{12pt}{20pt}\selectfont}{\arabic{chapter}.\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}{12pt}{}
+\titleformat{\subsubsection}[hang]{\sffamily\fontsize{12pt}{20pt}\selectfont}{\arabic{chapter}.\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}{12pt}{}
 \titlespacing{\subsubsection}{0pt}{12pt}{6pt}
 \titleformat{\paragraph}[runin]{\rmfamily\fontsize{12pt}{20pt}\selectfont}{}{}{}
 \titlespacing{\paragraph}{0pt}{0pt}{0pt}
