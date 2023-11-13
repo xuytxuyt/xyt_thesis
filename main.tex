@@ -2,8 +2,8 @@
 %!TEX encoding = UTF-8 Unicode
 
 \documentclass[engineeringmaster]{hquThesis}
-\titleZh{论文中文题目}
-\titleEn{English Thesis Title}
+\titleZh{华侨大学研究生论文 \LaTeX 模版}
+\titleEn{\LaTeX\  Thesis Template for Huaqiao University}
 \authorZh{}
 \authorEn{}
 \id{}
@@ -17,6 +17,7 @@
 \major{}
 \coverdate{二〇二三年五月二十八日}
 
+
 \begin{document}
 \makecover
 \frontmatter
@@ -29,7 +30,9 @@
 \end{abstractEn}
 \keywordsEn{keyword1; keyword2; keyword3; keyword4; keyword5; keyword6; keyword7; keyword8}
 \tableofcontents
+
 \mainmatter
+
 \chapter{引言}
 \section{人工智能}
 \subsection{机器翻译}
@@ -50,7 +53,21 @@ AI 可能被用于开发自主武器，威胁到人类安全。
 AI 可能被用于操纵人们的思想和行为。
 AI 可能导致社会不平等，因为富人和穷人之间在 AI 技术方面的差距越来越大。
 我们需要意识到 AI 的潜在风险，并采取措施减轻这些风险。我们需要确保 AI 被用于善，而不是恶。我们需要确保 AI 被用于造福所有人，而不是少数人。
-
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figure/1.png}
+\caption{形函数$\Psi_I$}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figure/2.png}
+\caption{形函数导数$\Psi_{I,x}$}
+\end{subfigure}
+\caption{形函数及其导数}
+\end{figure}
 AI 是一项强大的工具，它有潜力改变我们的生活。我们需要负责任地发展和使用 AI，以确保它造福于人类。
 
 \chapter{宠物}
@@ -79,4 +96,19 @@ E = mc^2
 狗需要定期锻炼和照顾。它们需要每天散步、跑步或玩耍。它们还需要定期洗澡、刷牙和剪指甲。狗的饮食也需要注意，它们应该吃健康、营养的食物。
 
 养狗是一项责任，但也是一项巨大的回报。狗可以给我们带来无尽的快乐和爱。如果您正在考虑养狗，我鼓励您这样做。您一定不会后悔
+
+\chapter{图表}
+\section{图}
+\begin{figure}[H]
+\centering
+\begin{subcaptiongroup}
+\includegraphics[width=0.49\textwidth]{figure/1.png}
+\phantomcaption\label{shape}
+\includegraphics[width=0.49\textwidth]{figure/2.png}
+\phantomcaption\label{dshape}
+\label{dshape}
+\end{subcaptiongroup}
+\caption{形函数及其导数：\subref{shape} 形函数$\Psi_I$；\subref{dshape} 形函数导数$\Psi_{I,x}$}
+\end{figure}
+\section{表}
 \end{document}
