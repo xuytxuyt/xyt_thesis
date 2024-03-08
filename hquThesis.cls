@@ -27,7 +27,7 @@
 \LoadClass[twoside, openright, UTF8, scheme=plain]{book}
 
 \RequirePackage{geometry}
-\RequirePackage{graphicx,float,caption,subcaption,overpic}
+\RequirePackage{graphicx,float,caption,subcaption}
 \RequirePackage{xeCJK}
 \RequirePackage{amsmath,amsfonts,amssymb}
 \RequirePackage{indentfirst}
@@ -36,17 +36,17 @@
 \RequirePackage{titlesec}
 \RequirePackage{titletoc}
 \RequirePackage{hyperref}
-\RequirePackage{booktabs,multirow}
-\RequirePackage{tabularx}
+\RequirePackage{booktabs, multicol}
 \RequirePackage[titles]{tocloft}
 
+\bibliographystyle{gbt7714-2005}
 \geometry{a4paper,top=3.8cm,bottom=3.8cm,left=3.2cm,right=3.2cm,bindingoffset=0cm,voffset=0.3cm,footskip=1cm,headheight=14pt}
 \setmainfont{Times New Roman}
 \setsansfont{Arial}
-\setCJKmainfont{simsun.ttc}[AutoFakeSlant, AutoFakeBold={2}]
-\setCJKsansfont{simhei.ttf}[AutoFakeSlant, AutoFakeBold={2}]
-\setCJKmonofont{Kaiti_GB2312.ttf}[AutoFakeSlant, AutoFakeBold={2}]
-\newCJKfontfamily\declarationfont{simfang.ttf}[AutoFakeSlant, AutoFakeBold={2}]
+\setCJKmainfont{simsun.ttc}[Path=./fonts/, AutoFakeSlant, AutoFakeBold={2}]
+\setCJKsansfont{simhei.ttf}[Path=./fonts/, AutoFakeSlant, AutoFakeBold={2}]
+\setCJKmonofont{Kaiti_GB2312.ttf}[Path=./fonts/, AutoFakeSlant, AutoFakeBold={2}]
+\newCJKfontfamily\declarationfont{simfang.ttf}[Path=./fonts/, AutoFakeSlant, AutoFakeBold={2}]
 \fontsize{12pt}{20pt}\selectfont
 \setlength{\parindent}{24pt}
 
@@ -105,15 +105,14 @@
             \textsf{论文提交日期：} \textrm{\textbf{\@coverdate}}
         }
     \end{center}
+}
+
+\renewcommand{\frontmatter}{
     \cleardoublepage
     \include{decision}
     \cleardoublepage
     \restoregeometry
     \include{declaration}
-    \cleardoublepage
-}
-
-\renewcommand{\frontmatter}{
     \cleardoublepage
     \setcounter{page}{1}
     \pagestyle{fancy}
@@ -122,6 +121,7 @@
     \fancyhead[CO]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont \leftmark}
     \fancyhead[CE]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont 华侨大学\degree 学位论文}
     \rmfamily\fontsize{12pt}{20pt}\selectfont
+    \include{abstract}
 }
 \renewcommand{\mainmatter}{
     \cleardoublepage
@@ -149,14 +149,14 @@
     \setlength{\parindent}{24pt}
     \vspace*{24pt}\begin{center}\noindent\sffamily\fontsize{16pt}{\baselineskip}\selectfont 摘\hspace{16pt}要\end{center}\par\vspace{18pt}
     \indent\rmfamily\fontsize{12pt}{20pt}\selectfont
-}{\vspace{20pt}}
+}{\vspace{20pt}\par}
 
 \newenvironment{abstractEn}{
     \markboth{Abstract}{}
     \setlength{\parindent}{24pt}
     \vspace*{24pt}\begin{center}\noindent\sffamily\bfseries\fontsize{16pt}{\baselineskip}\selectfont Abstract\end{center}\par\vspace{18pt}
     \indent\rmfamily\fontsize{12pt}{20pt}\selectfont
-}{\vspace{20pt}}
+}{\vspace{20pt}\par}
 
 \newcommand\keywords[1]{
     \hangafter 1
@@ -173,10 +173,21 @@
 }
 
 \renewcommand{\chaptermark}[1]{
-    \markboth{第\ \thechapter\ 章\ #1}{}
+    \markboth{第\ \thechapter\ 章\ #1}{#1}
+}
+\renewcommand\appendix{\par
+    \setcounter{chapter}{0}
+    \gdef\thechapter{\Alph{chapter}}
+    \titleformat{\chapter}[block]{\centering\sffamily\bfseries\fontsize{16pt}{\baselineskip}\selectfont}{附录\ \Alph{chapter}}{16pt}{}
+    \fancyhf{}
+    \fancyfoot[C]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont \@arabic\thepage}
+    \fancyhead[CO]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont 附录\thechapter\ \rightmark}
+    \fancyhead[CE]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont 华侨大学\degree 学位论文}
+    \rmfamily\fontsize{12pt}{20pt}\selectfont
 }
 \renewcommand\figurename{图}
 \renewcommand\tablename{表}
+\renewcommand\bibname{参考文献}
 \DeclareCaptionFont{captionfont}{\rmfamily\fontsize{11pt}{\baselineskip}\selectfont}
 \captionsetup{font=captionfont,labelsep=quad,skip=6pt,subrefformat=parens}
 \tocloftpagestyle{fancy}
