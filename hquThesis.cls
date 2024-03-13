@@ -1,12 +1,10 @@
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{hquThesis}[2023/08/02 Huaqiao University Thesis document class]
 
-
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
-\newif\ifisengineer\isengineerfalse
-\newif\ifcovertitleEn\covertitleEnfalse
-
+\ProvidesClass{hquThesis}
+%---------------------------------------------------------------------------%
+%->> Declare options and parameters
+%---------------------------------------------------------------------------%
 \DeclareOption{doctor}{
     \def\degree{博士}
     \def\coverfig{covers/doctor.png}
@@ -14,136 +12,202 @@
 \DeclareOption{master}{
     \def\degree{硕士}
     \def\coverfig{covers/master.png}
-    \covertitleEntrue
 }
 \DeclareOption{engineeringmaster}{
     \def\degree{硕士}
     \def\coverfig{covers/engineering_master.png}
-    \covertitleEntrue
-    \isengineertrue
 }
-
 \ProcessOptions\relax
-\LoadClass[twoside, openright, UTF8, scheme=plain]{book}
-
-\RequirePackage{geometry}
-\RequirePackage{graphicx,float,caption,subcaption}
-\RequirePackage{xeCJK}
-\RequirePackage{amsmath,amsfonts,amssymb}
-\RequirePackage{indentfirst}
-\RequirePackage{fancyhdr}
-\RequirePackage{setspace}
-\RequirePackage{titlesec}
-\RequirePackage{titletoc}
-\RequirePackage{hyperref}
-\RequirePackage{booktabs, multicol}
-\RequirePackage[titles]{tocloft}
-
-\bibliographystyle{gbt7714-2005}
-\geometry{a4paper,top=3.8cm,bottom=3.8cm,left=3.2cm,right=3.2cm,bindingoffset=0cm,voffset=0.3cm,footskip=1cm,headheight=14pt}
-\setmainfont{Times New Roman}
-\setsansfont{Arial}
-\setCJKmainfont{simsun.ttc}[Path=./fonts/, AutoFakeSlant, AutoFakeBold={2}]
-\setCJKsansfont{simhei.ttf}[Path=./fonts/, AutoFakeSlant, AutoFakeBold={2}]
-\setCJKmonofont{Kaiti_GB2312.ttf}[Path=./fonts/, AutoFakeSlant, AutoFakeBold={2}]
-\newCJKfontfamily\declarationfont{simfang.ttf}[Path=./fonts/, AutoFakeSlant, AutoFakeBold={2}]
-\fontsize{12pt}{20pt}\selectfont
-\setlength{\parindent}{24pt}
 
 \newcommand\titleZh[1]{\def\@titleZh{#1}}
 \newcommand\titleEn[1]{\def\@titleEn{#1}}
 \newcommand\authorZh[1]{\def\@authorZh{#1}}
 \newcommand\authorEn[1]{\def\@authorEn{#1}}
 \newcommand\id[1]{\def\@id{#1}}
-\newcommand\schoolZh[1]{\def\@schoolZh{#1}}
-\newcommand\schoolEn[1]{\def\@schoolEn{#1}}
-\newcommand\supervisorZh[1]{\def\@supervisorZh{#1}}
-\newcommand\supervisorEn[1]{\def\@supervisorEn{#1}}
+\newcommand\departmentZh[1]{\def\@departmentZh{#1}}
+\newcommand\departmentEn[1]{\def\@departmentEn{#1}}
+\newcommand\supervisorZh[2]{\def\@supervisorZh{#1}\def\@supervisorTitleZh{#2}}
+\newcommand\supervisorEn[2]{\def\@supervisorEn{#1}\def\@supervisorTitleEn{#2}}
 \newcommand\cosupervisorZh[1]{\def\@cosupervisorZh{#1}}
 \newcommand\fieldZh[1]{\def\@fieldZh{#1}}
 \newcommand\fieldEn[1]{\def\@fieldEn{#1}}
 \newcommand\major[1]{\def\@major{#1}}
 \newcommand\coverdate[1]{\def\@coverdate{#1}}
 
+%---------------------------------------------------------------------------%
+%->> Load class and require packages
+%---------------------------------------------------------------------------%
+\LoadClass[twoside, openright]{book}
+\RequirePackage{geometry}
+\RequirePackage{graphicx}
+\RequirePackage{fancyhdr}
+\RequirePackage{xeCJK,lmodern}
+\RequirePackage{caption,subcaption}
+\RequirePackage{indentfirst}
+\RequirePackage{setspace}
+\RequirePackage{titlesec}
+\RequirePackage{titletoc}
+\RequirePackage{hyperref}
+\RequirePackage{tocloft}
+% \RequirePackage{appendix}
+
+%---------------------------------------------------------------------------%
+%->> Fonts, geometry, fancyhdr
+%---------------------------------------------------------------------------%
+\setmainfont{Times New Roman}
+\setsansfont{Times New Roman}
+\setCJKmainfont{simsun.ttc}[Path=./fonts/, AutoFakeSlant, AutoFakeBold={2}]
+\setCJKsansfont{simhei.ttf}[Path=./fonts/, AutoFakeSlant, AutoFakeBold={2}]
+\setCJKmonofont{Kaiti_GB2312.ttf}[Path=./fonts/, AutoFakeSlant, AutoFakeBold={2}]
+\newCJKfontfamily\declarationfont{simfang.ttf}[Path=./fonts/, AutoFakeSlant, AutoFakeBold={2}]
+\geometry{a4paper,top=3.8cm,bottom=3.8cm,left=3.2cm,right=3.2cm,bindingoffset=0cm,voffset=0.3cm,footskip=1cm,headheight=14pt}
+\sloppy
+\pagestyle{empty}
+\fancyhf{}
+\fancyhead[CO]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont \leftmark}
+\fancyhead[CE]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont 华侨大学\degree 学位论文}
+\setlength{\parindent}{24pt}
+
+%---------------------------------------------------------------------------%
+%->> makecover, frontmatter, mainmatter, backmatter
+%---------------------------------------------------------------------------%
 \newcommand{\makecover}{
-    \pagestyle{empty}
     \newgeometry{top=3.2cm,bottom=2.6cm,left=2.4cm,right=2.2cm,bindingoffset=0cm}
-    {
-        \ttfamily\setstretch{1.5}\fontsize{10.5pt}{\baselineskip}\selectfont
-        \noindent 学校代码：\hspace{6pt}\underline{\textrm{10385}}\hfill 分类号：\underline{\hspace{72pt}}\par
-        \noindent 研究生学号：\underline{\makebox[72pt]{\textrm{\@id}}}\hfill 密\hspace{10.5pt}集：\underline{\hspace{72pt}}\par
+    \noindent\parbox{\textwidth}{\ttfamily\setstretch{1.5}\fontsize{10.5pt}{\baselineskip}\selectfont
+        学校代码：\hspace{6pt}\underline{\textrm{10385}}\hfill 分类号：\underline{\hspace{72pt}}
+
+        研究生学号：\underline{\makebox[72pt]{\textrm{\ifdefined\@id \@id \fi}}}\hfill 密\hspace{10.5pt}集：\underline{\hspace{72pt}}
     }
-    
-    \begin{figure}[H]
-        \makebox[\textwidth]{\includegraphics[width=\paperwidth]{\coverfig}}
+
+    \begin{figure}[h!]
+        \noindent\makebox[\textwidth]{\includegraphics[width=\paperwidth]{\coverfig}}
     \end{figure}
-    
-    \begin{center}
-        {
-            \rmfamily\bfseries\setstretch{1.5}\fontsize{16pt}{\baselineskip}\selectfont
-            \@titleZh \par
-            \ifcovertitleEn
-                \@titleEn\par\vspace{56pt}
+
+    \noindent\parbox{\textwidth}{\rmfamily\bfseries\setstretch{1.5}\centering\fontsize{16pt}{\baselineskip}\selectfont
+        \ifdefined\@titleZh
+            \@titleZh
+        \else
+            华侨大学\degree 研究生论文 \LaTeX 模版
+        \fi
+        
+        \ifdefined\@titleEn
+            \@titleEn
+        \else
+            \LaTeX\  Thesis Template for Huaqiao University
+        \fi
+    }
+
+    \vfill
+
+    \ifdefined\@majortype
+        \def\titlelength{88pt}
+    \else
+        \def\titlelength{60pt}
+    \fi
+    \def\infolength{112pt}
+
+    \noindent\parbox{\textwidth}{
+        \sffamily\bfseries\setstretch{1.5}\centering\fontsize{14pt}{\baselineskip}\selectfont
+        \makebox[\titlelength][s]{作者姓名}： \underline{\makebox[182pt]{\hspace{35pt}\makebox[42pt][s]{\textrm{\textbf{\ifdefined\@authorZh
+            \@authorZh
+        \else
+            张三
+        \fi}}}\hfill}}
+
+        \makebox[\titlelength][s]{指导教师}： \underline{\makebox[182pt]{\hspace{35pt}\makebox[42pt][s]{\textrm{\textbf{\ifdefined\@supervisorZh
+            \@supervisorZh
+        \else
+            李四
+        \fi}}}
+        \hfill
+        \makebox[42pt][s]{\textrm{\textbf{\ifdefined\@supervisorTitleZh
+            \@supervisorTitleZh
+        \else
+            教授
+        \fi}}}
+        \hspace{35pt}}}
+
+        \ifdefined\@cosupervisorZh
+            \makebox[\titlelength][s]{合作教师}： \underline{\makebox[182pt]{\hspace{35pt}
+                \makebox[42pt][s]{\textrm{\textbf{\@cosupervisorZh}}}
+                \hfill
+                \makebox[42pt][s]{\textrm{\textbf{\@cosupervisorTitleZh}}}
+                \hspace{35pt}}
+            }
+        \fi
+
+        \ifdefined\@practicevisorZh
+            \makebox[\titlelength][s]{实践教师}： \underline{\makebox[182pt]{\hspace{35pt}
+                \makebox[42pt][s]{\textrm{\textbf{\@practicevisorZh}}}
+                \hfill
+                \makebox[42pt][s]{\textrm{\textbf{\@practicevisorTitleZh}}}
+                \hspace{35pt}}
+            }
+        \fi
+
+        \ifdefined\@majortype
+            \makebox[\titlelength][s]{专业学位类别}： \underline{\makebox[182pt]{\hspace{35pt}
+                \makebox[112pt][s]{\textrm{\textbf{\@majortype}}}
+            }}\hfill
+
+            \makebox[\titlelength][s]{专业学位领域}： \underline{\makebox[182pt]{\hspace{35pt}
+                \makebox[112pt][s]{\textrm{\textbf{\ifdefined\@major
+                    \@major
+                \else
+                    土木水利
+                \fi}}}\hfill
+            }}
+        \else
+            \makebox[\titlelength][s]{学科}： \underline{\makebox[182pt]{\hspace{35pt}\makebox[112pt][s]{\textrm{\textbf{\ifdefined\@major
+                \@major
             \else
-                \vspace{70pt}
-            \fi
-        }
-        {
-            \setstretch{1.5}\fontsize{14pt}{\baselineskip}\selectfont
-            \textsf{作者姓名：} \underline{\makebox[182pt]{\textrm{\textbf{\@authorZh}}}}\par
-            \textsf{指导教师：} \underline{\makebox[182pt]{\textrm{\textbf{\@supervisorZh}}}}\par
-            \textsf{合作教师：} \underline{\makebox[182pt]{\textrm{\textbf{\@cosupervisorZh}}}}\par
-            \ifisengineer
-                \textsf{专业学位类别：} \underline{\makebox[154pt]{\textrm{\textbf{\@major}}}}\par
-                \textsf{专业学位领域：} \underline{\makebox[154pt]{\textrm{\textbf{\@major}}}}\par
-            \else
-                \textsf{学\hspace{28pt}科：} \underline{\makebox[182pt]{\textrm{\textbf{\@major}}}}\par
-            \fi
-            \textsf{研究方向：} \underline{\makebox[182pt]{\textrm{\textbf{\@fieldZh}}}}\par
-            \textsf{所在学院：} \underline{\makebox[182pt]{\textrm{\textbf{\@schoolZh}}}}\par
-            \vspace{56pt}
-            \textsf{论文提交日期：} \textrm{\textbf{\@coverdate}}
-        }
+                土木工程
+            \fi}}}\hfill}}
+        \fi
+
+        \makebox[\titlelength][s]{研究方向}： \underline{\makebox[182pt][c]{\textrm{\textbf{\ifdefined\@fieldZh
+            \@fieldZh
+        \else
+            结构体系创新与工程应用
+        \fi}}}}
+
+        \makebox[\titlelength][s]{所在学院}： \underline{\makebox[182pt]{\hspace{35pt}\makebox[112pt][s]{\textrm{\textbf{\ifdefined\@departmentZh
+            \@departmentZh
+        \else
+            土木工程学院
+        \fi}}}\hfill}}
+    }
+
+    \vfill
+
+    \noindent\begin{center}
+        \sffamily\setstretch{1.5}\fontsize{14pt}{\baselineskip}\selectfont
+        论文提交日期： \textrm{\textbf{\ifdefined\@coverdate
+            \@coverdate
+        \else
+            二〇一八年五月二十八日
+        \fi}}
     \end{center}
+    \restoregeometry
 }
 
 \renewcommand{\frontmatter}{
-    \cleardoublepage
-    \include{decision}
-    \cleardoublepage
-    \restoregeometry
-    \include{declaration}
-    \cleardoublepage
-    \setcounter{page}{1}
     \pagestyle{fancy}
-    \fancyhf{}
+    \setcounter{page}{1}
     \fancyfoot[C]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont \@Roman\thepage}
-    \fancyhead[CO]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont \leftmark}
-    \fancyhead[CE]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont 华侨大学\degree 学位论文}
-    \rmfamily\fontsize{12pt}{20pt}\selectfont
-    \include{abstract}
-}
-\renewcommand{\mainmatter}{
-    \cleardoublepage
-    \setcounter{page}{1}
-    \pagestyle{fancy}
-    \fancyhf{}
-    \fancyfoot[C]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont \@arabic\thepage}
-    \fancyhead[CO]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont \leftmark}
-    \fancyhead[CE]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont 华侨大学\degree 学位论文}
-    \rmfamily\fontsize{12pt}{20pt}\selectfont
-}
-\renewcommand{\backmatter}{
-    \cleardoublepage
-    \setcounter{page}{1}
-    \pagestyle{fancy}
-    \fancyhf{}
-    \fancyfoot[C]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont \@Roman\thepage}
-    \fancyhead[CO]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont \leftmark}
-    \fancyhead[CE]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont 华侨大学\degree 学位论文}
-    \rmfamily\fontsize{12pt}{20pt}\selectfont
 }
 
+\renewcommand{\mainmatter}{
+    \cleardoublepage
+    \pagestyle{fancy}
+    \setcounter{page}{1}
+    \fancyfoot[C]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont \@arabic\thepage}
+    \fontsize{12pt}{20pt}\selectfont
+}
+
+%---------------------------------------------------------------------------%
+%->> abstract, keywords
+%---------------------------------------------------------------------------%
 \newenvironment{abstract}{
     \markboth{摘\hspace{10.5pt}要}{}
     \setlength{\parindent}{24pt}
@@ -172,55 +236,69 @@
     \cleardoublepage
 }
 
+%---------------------------------------------------------------------------%
+%->> Structure layout
+%---------------------------------------------------------------------------%
+%- chapter
+\renewcommand{\cftchappresnum}{第}
+\renewcommand{\cftchapaftersnum}{章}
+\renewcommand{\cftchapfont}{\sffamily\fontsize{12pt}{20pt}\selectfont}
+\titleformat{\chapter}[block]{\centering\sffamily\bfseries\fontsize{16pt}{\baselineskip}\selectfont}{第\ \arabic{chapter}\ 章}{16pt}{}
+\titlespacing{\chapter}{0pt}{24pt}{18pt}
+\assignpagestyle{\chapter}{fancy}
+\setlength{\cftchapindent}{0pt}
 \renewcommand{\chaptermark}[1]{
     \markboth{第\ \thechapter\ 章\ #1}{#1}
 }
-\renewcommand\appendix{\par
-    \setcounter{chapter}{0}
+\renewcommand{\cftchapdotsep}{4.5}
+\setlength{\cftbeforechapskip}{6pt}
+\setlength{\cftchapnumwidth}{48pt}
+%- section
+\renewcommand{\cftsecfont}{\rmfamily\fontsize{12pt}{20pt}\selectfont}
+\titleformat{\section}[hang]{\sffamily\bfseries\fontsize{14pt}{20pt}\selectfont}{\arabic{chapter}.\arabic{section}}{14pt}{}
+\titlespacing{\section}{0pt}{24pt}{6pt}
+%- subsection
+\renewcommand{\cftsubsecfont}{\rmfamily\fontsize{12pt}{20pt}\selectfont}
+\setlength{\cftsecindent}{12pt}
+\setlength{\cftbeforesecskip}{0pt}
+%- subsubsection
+\setlength{\cftsubsecindent}{24pt}
+\setlength{\cftbeforesubsecskip}{0pt}
+\titleformat{\subsection}[hang]{\sffamily\bfseries\fontsize{12pt}{20pt}\selectfont}{\arabic{chapter}.\arabic{section}.\arabic{subsection}}{12pt}{}
+\titlespacing{\subsection}{0pt}{12pt}{6pt}
+\titleformat{\subsubsection}[hang]{\sffamily\fontsize{12pt}{20pt}\selectfont}{\arabic{chapter}.\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}{12pt}{}
+\titlespacing{\subsubsection}{0pt}{12pt}{6pt}
+%- appendix
+\renewcommand{\appendixname}{附录}
+\DeclareRobustCommand{\changetoapp}{
+    \renewcommand*{\cftchappresnum}{\appendixname\space}
+    \setlength{\cftchapnumwidth}{7em}
+}
+\let\oldappendix\appendix
+\renewcommand{\appendix}{
+    \oldappendix
     \gdef\thechapter{\Alph{chapter}}
     \titleformat{\chapter}[block]{\centering\sffamily\bfseries\fontsize{16pt}{\baselineskip}\selectfont}{附录\ \Alph{chapter}}{16pt}{}
-    \fancyhf{}
-    \fancyfoot[C]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont \@arabic\thepage}
     \fancyhead[CO]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont 附录\thechapter\ \rightmark}
-    \fancyhead[CE]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont 华侨大学\degree 学位论文}
-    \rmfamily\fontsize{12pt}{20pt}\selectfont
+    % \addtocontents{toc}{\protect\setlength{\protect\cftchapnumwidth}{3cm}}
+    \addtocontents{toc}{\protect\renewcommand{\protect\cftchappresnum}{附录 }}
+    \addtocontents{toc}{\protect\renewcommand{\protect\cftchapaftersnum}{}}
 }
-\renewcommand\figurename{图}
-\renewcommand\tablename{表}
-\renewcommand\bibname{参考文献}
-\DeclareCaptionFont{captionfont}{\rmfamily\fontsize{11pt}{\baselineskip}\selectfont}
-\captionsetup{font=captionfont,labelsep=quad,skip=6pt,subrefformat=parens}
+%- TOC
 \tocloftpagestyle{fancy}
 \renewcommand{\contentsname}{\centerline{目\hspace{16pt}录}}
 \renewcommand{\cfttoctitlefont}{\sffamily\bfseries\fontsize{16pt}{\baselineskip}\selectfont}
 \renewcommand{\cftbeforetoctitleskip}{24pt}
 \renewcommand{\cftaftertoctitleskip}{18pt}
-\renewcommand{\cftchapdotsep}{4.5}
+%- Others
+\renewcommand\figurename{图}
+\renewcommand\tablename{表}
+\renewcommand\bibname{参考文献}
+\DeclareCaptionFont{captionfont}{\rmfamily\fontsize{11pt}{\baselineskip}\selectfont}
+\captionsetup{font=captionfont,labelsep=quad,skip=6pt,subrefformat=parens}
 \setlength{\cftparskip}{0pt}
-\setlength{\cftchapindent}{0pt}
-\setlength{\cftsecindent}{12pt}
-\setlength{\cftsubsecindent}{24pt}
-\setlength{\cftchapnumwidth}{48pt}
-\renewcommand{\cftchappresnum}{第}
-\renewcommand{\cftchapaftersnum}{章}
-\renewcommand{\cftchapfont}{\sffamily\fontsize{12pt}{20pt}\selectfont}
-\renewcommand{\cftsecfont}{\rmfamily\fontsize{12pt}{20pt}\selectfont}
-\renewcommand{\cftsubsecfont}{\rmfamily\fontsize{12pt}{20pt}\selectfont}
-\setlength{\cftbeforechapskip}{6pt}
-\setlength{\cftbeforesecskip}{0pt}
-\setlength{\cftbeforesubsecskip}{0pt}
 \setcounter{tocdepth}{2}
-
 \setcounter{secnumdepth}{3}
-\setlength{\parskip}{0pt}
-\titleformat{\chapter}[block]{\centering\sffamily\bfseries\fontsize{16pt}{\baselineskip}\selectfont}{第\ \arabic{chapter}\ 章}{16pt}{}
-\titlespacing{\chapter}{0pt}{24pt}{18pt}
-\assignpagestyle{\chapter}{fancy}
-\titleformat{\section}[hang]{\sffamily\bfseries\fontsize{14pt}{20pt}\selectfont}{\arabic{chapter}.\arabic{section}}{14pt}{}
-\titlespacing{\section}{0pt}{24pt}{6pt}
-\titleformat{\subsection}[hang]{\sffamily\bfseries\fontsize{12pt}{20pt}\selectfont}{\arabic{chapter}.\arabic{section}.\arabic{subsection}}{12pt}{}
-\titlespacing{\subsection}{0pt}{12pt}{6pt}
-\titleformat{\subsubsection}[hang]{\sffamily\fontsize{12pt}{20pt}\selectfont}{\arabic{chapter}.\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}{12pt}{}
-\titlespacing{\subsubsection}{0pt}{12pt}{6pt}
 \titleformat{\paragraph}[runin]{\rmfamily\fontsize{12pt}{20pt}\selectfont}{}{}{}
 \titlespacing{\paragraph}{0pt}{0pt}{0pt}
+\setlength{\parskip}{0pt}
