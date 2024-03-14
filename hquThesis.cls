@@ -49,10 +49,12 @@
 \RequirePackage{titletoc}
 \RequirePackage{hyperref}
 \RequirePackage{tocloft}
-% \RequirePackage{appendix}
+\RequirePackage[sort&compress]{gbt7714}
+\RequirePackage{enumerate}
+
 
 %---------------------------------------------------------------------------%
-%->> Fonts, geometry, fancyhdr
+%->> Fonts, geometry, fancyhdr, gbt7714
 %---------------------------------------------------------------------------%
 \setmainfont{Times New Roman}
 \setsansfont{Times New Roman}
@@ -66,6 +68,7 @@
 \fancyhf{}
 \fancyhead[CO]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont \leftmark}
 \fancyhead[CE]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont 华侨大学\degree 学位论文}
+\bibliographystyle{gbt7714-2005-numerical}
 \setlength{\parindent}{24pt}
 
 %---------------------------------------------------------------------------%
@@ -104,17 +107,17 @@
     \else
         \def\titlelength{60pt}
     \fi
-    \def\infolength{112pt}
+    \def\infolength{100pt}
 
     \noindent\parbox{\textwidth}{
         \sffamily\bfseries\setstretch{1.5}\centering\fontsize{14pt}{\baselineskip}\selectfont
-        \makebox[\titlelength][s]{作者姓名}： \underline{\makebox[182pt]{\hspace{35pt}\makebox[42pt][s]{\textrm{\textbf{\ifdefined\@authorZh
+        \makebox[\titlelength][s]{作者姓名}： \underline{\makebox[182pt][c]{\makebox[\infolength][l]{\makebox[42pt][s]{\textrm{\textbf{\ifdefined\@authorZh
             \@authorZh
         \else
             张三
-        \fi}}}\hfill}}
+        \fi}}}}}}
 
-        \makebox[\titlelength][s]{指导教师}： \underline{\makebox[182pt]{\hspace{35pt}\makebox[42pt][s]{\textrm{\textbf{\ifdefined\@supervisorZh
+        \makebox[\titlelength][s]{指导教师}： \underline{\makebox[182pt][c]{\makebox[\infolength]{\makebox[42pt][s]{\textrm{\textbf{\ifdefined\@supervisorZh
             \@supervisorZh
         \else
             李四
@@ -124,45 +127,37 @@
             \@supervisorTitleZh
         \else
             教授
-        \fi}}}
-        \hspace{35pt}}}
+        \fi}}}}}}
 
         \ifdefined\@cosupervisorZh
-            \makebox[\titlelength][s]{合作教师}： \underline{\makebox[182pt]{\hspace{35pt}
-                \makebox[42pt][s]{\textrm{\textbf{\@cosupervisorZh}}}
+            \makebox[\titlelength][s]{合作教师}： \underline{\makebox[182pt][c]{\makebox[\infolength]{\makebox[42pt][s]{\textrm{\textbf{\@cosupervisorZh}}}
                 \hfill
-                \makebox[42pt][s]{\textrm{\textbf{\@cosupervisorTitleZh}}}
-                \hspace{35pt}}
+                \makebox[42pt][s]{\textrm{\textbf{\@cosupervisorTitleZh}}}}}
             }
         \fi
 
         \ifdefined\@practicevisorZh
-            \makebox[\titlelength][s]{实践教师}： \underline{\makebox[182pt]{\hspace{35pt}
-                \makebox[42pt][s]{\textrm{\textbf{\@practicevisorZh}}}
+            \makebox[\titlelength][s]{实践教师}： \underline{\makebox[182pt][c]{\makebox[\infolength]{\makebox[42pt][s]{\textrm{\textbf{\@practicevisorZh}}}
                 \hfill
-                \makebox[42pt][s]{\textrm{\textbf{\@practicevisorTitleZh}}}
-                \hspace{35pt}}
+                \makebox[42pt][s]{\textrm{\textbf{\@practicevisorTitleZh}}}}}
             }
         \fi
 
         \ifdefined\@majortype
-            \makebox[\titlelength][s]{专业学位类别}： \underline{\makebox[182pt]{\hspace{35pt}
-                \makebox[112pt][s]{\textrm{\textbf{\@majortype}}}
-            }}\hfill
+            \makebox[\titlelength][s]{专业学位类别}： \underline{\makebox[182pt][c]{\makebox[\infolength][s]{\textrm{\textbf{\@majortype}}}}}
 
-            \makebox[\titlelength][s]{专业学位领域}： \underline{\makebox[182pt]{\hspace{35pt}
-                \makebox[112pt][s]{\textrm{\textbf{\ifdefined\@major
+            \makebox[\titlelength][s]{专业学位领域}： \underline{\makebox[182pt][c]{\makebox[\infolength][s]{\textrm{\textbf{\ifdefined\@major
                     \@major
                 \else
                     土木水利
-                \fi}}}\hfill
+                \fi}}}
             }}
         \else
-            \makebox[\titlelength][s]{学科}： \underline{\makebox[182pt]{\hspace{35pt}\makebox[112pt][s]{\textrm{\textbf{\ifdefined\@major
+            \makebox[\titlelength][s]{学科}： \underline{\makebox[182pt][c]{\makebox[\infolength][s]{\textrm{\textbf{\ifdefined\@major
                 \@major
             \else
                 土木工程
-            \fi}}}\hfill}}
+            \fi}}}}}
         \fi
 
         \makebox[\titlelength][s]{研究方向}： \underline{\makebox[182pt][c]{\textrm{\textbf{\ifdefined\@fieldZh
@@ -171,11 +166,11 @@
             结构体系创新与工程应用
         \fi}}}}
 
-        \makebox[\titlelength][s]{所在学院}： \underline{\makebox[182pt]{\hspace{35pt}\makebox[112pt][s]{\textrm{\textbf{\ifdefined\@departmentZh
+        \makebox[\titlelength][s]{所在学院}： \underline{\makebox[182pt][c]{\makebox[\infolength][s]{\textrm{\textbf{\ifdefined\@departmentZh
             \@departmentZh
         \else
             土木工程学院
-        \fi}}}\hfill}}
+        \fi}}}}}
     }
 
     \vfill
@@ -205,20 +200,26 @@
     \fontsize{12pt}{20pt}\selectfont
 }
 
+\renewcommand{\backmatter}{
+    \cleardoublepage
+    \pagestyle{fancy}
+    \fancyhead[CO]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont \leftmark}
+    \fontsize{12pt}{20pt}\selectfont
+}
 %---------------------------------------------------------------------------%
-%->> abstract, keywords
+%->> abstract, keywords, acknowledgements, CV
 %---------------------------------------------------------------------------%
 \newenvironment{abstract}{
     \markboth{摘\hspace{10.5pt}要}{}
     \setlength{\parindent}{24pt}
-    \vspace*{24pt}\begin{center}\noindent\sffamily\fontsize{16pt}{\baselineskip}\selectfont 摘\hspace{16pt}要\end{center}\par\vspace{18pt}
+    \chapter*{致\hspace{16pt}谢}
     \indent\rmfamily\fontsize{12pt}{20pt}\selectfont
 }{\vspace{20pt}\par}
 
 \newenvironment{abstractEn}{
     \markboth{Abstract}{}
     \setlength{\parindent}{24pt}
-    \vspace*{24pt}\begin{center}\noindent\sffamily\bfseries\fontsize{16pt}{\baselineskip}\selectfont Abstract\end{center}\par\vspace{18pt}
+    \chapter*{Abstract}
     \indent\rmfamily\fontsize{12pt}{20pt}\selectfont
 }{\vspace{20pt}\par}
 
@@ -236,6 +237,23 @@
     \cleardoublepage
 }
 
+\newenvironment{acknowledgements}{
+    \cleardoublepage
+    \markboth{致\hspace{10.5pt}谢}{}
+    \phantomsection
+    \chapter*{致\hspace{16pt}谢}
+    \addcontentsline{toc}{chapter}{致\hspace{12pt}谢}
+    \indent\rmfamily\fontsize{12pt}{20pt}\selectfont
+}{\vspace{20pt}\par}
+
+\newenvironment{cv}{
+    \cleardoublepage
+    \markboth{个人简历、在学期间发表的学术论文与研究成果}{}
+    \phantomsection
+    \chapter*{个人简历、在学期间发表的学术论文与研究成果}
+    \addcontentsline{toc}{chapter}{个人简历、在学期间发表的学术论文与研究成果}
+    \indent\rmfamily\fontsize{12pt}{20pt}\selectfont
+}{\vspace{20pt}\par}
 %---------------------------------------------------------------------------%
 %->> Structure layout
 %---------------------------------------------------------------------------%
@@ -269,20 +287,21 @@
 \titleformat{\subsubsection}[hang]{\sffamily\fontsize{12pt}{20pt}\selectfont}{\arabic{chapter}.\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}{12pt}{}
 \titlespacing{\subsubsection}{0pt}{12pt}{6pt}
 %- appendix
-\renewcommand{\appendixname}{附录}
-\DeclareRobustCommand{\changetoapp}{
-    \renewcommand*{\cftchappresnum}{\appendixname\space}
-    \setlength{\cftchapnumwidth}{7em}
-}
 \let\oldappendix\appendix
 \renewcommand{\appendix}{
     \oldappendix
     \gdef\thechapter{\Alph{chapter}}
     \titleformat{\chapter}[block]{\centering\sffamily\bfseries\fontsize{16pt}{\baselineskip}\selectfont}{附录\ \Alph{chapter}}{16pt}{}
     \fancyhead[CO]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont 附录\thechapter\ \rightmark}
-    % \addtocontents{toc}{\protect\setlength{\protect\cftchapnumwidth}{3cm}}
     \addtocontents{toc}{\protect\renewcommand{\protect\cftchappresnum}{附录 }}
     \addtocontents{toc}{\protect\renewcommand{\protect\cftchapaftersnum}{}}
+}
+%- bibliography
+\let\oldbibliography\bibliography
+\renewcommand{\bibliography}[1]{
+    \rmfamily\fontsize{10.5pt}{16pt}\selectfont\oldbibliography{#1}
+    \addcontentsline{toc}{chapter}{参考文献}
+    \fancyhead[CO]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont 参考文献}
 }
 %- TOC
 \tocloftpagestyle{fancy}
