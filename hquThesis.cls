@@ -28,16 +28,18 @@
 \newcommand\departmentEn[1]{\def\@departmentEn{#1}}
 \newcommand\supervisorZh[2]{\def\@supervisorZh{#1}\def\@supervisorTitleZh{#2}}
 \newcommand\supervisorEn[2]{\def\@supervisorEn{#1}\def\@supervisorTitleEn{#2}}
-\newcommand\cosupervisorZh[1]{\def\@cosupervisorZh{#1}}
+\newcommand\cosupervisorZh[2]{\def\@cosupervisorZh{#1}\def\@cosupervisorTitleZh{#2}}
+\newcommand\practicevisorZh[2]{\def\@practicevisorZh{#1}\def\@practicevisorTitleZh{#2}}
 \newcommand\fieldZh[1]{\def\@fieldZh{#1}}
 \newcommand\fieldEn[1]{\def\@fieldEn{#1}}
 \newcommand\major[1]{\def\@major{#1}}
+\newcommand\majortype[1]{\def\@majortype{#1}}
 \newcommand\coverdate[1]{\def\@coverdate{#1}}
 
 %---------------------------------------------------------------------------%
 %->> Load class and require packages
 %---------------------------------------------------------------------------%
-\LoadClass[twoside, openright]{book}
+\LoadClass[twoside, openright, UTF8]{book}
 \RequirePackage{geometry}
 \RequirePackage{graphicx}
 \RequirePackage{fancyhdr}
@@ -49,6 +51,7 @@
 \RequirePackage{titletoc}
 \RequirePackage{hyperref}
 \RequirePackage{tocloft}
+% \RequirePackage[titletoc,title,header]{appendix}
 \RequirePackage[sort&compress]{gbt7714}
 \RequirePackage{enumerate}
 
@@ -111,11 +114,11 @@
 
     \noindent\parbox{\textwidth}{
         \sffamily\bfseries\setstretch{1.5}\centering\fontsize{14pt}{\baselineskip}\selectfont
-        \makebox[\titlelength][s]{作者姓名}： \underline{\makebox[182pt][c]{\makebox[\infolength][l]{\makebox[42pt][s]{\textrm{\textbf{\ifdefined\@authorZh
+        \makebox[\titlelength][s]{作者姓名}： \underline{\makebox[182pt][c]{\makebox[42pt][s]{\textrm{\textbf{\ifdefined\@authorZh
             \@authorZh
         \else
             张三
-        \fi}}}}}}
+        \fi}}}}}
 
         \makebox[\titlelength][s]{指导教师}： \underline{\makebox[182pt][c]{\makebox[\infolength]{\makebox[42pt][s]{\textrm{\textbf{\ifdefined\@supervisorZh
             \@supervisorZh
@@ -144,20 +147,20 @@
         \fi
 
         \ifdefined\@majortype
-            \makebox[\titlelength][s]{专业学位类别}： \underline{\makebox[182pt][c]{\makebox[\infolength][s]{\textrm{\textbf{\@majortype}}}}}
+            \makebox[\titlelength][s]{专业学位类别}： \underline{\makebox[182pt][c]{\textrm{\textbf{\@majortype}}}}
 
-            \makebox[\titlelength][s]{专业学位领域}： \underline{\makebox[182pt][c]{\makebox[\infolength][s]{\textrm{\textbf{\ifdefined\@major
+            \makebox[\titlelength][s]{专业学位领域}： \underline{\makebox[182pt][c]{\textrm{\textbf{\ifdefined\@major
                     \@major
                 \else
                     土木水利
-                \fi}}}
+                \fi}}
             }}
         \else
-            \makebox[\titlelength][s]{学科}： \underline{\makebox[182pt][c]{\makebox[\infolength][s]{\textrm{\textbf{\ifdefined\@major
+            \makebox[\titlelength][s]{学科}： \underline{\makebox[182pt][c]{\textrm{\textbf{\ifdefined\@major
                 \@major
             \else
                 土木工程
-            \fi}}}}}
+            \fi}}}}
         \fi
 
         \makebox[\titlelength][s]{研究方向}： \underline{\makebox[182pt][c]{\textrm{\textbf{\ifdefined\@fieldZh
@@ -166,11 +169,11 @@
             结构体系创新与工程应用
         \fi}}}}
 
-        \makebox[\titlelength][s]{所在学院}： \underline{\makebox[182pt][c]{\makebox[\infolength][s]{\textrm{\textbf{\ifdefined\@departmentZh
+        \makebox[\titlelength][s]{所在学院}： \underline{\makebox[182pt][c]{\textrm{\textbf{\ifdefined\@departmentZh
             \@departmentZh
         \else
             土木工程学院
-        \fi}}}}}
+        \fi}}}}
     }
 
     \vfill
@@ -212,7 +215,7 @@
 \newenvironment{abstract}{
     \markboth{摘\hspace{10.5pt}要}{}
     \setlength{\parindent}{24pt}
-    \chapter*{致\hspace{16pt}谢}
+    \chapter*{摘\hspace{16pt}要}
     \indent\rmfamily\fontsize{12pt}{20pt}\selectfont
 }{\vspace{20pt}\par}
 
@@ -240,10 +243,10 @@
 \newenvironment{acknowledgements}{
     \cleardoublepage
     \markboth{致\hspace{10.5pt}谢}{}
-    \phantomsection
     \chapter*{致\hspace{16pt}谢}
+    \phantomsection
     \addcontentsline{toc}{chapter}{致\hspace{12pt}谢}
-    \indent\rmfamily\fontsize{12pt}{20pt}\selectfont
+    \indent\ttfamily\fontsize{12pt}{20pt}\selectfont
 }{\vspace{20pt}\par}
 
 \newenvironment{cv}{
@@ -287,21 +290,25 @@
 \titleformat{\subsubsection}[hang]{\sffamily\fontsize{12pt}{20pt}\selectfont}{\arabic{chapter}.\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}{12pt}{}
 \titlespacing{\subsubsection}{0pt}{12pt}{6pt}
 %- appendix
+% \renewcommand{\appendixname}{附录}
 \let\oldappendix\appendix
 \renewcommand{\appendix}{
     \oldappendix
-    \gdef\thechapter{\Alph{chapter}}
-    \titleformat{\chapter}[block]{\centering\sffamily\bfseries\fontsize{16pt}{\baselineskip}\selectfont}{附录\ \Alph{chapter}}{16pt}{}
+    \titleformat{\chapter}[block]{\centering\sffamily\bfseries\fontsize{16pt}{\baselineskip}\selectfont}{附录\Alph{chapter}}{16pt}{}
     \fancyhead[CO]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont 附录\thechapter\ \rightmark}
-    \addtocontents{toc}{\protect\renewcommand{\protect\cftchappresnum}{附录 }}
+    % \protect\renewcommand{\chaptermark}[1]{\markboth{附录\ \thechapter\ #1}{}}
+    \addtocontents{toc}{\protect\renewcommand{\protect\cftchappresnum}{附录}}
     \addtocontents{toc}{\protect\renewcommand{\protect\cftchapaftersnum}{}}
+    \cleardoublepage
 }
 %- bibliography
 \let\oldbibliography\bibliography
 \renewcommand{\bibliography}[1]{
-    \rmfamily\fontsize{10.5pt}{16pt}\selectfont\oldbibliography{#1}
+    \cleardoublepage
+    \markboth{参考文献}{}
+    \phantomsection
     \addcontentsline{toc}{chapter}{参考文献}
-    \fancyhead[CO]{\rmfamily\fontsize{10.5pt}{\baselineskip}\selectfont 参考文献}
+    \rmfamily\fontsize{10.5pt}{16pt}\selectfont\oldbibliography{#1}
 }
 %- TOC
 \tocloftpagestyle{fancy}
