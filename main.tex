@@ -3,7 +3,9 @@
 
 \documentclass[engineeringmaster]{hquThesis}
 \usepackage{lineno}
-
+\usepackage{amsmath,amsfonts,amssymb,textcomp}
+\usepackage{booktabs,multirow,tabularx,float}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black}
 \begin{document}
 \makecover
 % NOTE: 正式文档请取消下面两行注释
@@ -31,24 +33,94 @@ Git Graph: 查看修改(diff)
 Todo Tree: magic comment
 
 % TODO: add magic comment
-LTeX: magic comment
+LaTeX: magic comment
 
+Zotero LaTeX：Zotero管理参考文献
 \section{文件、label 命名规则}
+公式：label\{chapter\{name\}-formula1-name\}
+
+图：label\{chapter\{name\}-fig1-name\}
+
+表：label\{chapter\{name\}-table1-name\}
+
 \chapter{图表设置}
+单张
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{figure/1.png}
+\caption{\centering{边界点处无网格形函数}}
+\label{chapter-Graphsettings-fig1-meshfree}
+\end{figure}
+
+并排
+\begin{figure}[H]
+    \centering
+    \begin{subcaptiongroup}
+    \includegraphics[width=0.49\textwidth]{figure/1.png}
+    \phantomcaption\label{1}
+    \includegraphics[width=0.49\textwidth]{figure/2.png}
+    \phantomcaption\label{2}
+    \end{subcaptiongroup}
+\caption{\centering{无网格形函数：\subref{1}边界点；\subref{2}中心点}}
+
+% 遇到图名过长需要换行的编写：
+% \caption{\centering{标题：\protect\linebreak \subref{xxx} 小标题1；\subref{xx} 小标题2；\subref{xxx}小标题3；\subref{xxx} 小标题4}}
+
+\label{chapter-Graphsettings-fig2-meshfree}
+\end{figure}
+图\ref{chapter-Graphsettings-fig1-meshfree}、\ref{chapter-Graphsettings-fig2-meshfree}分别表示边界点处和内部节点处的无网格形函数图。
+
+\newpage
+
+
+三线表
+\begin{table}[H]
+    \caption{\textbf{三次基函数无网格法分片实验结果}}
+    \centering\label{chapter-table-cubic}
+    \begin{tabular}{lcccc}
+       \toprule
+    & \multicolumn{2}{c}{二次分片实验} & \multicolumn{2}{c}{三次分片实验} \\ \cline{2-5}
+       &$L_2$-Error$\quad$&$H_1$-Error&$L_2$-Error$\quad$&$H_1$-Error\\
+       \midrule
+      RKGSI-Penalty&$1.4\times10^{-7}$&$2.1\times10^{-6}$&$2.0\times10^{-7}$&$2.7\times10^{-6}$\\
+      RKGSI-LM&$3.0\times10^{-4}$&$9.8\times10^{-3}$&$4.2\times10^{-4}$&$9.8\times10^{-3}$\\
+      RKGSI-Nitsche&$3.6\times10^{-15}$&$1.0\times10^{-13}$&$4.6\times10^{-15}$&$9.5\times10^{-14}$\\
+      RKGSI-HR&$3.1\times10^{-15}$&$1.0\times10^{-13}$&$3.5\times10^{-15}$&$7.4\times10^{-14}$\\
+       \bottomrule
+    \end{tabular}
+    \end{table}
+表\ref{chapter-table-cubic}为三次基函数无网格法的分片试验结果。
+
+
 \chapter{使用Zotero管理参考文献}
+添加附件：Better BibTex
+
+建立文件库：references
+
+对文件库导出条目至Latex编写的文件夹路径中(Latex路径中只允许以英文命名)
+
+eg：基于赫林格-赖斯纳原理的变分一致型伽辽金无网格法\cite{Wu2022,wu2023}相较于传统的本质边界条件施加方法能够有效提高计算精度和计算效率。
+
+
+
+
 \chapter{\LaTeX 插件推荐}
+编写公式、图表可能需要用到的包：
+
+usepackage\{amsmath,amsfonts,amssymb,textcomp\}
+
+usepackage\{booktabs,multirow,tabularx,float\}
 
 \include{acknowledgments}
 
 \appendix
 
 \chapter{附录}
+本附录描述的是....
 
-
-\bibliography{references}
 
 \backmatter
-
+\bibliography{references}
 \include{cv}
 
 \end{document}

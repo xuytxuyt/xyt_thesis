@@ -1,0 +1,28 @@
+\begin{thebibliography}{2}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax\else
+  \urlstyle{same}\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \DeclareUrlCommand\doi{\urlstyle{rm}}
+  \def\eprint#1#2{#2}
+\else
+  \def\doi#1{\href{https://doi.org/#1}{\nolinkurl{#1}}}
+  \let\eprint\href
+\fi
+
+\bibitem[吴俊超\ 等(2022)吴俊超, 吴新瑜, 赵珧冰, and
+  王东东]{Wu2022}
+吴俊超, 吴新瑜, 赵珧冰, 等.
+\newblock
+  基于Hellinger-Reissner变分原理的一致高效无网格本质边界条件施加方法\allowbreak[J].
+\newblock 力学学报, 2022.
+
+\bibitem[Wu et~al.(2023)Wu, Wu, Zhao, and Wang]{wu2023}
+Wu J, Wu X, Zhao Y, et~al.
+\newblock A rotation-free {{Hellinger-Reissner}} meshfree thin plate
+  formulation naturally accommodating essential boundary
+  conditions\allowbreak[J].
+\newblock Engineering Analysis with Boundary Elements, 2023, 154: 122-140.
+
+\end{thebibliography}
