@@ -29,18 +29,22 @@
 \chapter{前期准备}
 \section{封面关键字设置}
 \section{Git相关}
-使用fork建仓，
+使用fork建仓
+
 网页链接：\href{https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository}{建仓步骤}
 
 删除不必要文件；
 
-建立Tmp文件：没办法自动更改bbl文件
+建立Tmp文件
 
-设置.gitignore：提交时忽略不必要文件(*.aux,*.toc,\dots)：\href{https://blog.csdn.net/hjc_042043/article/details/135965334}{设置.gitignore}
+网页链接：\href{https://blog.csdn.net/lyxichigoichie/article/details/125961850}{设置Tmp文件}(存储不必要的文件，但没办法自动更改bbl文件)
+
+设置.gitignore
+
+网页链接：\href{https://blog.csdn.net/hjc_042043/article/details/135965334}{设置.gitignore}(提交时忽略不必要文件(*.aux,*.toc,\dots))
 \section{VS code配置}
 \subsection*{配置Latex}
-在VSCode中修改LaTex WorkShop配置,详细介绍链接\href{https://zhuanlan.zhihu.com/p/166523064}{vsocde中的Latex配置}
-huhuhu
+在VSCode中修改LaTex WorkShop配置,网页链接\href{https://zhuanlan.zhihu.com/p/166523064}{vsocde中的Latex配置}
 \subsection*{LaTeX workshop: }
 
 正向搜索(forward research)从代码处定位至PDF文档处：Ctrl+alt+j
@@ -94,6 +98,7 @@ Latex路径中文件只允许以英文命名
 \label{CHGraphsettings_fig1_meshfree}-命名
 \end{figure}
 \end{lstlisting}
+\newpage
 \subsection*{并排}
 \begin{figure}[H]
     \centering
@@ -120,8 +125,7 @@ Latex路径中文件只允许以英文命名
 \end{subcaptiongroup}
 \caption{\centering{无网格形函数：\subref{1}边界点；\subref{2}中心点}}
 \end{lstlisting}
-图\ref{CHGraphsettings_fig1_meshfree}、\ref{CHGraphsettings_fig2_meshfree}分别表示边界点处和内部节点处的无网格形函数图。
-
+\newpage
 \subsection*{表格式图片}
 \begin{figure}[H]
     \centering
@@ -188,7 +192,6 @@ RKGSI-HR&$3.1\times10^{-15}$&$1.0\times10^{-13}$&$3.5\times10^{-15}$&$7.4\times1
 \end{tabular}
 \end{table}    
 \end{lstlisting}
-表\ref{CHGraphsettings_table_cubic}为三次基函数无网格法的分片试验结果。
 
 \chapter{使用Zotero管理参考文献}
 1.下载附件：Better BibTex
@@ -227,10 +230,9 @@ eg：基于赫林格-赖斯纳原理的变分一致型伽辽金无网格法\cite
 
 代码块设置
 \begin{lstlisting}
-\lstset{
-  breaklines,%自动换行
-  columns=flexible,%不随便添加空格,只在已经有空格的地方添加空格,
-}
+\lstset{breaklines,        %自动换行
+        columns=flexible,  %不随便添加空格,只在已经有空格的地方添加空格,
+       }
 \end{lstlisting}
 
 设置PDF文档中超链接的颜色
@@ -244,7 +246,7 @@ eg：基于赫林格-赖斯纳原理的变分一致型伽辽金无网格法\cite
 % \include{acknowledgments}
 \appendix
 \chapter{附录}
-附录章节前添加如下代码
+附录章节前需添加以下下代码
 \begin{lstlisting}
     \appendix
 \end{lstlisting}
