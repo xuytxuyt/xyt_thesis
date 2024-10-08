@@ -6,10 +6,7 @@
 \usepackage{amsmath,amsfonts,amssymb,textcomp,ulem}
 \usepackage{booktabs,multirow,tabularx,float}
 \usepackage{listings}
-\lstset{
-  breaklines,%自动换行
-  columns=flexible,%不随便添加空格,只在已经有空格的地方添加空格,
-}
+
 
 
 
@@ -29,36 +26,27 @@
 \chapter{前期准备}
 \section{封面关键字设置}
 \section{Git相关}
-使用fork建仓
+\begin{enumerate}
+    \item 通过fork建仓，具体步骤可参考\href{https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository}{这里}。
+    \item 设置 .gitignore 文件(已配置)。
+\item 设置临时文件(.aux、.bbl等)和编译文件(.pdf)位置，具体可参考\href{https://github.com/James-Yu/LaTeX-Workshop/wiki/Compile#latex-tools}{LaTeX-Workshop帮助文档}(设置\%TMPDIR\%、\%OUTDIR\%)。
+\end{enumerate}
 
-网页链接：\href{https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository}{建仓步骤}
-
-删除不必要文件；
-
-建立Tmp文件
-
-网页链接：\href{https://blog.csdn.net/lyxichigoichie/article/details/125961850}{设置Tmp文件}(存储不必要的文件，但没办法自动更改bbl文件)
-
-设置.gitignore
-
-网页链接：\href{https://blog.csdn.net/hjc_042043/article/details/135965334}{设置.gitignore}(提交时忽略不必要文件(*.aux,*.toc,\dots))
 \section{VS code配置}
 \subsection*{配置Latex}
-在VSCode中修改LaTex WorkShop配置,网页链接\href{https://zhuanlan.zhihu.com/p/166523064}{vsocde中的Latex配置}
+\href{https://github.com/James-Yu/LaTeX-Workshop/wiki/Compile#latex-tools}{LaTeX-Workshop配置}
 \subsection*{LaTeX workshop: }
 
 正向搜索(forward research)从代码处定位至PDF文档处：Ctrl+alt+j
 
-反向搜索(inverse research)从PDF文档准确定位至LaTeX代码处:Ctrl+鼠标左键
+反向搜索(inverse research)从PDF文档准确定位至LaTeX代码处：Ctrl+鼠标左键
 
-网页链接：\href{https://github.com/James-Yu/LaTeX-Workshop/wiki/View#synctex}{正反向搜索介绍}
+正反向搜索具体教程可参考\href{https://github.com/James-Yu/LaTeX-Workshop/wiki/View#synctex}{这里}。
 \subsection*{Git Graph}
 点击左侧源代码管理插件-点击左上角View Git Graph(git log)-查看修改记录
 
 \subsection*{Todo Tree}
-帮助管理项目中的TODO注释和其他标记
-
-网页链接：\href{https://blog.csdn.net/m0_37586991/article/details/104239568}{Todo Tree安装步骤}
+帮助管理项目中的TODO注释和其他标记，\href{https://blog.csdn.net/m0_37586991/article/details/104239568}{Todo Tree安装步骤}。
 
 \subsection*{Zotero LaTeX}
 Zotero管理参考文献
@@ -66,7 +54,7 @@ Zotero管理参考文献
 Latex路径中文件只允许以英文命名
 
 \subsection*{公式}
-\begin{lstlisting}
+\begin{lstlisting}[language=TeX]
     \label{CH_name}{formula_name}
 \end{lstlisting}
 
@@ -85,7 +73,7 @@ Latex路径中文件只允许以英文命名
 \subsection*{单张}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.4]{figure/1.png}
+    \includegraphics[scale=0.4]{figures/1.png}
 \caption{\centering{边界点处无网格形函数}}
 \label{CHGraphsettings_fig1_meshfree}
 \end{figure}
@@ -93,7 +81,7 @@ Latex路径中文件只允许以英文命名
 \begin{lstlisting}
 \begin{figure}[H]-放置位置
 \centering-居中
-\includegraphics[scale=0.4]{figure/1.png}-大小、图片路径
+\includegraphics[scale=0.4]{figures/1.png}-大小、图片路径
 \caption{\centering{边界点处无网格形函数}}-图名
 \label{CHGraphsettings_fig1_meshfree}-命名
 \end{figure}
@@ -103,9 +91,9 @@ Latex路径中文件只允许以英文命名
 \begin{figure}[H]
     \centering
     \begin{subcaptiongroup}
-    \includegraphics[width=0.49\textwidth]{figure/1.png}
+    \includegraphics[width=0.49\textwidth]{figures/1.png}
     \phantomcaption\label{1}
-    \includegraphics[width=0.49\textwidth]{figure/2.png}
+    \includegraphics[width=0.49\textwidth]{figures/2.png}
     \phantomcaption\label{2}
     \end{subcaptiongroup}
 \caption{\centering{无网格形函数：\subref{1}边界点；\subref{2}中心点}}
@@ -131,12 +119,12 @@ Latex路径中文件只允许以英文命名
     \centering
     \begin{tabular}{cccc}
     $\quad$&$p=2$&$p=2$&$p=2$\\
-    边界点&\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.3\textwidth]{figure/1.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.3\textwidth]{figure/1.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.3\textwidth]{figure/1.png}}\end{subcaptiongroup}\\
-    中心点&\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.3\textwidth]{figure/2.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.3\textwidth]{figure/2.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.3\textwidth]{figure/2.png}}\end{subcaptiongroup}\\
+    边界点&\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.3\textwidth]{figures/1.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.3\textwidth]{figures/1.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.3\textwidth]{figures/1.png}}\end{subcaptiongroup}\\
+    中心点&\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.3\textwidth]{figures/2.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.3\textwidth]{figures/2.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.3\textwidth]{figures/2.png}}\end{subcaptiongroup}\\
     \end{tabular}
     \caption{\textbf{二维边界点与内部节点无网格形函数图}}\label{CHGraphsettings_fig3_meshfree}
     \end{figure}
