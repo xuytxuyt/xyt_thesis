@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 23.4) (preloaded format=xelatex 2023.9.26)  30 DEC 2024 15:25
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 23.4) (preloaded format=xelatex 2023.9.26)  6 JAN 2025 14:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -679,11 +679,8 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 9.
 LaTeX Warning: Unused global option(s):
     [UTF8].
 
-(Thesis_xyt.aux (abstract.aux) (shearlocking.aux
-
-LaTeX Warning: Label `Q1-Quad8' multiply defined.
-
-))
+(Thesis_xyt.aux (abstract.aux) (Introduction.aux) (MixedFormulation.aux)
+(LBB.aux))
 \openout1 = `Thesis_xyt.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
@@ -962,27 +959,36 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 ] [4
 
 ]
+\openout2 = `Introduction.aux'.
+
+ (Introduction.tex
+Chapter 1.
+) [1
+
+
+] [2
+
+
+
+]
 No file Thesis_xyt.bbl.
-(Thesis_xyt.aux (abstract.aux))
-
-LaTeX Warning: There were multiply-defined labels.
-
+(Thesis_xyt.aux (abstract.aux) (Introduction.aux))
 
 Package rerunfilecheck Warning: File `Thesis_xyt.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `Thesis_xyt.out':
-(rerunfilecheck)             Before: 97E81B45F165D6376CF39187D75F6AC3;951
-(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
+(rerunfilecheck)             Before: 86EA26DD2DAF4C06CB9D2DDF3CB9AC15;791
+(rerunfilecheck)             After:  89FADD6B0F4F469F5D66F815508A6658;405.
  ) 
 Here is how much of TeX's memory you used:
- 17525 strings out of 411463
- 357466 string characters out of 5822270
+ 17513 strings out of 411463
+ 357848 string characters out of 5822270
  1857290 words of memory out of 5000000
- 37495 multiletter control sequences out of 15000+600000
+ 37473 multiletter control sequences out of 15000+600000
  557885 words of font info for 132 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 87i,11n,99p,446b,363s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 87i,11n,99p,326b,363s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Thesis_xyt.pdf (5 pages).
+Output written on Thesis_xyt.pdf (7 pages).

@@ -1,0 +1,72 @@
+\chapter{混合有限元法}
+
+\section{不可压弹性问题}               
+考虑一个$n_d$维具有边界$\Gamma$的影响域$\Omega\in \mathbb R^{n_d}$,其中$\Gamma_t$和$\Gamma_g$分别表示其自然边界和本质边界，
+且$\Gamma_t \cup \Gamma_g = \Gamma$, $\Gamma_t \cap \Gamma_g = \varnothing$。相应的混合控制方程由下式给出：
+\begin{equation}\label{strong}
+    \begin{cases}
+        \nabla \cdot \boldsymbol \sigma + \boldsymbol b = \boldsymbol 0 & \mathrm{in} \; \Omega \\
+        \frac{p}{\kappa} + \nabla \cdot \boldsymbol u = 0 & \mathrm{in} \; \Omega \\
+        \boldsymbol \sigma \cdot \boldsymbol n = \boldsymbol t & \mathrm{on} \; \Gamma_t \\
+        \boldsymbol u = \boldsymbol g & \mathrm{on} \; \Gamma_g \\
+    \end{cases}
+\end{equation}
+其中，$\boldsymbol u$和$p$分别表示位移和静水压力，是这个问题的变量，$\boldsymbol \sigma$ 为应力张量并具有如下形式：
+\begin{equation}\label{stress}
+    \boldsymbol \sigma(\boldsymbol u, p) = p \boldsymbol 1 + 2\mu \nabla^s \boldsymbol u
+\end{equation}
+式中， $\boldsymbol 1 = \delta_{ij} \boldsymbol e_i \otimes \boldsymbol e_j$ 为二阶恒等张量。
+$\boldsymbol \varepsilon$ 和 $\mathrm{tr}\,\boldsymbol \varepsilon$为应变张量和它的迹，由下式给出：
+\begin{equation}
+    \nabla^s \boldsymbol u = \frac{1}{2}(\boldsymbol u \nabla + \nabla \boldsymbol u) -\frac{1}{3} \boldsymbol \varepsilon : \boldsymbol 1
+\end{equation}
+$\kappa$, $\mu$ 为体积模量和剪切模量，与杨氏模量$E$和泊松比$\nu$之间存在如下关系式：
+\begin{equation}\label{modulus}
+    \kappa = \frac{E}{2(1-2\nu)}, \quad \mu = \frac{E}{2(1+\nu)}
+\end{equation}
+$\boldsymbol b$为$\Omega$中的体力， $\boldsymbol t$, $\boldsymbol g$ 分别为自然边界和本质边界上的牵引力和位移。
+
+根据伽辽金公式，弱形式可以定义为：
+求$\boldsymbol u \in V$, $p \in Q$,使
+\begin{equation}
+    \begin{aligned}
+        a(\boldsymbol v, \boldsymbol u) + b(\boldsymbol v, p) &= f(\boldsymbol v) \quad &\forall \boldsymbol v \in V \\
+        b(\boldsymbol u, q) &= \boldsymbol 0 \quad &\forall q \in Q
+    \end{aligned}
+\end{equation}
+其中,空间 $V, Q$定义为：
+\begin{equation}
+    V=\{\boldsymbol v \in H^1(\Omega)^2\;\vert\;\boldsymbol v = \boldsymbol g, \; \textrm{on} \; \Gamma_g\}
+\end{equation}
+\begin{equation}
+    Q = \{q \in L^2(\Omega) \vert \int_{\Omega} q d\Omega = 0\}
+\end{equation}
+其中， $a:V\times V\rightarrow \mathbb R$ ，$b:V\times Q\rightarrow \mathbb R$ 是连续双线性泛函, $f:V\rightarrow V$ 是线性泛函。在弹性问题中，它们具有以下形式：
+\begin{equation}
+    a(\boldsymbol v, \boldsymbol u) = \int_\Omega \nabla^s \boldsymbol v : \nabla^s \boldsymbol u d\Omega
+\end{equation}
+\begin{equation}
+    b(\boldsymbol v, q) = \int_\Omega \nabla \cdot \boldsymbol v q d\Omega
+\end{equation}
+\begin{equation}
+    f(\boldsymbol v) = \int_{\Gamma_t} \boldsymbol v \cdot \boldsymbol t d\Gamma + \int_{\Omega} \boldsymbol v \cdot \boldsymbol b d\Omega
+\end{equation}
+\section{中厚板问题}
+本文考虑的另一个传统混合有限元问题是中厚板问题，该问题的影响域为具有边界$\Gamma$的$\Omega\in \mathbb R^{n_d}$。这个问题的强形式为：
+\begin{equation}\label{strong2}
+    \begin{cases}
+        M_{\alpha\beta,\beta} - Q_\alpha = 0 & \textrm{in}\; \Omega \\
+        Q_{\alpha,\alpha} + \bar q = 0 & \textrm{in}\; \Omega \\    Q_\alpha n_\alpha = \bar Q & \textrm{on}\; \Gamma_Q \\
+        M_{\alpha\beta} n_\beta = \bar M_\alpha & \textrm{on}\; \Gamma_M \\
+        \varphi_\alpha = \bar \varphi_\alpha & \textrm{on}\; \Gamma_\varphi \\
+        w = \bar w & \textrm{on}\; \Gamma_w \\
+    \end{cases}
+\end{equation}
+
+相应的弱形式可以表示为：
+\begin{equation}
+    \begin{aligned}
+        a(\boldsymbol v, \boldsymbol u) + b(\boldsymbol v, p) &= f(\boldsymbol v) \quad &\forall \boldsymbol v \in V \\
+        b(\boldsymbol u, q) &= \boldsymbol 0 \quad &\forall q \in Q
+    \end{aligned}
+\end{equation}

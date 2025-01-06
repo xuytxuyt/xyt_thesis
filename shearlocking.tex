@@ -6,9 +6,8 @@
 \begin{equation}\label{z-1}
 \begin{cases}
     M_{\alpha\beta,\beta} - Q_\alpha = 0 & \textrm{in}\; \Omega \\
-    Q_{\alpha,\alpha} + \bar q = 0 & \textrm{in}\; \Omega \\
-    Q_\alpha n_\alpha = \pmb{\bar Q} & \textrm{on}\; \Gamma_Q \\
-    M_{\alpha\beta} n_\beta = \pmb{\bar M}_\alpha & \textrm{on}\; \Gamma_M \\
+    Q_{\alpha,\alpha} + \bar q = 0 & \textrm{in}\; \Omega \\    Q_\alpha n_\alpha = \bar Q & \textrm{on}\; \Gamma_Q \\
+    M_{\alpha\beta} n_\beta = \bar M_\alpha & \textrm{on}\; \Gamma_M \\
     \varphi_\alpha = \bar \varphi_\alpha & \textrm{on}\; \Gamma_\varphi \\
     w = \bar w & \textrm{on}\; \Gamma_w \\
     \end{cases}
@@ -20,7 +19,7 @@
 \end{figure}
 式中，$M_{\alpha \beta}$ 可表示弯矩张量$\pmb{M}$ 的弯曲或扭转部分的分量，$\bar{q}$ 为垂直于板中面的分布荷载；
 $\Gamma_w$和$\Gamma_\varphi$为本质边界条件，$\bar{w}$和$\bar{\varphi}_\alpha$分别为本质边界条件上给定的挠度和转角；
-$\Gamma_Q$ 和$\Gamma_M$ 为自然边界条件，$\bar{\pmb Q}$和$\pmb{\bar{M}}_{\pmb{\alpha}}$ 为自然边界上的等效剪力和法向弯矩；
+$\Gamma_Q$ 和$\Gamma_M$ 为自然边界条件，$\bar Q$和$\bar{M}_{\alpha}$ 为自然边界上的等效剪力和法向弯矩；
 $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
 
 在平面应力假设下，当中厚板为线弹性各同向性材料时，其本构关系为：
@@ -47,14 +46,14 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
 \begin{equation}\label{z-snfh}
 \begin{split} 
     \Pi(w,\boldsymbol{\varphi})&=\frac{1}{2}\int_{\Omega}\kappa_{\alpha\beta}M_{\alpha\beta}d\Omega+\frac{1}{2}\int_{\Omega}\gamma_{\alpha}Q_{\alpha}d\Omega\\
-    &+\int_{\Gamma_{M}}\pmb\varphi_{\pmb \alpha}\cdot{\bar{\pmb M}_{\pmb{\alpha}}}d\Gamma-\int_{\Gamma_{Q}}{w}\bar {\pmb Q}d\Gamma-\int_{\Omega} w\bar{q}d\Omega
+    &+\int_{\Gamma_{M}}\varphi_{\alpha}{\bar{M}_{\alpha}}d\Gamma-\int_{\Gamma_{Q}}{w}\bar {Q}d\Gamma-\int_{\Omega} w\bar{q}d\Omega
 \end{split}
 \end{equation}
 对式(\ref{z-snfh})进行变分可得弱形式：
 \begin{equation}\label{z-rxs}
     \begin{split} 
         \delta\Pi(w,\boldsymbol{\varphi})&=\int_{\Omega}\delta\kappa_{\alpha\beta}M_{\alpha\beta}d\Omega+\int_{\Omega}\delta\gamma_{\alpha}Q_{\alpha}d\Omega\\
-        &+\int_{\Gamma_{M}}\pmb\delta\varphi_{\pmb \alpha}\cdot{\bar{\pmb M}_{\pmb{\alpha}}}d\Gamma-\int_{\Gamma_{Q}}{\delta{w}}\bar {\pmb Q}d\Gamma-\int_{\Omega} \delta{w}\bar{q}d\Omega
+        &+\int_{\Gamma_{M}}\delta\varphi_{\alpha}{\bar{M}_{\alpha}}d\Gamma-\int_{\Gamma_{Q}}{\delta{w}}\bar {Q}d\Gamma-\int_{\Omega} \delta{w}\bar{q}d\Omega
     \end{split}
     \end{equation}
 
@@ -134,7 +133,7 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
 \begin{split} 
     \Pi(w,\boldsymbol{\varphi},\boldsymbol{Q})&=\int_{\bar\Omega}\frac{1}{2}\varepsilon_{ij}\sigma_{ij} d\Omega+\frac{1}{2}\int_{\Omega}Q_{\alpha}(\gamma_{\alpha}-\frac{Q_{\alpha}}{kGh})d\Omega-\int_{\Gamma^{t}} u_{i}t_{i}d\Gamma-\int_{\Omega} u_{i}b_{i}d\Omega\\
     &=\frac{1}{2}\int_{\Omega}(\kappa_{\alpha \beta}M_{\alpha \beta}+\gamma_{\alpha}Q_{\alpha})d\Omega+\frac{1}{2}\int_{\Omega}Q_{\alpha}(\gamma_{\alpha}-\frac{Q_{\alpha}}{kGh})d\Omega\\
-    &+\int_{\Gamma_{M}}\pmb\varphi_{\pmb \alpha}\cdot{\bar{\pmb M}_{\pmb{\alpha}}}d\Gamma-\int_{\Gamma_{Q}}{w}\bar {\pmb Q}d\Gamma-\int_{\Omega} w\bar{q}d\Omega
+    &+\int_{\Gamma_{M}}\pmb\varphi_{\alpha}{\bar{M}_{\alpha}}d\Gamma-\int_{\Gamma_{Q}}{w}\bar {Q}d\Gamma-\int_{\Omega} w\bar{q}d\Omega
 \end{split}
 \end{equation}
 对式(\ref{z-2})进行变分可得弱形式：
@@ -142,15 +141,15 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
     \begin{split}
     &\delta\Pi(w,\boldsymbol\varphi,\boldsymbol{Q})\\
     &=\int_{\Omega}\delta\kappa_{\alpha \beta}M_{\alpha \beta}d\Omega+\frac{1}{2}\int_{\Omega}\delta\gamma_{\alpha}Q_{\alpha}d\Omega+\frac{1}{2}\int_{\Omega}\gamma_{\alpha}\delta{Q}_{\alpha}d\Omega+\frac{1}{2}\int_{\Omega}\delta\gamma_{\alpha}Q_{\alpha}d\Omega\\
-    &+\frac{1}{2}\int_{\Omega}\gamma_{\alpha}\delta{Q}_{\alpha}d\Omega-\int_{\Omega}\frac{\delta{Q}_{\alpha}{Q}_{\alpha}}{kGh}d\Omega+\int_{\Gamma_{M}}\delta\pmb\varphi_{\boldsymbol \alpha}\cdot{\boldsymbol{\bar M}_{\boldsymbol{\alpha}}}d\Gamma-\int_{\Gamma_{Q}}\delta{w}\boldsymbol{\bar Q}d\Gamma+\int_{\Omega} \delta{w}\bar{q}d\Omega\\
-    &=\int_{\Omega}\delta\kappa_{\alpha \beta}M_{\alpha \beta}d\Omega+\int_{\Omega}\delta\gamma_{\alpha}Q_{\alpha}d\Omega+\int_{\Omega}\gamma_{\alpha}\delta{Q}_{\alpha}d\Omega-\int_{\Omega}\frac{\delta{Q}_{\alpha}{Q}_{\alpha}}{kGh}d\Omega+\int_{\Gamma_{M}}\delta\pmb\varphi_{\boldsymbol \alpha}\cdot{\boldsymbol{\bar M}_{\boldsymbol{\alpha}}}d\Gamma\\
-    &-\int_{\Gamma_{Q}}\delta{w}\boldsymbol{\bar Q}d\Gamma+\int_{\Omega} \delta{w}\bar{q}d\Omega\\
+    &+\frac{1}{2}\int_{\Omega}\gamma_{\alpha}\delta{Q}_{\alpha}d\Omega-\int_{\Omega}\frac{\delta{Q}_{\alpha}{Q}_{\alpha}}{kGh}d\Omega+\int_{\Gamma_{M}}\delta\varphi_{\alpha}{{\bar M}_{\alpha}}d\Gamma-\int_{\Gamma_{Q}}\delta{w}{\bar Q}d\Gamma+\int_{\Omega} \delta{w}\bar{q}d\Omega\\
+    &=\int_{\Omega}\delta\kappa_{\alpha \beta}M_{\alpha \beta}d\Omega+\int_{\Omega}\delta\gamma_{\alpha}Q_{\alpha}d\Omega+\int_{\Omega}\gamma_{\alpha}\delta{Q}_{\alpha}d\Omega-\int_{\Omega}\frac{\delta{Q}_{\alpha}{Q}_{\alpha}}{kGh}d\Omega+\int_{\Gamma_{M}}\delta\varphi_{\alpha}{\boldsymbol{\bar M}_{\boldsymbol{\alpha}}}d\Gamma\\
+    &-\int_{\Gamma_{Q}}\delta{w}{\bar Q}d\Gamma+\int_{\Omega} \delta{w}\bar{q}d\Omega\\
     &=0
     \end{split}
 \end{equation}
 由上式可得平衡方程：
 \begin{equation}\label{z-3}
-    \int_{\Omega}\delta\kappa_{\alpha \beta}M_{\alpha \beta}d\Omega+\int_{\Omega}\delta\gamma_{\alpha}Q_{\alpha}d\Omega=\int_{\Gamma_{Q}}\delta{w}\pmb{\bar Q}d\Gamma-\int_{\Omega} \delta{w}\bar{q}d\Omega-\int_{\Gamma_{M}}\delta\pmb\varphi_{\pmb \alpha}\cdot{\pmb{\bar M}_{\pmb{\alpha}}}d\Gamma
+    \int_{\Omega}\delta\kappa_{\alpha \beta}M_{\alpha \beta}d\Omega+\int_{\Omega}\delta\gamma_{\alpha}Q_{\alpha}d\Omega=\int_{\Gamma_{Q}}\delta{w}{\bar Q}d\Gamma-\int_{\Omega} \delta{w}\bar{q}d\Omega-\int_{\Gamma_{M}}\delta\varphi_{\alpha}{{\bar M}_{\alpha}}d\Gamma
 \end{equation}
 \begin{equation}\label{z-4}
     \int_{\Omega}\gamma_{\alpha}\delta{Q}_{\alpha}d\Omega-\int_{\Omega}\frac{\delta{Q}_{\alpha}{Q}_{\alpha}}{kGh}d\Omega=0
@@ -174,22 +173,20 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
 \section{数值算例}
 \subsection{固支方板问题}
 如图\ref{plate}所示，一固支方板求解域为$\Omega=(0,1)\otimes(0,1)$，边长$L=1$,厚度$h=0.1$，$0.01$，$0.001$，材料系数分别为杨氏模量
-$E=10.92\times10^6$、泊松比$\mu=0.3$板面内分布如图所示纵向非均布荷载：
+$E=10.92\times10^6$、泊松比$\nu=0.3$板面内分布如图所示纵向非均布荷载：
 \begin{equation} 
 \begin{split} 
-    &F(x,y) =\\
-    &E*h^3/(12*(1-ν^2))*(12*y*(y-1)*(5*x^2-5*x+1)*(2*y^2\\
-    &*(y-1)^2+x*(x-1)*(5*y^2-5*y+1))+12*x*(x-1)*(5\\
-    &*y^2-5*y+1)*(2*x^2*(x-1)^2+y*(y-1)*(5*x^2-5*x+1)))
+    \bar{q}(x,y) =&\frac{Eh^3}{12(1-\nu^2)}(12y(y-1)(5x^2-5x+1)(2y^2(y-1)^2+x(x-1)(5y^2-5y+\\
+    &1))+12x(x-1)(5y^2-5y+1)(2x^2(x-1)^2+y(y-1)(5x^2-5x+1)))
 \end{split} 
 \end{equation}
 该问题的精确解为：
 \begin{equation} 
     \begin{split} 
-        &w(x,y) = 1/3*x^3*(x-1)^3*y^3*(y-1)^3-2*h^2/(5*(1-ν))*(y^3*(y-1)^3\\
-        &*x*(x-1)*(5*x^2-5*x+1)+x^3*(x-1)^3*y*(y-1)*(5*y^2-5*y+1))\\
-        &\theta_1(x,y) = y^3*(y-1)^3*x^2*(x-1)^2*(2*x-1)\\
-        &\theta_2(x,y) = x^3*(x-1)^3*y^2*(y-1)^2*(2*y-1)
+        w(x,y) =&\frac{1}{3}x^3(x-1)^3y^3(y-1)^3-\frac{2h^2}{5(1-\nu)}(y^3(y-1)^3x(x-1)(5x^2-5x+1)+\\
+        &x^3(x-1)^3y(y-1)(5y^2-5y+1))\\
+        \theta_1(x,y) =& y^3(y-1)^3x^2(x-1)^2(2x-1)\\
+        \theta_2(x,y) =& x^3(x-1)^3y^2(y-1)^2(2y-1)
     \end{split} 
 \end{equation}
 \begin{figure}[H]
@@ -198,7 +195,7 @@ $E=10.92\times10^6$、泊松比$\mu=0.3$板面内分布如图所示纵向非均�
         \caption{固支方板问题模型}\label{plate}
 \end{figure}
  
-为研究误差收敛性，采用图\ref{platemsh}所示的均布的$9\times 9$、$17\times 17$、$33\times 33$、$65\times 65$
+为研究误差收敛性，采用图\ref{platemsh}所示的均布的81、289、1089、4225
 的四个疏密不同的节点进行离散，并采用线性单元：三角形三节点单元(Tri3)、四边形四节点单元(Quad4)，二次单元：
 三角形六节点单元(Tri6)、四边形八节点单元(Quad8)。此时对于采用对于线性基函数的固支方板问题其影响域取为1.5倍
 的积分域长度，采用二次基函数时其影响域取为2.5倍积分域长度。
@@ -324,7 +321,7 @@ $Q\_1$进行探讨。如图\ref{Q1-Tri3}对于Tri3单元，在不同位移节点
     $1089$&\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_T3_q1_32_26.png}}\end{subcaptiongroup}
     &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_T3_q1_32_32.png}}\end{subcaptiongroup}\\
     \end{tabular}
-    \caption{\textbf{Tri3单元应力云图($Q_1$)}}\label{Q1-Tri3}
+    \caption{\textbf{固支方板问题Tri3单元应力云图($Q_1$)}}\label{Q1-Tri3}
 \end{figure}
 
 \begin{figure}[H]
@@ -338,7 +335,7 @@ $Q\_1$进行探讨。如图\ref{Q1-Tri3}对于Tri3单元，在不同位移节点
     $1089$&\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_quad4_q1_32_26.png}}\end{subcaptiongroup}
     &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_quad4_q1_32_32.png}}\end{subcaptiongroup}\\
     \end{tabular}
-    \caption{\textbf{Quad4单元应力云图($Q_1$)}}\label{Q1-Quad4}
+    \caption{\textbf{固支方板问题Quad4单元应力云图($Q_1$)}}\label{Q1-Quad4}
 \end{figure}
 
 \begin{figure}[H]
@@ -352,7 +349,7 @@ $Q\_1$进行探讨。如图\ref{Q1-Tri3}对于Tri3单元，在不同位移节点
     $4225$&\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_tri6_q1_32_25.png}}\end{subcaptiongroup}
     &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_tri6_q1_32_32.png}}\end{subcaptiongroup}\\  
     \end{tabular}
-    \caption{\textbf{Tri6单元应力云图($Q_1$)}}\label{Q1-Tri6}
+    \caption{\textbf{固支方板问题Tri6单元应力云图($Q_1$)}}\label{Q1-Tri6}
 \end{figure}
 
 \begin{figure}[H]
@@ -366,17 +363,150 @@ $Q\_1$进行探讨。如图\ref{Q1-Tri3}对于Tri3单元，在不同位移节点
     $3201$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_quad8_q1_32_26.png}}\end{subcaptiongroup}
     &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_quad8_q1_32_32.png}}\end{subcaptiongroup}\\ 
     \end{tabular}
-    \caption{\textbf{Quad8单元应力云图($Q_1$)}}\label{Q1-Quad8}
+    \caption{\textbf{固支方板问题Quad8单元应力云图($Q_1$)}}\label{Q1-Quad8}
 \end{figure}
 
-\subsection{Morley's斜板问题}
+\subsection{Razzaque斜板问题}
+考虑如图\ref{xieplate}所示斜板问题，其中斜板的边长为$L=100$,厚度为$h=10,1,0.1$,均被荷载作用在板内为$\bar{q}=1$,材料系数分别为杨氏模量$E=1085$、泊松比$\nu=0.31$。该斜板中心位移$w_c$的参考解为：
+\begin{equation} 
+    \bar{w_c}=w_c\times10^2\frac{D}{\bar{q}L^4}
+\end{equation}
+如图\ref{xieplatemsh}所示，斜板求解域采用均布离散的81、289、1089、4225四个疏密不同的节点进行离散，同样采用线性单元和二次单元进行数值分析。
+\begin{figure}[H]
+    \centering 
+        \includegraphics[scale=0.6]{figures/shearlocking/xie plate.png}
+        \caption{Razzaque斜板问题模型}\label{xieplate}
+\end{figure}
+\begin{figure}[H]
+    \centering 
+        \includegraphics[scale=0.5]{figures/shearlocking/xieplatemsh.png}
+        \caption{Razzaque斜板问题模型}\label{xieplatemsh}
+\end{figure}
 \begin{figure}[H]
     \centering
     \begin{tabular}{cccc}
     $\quad$&最优约束比&传统约束比\\
-    $1089$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_tri3_q1_32_24.png}}\end{subcaptiongroup}
+    $81$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_tri3_q1_8_6.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_tri3_q1_8_8.png}}\end{subcaptiongroup}\\ 
+    $289$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_tri3_q1_16_12.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_tri3_q1_16_16.png}}\end{subcaptiongroup}\\ 
+    $1089$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_tri3_q1_32_26.png}}\end{subcaptiongroup}
     &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_tri3_q1_32_32.png}}\end{subcaptiongroup}\\ 
     \end{tabular}
-    \caption{\textbf{Quad8单元应力云图($Q_1$)}}\label{Q1-Quad8}
+    \caption{\textbf{Razzaque斜板问题Tri3单元应力云图($Q_1$)}}\label{XQ1-Tri3}
 \end{figure}
-\subsection{简支圆板问题问题}
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{cccc}
+    $\quad$&最优约束比&传统约束比\\
+    $81$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_quad4_q1_8_6.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_quad4_q1_8_8.png}}\end{subcaptiongroup}\\ 
+    $289$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_quad4_q1_16_12.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_quad4_q1_16_16.png}}\end{subcaptiongroup}\\ 
+    $1089$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_quad4_q1_32_26.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_quad4_q1_32_32.png}}\end{subcaptiongroup}\\ 
+    \end{tabular}
+    \caption{\textbf{Razzaque斜板问题Quad4单元应力云图($Q_1$)}}\label{XQ1-Quad4}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{cccc}
+    $\quad$&最优约束比&传统约束比\\
+    $289$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_tri6_q1_8_6.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_tri6_q1_8_8.png}}\end{subcaptiongroup}\\ 
+    $833$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_tri6_q1_16_12.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_tri6_q1_16_16.png}}\end{subcaptiongroup}\\ 
+    $4225$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_tri6_q1_32_26.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_tri6_q1_32_32.png}}\end{subcaptiongroup}\\ 
+    \end{tabular}
+    \caption{\textbf{Razzaque斜板问题Tri6单元应力云图($Q_1$)}}\label{XQ1-Tri6}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{cccc}
+    $\quad$&最优约束比&传统约束比\\
+    $225$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_quad8_q1_8_6.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_quad8_q1_8_8.png}}\end{subcaptiongroup}\\ 
+    $833$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_quad8_q1_16_12.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_quad8_q1_16_16.png}}\end{subcaptiongroup}\\ 
+    $3201$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_quad8_q1_32_26.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/MorleysAcuteSkewPlate_quad8_q1_32_32.png}}\end{subcaptiongroup}\\ 
+    \end{tabular}
+    \caption{\textbf{Razzaque斜板问题Quad8单元应力云图($Q_1$)}}\label{XQ1-Tri6}
+\end{figure}
+\subsection{简支圆板问题}
+考虑如图\ref{yuanplate}所示简支圆板问题，其中圆板的半径为$R=5$,均匀荷载作用在板内为$\bar{q}=1$,材料系数分别为杨氏模量$E=10.92$、泊松比$\nu=0.3$。该圆板板中心位移$w_c$的精确解与板厚具有以下关系：
+
+\begin{table} 
+    \centering
+    \caption{均匀荷载下简支圆板中心位移$w_c$}
+    \begin{tabular}{l|c|r}
+        \hline
+        0.1   &1      & 2.5   \\
+        39831 &41.599 & 3.262 \\
+        \hline
+    \end{tabular}
+\end{table}
+如图\ref{yuanplatemsh}所示，圆板求解域采用均布离散的61、217、817、3169四个疏密不同的节点进行离散，同样采用线性单元和二次单元进行数值分析。
+\begin{figure}[H]
+    \centering 
+        \includegraphics[scale=0.8]{figures/shearlocking/yuan plate.png}
+        \caption{简支圆板问题模型}\label{yuanplate}
+\end{figure}22
+\begin{figure}[H]
+    \centering 
+        \includegraphics[scale=0.5]{figures/shearlocking/yuanplatemsh.png}
+        \caption{简支圆板问题节点离散}\label{yuanplatemsh}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{cccc}
+    $\quad$&最优约束比&传统约束比\\
+    $61$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri3_q1_8_6.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri3_q1_8_8.png}}\end{subcaptiongroup}\\ 
+    $217$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri3_q1_16_12.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri3_q1_16_16.png}}\end{subcaptiongroup}\\ 
+    $817$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri3_q1_32_26.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri3_q1_32_32.png}}\end{subcaptiongroup}\\ 
+    \end{tabular}
+    \caption{\textbf{简支圆板问题Tri3单元应力云图($Q_1$)}}\label{YQ1-Tri3}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{cccc}
+    $\quad$&最优约束比&传统约束比\\
+    $61$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad4_q1_8_6.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad4_q1_8_8.png}}\end{subcaptiongroup}\\ 
+    $217$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad4_q1_16_12.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad4_q1_16_16.png}}\end{subcaptiongroup}\\ 
+    $817$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad4_q1_32_26.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad4_q1_32_32.png}}\end{subcaptiongroup}\\ 
+    \end{tabular}
+    \caption{\textbf{简支圆板问题Quad4单元应力云图($Q_1$)}}\label{YQ1-Quad4}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{cccc}
+    $\quad$&最优约束比&传统约束比\\
+    $61$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri6_q1_8_6.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri6_q1_8_8.png}}\end{subcaptiongroup}\\ 
+    $217$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri6_q1_16_12.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri6_q1_16_16.png}}\end{subcaptiongroup}\\ 
+    $817$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri6_q1_32_26.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri6_q1_32_32.png}}\end{subcaptiongroup}\\ 
+    \end{tabular}
+    \caption{\textbf{简支圆板问题Tri6单元应力云图($Q_1$)}}\label{YQ1-Tri6}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{cccc}
+    $\quad$&最优约束比&传统约束比\\
+    $61$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad8_q1_8_6.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad8_q1_8_8.png}}\end{subcaptiongroup}\\ 
+    $217$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad4_q1_16_12.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad8_q1_16_16.png}}\end{subcaptiongroup}\\ 
+    $817$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad4_q1_32_26.png}}\end{subcaptiongroup}
+    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad8_q1_32_32.png}}\end{subcaptiongroup}\\ 
+    \end{tabular}
+    \caption{\textbf{简支圆板问题Quad8单元应力云图($Q_1$)}}\label{YQ1-Quad8}
+\end{figure}
