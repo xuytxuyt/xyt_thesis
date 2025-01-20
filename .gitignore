@@ -12,3 +12,5 @@
 .gz
 .log
 .DS_Store
+.pdf
+.synctex.gz
