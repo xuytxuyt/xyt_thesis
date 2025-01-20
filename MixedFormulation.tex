@@ -1,22 +1,5 @@
-\chapter{混合有限元法}
-\section{混合方程}
-混合有限元法基于混合变分原理，在分析的过程中同时选择两个基本未知函数，即节点位移函数和力函数。根据混合能量原理推导出混合方程。考虑混合变分问题：
-存在$\boldsymbol \psi \in V$, $\lambda \in Q$,使
-\begin{equation}
-    \begin{aligned}
-        a(\boldsymbol v, \boldsymbol \psi) + b(\boldsymbol v, \lambda) &= f(\boldsymbol v) \quad &\forall \boldsymbol v \in V \\
-        b(\boldsymbol \lambda, q) &= g(\boldsymbol q) \quad &\forall q \in Q
-    \end{aligned}
-\end{equation}
-其中$V, Q$为希尔伯特空间，定义为：
-\begin{equation}
-    V=\{\boldsymbol v \in H^1(\Omega)^2\;\vert\;\boldsymbol v = \boldsymbol g, \; \textrm{on} \; \Gamma_g\}
-\end{equation}
-\begin{equation}
-    Q = \{q \in L^2(\Omega) \vert \int_{\Omega} q d\Omega = 0\}
-\end{equation}
-$a$是定义在 $V\times V\rightarrow$ 上的，$b$是定义在$V\times Q\rightarrow $ 上的连续双线性泛函， $f\in V'$($V$的对偶空间)， $g\in Q'$($Q$的对偶空间)。
-\section{不可压问题的混合离散法与罚函数法}               
+\chapter{伽辽金法中的自锁问题}
+\section{不可压问题}               
 \subsection{罚函数法}
 考虑一个$n_d$维具有边界$\Gamma$的影响域$\Omega\in \mathbb R^{n_d}$,其中$\Gamma_t$和$\Gamma_g$分别表示其自然边界和本质边界，
 且$\Gamma_t \cup \Gamma_g = \Gamma$, $\Gamma_t \cap \Gamma_g = \varnothing$。相应的混合控制方程由下式给出：
@@ -31,13 +14,13 @@ $a$是定义在 $V\times V\rightarrow$ 上的，$b$是定义在$V\times Q\righta
 \begin{equation}\label{stress_penalty}
     \boldsymbol \sigma(\boldsymbol u) = 3\kappa \boldsymbol \varepsilon^v(\boldsymbol u) + 2\mu \boldsymbol \varepsilon^d(\boldsymbol u) 
 \end{equation}
-式中$\boldsymbol \varepsilon^v$ 和 $\boldsymbol \varepsilon^d$ 为应变张量$\boldsymbol \varepsilon$的体积（膨胀）应变和偏应变部分，可表示为：
+式中$\boldsymbol \varepsilon^v$ 和 $\boldsymbol \varepsilon^d$ 为应变张量$\boldsymbol \varepsilon$的体积应变和偏应变部分，可表示为：
 \begin{equation}
     \boldsymbol \varepsilon^v(\boldsymbol u) =\frac{1}{3} \nabla \cdot \boldsymbol u \; \boldsymbol 1, \quad
     \boldsymbol \varepsilon^d(\boldsymbol u) =\frac{1}{2}(\boldsymbol u \nabla + \nabla \boldsymbol u) - \boldsymbol \varepsilon^v, \quad
     \boldsymbol \varepsilon^v : \boldsymbol \varepsilon^d = 0
 \end{equation}
-$\kappa$, $\mu$ 为体积模量和剪切模量，与杨氏模量$E$和泊松比$\nu$之间存在如下关系式：
+其中,$\boldsymbol 1 = \delta_{ij} \boldsymbol e_i \otimes \boldsymbol e_j$是二阶恒等张量,$\kappa$, $\mu$ 为体积模量和剪切模量，与杨氏模量$E$和泊松比$\nu$之间存在如下关系式：
 \begin{equation}\label{modulus}
     \kappa = \frac{E}{2(1-2\nu)}, \quad \mu = \frac{E}{2(1+\nu)}
 \end{equation}
@@ -51,9 +34,11 @@ $\boldsymbol b$为$\Omega$中的体力， $\boldsymbol t$, $\boldsymbol g$ 分�
 \int_{\Gamma_t} \delta \boldsymbol u \cdot \boldsymbol t d\Gamma + \int_\Omega \delta \boldsymbol u \cdot \boldsymbol b d\Omega, \quad
 \forall \delta \boldsymbol u \in V
 \end{equation}
+其中,空间$V$定义为：$V=\{\boldsymbol v \in H^1(\Omega)^2\;\vert\;\boldsymbol v = \boldsymbol g, \; \textrm{on} \; \Gamma_g\}$。
+$\delta \boldsymbol u$是位移$\boldsymbol u $的变分，$\delta\boldsymbol \varepsilon^v$和$\delta\boldsymbol \varepsilon^d $分别为对应的体积应变和偏应变的变分。
 
 在传统有限元法中，整个影响域$\Omega$由一组具有节点$\{\boldsymbol x_I\}_{I=1}^{n_u}$的构造网格离散\cite{hughes2000},其中$n_u$是节点的数量。
-位移$u$及其变分$\delta u $可通过$x_I$处的节点系数和形函数进行近似：
+位移$\boldsymbol u$及其变分$\delta \boldsymbol u $可通过$x_I$处的节点系数和形函数进行近似：
 \begin{equation}\label{u_h}
     \boldsymbol u_h(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) \boldsymbol u_I, \quad
     \delta \boldsymbol u_h(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) \delta \boldsymbol u_I
@@ -66,19 +51,16 @@ $\boldsymbol b$为$\Omega$中的体力， $\boldsymbol t$, $\boldsymbol g$ 分�
 \int_{\Gamma_t} \delta \boldsymbol u_h \cdot \boldsymbol t d\Gamma + \int_\Omega \delta \boldsymbol u_h \cdot \boldsymbol b d\Omega, \quad
 \forall \delta \boldsymbol u_h \in V_h
 \end{equation}
-其中近似空间$V_h \subseteq V$，
-\begin{equation}
-    V_h = \{\boldsymbol v_h \in (\mathrm{span}\{N_I\}_{I=1}^{n_u})^2 \vert \boldsymbol v^h = \boldsymbol g,\; \mathrm{on} \; \Gamma_g\}
-\end{equation}
-根据$\delta u_h$的任意性，通过消除$\delta u_I$,上述方程可以简化为以下离散控制方程：
+其中近似空间$V_h \subseteq V$，$V_h = \{\boldsymbol v_h \in (\mathrm{span}\{N_I\}_{I=1}^{n_u})^2 \vert \boldsymbol v_h = \boldsymbol g,\; \mathrm{on} \; \Gamma_g\}$
+根据$\delta \boldsymbol u_h$的任意性，通过消除$\delta u_I$,上述方程可以简化为以下离散控制方程：
 \begin{equation}\label{equilibrium_penalty}
     (2\mu\boldsymbol K^d + 3\kappa\boldsymbol K^v) \boldsymbol d^u = \boldsymbol f
 \end{equation}
-式中，体积刚度矩阵$\boldsymbol K^v$ 和偏刚度矩阵 $\boldsymbol K^d$的分量分别为：
+式中，体积刚度矩阵$\boldsymbol K^v$ 和偏应力刚度矩阵 $\boldsymbol K^d$的分量分别为：
 \begin{equation}\label{stiffness_vol}
     \boldsymbol K^v_{IJ}= \int_{\Omega} \boldsymbol B^{vT}_I \boldsymbol B^v_J d\Omega
 \end{equation}
-\begin{equation}
+\begin{equation}\label{stiffness_dev}
     \boldsymbol K^d_{IJ}= \int_{\Omega} \boldsymbol B^{dT}_I \boldsymbol B^d_J d\Omega
 \end{equation}
 力向量$\boldsymbol f$的分量为：
@@ -117,17 +99,17 @@ $\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量。
         \boldsymbol u = \boldsymbol g & \mathrm{on} \; \Gamma_g \\
     \end{cases}
 \end{equation}
-其中$p\in Q$。
+其中$p\in Q$，空间$Q$定义为$Q = \{q \in L^2(\Omega) \vert \int_{\Omega} q d\Omega = 0\}$。
 
 根据伽辽金公式，弱形式可以定义为：
 存在$\boldsymbol u \in V$, $p \in Q$,使
-\begin{equation}
+\begin{equation}\label{weak_mix}
     \begin{aligned}
         a(\boldsymbol v, \boldsymbol u) + b(\boldsymbol v, p) &= f(\boldsymbol v) \quad &\forall \boldsymbol v \in V \\
         b(\boldsymbol u, q) &= \boldsymbol 0 \quad &\forall q \in Q
     \end{aligned}
 \end{equation}
-在弹性问题中，它们具有以下形式：
+式中，$a$是定义在 $V\times V\rightarrow$ 上，$b$是定义在$V\times Q\rightarrow $ 上的连续双线性泛函， $f\in V'$($V$的对偶空间)。在弹性问题中，它们具有以下形式：
 \begin{equation}
     a(\boldsymbol v, \boldsymbol u) = \int_\Omega \nabla^s \boldsymbol v : \nabla^s \boldsymbol u d\Omega
 \end{equation}
@@ -159,7 +141,7 @@ $\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量。
         b(\boldsymbol u_h, q_h) &= \boldsymbol 0 \quad &\forall q_h \in Q_h
     \end{aligned}
 \end{equation}
-即
+具体表达式为：
 \begin{subequations}\label{ritz_mix}
 \begin{alignat}{2}
 \label{ritz_mix_1}
@@ -171,6 +153,7 @@ $\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量。
 \int_\Omega \delta p_h \nabla \cdot \boldsymbol u_h d\Omega - \int_\Omega \frac{1}{3\kappa} \delta p_h p_h d\Omega &= 0, &\forall \delta p_h \in Q_h
 \end{alignat}
 \end{subequations}
+其中近似空间$Q_h \subseteq Q$，$Q_h = \{q_h \in L^2(\Omega) \vert \int_{\Omega} q_h d\Omega = 0\}$
 
 根据$u_h$和$p_h$的任意性，式\eqref{ritz_mix}可得到如下离散控制方程：
 \begin{equation}\label{equilibrium_mix}
@@ -247,7 +230,7 @@ $\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量。
 
 通过对比式\eqref{projection_penalty}和式\eqref{projection_mixed},罚函数法实际上与混合离散法等价，两种方法都可以用投影的方式来描述。
 
-\section{中厚板问题的混合离散法与罚函数法}      
+\section{剪切自锁问题}      
 \subsection{罚函数法}
 考虑如图\ref{mindlin_picture}所示中厚板，其中中板厚为$h$,$\Omega$为板中面。在Mindlin假设下,中厚板考虑横向剪切变形,相应的混合控制方程由下式给出：
 \begin{equation}\label{strong_mindlin}
@@ -306,17 +289,17 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
 \end{equation}
 
 在传统有限元法中，整个影响域$\Omega$由一组具有节点$\{\boldsymbol x_I\}_{I=1}^{n_u}$的构造网格离散,其中$n_u$是节点的数量。
-挠度$w$及其变分$\delta w $,转角$\varphi$及其变分$\delta \varphi $可通过$x_I$处的节点系数和形函数进行近似：
+挠度$w$及其变分$\delta w $,转角$\varphi_\alpha$及其变分$\delta \varphi_\alpha $可通过$x_I$处的节点系数和形函数进行近似：
 \begin{equation}
-    w_h(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) w_I, \quad \delta w_h(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) \delta w_I
+    w^h(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) w_I, \quad \delta w^h(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) \delta w_I
 \end{equation}
 \begin{equation}
-    \varphi_{\alpha h}(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) \varphi_{\alpha I}, \quad \delta \varphi_h(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) \delta \varphi_{\alpha I}
+    \varphi^h_{\alpha}(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) \varphi_{\alpha I}, \quad \delta \varphi^h(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) \delta \varphi_{\alpha I}
 \end{equation}
 其中，$N_I$为节点$x_I$处的形函数，和$w_I$和$\varphi_{\alpha I}$节点系数张量。
-相应的近似曲率$\pmb\kappa_h$和近似剪切应变$\pmb\gamma_h$可表示为：
+相应的近似曲率$\pmb\kappa$和近似剪切应变$\pmb\gamma$可表示为：
 \begin{equation}
-    \boldsymbol\kappa_h = 
+    \boldsymbol\kappa^h = 
     \begin{Bmatrix}
         \kappa^h_{11} \\ \kappa^h_{22} \\ 2\kappa^h_{12} 
     \end{Bmatrix} = -\sum_{I=1}^{n_u}
@@ -328,7 +311,7 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
     \end{Bmatrix} = - \sum_{I=1}^{n_u} \boldsymbol B^b_I \boldsymbol d_I
 \end{equation}
 \begin{equation}
-    \boldsymbol\gamma_h = 
+    \boldsymbol\gamma^h = 
     \begin{Bmatrix}
         \gamma^h_1 \\ \gamma^h_2
     \end{Bmatrix} = \sum_{I=1}^{n_u}
@@ -341,18 +324,18 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
     \end{Bmatrix} = \sum_{I=1}^{n_u} \boldsymbol B^s_I \boldsymbol d_I
 \end{equation}
 \begin{equation}\label{kappa_h}
-    \delta\boldsymbol\kappa_h = - \sum_{I=1}^{n_u} \boldsymbol B^b_I \delta\boldsymbol d_I ,\quad \delta\boldsymbol\gamma_h = \sum_{I=1}^{n_u} \boldsymbol B^s_I \delta\boldsymbol d_I
+    \delta\boldsymbol\kappa^h = - \sum_{I=1}^{n_u} \boldsymbol B^b_I \delta\boldsymbol d_I ,\quad \delta\boldsymbol\gamma^h = \sum_{I=1}^{n_u} \boldsymbol B^s_I \delta\boldsymbol d_I
 \end{equation}
 将式\eqref{kappa_h}代入到弱形式\eqref{weak_penalty_mindlin}可得下列变分方程：
-存在$(w_h,\boldsymbol{\varphi}_{\alpha h})\in V_h$,使
+存在$(w^h,\boldsymbol{\varphi}^h_{\alpha})\in V_h$,使
 \begin{equation}\label{ritz_penalty_mindlin}
     \begin{split} 
         &\int_{\Omega}\delta\kappa^h_{\alpha\beta}M_{\alpha\beta}d\Omega+\int_{\Omega}\delta\gamma^h_{\alpha}Q_{\alpha}d\Omega=\\
-        &-\int_{\Gamma_{M}}\delta\varphi_{\alpha h}{\bar{M}_{\alpha}}d\Gamma+\int_{\Gamma_{Q}}{\delta{w_h}}\bar {Q}d\Gamma+\int_{\Omega} \delta{w}\bar{q}d\Omega,\quad \forall(\delta w_h,\delta\varphi_{\alpha h}) \in V_h
+        &-\int_{\Gamma_{M}}\delta\varphi^h_{\alpha}{\bar{M}_{\alpha}}d\Gamma+\int_{\Gamma_{Q}}{\delta{w^h}}\bar {Q}d\Gamma+\int_{\Omega} \delta{w^h}\bar{q}d\Omega,\quad \forall(\delta w^h,\delta\varphi^h_{\alpha}) \in V_h
     \end{split}
 \end{equation}
 
-根据$\pmb\kappa_h$和$\pmb\gamma_h$的任意性，上述方程可简化为如下离散控制方程：
+根据$\pmb\kappa^h$和$\pmb\gamma^h$的任意性，上述方程可简化为如下离散控制方程：
 \begin{equation}
     (\boldsymbol K^b + \boldsymbol K^s) \boldsymbol d = \boldsymbol f
 \end{equation}
@@ -393,7 +376,7 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
 \end{equation}
 式\eqref{stiffness_shear}中的剪切刚度矩阵$\boldsymbol K^s$的分量可以改写为：
 \begin{equation}
-    \boldsymbol K^s_{IJ} \approx \bar{\boldsymbol K}^s_{IJ} = \sum_{C=1}^{n_e}\sum_{G=1}^{n_g} h\boldsymbol B^{sT}_I(\boldsymbol x_G) \boldsymbol B_J^s(\boldsymbol x_G) w_G
+    \boldsymbol K^s_{IJ} \approx \bar{\boldsymbol K}^s_{IJ} = \sum_{C=1}^{n_e}\sum_{G=1}^{n_g} h\boldsymbol B^{sT}_I(\boldsymbol x_G) kG\boldsymbol B_J^s(\boldsymbol x_G) w_G
 \end{equation}
 
 \subsection{混合离散法}
@@ -417,14 +400,14 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
     \end{split}
 \end{equation}
 由上式弱形式可以定义为：
-存在$\boldsymbol u \in V$, $p \in Q$,使
+存在$\boldsymbol u \in V$, $\boldsymbol p \in Q$,使
 \begin{equation}
     \begin{aligned}
-        a(\boldsymbol v, \boldsymbol u) + b(\boldsymbol v, p) &= f(\boldsymbol v) \quad &\forall \boldsymbol v \in V \\
-        b(\boldsymbol u, q) &= \boldsymbol 0 \quad &\forall q \in Q
+        a(\boldsymbol v, \boldsymbol u) + b(\boldsymbol v, \boldsymbol p) &= f(\boldsymbol v) \quad &\forall \boldsymbol v \in V \\
+        b(\boldsymbol u, \boldsymbol q) &= \boldsymbol 0 \quad &\forall q \in Q
     \end{aligned}
 \end{equation}
-即：
+其中$\boldsymbol u=(w,\varphi_1,\varphi_2)$,具体表达式为：
 \begin{equation}\label{mindlin_weak1}
     \int_{\Omega}\delta\kappa_{\alpha \beta}M_{\alpha \beta}d\Omega+\int_{\Omega}\delta\gamma_{\alpha}Q_{\alpha}d\Omega=\int_{\Gamma_{Q}}\delta{w}{\bar Q}d\Gamma-\int_{\Omega} \delta{w}\bar{q}d\Omega-\int_{\Gamma_{M}}\delta\varphi_{\alpha}{{\bar M}_{\alpha}}d\Gamma
 \end{equation}
@@ -436,14 +419,14 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
     Q^h_\alpha(\boldsymbol x) = \sum_{K=1}^{n_q} N^q_K(\boldsymbol x) q_{\alpha K},\quad \delta Q^h_\alpha(\boldsymbol x) = \sum_{K=1}^{n_q} N^q_K(\boldsymbol x) \delta q_{\alpha K}
 \end{equation}
 其中$q_{\alpha K}$是节点系数，$N^q_K$是对应的形函数。相应的里兹-伽辽金变分方程如下：
-存在$\boldsymbol u_h \in V_h$, $p_h \in Q_h$使
+存在$\boldsymbol u_h \in V_h$, $\boldsymbol p_h \in Q_h$使
 \begin{equation}
     \begin{aligned}
-        a(\boldsymbol v_h, \boldsymbol u_h) + b(\boldsymbol v_h, p_h) &= f(\boldsymbol v_h) \quad &\forall \boldsymbol v_h \in V_h \\
-        b(\boldsymbol u_h, q_h) &= \boldsymbol 0 \quad &\forall q_h \in Q_h
+        a(\boldsymbol v_h, \boldsymbol u_h) + b(\boldsymbol v_h, \boldsymbol p_h) &= f(\boldsymbol v_h) \quad &\forall \boldsymbol v_h \in V_h \\
+        b(\boldsymbol u_h, \boldsymbol q_h) &= \boldsymbol 0 \quad &\forall \boldsymbol q_h \in Q_h
     \end{aligned}
 \end{equation}
-即：
+具体表达式为：
 \begin{equation}\label{mindlin_ritz1}
     \int_{\Omega}\delta\kappa^h_{\alpha \beta}M_{\alpha \beta}d\Omega+\int_{\Omega}\delta\gamma^h_{\alpha}Q_{\alpha}d\Omega=\int_{\Gamma_{Q}}\delta{w_h}{\bar Q}d\Gamma-\int_{\Omega} \delta{w_h}\bar{q}d\Omega-\int_{\Gamma_{M}}\delta\varphi_{\alpha h}{{\bar M}_{\alpha}}d\Gamma
 \end{equation}
@@ -451,11 +434,11 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
     \int_{\Omega}\gamma^h_{\alpha}\delta{Q}^h_{\alpha}d\Omega-\int_{\Omega}\frac{\delta{Q}^h_{\alpha}{Q}^h_{\alpha}}{kGh}d\Omega=0
 \end{equation}
 
-根据$\pmb\kappa_h$、$\pmb\gamma_h$和$\pmb Q_h$的任意性，上述方程可简化为如下离散控制方程：
+根据$\boldsymbol\kappa^h$、$\boldsymbol\gamma^h$和$\boldsymbol Q^h$的任意性，上述方程可简化为如下离散控制方程：
 \begin{equation} \label{equilibrium_mindlin_mix}
-    \begin{bmatrix}\pmb{K}^{b}&\pmb{K}^{sq}\\{\pmb{K}^{sq}}^T&\pmb{K}^{qq}\end{bmatrix}
-    \begin{Bmatrix}\pmb{d}\\\pmb{q}\end{Bmatrix}=
-    \begin{Bmatrix}\pmb{f}\\\pmb{0}\end{Bmatrix}
+    \begin{bmatrix}\boldsymbol{K}^{b}&\boldsymbol{K}^{sq}\\{\boldsymbol{K}^{sq}}^T&\boldsymbol{K}^{qq}\end{bmatrix}
+    \begin{Bmatrix}\boldsymbol{d}\\\boldsymbol{q}\end{Bmatrix}=
+    \begin{Bmatrix}\boldsymbol{f}\\\boldsymbol{0}\end{Bmatrix}
 \end{equation}
 式中，刚度矩阵$\boldsymbol K^{sq}$,$\boldsymbol K^{qq}$的分量具体表达式如下:
 \begin{equation} 
@@ -464,7 +447,6 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
 \begin{equation} 
     \boldsymbol K^{qq}_{KL} = -\frac{1}{kGh} \int_\Omega N^q_K N^q_L \boldsymbol 1 d\Omega
 \end{equation}
-其中$\boldsymbol 1$为二阶恒等张量。
 
 由式\eqref{equilibrium_mindlin_mix}离散控制方程中的第二个等式，系数向量$\boldsymbol q$可用$\boldsymbol d$表示：
 \begin{equation}
@@ -478,4 +460,58 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
     \end{split}
 \end{equation}
 
-\section{有限元离散与约束比}      
+\section{差异约束}
+以不可压问题为例，消除自锁的途径通常可以分为减少压力约束或增加位移约束两种途径进行。减小压力约束最直接的方式为采用缩减积分进行数值积分。混合离散法中采取不同的单元组合达到减少压力约束或增加位移约束的目的。
+\subsection{缩减积分}
+对于双线性四边形单元，全积分在每个方向上有两个积分点，如图所示的单元，使用$2\times2$个高斯积分点。根据高斯求积的规则，式\eqref{stiffness_vol}提到的体积刚度矩阵在每个单元的计算结果为：
+\begin{equation}
+    \begin{split}
+        \boldsymbol K^{ve}_{IJ} \approx \bar{\boldsymbol K}^{ve}_{IJ} = & \boldsymbol B^{vT}_I(-\frac{1}{\sqrt{3}},-\frac{1}{\sqrt{3}}) \boldsymbol B_J^v(-\frac{1}{\sqrt{3}},-\frac{1}{\sqrt{3}}) \\
+        & + \boldsymbol B^{vT}_I(\frac{1}{\sqrt{3}},-\frac{1}{\sqrt{3}}) \boldsymbol B_J^v(\frac{1}{\sqrt{3}},-\frac{1}{\sqrt{3}})\\
+        & + \boldsymbol B^{vT}_I(\frac{1}{-\sqrt{3}},\frac{1}{\sqrt{3}}) \boldsymbol B_J^v(-\frac{1}{\sqrt{3}},\frac{1}{\sqrt{3}})\\
+        & + \boldsymbol B^{vT}_I(\frac{1}{\sqrt{3}},\frac{1}{\sqrt{3}}) \boldsymbol B_J^v(\frac{1}{\sqrt{3}},\frac{1}{\sqrt{3}})\\
+    \end{split}
+\end{equation}
+这样的表达式同样适用于偏应力刚度矩阵\eqref{stiffness_dev}。
+
+事实证明，传统有限元法使用全积分会导致自锁问题。缩减积分在每个方向上的积分点由两个缩减到一个。如图所示，只在单元中心有一个积分点。这种方式，相关刚度矩阵的计算结果为：
+\begin{equation}
+        \boldsymbol K^{ve}_{IJ} \approx \bar{\boldsymbol K}^{ve}_{IJ} = 4\boldsymbol B^{vT}_I(0,0) \boldsymbol B_J^v(0,0)
+\end{equation}
+\begin{equation}
+    \boldsymbol K^{de}_{IJ} \approx \bar{\boldsymbol K}^{de}_{IJ} = 4\boldsymbol B^{dT}_I(0,0) \boldsymbol B_J^d(0,0)
+\end{equation}
+
+计算结果表明，虽然缩减积分能够消除自锁现象，但是低阶高斯积分将伴随着数值积分精度不足，引起数值计算结果振荡和精度下降。
+由于单元只有一个积分点，会产生沙漏问题或零能模式，影响分析精度。针对低阶高斯积分精度不足的问题，可以使用选择积分法，该方法对于偏应力刚度矩阵使用全积分，对体积刚度矩阵采用缩减积分进行计算，从而提高求解精度。
+这样的方法同样适用于剪切自锁问题。
+
+对于二次四边形单元，全积分在每个方向上有三个积分点，如图所示，使用$3\times3$个高斯积分点。对于全积分二次单元，因其边缘自身可以弯曲，可以缓解剪切自锁，但不能缓解体积自锁。
+二次单元的缩减积分，在每个方向上有两个积分点，同样可以缓解剪切自锁，而且几乎没有沙漏模式或零能模式，但仍然不能缓解体积自锁。
+
+\subsection{混合离散}
+同样以不可压问题为例，由式\eqref{weak_mix}可得，混合离散法分别对位移$u$和压力$p$采用不同的空间不同的节点进行离散。而在传统有限元中，相应的节点是通过单元进行布置的，因此调整约束也要通过单元进行。传统有限元法往往表现出过度约束的状态，降低混合离散单元组合中的压力近似阶数可以达到降低压力约束的目的。
+例如双线性位移-常数压力的四边形单元(Q4P1),最早由Hughes和Allik提出\cite{hughes1969}，其与线性缩减积分单元是等价的，并且Malkus和Hughes证明了混合方法和缩减积分及选择积分法在概念上的统一\cite{hughes1978}，这个单元被广泛运用于体积自锁；八节点位移-线性压力的四边形单元(Q8P1、Q8P3)；九节点位移-线性压力的四边形单元(Q9P3)，是缓解体积自锁最有效的四边形单元之一。
+使用连续形函数连接每个单元中的局部压力约束同样可以减少总的压力约束。例如6节点位移-3节点连续线性压力的三角形单元(T6C3);9节点位移-4节点二次压力的四边形单元(Q9C4)又称Taylor-Hood单元。
+
+另一类混合有限元法通过增加位移约束来缓解体积自锁。例如在3节点三角形单元的基础上，Arnold等人在每个单元上使用三阶泡泡函数增加位移约束，被称为Mini单元(T4C3)；同样还有Crouzeix-Raviart单元(T6P1)将位移节点由顶点增加到边上，增加了位移约束。
+
+从上述单元可以看出，位移约束和应力约束在一定的比例能缓解体积自锁。不同的差异约束能产生不同的效果，适当的施加这一约束对于获得更加精确的结果至关重要。约束不足或约束过多都会降低结果的精确性和稳定性。为了更加精确的施加约束，确定准确的约束比至关重要。
+\subsection{约束比}
+约束比是用来衡量变量间的约束程度。对于不可压问题约束比为位移的总自由度比上压力的总自由度。理想情况下，最优约束比应与其偏微分控制方程一致。例如，在二维情况下，不可压问题有两个位移控制方程，一个压力控制方程，所以最优约束比为2.当约束比小于2时会出现体积自锁的倾向，当约束比小于等于1时会出现严重自锁现象。当约束比大于2时会导致压力出现很大的误差。
+相关的结论Hughes已经做出了总结\cite{hughes2000}。
+\begin{equation}
+    r = \frac{2n_u}{n_p}, \quad 
+    \begin{cases}
+        r > 2 & \text{过少的约束} \\
+        r = 2 & \text{最优} \\
+        r < 2 & \text{过多的约束} \\
+        r \le 1 & \text{严重自锁} \\
+    \end{cases}
+\end{equation}
+其中$n_u$和$n_p$分别为位移和压力的控制节点数量。
+
+
+从上述结果可以看出，该方法只是一种启发式方法，并不可以精确确定单元组合能否够缓解自锁，只是一种便捷的工具来评估单元是否有缓解自锁的可能，在整体评估单元性能时，还需要考虑其它问题。尽管满足约束比的单元缓解了体积自锁且数值解也比较精确，但它们并非都能满足LBB稳定性条件。
+例如Q4P1单元就不满足LBB稳定性条件且压力的解出现了明显的振荡，被称为伪压力模式或应力棋盘模式；
+
