@@ -1,4 +1,5 @@
 \chapter{体积自锁问题}
+本章针对体积不可压材料数值分析的体积自锁问题，介绍了罚函数法和拉格朗日乘子法两种解决方法，讨论了两种方法的等价性。同时，说明了体积自锁程度的判定方法，包括体积约束比和LBB稳定性条件。
 \section{体积不可压材料}               
 考虑一个维度为$n_d$具有边界$\Gamma$的体积不可压材料弹性体$\Omega\in \mathbb R^{n_d}$,其中$\Gamma_t$和$\Gamma_g$分别表示其自然边界和本质边界，
 且$\Gamma_t \cup \Gamma_g = \Gamma$, $\Gamma_t \cap \Gamma_g = \varnothing$。该问题相应的强形式为：
@@ -76,8 +77,6 @@ $\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量。
 因此式\eqref{equilibrium_penalty}中的体积刚度矩阵$\boldsymbol K^v$可视作一种强制使用的罚函数法使得体积变形为$0$,即$\nabla \cdot \boldsymbol u = 0$，而体积模量$\kappa$可视作罚因子。
 由于这种情况，使用传统有限元法会产生严重的体积锁定，就是所谓的体积自锁现象。
 
-% 1. 约束过多 2. 锁定了K^d的模态，rank(K^d)
-
 \section{调整体积约束}
 \subsection{罚函数法}
 传统有限元法发生体积自锁的自由度为刚度矩阵的秩$rank(\boldsymbol K)$,通过减少体积刚度矩阵中的积分点数量，可以达到缓解体积自锁的目的。
@@ -96,11 +95,18 @@ $\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量。
 \begin{equation}
     rank(\boldsymbol K)=min(n_e,2n_u)
 \end{equation}
-\begin{figure}[H]
-    \centering 
-    \includegraphics[scale=0.8]{figures/reduced.png}
-    \caption{Quad4单元缩减积分}\label{reduced}
+\begin{figure}[!ht]
+    \centering
+        \begin{tabular}{c@{\hspace{24pt}}c}
+            \includegraphics[width=0.3\textwidth]{figures/rd_quad4.png} &
+            \includegraphics[width=0.3\textwidth]{figures/rd_q4r1.png} \\
+            完全积分 & 缩减积分 \\
+            \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_u.png}} ：位移节点 &
+            \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_i.png}} ：高斯积分点 
+        \end{tabular}
+        \caption{Quad4单元缩减积分}\label{reduced}
 \end{figure}
+
 通过减少对体积自由度的约束，缓解体积自锁现象，但是低阶高斯积分将伴随着数值积分精度不足，引起数值计算结果振荡和精度下降。针对低阶高斯积分精度不足的问题，可以使用选择积分法。该方法对于偏应力刚度矩阵使用全积分，
 对体积刚度矩阵采用缩减积分进行计算，保持了偏应力刚度矩阵的自由度个数，只减少体积刚度矩阵的自由度个数，从而提高求解精度。
 
@@ -225,7 +231,7 @@ $\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量。
 
 \section{体积自锁程度判断方法}
 \subsection{体积约束比}
-约束比是用来衡量变量间的约束程度。对于不可压问题约束比为位移的总自由度比上压力的总自由度。理想情况下，最优约束比应与其偏微分控制方程一致。例如，在二维情况下，不可压问题有两个位移控制方程，一个压力控制方程，所以最优约束比为2.当约束比小于2时会出现体积自锁的倾向。当约束比大于2时会导致压力出现很大的误差。
+约束比是用来衡量变量间的约束程度的重要指标。对于不可压问题而言，约束比定义为位移总自由度与压力总自由度的比值。在理想情况下，最优约束比应与相应的偏微分控制方程一致。例如，在二维情况下，不可压问题涉及两个位移控制方程和一个压力控制方程，因此最优约束比为2.当约束比小于2时会出现体积自锁的倾向。当约束比大于2时可能会导致压力计算出现较大误差。
 相关的结论Hughes已经做出了总结\cite{hughes2000}。
 \begin{equation}
     r = \frac{n_d\times n_u}{n_p}, \quad 
@@ -236,16 +242,159 @@ $\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量。
     \end{cases}
 \end{equation}
 
-图\ref{pressure_elements}为四种不同的二维位移压力单元。图(a)为
-\begin{figure}[H]
-    \centering 
-    \includegraphics[scale=0.8]{figures/pressure_elements.png}
-    \caption{二维位移应力单元示例}\label{pressure_elements}
-\end{figure}
+图\ref{pressure_elements}为四种不同的二维位移压力单元，图中阴影部分为边界条件，边界上位移、压力节点自由度均为0。
 
-从上述结果可以看出，该方法只是一种启发式方法，并不可以精确确定单元组合能否够缓解自锁，只是一种便捷的工具来评估单元是否有缓解自锁的可能，在整体评估单元性能时，还需要考虑其它问题。尽管满足约束比的单元缓解了体积自锁且数值解也比较精确，但它们并非都能满足LBB稳定性条件。
-例如Q4P1单元就不满足LBB稳定性条件且压力的解出现了明显的振荡，被称为伪压力模式或应力棋盘模式；
+图\ref{pressure_elements}(a)为线性位移--常数压力三角形单元(T3P1)，它的约束比为：
+\begin{equation}
+    r= \frac{2\times n_u}{n_p}=\frac{2\times 1}{2}=1
+\end{equation}
+表明此单元体积约束过多，会产生体积自锁，与实际情况一致。
+
+图\ref{pressure_elements}(b)为双线性位移--常数压力四边形单元(Q4P1)，约束比为：
+\begin{equation}
+    r= \frac{2\times n_u}{n_p}=\frac{2\times 1}{1}=2
+\end{equation}
+此单元满足最优约束比，能够缓解体积自锁。
+
+图\ref{pressure_elements}(c)为双线性位移--连续双线性压力四边形单元(Q4C4)，约束比为：
+\begin{equation}
+    r= \frac{2\times n_u}{n_p}=\frac{2\times 1}{1}=2
+\end{equation}
+结果显示满足最优约束比，然而这个单元结果并不收敛，不能缓解体积自锁。
+
+图\ref{pressure_elements}(d)为8节点位移--连续双线性压力四边形单元(Q8C4)，约束比为：
+\begin{equation}
+    r= \frac{2\times n_u}{n_p}=\frac{2\times 3}{1}=6
+\end{equation}
+约束比很大，表示这个单元体积约束太少。实际应用中虽然能缓解体积自锁，但是存在收敛性问题。
+
+\begin{figure}[!ht]
+    \centering
+        \begin{tabular}{c@{\hspace{24pt}}c}
+            \includegraphics[width=0.3\textwidth]{figures/T3P1.png} &
+            \includegraphics[width=0.3\textwidth]{figures/Q4P1.png} \\
+            (a) & (b) \\
+            \includegraphics[width=0.3\textwidth]{figures/Q4C4.png} &
+            \includegraphics[width=0.3\textwidth]{figures/Q8C4.png} \\
+            (c) & (d) \\
+            \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_u.png}} ：位移节点 &
+            \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_p.png}} ：压力节点 
+        \end{tabular}
+        \caption{二维位移压力单元示例}\label{pressure_elements}
+    \end{figure}
+
+从上述分析来看，Hughes对约束比的总结只是一种启发式手段，并不能确保单元组合能够缓解自锁现象。它主要作为一种便捷的工具来评估单元是否有缓解自锁的潜在能力，在全面评估单元性能时，还需要综合考虑其它相关因素。
+对于图\ref{pressure_elements}(c)这类具有相同数量位移和压力节点的经典单元，尽管其约束比为最优，但在实际应用中仍会出现体积自锁问题。尽管其它满足最优约束比的单元可以在一定程度上缓解体积自锁现象，但它们并不一定能能满足LBB稳定性条件。
+例如图\ref{pressure_elements}(b)Q4P1单元就不满足LBB稳定性条件，压力的解出现了明显的振荡现象，这种现象通常被称为伪压力模式或应力棋盘模式。
 \subsection{LBB稳定性条件}
+Ladyzhenskaya--Babuska--Brezzi(LBB)条件，也被称为inf--sup条件\cite{babuska1997a,bathe1996}，是对免自锁方法更为精确的要求。这一条件基于混合离散框架构建，当满足inf--sup条件时，可以确保混合方程的准确性和稳定性。
 \begin{equation}\label{infsup}
     \inf_{q_h \in Q_h} \sup_{\boldsymbol v_h \in V_h} \frac{\vert b(q_h,\boldsymbol v_h) \vert}{\Vert q_h \Vert_Q \Vert \boldsymbol v_h \Vert_V} \ge \beta > 0
 \end{equation}
+其中$\beta$为与单元尺寸$h$无关的常数。
+
+建立特征值问题\cite{chapelle1993}可以数值验证离散方案是否通过满足inf--sup条件。
+\begin{equation}\label{eigenvalue}
+    \boldsymbol K^d=\lambda\boldsymbol K^v,\quad \beta=\sqrt{\lambda_p}
+\end{equation}
+式中$\lambda_p$为最小非零特征值。
+
+在理论分析方面，以下解析证明框架\cite{chapelle1993}始终满足inf--sup条件，通过确定离散方案是否包含在该框架内，可以验证其是否满足inf--sup条件。
+
+\begin{equation}\label{analy}
+    \begin{cases}
+        &\Vert\Pi_1 w\Vert_V \le c_1\Vert w\Vert_W \\
+        &b(\Pi_2\nu-\nu,q_h)=0 \quad \forall q_h \in Q_h\\
+        &\Vert \Pi_2(I-\Pi_1)w \Vert_V \le c \Vert w\Vert_W \\
+    \end{cases}
+\end{equation}
+
+表\ref{infsuptest}详细列出了用于体积锁定的经典单元，包括它们的约束比、数值验证以及解析证明结果。显然，传统混合有限元法中使用的单元在约束比最优的情况下无法满足inf-sup条件。相反，满足inf-sup条件的单元通常存在体积约束不足的情况。无论是不满足inf-sup条件还是体积约束不足，都会对结果的准确性和稳定性产生影响。同时，对inf-sup条件的数值验证和解析证明都相当复杂，约束比与inf-sup条件之间的关系也并不明确。
+\begin{table}[!t]
+    \centering
+    \renewcommand\arraystretch{1.2}
+    \caption{inf-sup条件验证} \label{infsuptest}
+    \begin{tabular}{c|c|c|c}
+        \hline
+        \multirow{2}{*}{离散方案}&\multirow{2}{*}{约束比}&\multicolumn{2}{c}{inf-sup条件}\\
+        \cline{3-4}
+        & &数值验证&解析证明\\
+        \hline
+        \begin{tabular}{c}
+            \begin{minipage}{0.1\columnwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/mix_T3P1.png}
+            \end{minipage}\\T3P1
+        \end{tabular}
+        &1&$\times$ & $\times$\\
+        \hline
+        \begin{tabular}{c}
+            \begin{minipage}{0.1\columnwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/mix_Q4P1.png}
+            \end{minipage}\\Q4P1
+        \end{tabular}
+        &2&$\times$ & $\times$\\
+        \hline
+        \begin{tabular}{c}
+            \begin{minipage}{0.1\columnwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/mix_Q8P3.png}
+            \end{minipage}\\Q8P3
+        \end{tabular}
+        &2&$\times$ & $\times$\\
+        \hline
+        \begin{tabular}{c}
+            \begin{minipage}{0.1\columnwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/mix_Q8P1.png}
+            \end{minipage}\\Q8P1
+        \end{tabular}
+        &6&\checkmark & \checkmark\\
+        \hline
+        \begin{tabular}{c}
+            \begin{minipage}{0.1\columnwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/mix_Q9P3.png}
+            \end{minipage}\\Q9P3
+        \end{tabular}
+        &$\frac{8}{3}$&\checkmark & \checkmark\\
+        \hline
+        \begin{tabular}{c}
+            \begin{minipage}{0.1\columnwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/mini.png}
+            \end{minipage}\\MINI element \cite{arnold1984,auricchio2005}
+        \end{tabular}
+        &$\frac{8}{3}$&\checkmark & \checkmark\\
+        \hline
+        \begin{tabular}{c}
+            \begin{minipage}{0.1\columnwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/TaylorHood.png}
+            \end{minipage}\\Taylor--Hood element \cite{hood1974}
+        \end{tabular}
+        &$\frac{8}{3}$&\checkmark & \checkmark\\
+        \hline
+        \begin{tabular}{c}
+            \begin{minipage}{0.1\columnwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/mix_T6C3.png}
+            \end{minipage}\\T6C3
+        \end{tabular}
+        &8&\checkmark & \\
+        \hline
+        \begin{tabular}{c}
+            \begin{minipage}{0.1\columnwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/CrouzeixRaviart.png}
+            \end{minipage}\\Crouzeix-Raviart element \cite{crouzeix1973}
+        \end{tabular}
+        &4&\checkmark & \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\section{小结}
+本章讨论了体积自锁问题及其目前的解决方法。首先介绍了体积不可压材料的性质，随后详细讨论了通过罚函数法和拉格朗日乘子法调整体积约束解决体积不可压问题的方法，两种方法在数学上等价。
+同时，本章还介绍了体积约束比和LBB稳定性条件作为判断自锁程度的依据，并指出传统混合离散法无法同时满足最优约束比和LBB稳定性条件。

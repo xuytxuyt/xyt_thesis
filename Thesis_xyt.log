@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 23.4) (preloaded format=xelatex 2023.9.26)  22 JAN 2025 10:50
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 23.4) (preloaded format=xelatex 2023.9.26)  31 JAN 2025 01:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -679,7 +679,8 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 9.
 LaTeX Warning: Unused global option(s):
     [UTF8].
 
-(Thesis_xyt.aux (abstract.aux) (Introduction.aux) (MixedFormulation.aux))
+(Thesis_xyt.aux (abstract.aux) (Introduction.aux) (MixedFormulation.aux)
+(LBB.aux))
 \openout1 = `Thesis_xyt.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
@@ -693,8 +694,7 @@ LaTeX Font Info:    ... okay on input line 24.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 24.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 2
 4.
-
-(C:\Program Files\MiKTeX\tex/latex/base\ts1cmr.fd
+ (C:\Program Files\MiKTeX\tex/latex/base\ts1cmr.fd
 File: ts1cmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 24.
@@ -976,38 +976,109 @@ Chapter 1.
 
 ]
 Chapter 2.
+[3]
 
-Package natbib Warning: Citation `hughes2000' on page 3 undefined on input line
- 43.
+Package natbib Warning: Citation `hughes2000' on page 4 undefined on input line
+ 44.
 
-[3] [4]
-File: figures/reduced.png Graphic file (type bmp)
-<figures/reduced.png>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [5]
-[6]
+[4]
+File: figures/rd_quad4.png Graphic file (type bmp)
+<figures/rd_quad4.png>
+File: figures/rd_q4r1.png Graphic file (type bmp)
+<figures/rd_q4r1.png>
+File: figures/legend_u.png Graphic file (type bmp)
+<figures/legend_u.png>
+File: figures/legend_i.png Graphic file (type bmp)
+<figures/legend_i.png>
+ [5] [6]
 
 Package natbib Warning: Citation `philippeg.2013' on page 7 undefined on input 
-line 179.
+line 185.
 
 [7]
 
 Package natbib Warning: Citation `hughes2000' on page 8 undefined on input line
- 229.
+ 235.
+
+[8]
+File: figures/T3P1.png Graphic file (type bmp)
+<figures/T3P1.png>
+File: figures/Q4P1.png Graphic file (type bmp)
+<figures/Q4P1.png>
+File: figures/Q4C4.png Graphic file (type bmp)
+<figures/Q4C4.png>
+File: figures/Q8C4.png Graphic file (type bmp)
+<figures/Q8C4.png>
+File: figures/legend_u.png Graphic file (type bmp)
+<figures/legend_u.png>
+File: figures/legend_p.png Graphic file (type bmp)
+<figures/legend_p.png>
+ [9]
+
+Package natbib Warning: Citation `babuska1997a' on page 10 undefined on input l
+ine 290.
 
 
-LaTeX Warning: Reference `pressure_elements' on page 8 undefined on input line 
-239.
+Package natbib Warning: Citation `bathe1996' on page 10 undefined on input line
+ 290.
 
-File: figures/pressure_elements.png Graphic file (type bmp)
-<figures/pressure_elements.png>
 
+Package natbib Warning: Citation `chapelle1993' on page 10 undefined on input l
+ine 296.
+
+
+Package natbib Warning: Citation `chapelle1993' on page 10 undefined on input l
+ine 302.
+
+File: figures/mix_T3P1.png Graphic file (type bmp)
+<figures/mix_T3P1.png>
+File: figures/mix_Q4P1.png Graphic file (type bmp)
+<figures/mix_Q4P1.png>
+File: figures/mix_Q8P3.png Graphic file (type bmp)
+<figures/mix_Q8P3.png>
+File: figures/mix_Q8P1.png Graphic file (type bmp)
+<figures/mix_Q8P1.png>
+File: figures/mix_Q9P3.png Graphic file (type bmp)
+<figures/mix_Q9P3.png>
+File: figures/mini.png Graphic file (type bmp)
+<figures/mini.png>
+
+Package natbib Warning: Citation `arnold1984' on page 10 undefined on input lin
+e 367.
+
+
+Package natbib Warning: Citation `auricchio2005' on page 10 undefined on input 
+line 367.
+
+File: figures/TaylorHood.png Graphic file (type bmp)
+<figures/TaylorHood.png>
+
+Package natbib Warning: Citation `hood1974' on page 10 undefined on input line 
+375.
+
+File: figures/mix_T6C3.png Graphic file (type bmp)
+<figures/mix_T6C3.png>
+File: figures/CrouzeixRaviart.png Graphic file (type bmp)
+<figures/CrouzeixRaviart.png>
+
+Package natbib Warning: Citation `crouzeix1973' on page 10 undefined on input l
+ine 391.
+
+) [10]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [8])
-[9] [10
+ [11]
+[12]
+\openout2 = `LBB.aux'.
+
+ (LBB.tex
+Chapter 3.
+) [13
+
+
+
+
+] [14
 
 
 
@@ -1016,23 +1087,18 @@ No file Thesis_xyt.bbl.
 
 Package natbib Warning: There were undefined citations.
 
-(Thesis_xyt.aux (abstract.aux) (Introduction.aux) (MixedFormulation.aux))
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
+(Thesis_xyt.aux (abstract.aux) (Introduction.aux) (MixedFormulation.aux)
+(LBB.aux))
 Package rerunfilecheck Info: File `Thesis_xyt.out' has not changed.
-(rerunfilecheck)             Checksum: 367D93D6304944D6E2DEBE1B9619A07E;1478.
+(rerunfilecheck)             Checksum: 8BFA2B48E0E45099F1B881F13F1E2CC6;1759.
  ) 
 Here is how much of TeX's memory you used:
- 17622 strings out of 411463
- 361207 string characters out of 5822270
- 1866290 words of memory out of 5000000
- 37563 multiletter control sequences out of 15000+600000
- 568751 words of font info for 149 fonts, out of 8000000 for 9000
+ 17798 strings out of 411463
+ 365638 string characters out of 5822270
+ 1872290 words of memory out of 5000000
+ 37714 multiletter control sequences out of 15000+600000
+ 568767 words of font info for 151 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  87i,26n,99p,374b,476s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Thesis_xyt.pdf (15 pages).
+Output written on Thesis_xyt.pdf (19 pages).
