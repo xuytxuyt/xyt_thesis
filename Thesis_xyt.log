@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 23.4) (preloaded format=xelatex 2023.9.26)  31 JAN 2025 01:02
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 23.4) (preloaded format=xelatex 2023.9.26)  6 FEB 2025 11:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -976,12 +976,16 @@ Chapter 1.
 
 ]
 Chapter 2.
+File: figures/model.png Graphic file (type bmp)
+<figures/model.png>
 [3]
 
 Package natbib Warning: Citation `hughes2000' on page 4 undefined on input line
- 44.
+ 48.
 
-[4]
+File: figures/fem.png Graphic file (type bmp)
+<figures/fem.png>
+[4] [5]
 File: figures/rd_quad4.png Graphic file (type bmp)
 <figures/rd_quad4.png>
 File: figures/rd_q4r1.png Graphic file (type bmp)
@@ -990,45 +994,49 @@ File: figures/legend_u.png Graphic file (type bmp)
 <figures/legend_u.png>
 File: figures/legend_i.png Graphic file (type bmp)
 <figures/legend_i.png>
- [5] [6]
-
-Package natbib Warning: Citation `philippeg.2013' on page 7 undefined on input 
-line 185.
-
-[7]
-
-Package natbib Warning: Citation `hughes2000' on page 8 undefined on input line
- 235.
-
-[8]
-File: figures/T3P1.png Graphic file (type bmp)
-<figures/T3P1.png>
-File: figures/Q4P1.png Graphic file (type bmp)
-<figures/Q4P1.png>
-File: figures/Q4C4.png Graphic file (type bmp)
-<figures/Q4C4.png>
-File: figures/Q8C4.png Graphic file (type bmp)
-<figures/Q8C4.png>
+ [6] [7]
+File: figures/mix_Q4P1.png Graphic file (type bmp)
+<figures/mix_Q4P1.png>
 File: figures/legend_u.png Graphic file (type bmp)
 <figures/legend_u.png>
 File: figures/legend_p.png Graphic file (type bmp)
 <figures/legend_p.png>
- [9]
+ [8]
 
-Package natbib Warning: Citation `babuska1997a' on page 10 undefined on input l
-ine 290.
+Package natbib Warning: Citation `philippeg.2013' on page 9 undefined on input 
+line 236.
+
+[9]
+
+Package natbib Warning: Citation `hughes2000' on page 10 undefined on input lin
+e 286.
+
+[10]
+File: figures/T3P1.png Graphic file (type bmp)
+<figures/T3P1.png>
+File: figures/Q4P1.png Graphic file (type bmp)
+<figures/Q4P1.png>
+File: figures/legend_u.png Graphic file (type bmp)
+<figures/legend_u.png>
+File: figures/legend_p.png Graphic file (type bmp)
+<figures/legend_p.png>
 
 
-Package natbib Warning: Citation `bathe1996' on page 10 undefined on input line
- 290.
+Package natbib Warning: Citation `babuska1997a' on page 11 undefined on input l
+ine 327.
 
 
-Package natbib Warning: Citation `chapelle1993' on page 10 undefined on input l
-ine 296.
+Package natbib Warning: Citation `bathe1996' on page 11 undefined on input line
+ 327.
+
+[11]
+
+Package natbib Warning: Citation `chapelle1993' on page 12 undefined on input l
+ine 333.
 
 
-Package natbib Warning: Citation `chapelle1993' on page 10 undefined on input l
-ine 302.
+Package natbib Warning: Citation `chapelle1993' on page 12 undefined on input l
+ine 339.
 
 File: figures/mix_T3P1.png Graphic file (type bmp)
 <figures/mix_T3P1.png>
@@ -1043,46 +1051,66 @@ File: figures/mix_Q9P3.png Graphic file (type bmp)
 File: figures/mini.png Graphic file (type bmp)
 <figures/mini.png>
 
-Package natbib Warning: Citation `arnold1984' on page 10 undefined on input lin
-e 367.
+Package natbib Warning: Citation `arnold1984' on page 12 undefined on input lin
+e 404.
 
 
-Package natbib Warning: Citation `auricchio2005' on page 10 undefined on input 
-line 367.
+Package natbib Warning: Citation `auricchio2005' on page 12 undefined on input 
+line 404.
 
 File: figures/TaylorHood.png Graphic file (type bmp)
 <figures/TaylorHood.png>
 
-Package natbib Warning: Citation `hood1974' on page 10 undefined on input line 
-375.
+Package natbib Warning: Citation `hood1974' on page 12 undefined on input line 
+412.
 
 File: figures/mix_T6C3.png Graphic file (type bmp)
 <figures/mix_T6C3.png>
 File: figures/CrouzeixRaviart.png Graphic file (type bmp)
 <figures/CrouzeixRaviart.png>
 
-Package natbib Warning: Citation `crouzeix1973' on page 10 undefined on input l
-ine 391.
+Package natbib Warning: Citation `crouzeix1973' on page 12 undefined on input l
+ine 428.
 
-) [10]
+File: figures/legend_u.png Graphic file (type bmp)
+<figures/legend_u.png>
+File: figures/legend_p.png Graphic file (type bmp)
+<figures/legend_p.png>
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11]
-[12]
+ [12])
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [13]
+[14]
 \openout2 = `LBB.aux'.
 
  (LBB.tex
 Chapter 3.
-) [13
+
+Package natbib Warning: Citation `malkus1981' on page 15 undefined on input lin
+e 42.
 
 
+Package natbib Warning: Citation `babuska1991a' on page 15 undefined on input l
+ine 42.
 
+[15
 
-] [14
 
 
 
 ]
+
+Package natbib Warning: Citation `yosida1995' on page 16 undefined on input lin
+e 62.
+
+
+Package natbib Warning: Citation `quarteroni1994' on page 16 undefined on input
+ line 66.
+
+[16] [17]) [18]
 No file Thesis_xyt.bbl.
 
 Package natbib Warning: There were undefined citations.
@@ -1090,15 +1118,15 @@ Package natbib Warning: There were undefined citations.
 (Thesis_xyt.aux (abstract.aux) (Introduction.aux) (MixedFormulation.aux)
 (LBB.aux))
 Package rerunfilecheck Info: File `Thesis_xyt.out' has not changed.
-(rerunfilecheck)             Checksum: 8BFA2B48E0E45099F1B881F13F1E2CC6;1759.
+(rerunfilecheck)             Checksum: FE2A7EB9278300BCDCD5CEAEDCF17044;2179.
  ) 
 Here is how much of TeX's memory you used:
- 17798 strings out of 411463
- 365638 string characters out of 5822270
- 1872290 words of memory out of 5000000
- 37714 multiletter control sequences out of 15000+600000
- 568767 words of font info for 151 fonts, out of 8000000 for 9000
+ 17831 strings out of 411463
+ 365954 string characters out of 5822270
+ 1870290 words of memory out of 5000000
+ 37743 multiletter control sequences out of 15000+600000
+ 594089 words of font info for 157 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 87i,26n,99p,374b,476s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 87i,26n,99p,376b,476s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Thesis_xyt.pdf (19 pages).
+Output written on Thesis_xyt.pdf (23 pages).

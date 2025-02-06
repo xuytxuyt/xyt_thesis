@@ -1,7 +1,7 @@
 \chapter{体积自锁问题}
-本章针对体积不可压材料数值分析的体积自锁问题，介绍了罚函数法和拉格朗日乘子法两种解决方法，讨论了两种方法的等价性。同时，说明了体积自锁程度的判定方法，包括体积约束比和LBB稳定性条件。
+本章针对体积不可压材料数值分析的体积自锁问题，介绍了罚函数法和拉格朗日乘子法两种解决方法，并讨论了两种方法的等价性。同时，阐述了免体积自锁的条件，包括体积约束比和LBB稳定性条件。
 \section{体积不可压材料}               
-考虑一个维度为$n_d$具有边界$\Gamma$的体积不可压材料弹性体$\Omega\in \mathbb R^{n_d}$,其中$\Gamma_t$和$\Gamma_g$分别表示其自然边界和本质边界，
+考虑如图\ref{model}所示维度为$n_d$具有边界$\Gamma$的体积不可压材料弹性体$\Omega\in \mathbb R^{n_d}$,其中$\Gamma_t$和$\Gamma_g$分别表示其自然边界和本质边界，
 且$\Gamma_t \cup \Gamma_g = \Gamma$, $\Gamma_t \cap \Gamma_g = \varnothing$。该问题相应的强形式为：
 \begin{equation}\label{strong_penalty}
     \begin{cases}
@@ -20,15 +20,19 @@
     \boldsymbol \varepsilon^d(\boldsymbol u) =\frac{1}{2}(\boldsymbol u \nabla + \nabla \boldsymbol u) - \boldsymbol \varepsilon^v, \quad
     \boldsymbol \varepsilon^v : \boldsymbol \varepsilon^d = 0
 \end{equation}
-其中，$\boldsymbol 1 = \delta_{ij} \boldsymbol e_i \otimes \boldsymbol e_j$是二阶恒等张量。
-
-$\kappa$, $\mu$ 分别为体积模量和剪切模量，它们与杨氏模量$E$和泊松比$\nu$之间存在如下关系式：
+其中，$\boldsymbol 1 = \delta_{ij} \boldsymbol e_i \otimes \boldsymbol e_j$是二阶恒等张量。$\kappa$, $\mu$ 分别为体积模量和剪切模量，其与杨氏模量$E$和泊松比$\nu$之间存在如下关系式：
 \begin{equation}\label{modulus}
     \kappa = \frac{E}{3(1-2\nu)}, \quad \mu = \frac{E}{2(1+\nu)}
 \end{equation}
 $\boldsymbol b$为$\Omega$中的体力， $\boldsymbol t$, $\boldsymbol g$ 分别为自然边界和本质边界上的牵引力和位移。
+\begin{figure}[H]
+    \centering 
+        \includegraphics[scale=0.7]{figures/model.png}
+        \caption{不可压缩材料弹性体模型}\label{model}
+\end{figure}
 
-对于体积几乎不可压缩材料，它们的泊松比$\nu \rightarrow 0.5$, 相应的体积模量$\kappa \rightarrow \infty$，$\kappa\gg\mu$,使得其体积变化无限小。
+对于体积不可压缩材料，其泊松比$\nu \rightarrow 0.5$。 在这种情况下，式\eqref{modulus}中体积模量$\kappa \rightarrow \infty$，而剪切模量$\mu$的变化相对较小，从而导致$\kappa\gg\mu$。
+根据体积不可压缩材料本构关系\eqref{stress_penalty}，当$\kappa \rightarrow \infty$时，体积应变$\boldsymbol \varepsilon^v$被约束，导致体积的变化$\nabla \cdot \boldsymbol u\rightarrow 0$。
 
 采用伽辽金法进行求解时，其相对应的伽辽金弱形式为：
 位移$\boldsymbol u \in V$满足
@@ -47,7 +51,14 @@ $\delta\boldsymbol \varepsilon^v$和$\delta\boldsymbol \varepsilon^d $分别为$
     \boldsymbol u_h(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) \boldsymbol u_I, \quad
     \delta \boldsymbol u_h(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) \delta \boldsymbol u_I
 \end{equation}
-其中$N_I$和$u_I$分别为节点$x_I$处的形函数和节点系数张量。将式\eqref{u_h}代入到弱形式\eqref{weak_penalty}中可得下列的里兹--伽辽金问题：
+其中$N_I$和$\boldsymbol u_I$分别为节点$x_I$处的形函数和节点系数张量。
+\begin{figure}[H]
+    \centering 
+        \includegraphics[scale=1.5]{figures/fem.png}
+        \caption{有限元离散示意图}\label{fem}
+\end{figure}
+
+将式\eqref{u_h}代入到弱形式\eqref{weak_penalty}中可得下列的里兹--伽辽金问题：
 近似位移 $\boldsymbol u_h \in V_h$满足
 \begin{equation}\label{ritz_penalty}
 \int_\Omega 2\mu \delta \boldsymbol \varepsilon^d_h : \boldsymbol \varepsilon^d_h d\Omega +
@@ -56,44 +67,57 @@ $\delta\boldsymbol \varepsilon^v$和$\delta\boldsymbol \varepsilon^d $分别为$
 \forall \delta \boldsymbol u_h \in V_h
 \end{equation}
 其中近似空间$V_h \subseteq V$，$V_h = \{\boldsymbol v_h \in (\mathrm{span}\{N_I\}_{I=1}^{n_u})^{n_d} \vert \boldsymbol v_h = \boldsymbol g,\; \mathrm{on} \; \Gamma_g\}$。
-根据$\delta \boldsymbol u_h$的任意性，等式两边同时消除$\delta \boldsymbol u_I$,上述方程可以简化为以下离散控制方程：
+根据$\delta \boldsymbol u_h$的任意性，等式两边同时消除$\delta \boldsymbol u_I$,上述方程可以简化为如下离散控制方程：
 \begin{equation}\label{equilibrium_penalty}
     (\boldsymbol K^d +\boldsymbol K^v) \boldsymbol d^u = \boldsymbol f
 \end{equation}
-式中，体积刚度矩阵$\boldsymbol K^v$ 和偏应力刚度矩阵 $\boldsymbol K^d$的分量分别为：
+其中，$\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量，$\boldsymbol K^v$ 为体积刚度矩阵，$\boldsymbol K^d$为偏应力刚度矩阵，$\boldsymbol f$为力向量，其分量分别为：
 \begin{equation}\label{stiffness_vol}
-    \boldsymbol K^v_{IJ}=  3\kappa\int_{\Omega} \boldsymbol B^{vT}_I \boldsymbol B^v_J d\Omega
+    \boldsymbol K^v_{IJ}=  3\kappa\int_{\Omega} \boldsymbol B^{v\mathrm T}_I \boldsymbol B^v_J d\Omega
 \end{equation}
 \begin{equation}\label{stiffness_dev}
-    \boldsymbol K^d_{IJ}= 2\mu\int_{\Omega} \boldsymbol B^{dT}_I \boldsymbol B^d_J d\Omega
+    \boldsymbol K^d_{IJ}= 2\mu\int_{\Omega} \boldsymbol B^{d\mathrm T}_I \boldsymbol B^d_J d\Omega
 \end{equation}
-力向量$\boldsymbol f$的分量为：
 \begin{equation}
     \boldsymbol f_I = \int_{\Gamma_t} N_I \boldsymbol t d\Gamma + \int_{\Omega} N_I \boldsymbol b d\Omega
 \end{equation}
-$\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量。
-
-对于体积几乎不可压缩的材料，$\kappa \rightarrow \infty$，$\boldsymbol K^v \gg \boldsymbol K^d $。
-因此式\eqref{equilibrium_penalty}中的体积刚度矩阵$\boldsymbol K^v$可视作一种强制使用的罚函数法使得体积变形为$0$,即$\nabla \cdot \boldsymbol u = 0$，而体积模量$\kappa$可视作罚因子。
-由于这种情况，使用传统有限元法会产生严重的体积锁定，就是所谓的体积自锁现象。
-
-\section{调整体积约束}
-\subsection{罚函数法}
-传统有限元法发生体积自锁的自由度为刚度矩阵的秩$rank(\boldsymbol K)$,通过减少体积刚度矩阵中的积分点数量，可以达到缓解体积自锁的目的。
-为了清晰起见，将数值积分代入上述刚度矩阵中：
-\begin{equation}
-    \boldsymbol K_{IJ} \approx \bar{\boldsymbol K}_{IJ} = \sum_{C=1}^{n_e}\sum_{G=1}^{n_g} \boldsymbol B^{T}_I(\boldsymbol x_G) \boldsymbol B_J(\boldsymbol x_G) w_G
+式中$\boldsymbol B_I$为形函数梯度矩阵，在二维问题中$\boldsymbol B_I$具有如下表达式：
+\begin{equation}\label{strain vector}
+    \pmb{B}_I= \left[\begin{matrix}N_{I,x}&0\\0&N_{I,y}\\N_{I,y}&N_{I,x} \end{matrix}\right] 
 \end{equation}
-其中，$\boldsymbol x_G$和$w_G$分别为积分点的位置和权重。$n_e$是单元的数量，$n_g$是每个单元中积分点的数量，因此总的积分点数量为$n_e \times n_g$。
-
-以图\ref{reduced}中二维四边形单元(Quad4)为例，传统二维四边形单元使用$2\times2$高斯积分点作为全积分，对应的体积自锁自由度为：
-\begin{equation}
-    rank(\boldsymbol K)=min(n_e \times n_g,n_d \times n_u)=min(4n_e,2n_u)
+\section{免自锁方案}
+\subsection{罚函数法与缩减积分方案}
+上述体积不可压缩的材料，$\kappa \rightarrow \infty$，式\eqref{stiffness_vol}所示的体积刚度矩阵$\boldsymbol K^v$中的模态也趋向无穷。在这种情况下，离散控制方程\eqref{equilibrium_penalty}中
+体积刚度矩阵的模态远大于偏应力刚度矩阵的模态。此时，体积刚度矩阵$\boldsymbol K^v$可视作一种强制使用的罚函数法使得体积部分受到约束，体积模量$\kappa$可视作罚因子。
+使用传统有限元法进行数值分析时体积解会远小于实际情况，就是所谓的体积自锁现象，体积刚度矩阵的秩($\mathit{rank}(\boldsymbol K^v)$)就是发生体积自锁的自由度。由式\eqref{stiffness_vol}可知，体积刚度矩阵的秩：
+\begin{equation}\label{rank1}
+    \mathit{rank}(\boldsymbol K^v)=\text{min}(\mathit{rank}( \boldsymbol B^v))
 \end{equation}
 
-采用缩减积分单元，积分点的数量从4个减少到1个，此时的体积自由度为：
+由离散控制方程\eqref{equilibrium_penalty}可知，整体数值积分需要保证整体刚度矩阵满足正定性条件，即
 \begin{equation}
-    rank(\boldsymbol K)=min(n_e,2n_u)
+    \mathit{rank}(\boldsymbol K^v)\le\mathit{rank}( \boldsymbol d^u)=n_d \times n_u
+\end{equation}
+
+将数值积分代入体积刚度矩阵\eqref{stiffness_vol}：
+\begin{equation}\label{integration}
+    \boldsymbol K^v_{IJ} =  3\kappa \sum_{C=1}^{n_e}\sum_{G=1}^{n_g} \boldsymbol B^{vT}_I(\boldsymbol x_G) \boldsymbol B^v_J(\boldsymbol x_G) w_G
+\end{equation}
+式中，$\boldsymbol x_G$和$w_G$分别为积分点的位置和权重。$n_e$是单元的数量，$n_g$是每个单元中积分点的数量。
+
+由式\eqref{rank1}--\eqref{integration}可得体积自锁自由度：
+\begin{equation}\label{rank}
+    \mathit{rank}(\boldsymbol K^v)= \text{min}(n_e \times n_g,n_d \times n_u)
+\end{equation}
+
+由式\eqref{rank}可知，减少用于体积刚度矩阵得积分点数量可以减少体积自锁约束。以图\ref{reduced}所示的经典免自锁二维四边形单元(Quad4)缩减积分方案为例，Quad4单元以$2\times2$高斯积分点为完全积分，以1点高斯积分点为缩减积分。
+为保证整体刚度矩阵的正定性，对偏应力刚度矩阵部分采用完全积分单元离散，对体积刚度矩阵部分采用缩减积分单元离散。采用完全积分单元的自由度为：
+\begin{equation}
+    \mathit{rank}(\boldsymbol K^d)=min(4n_e,2n_u)=2n_u
+\end{equation}
+采用缩减积分单元的体积自由度为：
+\begin{equation}
+    \mathit{rank}(\boldsymbol K^v)=min(n_e,2n_u)=n_e
 \end{equation}
 \begin{figure}[!ht]
     \centering
@@ -104,14 +128,12 @@ $\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量。
             \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_u.png}} ：位移节点 &
             \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_i.png}} ：高斯积分点 
         \end{tabular}
-        \caption{Quad4单元缩减积分}\label{reduced}
+        \caption{Quad4单元缩减积分方案}\label{reduced}
 \end{figure}
 
-通过减少对体积自由度的约束，缓解体积自锁现象，但是低阶高斯积分将伴随着数值积分精度不足，引起数值计算结果振荡和精度下降。针对低阶高斯积分精度不足的问题，可以使用选择积分法。该方法对于偏应力刚度矩阵使用全积分，
-对体积刚度矩阵采用缩减积分进行计算，保持了偏应力刚度矩阵的自由度个数，只减少体积刚度矩阵的自由度个数，从而提高求解精度。
-
-\subsection{拉格朗日乘子法}
-施加约束的方式除了传统罚函数法外，还有拉格朗日乘子法。拉格朗日乘子法中将压力$p$作为拉格朗日乘子独立变量，相对应的强形式中增加了压力$p$与位移之间的约束：
+由上述例子可知，缩减积分方案通过减少体积刚度矩阵离散单元的积分点数量，减少了体积约束自由度，缓解体积自锁现象。但是低阶高斯积分将伴随着数值积分精度不足，引起数值计算结果振荡和精度下降。
+\subsection{拉格朗日乘子法与混合离散方案}
+施加约束的方式除了传统罚函数法外，常用的方法还有拉格朗日乘子法。拉格朗日乘子法将压力$p$作为拉格朗日乘子独立变量，相对应的强形式中增加了压力$p$与位移之间的约束：
 \begin{equation}\label{strong_mix}
     \begin{cases}
         \nabla \cdot \boldsymbol \sigma + \boldsymbol b = \boldsymbol 0 & \mathrm{in} \; \Omega \\
@@ -128,18 +150,18 @@ $\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量。
 位移$\boldsymbol u \in V$, 压力$p \in Q$满足
 \begin{equation}\label{weak_mix}
     \begin{aligned}
-        a(\boldsymbol v, \boldsymbol u) + b(\boldsymbol v, p) &= f(\boldsymbol v) \quad &\forall \boldsymbol v \in V \\
+        a(\delta \boldsymbol u, \boldsymbol u) + b(\delta \boldsymbol u, p) &= f(\delta \boldsymbol u) \quad &\forall \delta \boldsymbol u \in V \\
         b(\boldsymbol u, q) &= \boldsymbol 0 \quad &\forall q \in Q
     \end{aligned}
 \end{equation}
 式中，$a: V\times V\rightarrow \mathbb R$，$b: V\times Q\rightarrow \mathbb R$ 为双线性算子， $f: V \rightarrow \mathbb R$ 为线性算子，它们具有以下形式：
 \begin{align}
-    a(\boldsymbol v, \boldsymbol u) &= \int_\Omega \nabla^s \boldsymbol v : \nabla^s \boldsymbol u d\Omega \\
-    b(\boldsymbol v, p) &= \int_\Omega \nabla \cdot \boldsymbol v p d\Omega \\
-    f(\boldsymbol v) &= \int_{\Gamma_t} \boldsymbol v \cdot \boldsymbol t d\Gamma + \int_{\Omega} \boldsymbol v \cdot \boldsymbol b d\Omega
+    a(\delta \boldsymbol u, \boldsymbol u) &= \int_\Omega \nabla^s \delta \boldsymbol u: \nabla^s \boldsymbol u d\Omega \\
+    b(\delta \boldsymbol u, p) &= \int_\Omega \nabla \cdot \delta \boldsymbol u p d\Omega \\
+    f(\delta \boldsymbol u) &= \int_{\Gamma_t} \delta \boldsymbol u \cdot \boldsymbol t d\Gamma + \int_{\Omega} \delta \boldsymbol u \cdot \boldsymbol b d\Omega
 \end{align}
 
-位移$\boldsymbol u$压力$p$双变量可采用不同的离散方式进行近似，形成混合离散框架。
+位移$\boldsymbol u$和压力$p$双变量采用不同的离散方式进行近似，形成混合离散框架。
 \begin{equation}\label{u_h_mix}
     \boldsymbol u_h(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) \boldsymbol u_I, \quad
     \delta \boldsymbol u_h(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) \delta \boldsymbol u_I
@@ -148,12 +170,12 @@ $\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量。
     p_h(\boldsymbol x) = \sum_{K=1}^{n_p} \Psi_K(\boldsymbol x) p_K, \quad
     \delta p_h(\boldsymbol x) = \sum_{K=1}^{n_p} \Psi_K(\boldsymbol x) \delta p_K
 \end{equation}
-此时，压力$p$的自由度个数则反应了体积约束个数。式中，$n_p$分别为压力节点的总数，$p_K$为压力节点系数，$\Psi_K$为对应的形函数。
+式中，$n_p$分别为压力节点的总数，$p_K$为压力节点系数，$\Psi_K$为对应的形函数。
 
 根据$u_h$和$p_h$的任意性，式\eqref{weak_mix}可得到如下离散控制方程：
 \begin{equation}\label{equilibrium_mix}
     \begin{bmatrix}
-        \boldsymbol K^{uu} & \boldsymbol K^{up} \\ (\boldsymbol K^{up})^T & \boldsymbol K^{pp}
+        \boldsymbol K^{uu} & \boldsymbol K^{up} \\ (\boldsymbol K^{up})^{\mathrm T} & \boldsymbol K^{pp}
     \end{bmatrix}
     \begin{Bmatrix}
         \boldsymbol d^u \\ \boldsymbol d^p 
@@ -162,27 +184,56 @@ $\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量。
         \boldsymbol f \\ \boldsymbol 0 
     \end{Bmatrix}
 \end{equation}
-式中$\boldsymbol K^{uu} = \boldsymbol K^d$. 
-
+式中，$\boldsymbol K^{uu} = \boldsymbol K^d$， $\boldsymbol{K}^{up}$为刚度矩阵中和位移、压力都有关的部分。$\boldsymbol{K}^{pp}$为刚度矩阵中只和压力相关的部分，其分量分别为：
+\begin{equation}
+    \boldsymbol{K}^{up}_{I J}=\int_{\Omega} \boldsymbol B_{I}^{\mathrm T} \Psi_{J} {d} \Omega
+\end{equation}
+\begin{equation}  
+    \boldsymbol{K}^{pp}_{IJ}=-\frac{1}{\kappa}\int_{\Omega}  \Psi^\mathrm{T}_{I}  \Psi_{J}d\Omega
+\end{equation}
 由式\eqref{equilibrium_mix}离散控制方程中的第二个等式，系数向量$d^p$可用$d^u$表示：
 \begin{equation}
-    \boldsymbol d^p = (\boldsymbol K^{pp})^{-1} (\boldsymbol K^{up})^T \boldsymbol d^u
+    \boldsymbol d^p = (\boldsymbol K^{pp})^{-1} (\boldsymbol K^{up})^{\mathrm T} \boldsymbol d^u
 \end{equation}
+
 将上式代入到式\eqref{equilibrium_mix}的第一个等式中可得：
 \begin{equation}\label{equilibrium_projection}
     \begin{split}
-        &(\underbrace{\boldsymbol K^{uu}}_{\boldsymbol K^d} +  \underbrace{\boldsymbol K^{up}(\boldsymbol K^{pp})^{-1}(\boldsymbol K^{up})^{T}}_{\tilde{\boldsymbol K}^v}) \boldsymbol d^u = \boldsymbol f \\
-        \Rightarrow\;& (\boldsymbol K^d + \tilde{\boldsymbol K}^v) = \boldsymbol f
+        &(\underbrace{\boldsymbol K^{uu}}_{\boldsymbol K^d} +  \underbrace{\boldsymbol K^{up}(\boldsymbol K^{pp})^{-1}(\boldsymbol K^{up})^{\mathrm T}}_{\tilde{\boldsymbol K}^v}) \boldsymbol d^u = \boldsymbol f \\
+        \Rightarrow\;& (\boldsymbol K^d + \tilde{\boldsymbol K}^v) \boldsymbol d^u= \boldsymbol f
     \end{split}
 \end{equation}
-此时,位移自由度为$rank(\boldsymbol K^d)$,压力自由度为$rank(\boldsymbol K^v)$。
+
+为保证积分精度，混合离散方案均采用完全积分进行数值积分，且考虑离散控制方程\eqref{equilibrium_mix}中整体刚度矩阵的正定性，$\boldsymbol K^{uu}$、$\boldsymbol K^{pp}$为满秩矩阵。因此，结合式\eqref{equilibrium_projection}可得混合离散方案中的位移自由度$\mathit{rank}(\boldsymbol K^d)$、压力自由度$\mathit{rank}(\tilde{\boldsymbol K}^v)$分别为：
 \begin{equation}
-    rank(\boldsymbol K^d)=n_d\times n_u,\quad rank(\boldsymbol K^v)=n_p
+    \mathit{rank}(\boldsymbol K^d)=n_d\times n_u
+\end{equation}
+\begin{equation}
+    \mathit{rank}(\tilde{\boldsymbol K}^v)=\text{min}(\mathit{rank}({\boldsymbol K}^{up}),\mathit{rank}({\boldsymbol K}^{pp}))=n_p
 \end{equation}
 
+以图\ref{mix_ex}所示的常用于免自锁的Q4P1单元混合离散方案为例，Q4P1单元由四个位移节点和一个压力节点组成。图中单个单元的位移自由度为：
+\begin{equation}
+    \mathit{rank}(\boldsymbol K^d)=2\times 4=8
+\end{equation}
+压力自由度为：
+\begin{equation}
+    \mathit{rank}(\tilde{\boldsymbol K}^v)=1
+\end{equation}
+\begin{figure}[!ht]
+    \centering
+        \begin{tabular}{c@{\hspace{24pt}}c}
+            \multicolumn{2}{c}{\includegraphics[width=0.3\textwidth]{figures/mix_Q4P1.png}}\\
+            \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_u.png}} ：位移节点 &
+            \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_p.png}} ：压力节点 
+        \end{tabular}
+    \caption{Q4P1单元混合离散方案}\label{mix_ex}
+\end{figure}
+
+由上述例子可知，混合离散方案依附单元布置不同的位移节点和压力节点，减少了压力节点的数量从而减少了位移自由度的个数，缓解体积自锁现象。
 \subsection{罚函数法和拉格朗日乘子法方法的等价性}
 从拉格朗日乘子法的离散方程\eqref{equilibrium_projection}中可以看出，压力$p_h$的解是$3\kappa \nabla \cdot \boldsymbol u_h$的一个正交投影。
-令$P_h: V_h \rightarrow P_h(V_h)$ 使得 $P_h(V_h) \subseteq Q_h$, 其中 $P_h(V_h) = \textrm{Im}\:P_h$ 是线性算子$P_h$的虚部 \cite{philippeg.2013}. 
+令$P_h: V_h \rightarrow P_h(V_h)$ 使得 $P_h(V_h) \subseteq Q_h$, 其中 $P_h(V_h) = \textrm{Im}\:P_h$ 是线性算子$P_h$的相空间 \cite{philippeg.2013}. 
 在这种情况下, $p_h = P_h (3\kappa \nabla \cdot \boldsymbol u_h) = 3\kappa \tilde \nabla \cdot \boldsymbol u_h$,式\eqref{weak_mix}可以改写为：
 \begin{equation}
     \int_\Omega q_h(\nabla \cdot \boldsymbol u_h - \tilde \nabla \cdot \boldsymbol u_h) d\Omega = 0, \quad \forall q_h \in Q_h
@@ -202,7 +253,7 @@ $\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量。
     \int_{\Gamma_t} \delta \boldsymbol u_h \cdot \boldsymbol t d\Gamma + \int_\Omega \delta \boldsymbol u_h \cdot \boldsymbol b d\Omega, \quad \forall \boldsymbol u_h \in V_h
 \end{equation}
 
-相比之下，对于罚函数法，缩减积分也可以被视作一种投影。设$\varrho_i$为正交多项式，
+相比之下，对于罚函数法，数值积分也可以被视作一种投影。设$\varrho_i$为正交多项式，
 \begin{equation}
     \int_{\Omega_C} \varrho_i \varrho_j d\Omega = 
     \begin{cases}
@@ -228,11 +279,12 @@ $\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量。
 \end{equation}
 
 通过对比式\eqref{projection_penalty}和式\eqref{projection_mixed},罚函数法实际上与拉格朗日乘子法等价，两种方法都可以用投影的方式来描述。
+缩减积分方案与混合离散方案调整体积自由度的方法也等价，即$n_g=n_p$
 
-\section{体积自锁程度判断方法}
+\section{免体积自锁条件}
 \subsection{体积约束比}
-约束比是用来衡量变量间的约束程度的重要指标。对于不可压问题而言，约束比定义为位移总自由度与压力总自由度的比值。在理想情况下，最优约束比应与相应的偏微分控制方程一致。例如，在二维情况下，不可压问题涉及两个位移控制方程和一个压力控制方程，因此最优约束比为2.当约束比小于2时会出现体积自锁的倾向。当约束比大于2时可能会导致压力计算出现较大误差。
-相关的结论Hughes已经做出了总结\cite{hughes2000}。
+从上文介绍的两种方法可知，调整体积约束自由度可以免体积自锁。相关的结论Hughes已经做出了总结\cite{hughes2000}，并提出了约束比的概念。
+约束比是用来衡量变量间的约束程度的重要指标。对于体积不可压问题而言，约束比定义为位移总自由度与压力总自由度的比值。在理想情况下，最优约束比应与相应的偏微分控制方程一致。
 \begin{equation}
     r = \frac{n_d\times n_u}{n_p}, \quad 
     \begin{cases}
@@ -242,7 +294,8 @@ $\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量。
     \end{cases}
 \end{equation}
 
-图\ref{pressure_elements}为四种不同的二维位移压力单元，图中阴影部分为边界条件，边界上位移、压力节点自由度均为0。
+在二维情况下，不可压问题涉及两个位移控制方程和一个压力控制方程，因此最优约束比为2.当约束比小于2时会出现体积自锁的倾向。当约束比大于2时可能会导致压力计算出现较大误差。
+图\ref{pressure_elements}为两个不同的二维单元混合离散方案，图中阴影部分为边界条件，边界上节点自由度均受到约束。
 
 图\ref{pressure_elements}(a)为线性位移--常数压力三角形单元(T3P1)，它的约束比为：
 \begin{equation}
@@ -255,28 +308,12 @@ $\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量。
     r= \frac{2\times n_u}{n_p}=\frac{2\times 1}{1}=2
 \end{equation}
 此单元满足最优约束比，能够缓解体积自锁。
-
-图\ref{pressure_elements}(c)为双线性位移--连续双线性压力四边形单元(Q4C4)，约束比为：
-\begin{equation}
-    r= \frac{2\times n_u}{n_p}=\frac{2\times 1}{1}=2
-\end{equation}
-结果显示满足最优约束比，然而这个单元结果并不收敛，不能缓解体积自锁。
-
-图\ref{pressure_elements}(d)为8节点位移--连续双线性压力四边形单元(Q8C4)，约束比为：
-\begin{equation}
-    r= \frac{2\times n_u}{n_p}=\frac{2\times 3}{1}=6
-\end{equation}
-约束比很大，表示这个单元体积约束太少。实际应用中虽然能缓解体积自锁，但是存在收敛性问题。
-
-\begin{figure}[!ht]
+\begin{figure}
     \centering
         \begin{tabular}{c@{\hspace{24pt}}c}
             \includegraphics[width=0.3\textwidth]{figures/T3P1.png} &
             \includegraphics[width=0.3\textwidth]{figures/Q4P1.png} \\
             (a) & (b) \\
-            \includegraphics[width=0.3\textwidth]{figures/Q4C4.png} &
-            \includegraphics[width=0.3\textwidth]{figures/Q8C4.png} \\
-            (c) & (d) \\
             \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_u.png}} ：位移节点 &
             \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_p.png}} ：压力节点 
         \end{tabular}
@@ -284,7 +321,7 @@ $\boldsymbol d^u$ 是包含 $\boldsymbol u_I$的系数向量。
     \end{figure}
 
 从上述分析来看，Hughes对约束比的总结只是一种启发式手段，并不能确保单元组合能够缓解自锁现象。它主要作为一种便捷的工具来评估单元是否有缓解自锁的潜在能力，在全面评估单元性能时，还需要综合考虑其它相关因素。
-对于图\ref{pressure_elements}(c)这类具有相同数量位移和压力节点的经典单元，尽管其约束比为最优，但在实际应用中仍会出现体积自锁问题。尽管其它满足最优约束比的单元可以在一定程度上缓解体积自锁现象，但它们并不一定能能满足LBB稳定性条件。
+对于具有相同数量位移和压力节点的经典单元，尽管其约束比为最优，但在实际应用中仍会出现体积自锁问题。尽管其它满足最优约束比的单元可以在一定程度上缓解体积自锁现象，但它们并不一定能满足LBB稳定性条件。
 例如图\ref{pressure_elements}(b)Q4P1单元就不满足LBB稳定性条件，压力的解出现了明显的振荡现象，这种现象通常被称为伪压力模式或应力棋盘模式。
 \subsection{LBB稳定性条件}
 Ladyzhenskaya--Babuska--Brezzi(LBB)条件，也被称为inf--sup条件\cite{babuska1997a,bathe1996}，是对免自锁方法更为精确的要求。这一条件基于混合离散框架构建，当满足inf--sup条件时，可以确保混合方程的准确性和稳定性。
@@ -310,7 +347,7 @@ Ladyzhenskaya--Babuska--Brezzi(LBB)条件，也被称为inf--sup条件\cite{babu
 \end{equation}
 
 表\ref{infsuptest}详细列出了用于体积锁定的经典单元，包括它们的约束比、数值验证以及解析证明结果。显然，传统混合有限元法中使用的单元在约束比最优的情况下无法满足inf-sup条件。相反，满足inf-sup条件的单元通常存在体积约束不足的情况。无论是不满足inf-sup条件还是体积约束不足，都会对结果的准确性和稳定性产生影响。同时，对inf-sup条件的数值验证和解析证明都相当复杂，约束比与inf-sup条件之间的关系也并不明确。
-\begin{table}[!t]
+\begin{table}[H]
     \centering
     \renewcommand\arraystretch{1.2}
     \caption{inf-sup条件验证} \label{infsuptest}
@@ -373,7 +410,7 @@ Ladyzhenskaya--Babuska--Brezzi(LBB)条件，也被称为inf--sup条件\cite{babu
                 \centering
                 \includegraphics[width=0.9\textwidth]{figures/TaylorHood.png}
             \end{minipage}\\Taylor--Hood element \cite{hood1974}
-        \end{tabular}
+        \end{tabular}c
         &$\frac{8}{3}$&\checkmark & \checkmark\\
         \hline
         \begin{tabular}{c}
@@ -392,9 +429,14 @@ Ladyzhenskaya--Babuska--Brezzi(LBB)条件，也被称为inf--sup条件\cite{babu
         \end{tabular}
         &4&\checkmark & \\
         \hline
+        \multicolumn{4}{c}{
+                \begin{tabular}{c@{\hspace{24pt}}c}
+                    \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_u.png}} ：位移节点 &
+                    \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_p.png}} ：压力节点 
+                \end{tabular}}\\
+        \hline
     \end{tabular}
 \end{table}
-
 \section{小结}
-本章讨论了体积自锁问题及其目前的解决方法。首先介绍了体积不可压材料的性质，随后详细讨论了通过罚函数法和拉格朗日乘子法调整体积约束解决体积不可压问题的方法，两种方法在数学上等价。
-同时，本章还介绍了体积约束比和LBB稳定性条件作为判断自锁程度的依据，并指出传统混合离散法无法同时满足最优约束比和LBB稳定性条件。
+本章讨论了体积自锁问题及其目前的解决方法。首先介绍了体积不可压材料的性质，随后详细讨论了通过罚函数法和拉格朗日乘子法两个常用的免体积自锁方法，且两种方法在数学上等价。
+最后根据上述两种方法介绍了免体积自锁条件，包括体积约束比和LBB稳定性条件，并指出传统混合离散法无法同时满足最优约束比和LBB稳定性条件。
