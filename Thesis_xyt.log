@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 23.4) (preloaded format=xelatex 2023.9.26)  6 FEB 2025 11:35
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 23.4) (preloaded format=xelatex 2023.9.26)  7 FEB 2025 00:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -680,7 +680,7 @@ LaTeX Warning: Unused global option(s):
     [UTF8].
 
 (Thesis_xyt.aux (abstract.aux) (Introduction.aux) (MixedFormulation.aux)
-(LBB.aux))
+(LBB.aux) (incompressible.aux))
 \openout1 = `Thesis_xyt.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
@@ -694,7 +694,8 @@ LaTeX Font Info:    ... okay on input line 24.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 24.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 2
 4.
- (C:\Program Files\MiKTeX\tex/latex/base\ts1cmr.fd
+
+(C:\Program Files\MiKTeX\tex/latex/base\ts1cmr.fd
 File: ts1cmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 24.
@@ -1110,23 +1111,57 @@ e 62.
 Package natbib Warning: Citation `quarteroni1994' on page 16 undefined on input
  line 66.
 
-[16] [17]) [18]
+[16] [17]
+Underfull \vbox (badness 1221) has occurred while \output is active []
+
+ [18])
+[19]
+\openout2 = `incompressible.aux'.
+
+ (incompressible.tex [20
+
+
+
+
+]
+Chapter 4.
+) [21]
+\openout2 = `shearlocking.aux'.
+
+ (shearlocking.tex [22
+
+
+
+
+]
+Chapter 5.
+) [23] [24
+
+
+
+]
 No file Thesis_xyt.bbl.
 
 Package natbib Warning: There were undefined citations.
 
 (Thesis_xyt.aux (abstract.aux) (Introduction.aux) (MixedFormulation.aux)
-(LBB.aux))
-Package rerunfilecheck Info: File `Thesis_xyt.out' has not changed.
-(rerunfilecheck)             Checksum: FE2A7EB9278300BCDCD5CEAEDCF17044;2179.
+(LBB.aux) (incompressible.aux) (shearlocking.aux))
+
+Package rerunfilecheck Warning: File `Thesis_xyt.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Thesis_xyt.out':
+(rerunfilecheck)             Before: F9611581F7FBAAC4207FFC534A14167F;2295
+(rerunfilecheck)             After:  64B9F9E46D5B266C6A6D72ADC306DD3F;2387.
  ) 
 Here is how much of TeX's memory you used:
- 17831 strings out of 411463
- 365954 string characters out of 5822270
- 1870290 words of memory out of 5000000
- 37743 multiletter control sequences out of 15000+600000
+ 17887 strings out of 411463
+ 367663 string characters out of 5822270
+ 1874290 words of memory out of 5000000
+ 37787 multiletter control sequences out of 15000+600000
  594089 words of font info for 157 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  87i,26n,99p,376b,476s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Thesis_xyt.pdf (23 pages).
+Output written on Thesis_xyt.pdf (29 pages).
