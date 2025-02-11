@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 23.4) (preloaded format=xelatex 2023.9.26)  7 FEB 2025 00:06
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 23.4) (preloaded format=xelatex 2023.9.26)  11 FEB 2025 15:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -680,7 +680,7 @@ LaTeX Warning: Unused global option(s):
     [UTF8].
 
 (Thesis_xyt.aux (abstract.aux) (Introduction.aux) (MixedFormulation.aux)
-(LBB.aux) (incompressible.aux))
+(LBB.aux) (incompressible.aux) (shearlocking.aux))
 \openout1 = `Thesis_xyt.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
@@ -1135,11 +1135,13 @@ Chapter 4.
 
 ]
 Chapter 5.
-) [23] [24
-
-
-
-]
+File: figures/shearlocking/Mindlinplate.png Graphic file (type bmp)
+<figures/shearlocking/Mindlinplate.png>
+[23]
+Missing character: There is no ， in font rm-lmr12!
+File: figures/fem.png Graphic file (type bmp)
+<figures/fem.png>
+[24] [25]) [26]
 No file Thesis_xyt.bbl.
 
 Package natbib Warning: There were undefined citations.
@@ -1147,21 +1149,24 @@ Package natbib Warning: There were undefined citations.
 (Thesis_xyt.aux (abstract.aux) (Introduction.aux) (MixedFormulation.aux)
 (LBB.aux) (incompressible.aux) (shearlocking.aux))
 
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
 Package rerunfilecheck Warning: File `Thesis_xyt.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `Thesis_xyt.out':
-(rerunfilecheck)             Before: F9611581F7FBAAC4207FFC534A14167F;2295
-(rerunfilecheck)             After:  64B9F9E46D5B266C6A6D72ADC306DD3F;2387.
+(rerunfilecheck)             Before: 1CAC20C679EBA59B6CCED50642AC53C4;2482
+(rerunfilecheck)             After:  CB18A567282E169FF36D130E59A65374;2727.
  ) 
 Here is how much of TeX's memory you used:
- 17887 strings out of 411463
- 367663 string characters out of 5822270
+ 17915 strings out of 411463
+ 368268 string characters out of 5822270
  1874290 words of memory out of 5000000
- 37787 multiletter control sequences out of 15000+600000
+ 37811 multiletter control sequences out of 15000+600000
  594089 words of font info for 157 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 87i,26n,99p,376b,476s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 87i,26n,99p,388b,476s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Thesis_xyt.pdf (29 pages).
+Output written on Thesis_xyt.pdf (31 pages).

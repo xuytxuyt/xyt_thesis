@@ -19,4 +19,7 @@
 \contentsline {subsection}{\numberline {3.3.1}再生核近似}{17}{subsection.3.3.1}%
 \contentsline {chapter}{\numberline {4}体积不可压问题实例}{21}{chapter.4}%
 \contentsline {chapter}{\numberline {5}剪切自锁问题}{23}{chapter.5}%
+\contentsline {section}{\numberline {5.1}中厚板问题}{23}{section.5.1}%
+\contentsline {section}{\numberline {5.2}免自锁方案}{26}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}罚函数法与缩减积分方案}{26}{subsection.5.2.1}%
 \contentsfinish 

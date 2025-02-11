@@ -2,7 +2,7 @@
 本章针对中厚板剪切自锁问题，提出了有限元无网格混合离散分析方法最优约束比例。首先介绍了中厚板问题的混合离散过程，
 其次对比中厚板问题的最优约束比例和传统约束比例。最后通过算例验证该方法的计算精度。
 
-\section{剪切自锁问题}      
+\section{剪切自锁问题}    
 \subsection{罚函数法}
 考虑如图\ref{mindlin_picture}所示中厚板，其中中板厚为$h$,$\Omega$为板中面。在Mindlin假设下,中厚板考虑横向剪切变形,相应的混合控制方程由下式给出：
 \begin{equation}\label{strong_mindlin}
@@ -14,15 +14,16 @@
         w = \bar w & \textrm{on}\; \Gamma_w \\
     \end{cases}
 \end{equation}
-式中，$M_{\alpha \beta}$ 可表示弯矩张量$\pmb{M}$ 的弯曲或扭转部分的分量，$\bar{q}$ 为垂直于板中面的分布荷载；
-$\Gamma_w$和$\Gamma_\varphi$为本质边界条件，$\bar{w}$和$\bar{\varphi}_\alpha$分别为本质边界条件上给定的挠度和转角；
-$\Gamma_Q$ 和$\Gamma_M$ 为自然边界条件，$\bar Q$和$\bar{M}_{\alpha}$ 为自然边界上的等效剪力和法向弯矩；
-$n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
-\begin{figure}[H]
+\begin{figure}
     \centering 
         \includegraphics[scale=0.5]{figures/shearlocking/Mindlinplate.png}
         \caption{中厚板运动学及边界条件}\label{mindlin_picture}
 \end{figure}
+式中，$M_{\alpha \beta}$ 可表示弯矩张量$\pmb{M}$ 的弯曲或扭转部分的分量，$\bar{q}$ 为垂直于板中面的分布荷载；
+$\Gamma_w$和$\Gamma_\varphi$为本质边界条件，$\bar{w}$和$\bar{\varphi}_\alpha$分别为本质边界条件上给定的挠度和转角；
+$\Gamma_Q$ 和$\Gamma_M$ 为自然边界条件，$\bar Q$和$\bar{M}_{\alpha}$ 为自然边界上的等效剪力和法向弯矩；
+$n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
+
 
 在平面应力假设下，当中厚板为线弹性各同向性材料时，其本构关系为：
 \begin{equation} 
