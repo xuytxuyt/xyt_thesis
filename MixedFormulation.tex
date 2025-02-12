@@ -48,7 +48,7 @@ $\boldsymbol b$为$\Omega$中的体力， $\boldsymbol t$, $\boldsymbol g$ 分�
 其中,空间$V=\{\boldsymbol v \in H^1(\Omega)^2\;\vert\;\boldsymbol v = \boldsymbol g, \; \textrm{on} \; \Gamma_g\}$。
 $\delta\boldsymbol \varepsilon^v$和$\delta\boldsymbol \varepsilon^d $分别为$\delta \boldsymbol u$表示的体积应变和偏应变的变分。
 
-在传统有限元法中，整个求解域$\Omega$可离散为一组节点$\{\boldsymbol x_I\}_{I=1}^{n_u}$表示\cite{hughes2000}，其中$n_u$是位移节点的数量。
+在传统有限元法中，如图\ref{fem}所示整个求解域$\Omega$可离散为一组节点$\{\boldsymbol x_I\}_{I=1}^{n_u}$表示\cite{hughes2000}，其中$n_u$是位移节点的数量。
 位移$\boldsymbol u$及其变分$\delta \boldsymbol u $可通过$\boldsymbol x_I$处的节点系数和形函数进行近似：
 \begin{equation}\label{u_h}
     \boldsymbol u_h(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) \boldsymbol u_I, \quad
