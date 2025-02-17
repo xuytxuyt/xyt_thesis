@@ -3,7 +3,7 @@
 % ltex: language=zh-CN
 
 \documentclass[engineeringmaster]{hquThesis}
-
+\usepackage{lineno}
 \usepackage{amsmath,amsfonts,amssymb,textcomp}
 \usepackage{booktabs,multirow,tabularx,float}
 \hypersetup{colorlinks=true,linkcolor=black,citecolor=black}
@@ -24,10 +24,12 @@
 \begin{document}
 
 \makecover
+% \include{decision}
+% \include{declaration}
 
-\frontmatter
+\frontmatter{
 \include{abstract}
-\tableofcontents
+\tableofcontents}
 \mainmatter
 
 \include{Introduction}
@@ -35,15 +37,13 @@
 \include{LBB}
 \include{incompressible}
 \include{shearlocking}
-% \include{XXXX}
 % \backmatter-页眉另起设置
-% \bibliography{references}-引用参考文献条目(.bib)
+\bibliography{references}
 % \include{acknowledgments}-致谢
 % \appendix-附录部分
 % \include{appendixA}-附录章节
 % \include{appendixB}-附录章节
 % \include{cv}-个人简历
-\bibliography{references}  
 
 % \appendix
 
@@ -51,8 +51,6 @@
 
 % \backmatter
 
-
-% \bibliography{references}
 
 % NOTE 毕业论文个人简历部分
 % \include{cv}

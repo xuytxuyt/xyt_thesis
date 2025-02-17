@@ -1,13 +1,15 @@
-\chapter{最优约束比例}
-本章用一种新的方式推导了LBB稳定性条件，建立了LBB稳定性条件与特征值问题和压力自由度之间的关系，提出了更精确的最优约束比。
+\chapter{最优体积约束比}
+针对体积约束比和LBB稳定性条件验证方法的局限性，本章以一种新的方法推导LBB稳定性条件。通过建立LBB稳定性条件与特征值问题以及体积约束比之间的联系，估计LBB稳定系数，构建了一套更为简易高效的LBB稳定性条件验证体系。基于新提出的LBB稳定系数估计方法，总结出了满足稳定性条件的最优体积约束比关系式。并且通过与经典单元的数值验证与解析证明结果进行对比分析，验证所提出方法的正确性和可靠性。
 \section{LBB稳定系数估计}
-对于LBB稳定性条件\eqref{infsup}，假设$\mathcal P_h:V_h \rightarrow Q_h$ 是$\mathcal P$的正交投影算子，定义为：
+\subsection{LBB稳定性条件与特征值问题}
+
+基于LBB稳定性条件\eqref{infsup}，假设$\mathcal P_h:V_h \rightarrow Q_h$ 是$\mathcal P$的正交投影算子，定义为：
 \begin{equation}\label{Ph}
     b(q_h,\boldsymbol v_h) = (q_h, \mathcal P \boldsymbol v_h) = (q_h, \mathcal P_h \boldsymbol v_h), \quad \forall q_h \in Q_h
 \end{equation}
-式中， $\mathcal P:V\rightarrow Q$ 散度算子, $\mathcal P = \nabla \cdot$. 
+式中， 散度算子$\mathcal P:V\rightarrow Q$ , $\mathcal P = \nabla \cdot$。
 
-正如$\mathcal P_h$的定义，有$\mathrm{Im}\mathcal P_h \in Q_h$。式\eqref{infsup}可以改写为：
+根据$\mathcal P_h$的定义，有$\mathrm{Im}\mathcal P_h \in Q_h$。式\eqref{infsup}可以改写为：
 \begin{equation} \label{r11}
     \begin{split}
         \beta &\le \inf_{q_h \in Q_h} \sup_{\boldsymbol v_h \in V_h} \frac{\vert b(q_h,\boldsymbol v_h) \vert}{\Vert q_h \Vert_Q \Vert \boldsymbol v_h \Vert_V} 
@@ -40,8 +42,9 @@
 其中 $\ker \mathcal P_h \subset V$ 是 $\mathcal P_h$ 的核，定义为 $\ker \mathcal P_h := \{ \boldsymbol v \in V \;\vert\; \mathcal P_h \boldsymbol v = 0 \}$.
 
 上述方法与传统数值inf--sup测试一致\cite{malkus1981}，而根据极小--极大值原理 \cite{babuska1991a}，式\eqref{r1}计算刚度矩阵$\boldsymbol K^v$ 和 $\boldsymbol K^d$的最小非零特征值。
+\subsection{特征值问题与体积约束比}
 
-为了进一步找出最优约束数量，假设$P_{n_u}$ 是一个$n_u$ 维的多项式空间, $V_{n_u}$ 是位移多项式空间，且 $V_{n_u} = P_{n_u}^2$。由于$V_h$ 和 $V_{n_u}$的维度相同，$\dim V_{n_u}=\dim V_h = n_d\times n_u$，存在一个唯一的$\boldsymbol v \in V_{n_u}$ 满足$\boldsymbol v_h = \mathcal I_h \boldsymbol v$。于是式\eqref{r1}的右边可以改写为：
+为了进一步找出最优约束自由度数量，假设$P_{n_u}$ 是一个$n_u$ 维的多项式空间, $V_{n_u}$ 是位移多项式空间，且 $V_{n_u} = P_{n_u}^2$。由于$V_h$ 和 $V_{n_u}$的维度相同，$\dim V_{n_u}=\dim V_h = n_d\times n_u$，存在一个唯一的$\boldsymbol v \in V_{n_u}$ 满足$\boldsymbol v_h = \mathcal I_h \boldsymbol v$。于是式\eqref{r1}的右边可以改写为：
 \begin{equation}\label{r21}
     \inf_{V'_h \subset V_h\setminus \ker \mathcal P_h}\sup_{\boldsymbol v_h \in V_h'} \frac{\Vert \mathcal P_h \boldsymbol v_h \Vert_Q}{\Vert \boldsymbol v_h \Vert_V} = 
     \inf_{V'\subset V_{n_u}\setminus \ker \mathcal P_h \mathcal I_h}\sup_{\boldsymbol v \in V'} \frac{\Vert \mathcal P_h \mathcal I_h \boldsymbol v \Vert_Q}{\Vert \mathcal I_h \boldsymbol v \Vert_V}
@@ -76,15 +79,25 @@
 \end{equation}
 其中
 \begin{equation}
-    \beta = \inf_{V'\subset V_{n_u}\setminus\ker \mathcal P_h \mathcal I_h}\sup_{\boldsymbol v \in V'}\frac{\Vert \mathcal P \boldsymbol v\Vert_Q}{\Vert  \boldsymbol v\Vert_V} 
+    \beta_s = \inf_{V'\subset V_{n_u}\setminus\ker \mathcal P_h \mathcal I_h}\sup_{\boldsymbol v \in V'}\frac{\Vert \mathcal P \boldsymbol v\Vert_Q}{\Vert  \boldsymbol v\Vert_V} 
 \end{equation}
-TODO 压力最优约束自由度怎么得出的
 
-压力的最优自由度$n_p$为$n_s = \dim(V_{n_u}\setminus \ker \mathcal P)$
+当$\beta_s>0$时,
+\begin{equation}
+    \dim(V_{n_u}\setminus\ker \mathcal P_h \mathcal I_h) < \dim(V_{n_u}\setminus \ker \mathcal P)
+\end{equation}
+所以压力自由度$n_p$要满足:
+\begin{equation}
+    n_p<n_s = \dim(V_{n_u}\setminus \ker \mathcal P)
+\end{equation}
+此时的体积约束比要满足：
+\begin{equation}
+\frac{n_d\times n_u}{n_p}>r_{opt}=\frac{n_d\times n_u}{n_s}
+\end{equation}
+其中$r_{opt}$为最优体积约束比。
+\section{多项式约束数量}
 
-\section{多项式约束数}
-
-根据上述内容，$n_c$为最优压力自由度，确定$n_c$的方法如下。例如，在二维弹性体积不可压缩问题中，对于维数为3的线性多项式空间$P_3$,对应的位移空间$V_3$由下式给出：
+根据上述内容，$n_s$为最优约束比处的压力自由度数量，确定$n_s$的方法如下。例如，在二维弹性体积不可压缩问题中，对于维数为3的线性多项式空间$P_3$,对应的位移空间$V_3$由下式给出：
 \begin{equation}
     V_3 = \mathrm{span} \left \{
     \begin{pmatrix} 1 \\ 0 \end{pmatrix},
@@ -133,10 +146,10 @@ TODO 压力最优约束自由度怎么得出的
         }_{V_6\setminus \ker \mathcal P}
     \end{Bmatrix}
 \end{equation}
-在这种情况下，$n_u=6$，$n_s=3$。表中列出了随着多项式空间阶数的增加，各阶空间的最优约束自由度的数量，并总结了$n_u$与$n_s$之间的关系。
-\begin{table}[ht!]
+在这种情况下，$n_u=6$，$n_s=3$。表\ref{ch_3:tab:constraint}中列出了随着多项式空间阶数的增加，各阶空间的约束自由度数量，并总结了$n_u$与$n_s$之间的关系。
+\begin{table}[!h]
     \centering
-    \caption{体积约束自由度}\label{tab:constraint}
+    \caption{体积约束自由度}\label{ch_3:tab:constraint}
     \setlength{\tabcolsep}{10mm}
     \renewcommand{\arraystretch}{2}
     \begin{tabular}{cccc}
@@ -152,54 +165,106 @@ TODO 压力最优约束自由度怎么得出的
         \bottomrule
     \end{tabular}
 \end{table}
-\section{有限元无网格混合离散}
-第二章介绍的混合离散方案压力节点要依附单元上，无法任意布置。为了使压力自由度达到最优，在所提出的混合公式中，使用传统有限元法来近似位移，采用再生核无网格法来近似压力。
-\subsection{再生核近似}
-如图所示，再生核无网格近似将整个域$\Omega$及其边界$\Gamma$由$n_p$个无网格节点离散$\{\boldsymbol x_I\}_{I=1}^{n_p}$。每个无网格节点$\boldsymbol x_I$对应的形函数为$\Psi_I$,节点系数为$p_I$。于是近似压力$p_h$可以表示为：
-\begin{equation}
-    p_h(\boldsymbol x) = \sum_{I=1}^{n_p} \Psi_I(\boldsymbol x) p_I
-\end{equation}
-TODO  无网格近似的图
 
-根据再生核近似理论，无网格形函数可以假设为如下形式：
-\begin{equation}\label{rkshape}
-    \Psi_I(\boldsymbol x) = \boldsymbol c(\boldsymbol x_I-\boldsymbol x) \boldsymbol p^{[n]}(\boldsymbol x_I-\boldsymbol x) \phi(\boldsymbol x_I - \boldsymbol x)
-\end{equation}
-其中$\boldsymbol p$为$n$阶基函数向量，其表达式为：
-\begin{equation}
-    \boldsymbol p^{[n]}(\boldsymbol x) = \{ 1, x, y, x^2, xy, y^2,...,y^n\}^T
-\end{equation}
-而$\phi$为核函数，其影响域的大小由影响域尺寸$s$决定，核函数及其影响域的大小共同决定了无网格形函数的局部紧支性和光滑性。在二维情况下，核函数的影响域通常为圆形或者矩形。本文的影响域形状为矩形，矩形影响域的核函数可由下列公式计算得到：
-\begin{equation}
-    \phi(\boldsymbol x_I-\boldsymbol x) = \phi(r_x) \phi(r_y), \quad r_x = \frac{|\boldsymbol x_I - \boldsymbol x|}{s_{x}},r_y = \frac{|\boldsymbol y_I - \boldsymbol y|}{s_{y}}
-\end{equation}
-其中, $s_x$ 和 $s_y$ 分别为 $x$ 和 $y$ 方向上的影响域尺寸，若节点均匀布置，一般使两个方向上的影响域大小相等，即$s_x = s_y = s$。
-为保证形函数紧支性和光滑性，$\phi$ 通常取为阶次大于 $n$ 的紧支函数。对于弹性力学问题，无网格基函数一般选择二阶或者三阶多项式基函数，核函数 $\phi(\boldsymbol x_I-\boldsymbol x)$ 取为三次样条函数：
-\begin{equation}
-    \phi(s) =\frac{1}{3!} \begin{cases}
-        (2-2s)^3 - 4(1-2s)^3 & s\le\frac{1}{2} \\
-        (2-2s)^3 &\frac{1}{2}<s<1 \\
-        0 & s> 1
-    \end{cases}
-\end{equation}
-$\boldsymbol c$为待定系数向量，可以通过满足下列一致性条件确定：
-\begin{equation}\label{cc1}
-    \sum_{I=1}^{n_p}\Psi_I(\boldsymbol x) \boldsymbol p^{[n]}(\boldsymbol x_I) = \boldsymbol p^{[n]} (\boldsymbol x)
-\end{equation}
-或等效的转换形式：
-\begin{equation}\label{cc2}
-    \sum_{I=1}^{n_p}\Psi_I(\boldsymbol x) \boldsymbol p^{[n]}(\boldsymbol x_I-\boldsymbol x) = \boldsymbol p^{[n]} (\boldsymbol 0)
-\end{equation}
-将式\eqref{rkshape}代入式\eqref{cc2}中即可得到待定系数向量$\boldsymbol c$的具体表达式：
-\begin{equation}\label{correction}
-    \boldsymbol c(\boldsymbol x_I-\boldsymbol x) = \boldsymbol A^{-1}(\boldsymbol x_I-\boldsymbol x)\boldsymbol p^{[n]}(\boldsymbol 0)
-\end{equation}
-式中$\boldsymbol A$为矩量矩阵：
-\begin{equation}
-    \boldsymbol A(\boldsymbol x_I-\boldsymbol x) = \sum_{I=1}^{n_p}\boldsymbol p^{[n]}(\boldsymbol x_I-\boldsymbol x) \boldsymbol p^{[n]\mathrm{T}}(\boldsymbol x_I-\boldsymbol x)\phi(\boldsymbol x_I-\boldsymbol x)
-\end{equation}
+\section{系数估计验证}
 
-将式\eqref{correction}代入式\eqref{rkshape}可得最终的再生核无网格形函数表达式：
-\begin{equation}
-    \Psi_I(\boldsymbol x) = \boldsymbol p^{[n]\mathrm{T}}(\boldsymbol 0) \boldsymbol A^{-1}(\boldsymbol x_I-\boldsymbol x)p^{[n]}(\boldsymbol x_I-\boldsymbol x)\phi(\boldsymbol x_I-\boldsymbol x)
-\end{equation}
+同样以图\ref{ch_3:fig:elements_eg}所示的两个二维8位移节点单元混合离散方案为例，从上一章中可知图\ref{ch_3:fig:elements_eg}(a)Q8P3单元位移自由度个数$2n_u=6$，根据表\ref{ch_3:tab:constraint}可得$n=1$，进而$n_s=1$。因此,满足LBB稳定性条件的最优压力约束自由度的数量为1。因此Q8P3单元不满足LBB稳定性条件，而Q8P1单元满足LBB稳定性条件。
+\begin{figure}[!h]
+    \centering
+        \begin{tabular}{c@{\hspace{24pt}}c}
+            \includegraphics[width=0.3\textwidth]{figures/Q8P3.png} &
+            \includegraphics[width=0.3\textwidth]{figures/Q8P1.png} \\
+            (a) & (b) \\
+            \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_u.png}} ：位移节点 &
+            \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_p.png}} ：压力节点 
+        \end{tabular}
+        \caption{二维位移压力单元示例}\label{ch_3:fig:elements_eg}
+    \end{figure}
+
+表\ref{ch_3:tab:infsup2}为其他经典单元的验证结果，通过对比分析可以看出，本文所提的验证LBB稳定性条件的新方法，其验证结果与数值验证方法和解析证明方法完全一致。这一结果表明，新方法在使用简易的同时，能够有效的验证混合离散方案的LBB稳定性条件。
+\begin{table}[!h]
+    \centering
+    \renewcommand\arraystretch{1.2}
+    \caption{inf-sup条件验证} \label{ch_3:tab:infsup2}
+    \begin{tabular}{ccccc}
+        \hline
+        \multirow{2}{*}{离散方案}&体积&\multicolumn{3}{c}{inf-sup条件}\\
+        & 约束比&数值验证&解析证明&系数估计\\
+        \hline
+        \begin{tabular}{c}
+            \begin{minipage}{0.1\columnwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/mix_T3P1.png}
+            \end{minipage}\\T3P1
+        \end{tabular}
+        &1&$\times$ & $\times$&$\times$\\
+        \begin{tabular}{c}
+            \begin{minipage}{0.1\columnwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/mix_Q4P1.png}
+            \end{minipage}\\Q4P1
+        \end{tabular}
+        &2&$\times$ & $\times$&$\times$\\
+        \begin{tabular}{c}
+            \begin{minipage}{0.1\columnwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/mix_Q8P3.png}
+            \end{minipage}\\Q8P3
+        \end{tabular}
+        &2&$\times$ & $\times$&$\times$\\
+        \begin{tabular}{c}
+            \begin{minipage}{0.1\columnwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/mix_Q8P1.png}
+            \end{minipage}\\Q8P1
+        \end{tabular}
+        &6&\checkmark & \checkmark & \checkmark\\
+        \begin{tabular}{c}
+            \begin{minipage}{0.1\columnwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/mix_Q9P3.png}
+            \end{minipage}\\Q9P3
+        \end{tabular}
+        &$\frac{8}{3}$&\checkmark & \checkmark & \checkmark\\
+        \begin{tabular}{c}
+            \begin{minipage}{0.1\columnwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/mini.png}
+            \end{minipage}\\MINI element \cite{arnold1984,auricchio2005}
+        \end{tabular}
+        &$\frac{8}{3}$&\checkmark & \checkmark& \checkmark\\
+        \begin{tabular}{c}
+            \begin{minipage}{0.1\columnwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/TaylorHood.png}
+            \end{minipage}\\Taylor--Hood element \cite{hood1974}
+        \end{tabular}
+        &$\frac{8}{3}$&\checkmark & \checkmark& \checkmark\\
+        \begin{tabular}{c}
+            \begin{minipage}{0.1\columnwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/mix_T6C3.png}
+            \end{minipage}\\T6C3
+        \end{tabular}
+        &8&\checkmark & & \checkmark\\
+        \begin{tabular}{c}
+            \begin{minipage}{0.1\columnwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/CrouzeixRaviart.png}
+            \end{minipage}\\Crouzeix-Raviart element \cite{crouzeix1973}
+        \end{tabular}
+        &4&\checkmark & & \checkmark\\
+        \hline
+        \multicolumn{5}{c}{
+                \begin{tabular}{c@{\hspace{24pt}}c}
+                    \raisebox{-0.2\height}{\includegraphics[width=10pt]{figures/legend_u.png}} ：位移节点 &
+                    \raisebox{-0.2\height}{\includegraphics[width=10pt]{figures/legend_p.png}} ：压力节点 
+                \end{tabular}}\\
+        \hline
+    \end{tabular}
+\end{table}
+
+值得注意的是，从上述T3P1单元与Q4P1单元例子可以观察到，即使将两个单元中的压力节点数设置为最小值1，其仍然无法满足LBB稳定性条件。这一现象主要源于传统有限元离散方案中节点布置方式的固有局限性：在传统有限元混合离散方案中，压力节点必须依附于单元进行布置，且每个单元至少需要布置一个压力节点，这种限制导致节点数量无法根据位移节点与压力节点的最优比例需求进行灵活调整。因此，在传统有限元混合离散方案框架下，无论是三角形3位移节点单元还是四边形4位移节点单元，均不能满足LBB稳定性条件。
+
+\section{小结}
+本章对LBB稳定性条件进行了深入研究，通过结合特征值问题与体积约束比，推导出新的LBB稳定系数估算式，并确定了满足LBB稳定系数的最优体积约束比范围。首先，引入正交投影算子，推导出考虑刚度矩阵的最小非零特征值的LBB稳定系数估算式。随后，通过引入多项式空间，进一步推导出同时考虑特征值问题和体积约束自由度数量的LBB稳定系数估算式。在此基础上确定了满足LBB稳定性条件的最优体积约束比取值范围。并且，讨论了多项式空间中位移自由度和压力自由度的关系，并通过举例阐明了最优约束比下压力自由度数量的确定方法。通过规律总结了不同多项式空间阶数下的约束自由度数量，并建立了位移自由度与压力自由度数量之间的关系式，并举例说明了如何根据新方法确定混合离散单元是否满足LBB稳定性条件。为验证所提方法的有效性，采用系数估计法对多个经典单元进行了LBB稳定性条件验证，并将结果与数值验证结果、解析证明结果进行对比，充分证实了本文所提方法的正确性和可靠性。本章所提方法为验证LBB稳定性条件提供了更为简便直观的方法支持，对免体积自锁问题具有重要的意义。

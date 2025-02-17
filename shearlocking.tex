@@ -2,8 +2,8 @@
 本章讨论另一个自锁问题，中厚板的剪切自锁问题。同样介绍目前常用的罚函数法和拉格朗日乘子法两种解决方法。上文提出的最优约束比同样适用于剪切自锁问题。
 
 \section{中厚板问题}    
-考虑如图\ref{mindlin_picture}所示中厚板，其中中板厚为$h$，$\Omega$为板中面。在Mindlin假设下,中厚板考虑横向剪切变形,相应的混合控制方程由下式给出：
-\begin{equation}\label{strong_mindlin}
+考虑如图\ref{ch_5:fig:mindlin_picture}所示中厚板，板厚为$h$，$\Omega$为板中面。在Mindlin假设下,中厚板考虑横向剪切变形,相应的控制方程由下式给出：
+\begin{equation}\label{ch_5:eq:strong_mindlin}
     \begin{cases}
         M_{\alpha\beta,\beta} - Q_\alpha = 0 & \textrm{in}\; \Omega \\
         Q_{\alpha,\alpha} + \bar q = 0 & \textrm{in}\; \Omega \\    Q_\alpha n_\alpha = \bar Q & \textrm{on}\; \Gamma_Q \\
@@ -12,10 +12,10 @@
         w = \bar w & \textrm{on}\; \Gamma_w \\
     \end{cases}
 \end{equation}
-\begin{figure}[H]
+\begin{figure}[!h]
     \centering 
         \includegraphics[scale=0.5]{figures/shearlocking/Mindlinplate.png}
-        \caption{中厚板运动学及边界条件}\label{mindlin_picture}
+        \caption{中厚板运动学及边界条件}\label{ch_5:fig:mindlin_picture}
 \end{figure}
 式中，$M_{\alpha \beta}$ 可表示弯矩张量$ \boldsymbol{M}$ 的弯曲或扭转部分的分量，$Q_\alpha$为剪力张量$\boldsymbol{Q}$的分量，$\bar{q}$ 为垂直于板中面的分布荷载；
 $\Gamma_w$和$\Gamma_\varphi$为本质边界条件，$\bar{w}$和$\bar{\varphi}_\alpha$分别为本质边界条件上给定的挠度和转角；
@@ -23,14 +23,14 @@ $\Gamma_Q$ 和$\Gamma_M$ 为自然边界条件，$\bar Q$和$\bar{M}_{\alpha}$ �
 $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
 
 在平面应力假设下，对于各同向性线弹性材料，其本构关系表示为：
-\begin{equation}\label{mindlin_M}
+\begin{equation}\label{ch_5:eq:mindlin_M}
     M_{\alpha \beta}=-\frac{h^3}{12}D_{\alpha \beta \gamma\eta}\kappa_{\gamma\eta}=\frac{h^3}{12}D_{\alpha \beta \gamma\eta}\varphi_{\gamma,\eta}
 \end{equation}
-\begin{equation}\label{mindlin_Q}
+\begin{equation}\label{ch_5:eq:mindlin_Q}
     Q_{\alpha}=k\frac{Eh}{2(1+\nu)}\gamma_\beta=kGh(-\varphi_\beta+w_{,\beta})
 \end{equation}
 其中，$k$为剪切修正系数，$\kappa_{\alpha\beta}$为曲率张量$\pmb\kappa$的分量，$\gamma_\alpha$为剪切应变矢量$\pmb\gamma$的分量，表达式为：
-\begin{equation} \label{kappa}
+\begin{equation} \label{ch_5:eq:kappa}
     \kappa_{\alpha\beta}=-\varphi_{\alpha,\beta}，\quad\gamma_\alpha=-\varphi_\alpha+w_{,\alpha}
 \end{equation}
 式中$D_{\alpha \beta \gamma\eta}$为在平面应力假设下四阶弹性张量的分量，表达式为：
@@ -38,40 +38,40 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
     D_{\alpha \beta \gamma\eta}=\frac{E}{1-\nu^2}(\nu\delta_{\alpha\beta}\delta_{\gamma\eta}+\frac{1}{2}(1-\nu)(\delta_{\alpha\gamma}\delta_{\beta\eta}+\delta_{\alpha\eta}\delta_{\beta\gamma}))
 \end{equation}
 
-根据最小势能原理，强形式\eqref{strong_mindlin}所对应的势能泛函表达式为： 
-\begin{equation}\label{potential_energy}
+根据最小势能原理，强形式\eqref{ch_5:eq:strong_mindlin}所对应的势能泛函表达式为： 
+\begin{equation}\label{ch_5:eq:potential_energy}
     \begin{split} 
         \Pi(w,\boldsymbol{\varphi})&=\frac{1}{2}\int_{\Omega}\kappa_{\alpha\beta}M_{\alpha\beta}d\Omega+\frac{1}{2}\int_{\Omega}\gamma_{\alpha}Q_{\alpha}d\Omega\\
         &+\int_{\Gamma_{M}}\varphi_{\alpha}{\bar{M}_{\alpha}}d\Gamma-\int_{\Gamma_{Q}}{w}\bar {Q}d\Gamma-\int_{\Omega} w\bar{q}d\Omega
     \end{split}
 \end{equation}
-对式\eqref{potential_energy}进行变分可得弱形式：
-挠度，转角$(w,\varphi_{\alpha})\in V$,使
-\begin{equation}\label{weak_penalty_mindlin}
+对式\eqref{ch_5:eq:potential_energy}进行变分可得伽辽金弱形式：
+Find $(w,\varphi_{\alpha})\in V$
+\begin{equation}\label{ch_5:eq:weak_penalty_mindlin}
     \begin{split} 
         &\int_{\Omega}\delta\kappa_{\alpha\beta}M_{\alpha\beta}d\Omega+\int_{\Omega}\delta\gamma_{\alpha}Q_{\alpha}d\Omega=\\
         &-\int_{\Gamma_{M}}\delta\varphi_{\alpha}{\bar{M}_{\alpha}}d\Gamma+\int_{\Gamma_{Q}}{\delta{w}}\bar {Q}d\Gamma+\int_{\Omega} \delta{w}\bar{q}d\Omega,\quad \forall(\delta w,\delta\varphi_{\alpha}) \in V
     \end{split}
 \end{equation}
 
-对于考虑横向剪切变形的中厚板，根据中厚板的本构关系\eqref{mindlin_M}，\eqref{mindlin_Q}，当其厚度减小$h\rightarrow 0$，弯矩$M_{\alpha \beta}$减小的速度远大于剪力$Q_{\alpha}$，使得$Q_{\alpha}\gg M_{\alpha \beta}$。在式\eqref{weak_penalty_mindlin}中$Q_{\alpha}\gg M_{\alpha \beta}$，剪切应变$\boldsymbol{\gamma}$被约束，导致板的剪切位移为$0$。
+对于考虑横向剪切变形的中厚板，根据中厚板的本构关系\eqref{ch_5:eq:mindlin_M}，\eqref{ch_5:eq:mindlin_Q}，当其厚度减小$h\rightarrow 0$，$h \gg h^3$将导致弯矩$M_{\alpha \beta}$减小的速度远大于剪力$Q_{\alpha}$，使得$Q_{\alpha}\gg M_{\alpha \beta}$。从式\eqref{ch_5:eq:weak_penalty_mindlin}中可以看出当$Q_{\alpha}\gg M_{\alpha \beta}$，剪切应变$\boldsymbol{\gamma}$被约束，导致板的剪切位移为$0$。
 
-在传统有限元法中，如图\ref{mindlin_fem}所示整个求解域$\Omega$由一组具有节点$\{\boldsymbol x_I\}_{I=1}^{n_u}$的构造网格离散,其中$n_u$是节点的数量。
+在传统有限元法中，如图\ref{ch_5:fig:mindlin_fem}所示整个板中面$\Omega$由一组具有节点$\{\boldsymbol x_I\}_{I=1}^{n_u}$的构造网格离散,其中$n_u$是节点的数量。
 挠度$w$及其变分$\delta w $,转角$\varphi_\alpha$及其变分$\delta \varphi_\alpha $可通过$x_I$处的节点系数和形函数进行近似：
-\begin{equation}\label{w_h}
+\begin{equation}\label{ch_5:eq:w_h}
     w^h(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) w_I, \quad \delta w^h(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) \delta w_I
 \end{equation}
-\begin{equation}\label{varphi_h}
-    \varphi^h_{\alpha}(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) \varphi_{\alpha I}, \quad \delta \varphi^h(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) \delta \varphi_{\alpha I}
+\begin{equation}\label{ch_5:eq:varphi_h}
+    \varphi^h_{\alpha}(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) \varphi_{\alpha I}, \quad \delta \varphi^h_{\alpha}(\boldsymbol x) = \sum_{I=1}^{n_u} N_I(\boldsymbol x) \delta \varphi_{\alpha I}
 \end{equation}
 其中，$N_I$为节点$x_I$处的形函数，$w_I$和$\varphi_{\alpha I}$节点系数张量。
-\begin{figure}[H]
+\begin{figure}[!h]
     \centering 
-        \includegraphics[scale=1.5]{figures/fem.png}
-        \caption{有限元离散示意图}\label{mindlin_fem}
+        \includegraphics[scale=0.6]{figures/fem.png}
+        \caption{有限元离散示意图}\label{ch_5:fig:mindlin_fem}
 \end{figure}
 
-结合式\eqref{kappa}，\eqref{w_h}和\eqref{varphi_h}，相应的近似曲率$\boldsymbol\kappa$和近似剪切应变$\boldsymbol\gamma$可表示为：
+结合式\eqref{ch_5:eq:kappa}，\eqref{ch_5:eq:w_h}和\eqref{ch_5:eq:varphi_h}，相应的近似曲率$\boldsymbol\kappa^h$和近似剪切应变$\boldsymbol\gamma^h$可表示为：
 \begin{equation}
     \boldsymbol\kappa^h = 
     \begin{Bmatrix}
@@ -97,27 +97,27 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
         w_I \\ \varphi_{1I} \\ \varphi_{2I}
     \end{Bmatrix} = \sum_{I=1}^{n_u} \boldsymbol B^s_I \boldsymbol d_I
 \end{equation}
-\begin{equation}\label{kappa_h}
+\begin{equation}\label{ch_5:eq:kappa_h}
     \delta\boldsymbol\kappa^h = - \sum_{I=1}^{n_u} \boldsymbol B^b_I \delta\boldsymbol d_I ,\quad \delta\boldsymbol\gamma^h = \sum_{I=1}^{n_u} \boldsymbol B^s_I \delta\boldsymbol d_I
 \end{equation}
 
-将式\eqref{kappa_h}代入到弱形式\eqref{weak_penalty_mindlin}可得下列里兹--伽辽金问题：
-近似挠度和近似转角$(w^h,\boldsymbol{\varphi}^h_{\alpha})\in V_h$满足
-\begin{equation}\label{ritz_penalty_mindlin}
+将式\eqref{ch_5:eq:kappa_h}代入到弱形式\eqref{ch_5:eq:weak_penalty_mindlin}可得下列里兹--伽辽金问题：
+Find $(w^h,\boldsymbol{\varphi}^h_{\alpha})\in V_h$
+\begin{equation}\label{ch_5:eq:ritz_penalty_mindlin}
     \begin{split} 
         &\int_{\Omega}\delta\kappa^h_{\alpha\beta}M_{\alpha\beta}d\Omega+\int_{\Omega}\delta\gamma^h_{\alpha}Q_{\alpha}d\Omega=\\
         &-\int_{\Gamma_{M}}\delta\varphi^h_{\alpha}{\bar{M}_{\alpha}}d\Gamma+\int_{\Gamma_{Q}}{\delta{w^h}}\bar {Q}d\Gamma+\int_{\Omega} \delta{w^h}\bar{q}d\Omega,\quad \forall(\delta w^h,\delta\varphi^h_{\alpha}) \in V_h
     \end{split}
 \end{equation}
-根据$\boldsymbol\kappa^h$和$\boldsymbol\gamma^h$的任意性，上述方程可简化为如下离散控制方程：
-\begin{equation}
+根据$\delta\boldsymbol\kappa^h$和$\delta\boldsymbol\gamma^h$的任意性，上述方程可简化为如下离散控制方程：
+\begin{equation}\label{ch_5:eq:equilibrium_penalty}
     (\boldsymbol K^b + \boldsymbol K^s) \boldsymbol d = \boldsymbol f
 \end{equation}
-其中，$\boldsymbol K^b$为弯曲刚度矩阵，$\boldsymbol K^s$为剪切刚度矩阵，$\pmb{f}$为力矢量，其分量具有以下形式：
-\begin{equation}\label{stiffness_bending}
+其中，$\boldsymbol K^b$为弯曲刚度矩阵，$\boldsymbol K^s$为剪切刚度矩阵，$\pmb{f}$为力向量，其分量具有以下形式：
+\begin{equation}\label{ch_5:eq:stiffness_bending}
     \boldsymbol K^b_{IJ} = \frac{h^3}{12} \int_\Omega \boldsymbol B^{bT}_I \boldsymbol D \boldsymbol B^b_J d\Omega\\
 \end{equation}
-\begin{equation}\label{stiffness_shear}
+\begin{equation}\label{ch_5:eq:stiffness_shear}
     \boldsymbol K^s_{IJ} = h \int_\Omega \boldsymbol B^{sT}_I kG \boldsymbol B^s_J d\Omega
 \end{equation}
 \begin{equation}
@@ -139,7 +139,65 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
     \end{Bmatrix}
 \end{equation}
 
-\section{免自锁方案}
-\subsection{罚函数法与缩减积分方案}
-同样，对于中厚板当厚度减小$h\rightarrow 0$，式\eqref{stiffness_shear}中剪切刚度矩阵$\boldsymbol{K^s}$中的模态远大于式\eqref{stiffness_bending}中弯曲刚度矩阵$\boldsymbol{K^b}$中的模态。
-此时，剪切刚度矩阵$\boldsymbol{K^s}$可视为一种强制使用的罚函数法使得剪切部分受到约束。使用传统有限元法进行数值分析时位移解会远小于实际情况，就是所谓的剪切自锁现象。
+\section{中厚板问题混合离散方案} 
+同样，由式\eqref{ch_5:eq:equilibrium_penalty}，\eqref{ch_5:eq:stiffness_bending}和\eqref{ch_5:eq:stiffness_shear}可知，对于中厚板，当外力向量具有一定的数值时，厚度$h$减小$h\rightarrow 0$将导致剪切刚度矩阵$\boldsymbol{K^s}$中的所有模态也趋向零。此时，剪切刚度矩阵$\boldsymbol{K^s}$可作为罚函数项将剪切刚度中所有模态约束住，厚度$h$为其中的罚因子。用传统有限元法进行求解时，由于离散的有限元近似阶次较低，导致过多的位移自由度受到剪切约束的限制，位移解将远小于实际情况,即出现剪切自锁现象。  
+
+常用的缓解剪切自锁的方法与第二章介绍的体积自锁问题一样有罚函数法与缩减积分方案和拉格朗日乘子法与混合离散方案。对于剪切自锁问题，缩减积分方案与第二章中的相同，而对于拉格朗日乘子法与混合离散方案， 引入剪切应力$\boldsymbol{Q}$作为拉格朗日乘子独立变量，可以得到拉格朗日乘子型剪切约束施加方案。此时能量泛函具有挠度$w$、转角$\boldsymbol{\varphi}$和剪切应力$\boldsymbol{Q}$三个变量，势能泛函的表达式可更改为：
+\begin{equation}\label{ch_5:eq:potential_energy_mixed}
+    \begin{split} 
+        \Pi(w,\boldsymbol{\varphi},\boldsymbol{Q})&=\int_{\bar\Omega}\frac{1}{2}\varepsilon_{ij}\sigma_{ij} d\Omega+\frac{1}{2}\int_{\Omega}Q_{\alpha}(\gamma_{\alpha}-\frac{Q_{\alpha}}{kGh})d\Omega-\int_{\Gamma^{t}} u_{i}t_{i}d\Gamma-\int_{\Omega} u_{i}b_{i}d\Omega\\
+        &=\frac{1}{2}\int_{\Omega}(\kappa_{\alpha \beta}M_{\alpha \beta}+\gamma_{\alpha}Q_{\alpha})d\Omega+\frac{1}{2}\int_{\Omega}Q_{\alpha}(\gamma_{\alpha}-\frac{Q_{\alpha}}{kGh})d\Omega\\
+        &+\int_{\Gamma_{M}}\varphi_{\alpha}{\bar{M}_{\alpha}}d\Gamma-\int_{\Gamma_{Q}}{w}\bar {Q}d\Gamma-\int_{\Omega} w\bar{q}d\Omega
+    \end{split}
+\end{equation}
+
+对式\eqref{ch_5:eq:potential_energy_mixed}进行变分可得伽辽金弱形式：
+\begin{equation} 
+    \begin{split}
+    &\delta\Pi(w,\boldsymbol\varphi,\boldsymbol{Q})\\
+    &=\int_{\Omega}\delta\kappa_{\alpha \beta}M_{\alpha \beta}d\Omega+\frac{1}{2}\int_{\Omega}\delta\gamma_{\alpha}Q_{\alpha}d\Omega+\frac{1}{2}\int_{\Omega}\gamma_{\alpha}\delta{Q}_{\alpha}d\Omega+\frac{1}{2}\int_{\Omega}\delta\gamma_{\alpha}Q_{\alpha}d\Omega\\
+    &+\frac{1}{2}\int_{\Omega}\gamma_{\alpha}\delta{Q}_{\alpha}d\Omega-\int_{\Omega}\frac{\delta{Q}_{\alpha}{Q}_{\alpha}}{kGh}d\Omega+\int_{\Gamma_{M}}\delta\varphi_{\alpha}{{\bar M}_{\alpha}}d\Gamma-\int_{\Gamma_{Q}}\delta{w}{\bar Q}d\Gamma+\int_{\Omega} \delta{w}\bar{q}d\Omega\\
+    &=\int_{\Omega}\delta\kappa_{\alpha \beta}M_{\alpha \beta}d\Omega+\int_{\Omega}\delta\gamma_{\alpha}Q_{\alpha}d\Omega+\int_{\Omega}\gamma_{\alpha}\delta{Q}_{\alpha}d\Omega-\int_{\Omega}\frac{\delta{Q}_{\alpha}{Q}_{\alpha}}{kGh}d\Omega+\int_{\Gamma_{M}}\delta\varphi_{\alpha}{\boldsymbol{\bar M}_{\boldsymbol{\alpha}}}d\Gamma\\
+    &-\int_{\Gamma_{Q}}\delta{w}{\bar Q}d\Gamma+\int_{\Omega} \delta{w}\bar{q}d\Omega\\
+    &=0
+    \end{split}
+\end{equation}
+上述伽辽金弱形式可以改写为：
+Find $\boldsymbol u=(w,\boldsymbol{\varphi}) \in V$, $\boldsymbol p \in Q$,
+\begin{equation}\label{ch_5:eq:weak_mix}
+    \begin{aligned}
+        a(\delta \boldsymbol u, \boldsymbol u) + b(\delta \boldsymbol u,\boldsymbol p) &= f(\delta \boldsymbol u) \quad &\forall \delta \boldsymbol u \in V \\
+        b(\boldsymbol u, \delta \boldsymbol p) +  c(\delta \boldsymbol p,\boldsymbol p)&= \boldsymbol 0 \quad &\forall \delta \boldsymbol p \in Q
+    \end{aligned}
+\end{equation}
+具体表达式为：
+\begin{equation}\label{ch_5:eq:mindlin_weak1}
+    \int_{\Omega}\delta\kappa_{\alpha \beta}M_{\alpha \beta}d\Omega+\int_{\Omega}\delta\gamma_{\alpha}Q_{\alpha}d\Omega=\int_{\Gamma_{Q}}\delta{w}{\bar Q}d\Gamma-\int_{\Omega} \delta{w}\bar{q}d\Omega-\int_{\Gamma_{M}}\delta\varphi_{\alpha}{{\bar M}_{\alpha}}d\Gamma
+\end{equation}
+\begin{equation}\label{ch_5:eq:mindlin_weak2}
+    \int_{\Omega}\gamma_{\alpha}\delta{Q}_{\alpha}d\Omega-\int_{\Omega}\frac{\delta{Q}_{\alpha}{Q}_{\alpha}}{kGh}d\Omega=0
+\end{equation}
+
+采用伽辽金法进行求解时，挠度$w$、转角$\boldsymbol{\varphi}$和剪切应力$\boldsymbol{Q}$可以采用不同的离散节点进行近似，形成混合离散框架。近似的剪切应力$\boldsymbol{Q}^h$及其变分可表示为：
+\begin{equation}\label{Q_h}
+    Q^h_\alpha(\boldsymbol x) = \sum_{K=1}^{n_q} \psi_K(\boldsymbol x) \boldsymbol{q}_{K},\quad \delta Q^h_\alpha(\boldsymbol x) = \sum_{K=1}^{n_q} \psi_K(\boldsymbol x) \delta \boldsymbol{q}_{ K}
+\end{equation}
+其中，$\boldsymbol{q}_{ K}$是节点系数，$\psi_K$是对应的形函数。
+
+根据$\boldsymbol\kappa^h$、$\boldsymbol\gamma^h$和$\boldsymbol Q^h$的任意性，式\eqref{ch_5:eq:weak_mix}可简化为如下离散控制方程：
+\begin{equation} \label{equilibrium_mindlin_mix}
+    \begin{bmatrix}\boldsymbol{K}^{b}&\boldsymbol{K}^{sq}\\{\boldsymbol{K}^{sq}}^T&\boldsymbol{K}^{qq}\end{bmatrix}
+    \begin{Bmatrix}\boldsymbol{d}\\\boldsymbol{q}\end{Bmatrix}=
+    \begin{Bmatrix}\boldsymbol{f}\\\boldsymbol{0}\end{Bmatrix}
+\end{equation}
+式中，$\boldsymbol K^{sq}$为刚度矩阵中和位移、剪切应力都有关的部分，$\boldsymbol K^{qq}$为刚度矩阵中只和剪切应力相关的部分，其分量分别为:
+\begin{equation} 
+    \boldsymbol K^{sq}_{IK} = \int_\Omega \boldsymbol B^{sT}_I \psi_K d\Omega
+\end{equation} 
+\begin{equation} 
+    \boldsymbol K^{qq}_{KL} = -\frac{1}{kGh} \int_\Omega \psi_K \psi_L \boldsymbol 1 d\Omega
+\end{equation}
+
+\section{最优剪切约束比} 
+
+
