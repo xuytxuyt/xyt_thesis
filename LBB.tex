@@ -1,7 +1,10 @@
 \chapter{最优体积约束比}
-针对体积约束比和LBB稳定性条件验证方法的局限性，本章以一种新的方法推导LBB稳定性条件。通过建立LBB稳定性条件与特征值问题以及体积约束比之间的联系，估计LBB稳定系数，构建了一套更为简易高效的LBB稳定性条件验证体系。基于新提出的LBB稳定系数估计方法，总结出了满足稳定性条件的最优体积约束比关系式。并且通过与经典单元的数值验证与解析证明结果进行对比分析，验证所提出方法的正确性和可靠性。
-\section{LBB稳定系数估计}
-\subsection{LBB稳定性条件与特征值问题}
+TODO
+针对体积约束比和LBB稳定性条件验证方法的局限性，本章采用泛函分析的手段，验证LBB稳定性条件与特征值问题的等价性。
+详细讨论特征值问题非零特征值个数与体积约束比之间的联系，从而建立体积约束比和LBB稳定性条件之间的关系。
+以此，构建考虑体积约束比的新型LBB稳定系数估计表达式，从而确定最优体积约束比。
+
+\section{LBB稳定性条件与特征值问题}
 
 基于LBB稳定性条件\eqref{infsup}，假设$\mathcal P_h:V_h \rightarrow Q_h$ 是$\mathcal P$的正交投影算子，定义为：
 \begin{equation}\label{Ph}
@@ -25,7 +28,7 @@
 \begin{equation}
     \vert (q_h,\mathcal P_h \boldsymbol v_h) \vert \le \Vert q_h \Vert_Q \Vert \mathcal P_h \boldsymbol v_h \Vert_Q
 \end{equation}
-当且仅当$q_h=\mathcal P_h \boldsymbol v_h$时，等式成立，即
+同时，当且仅当$q_h=\mathcal P_h \boldsymbol v_h$时，等式成立，即
 \begin{equation}
     \vert (q_h,\mathcal P_h \boldsymbol v_h) \vert = \Vert q_h \Vert_Q \Vert \mathcal P_h \boldsymbol v_h \Vert_Q, \quad \forall \boldsymbol v_h \in V'_h
 \end{equation}
@@ -44,7 +47,7 @@
 上述方法与传统数值inf--sup测试一致\cite{malkus1981}，而根据极小--极大值原理 \cite{babuska1991a}，式\eqref{r1}计算刚度矩阵$\boldsymbol K^v$ 和 $\boldsymbol K^d$的最小非零特征值。
 \subsection{特征值问题与体积约束比}
 
-为了进一步找出最优约束自由度数量，假设$P_{n_u}$ 是一个$n_u$ 维的多项式空间, $V_{n_u}$ 是位移多项式空间，且 $V_{n_u} = P_{n_u}^2$。由于$V_h$ 和 $V_{n_u}$的维度相同，$\dim V_{n_u}=\dim V_h = n_d\times n_u$，存在一个唯一的$\boldsymbol v \in V_{n_u}$ 满足$\boldsymbol v_h = \mathcal I_h \boldsymbol v$。于是式\eqref{r1}的右边可以改写为：
+为了进一步找出最优约束自由度数量，引入完备多项式空间$P_{n_u}$ 是一个$n_u$ 维的多项式空间, $V_{n_u}$ 是位移多项式空间，且 $V_{n_u} = P_{n_u}^2$。由于$V_h$ 和 $V_{n_u}$的维度相同，$\dim V_{n_u}=\dim V_h = n_d\times n_u$，存在一个唯一的$\boldsymbol v \in V_{n_u}$ 满足$\boldsymbol v_h = \mathcal I_h \boldsymbol v$。于是式\eqref{r1}的右边可以改写为：
 \begin{equation}\label{r21}
     \inf_{V'_h \subset V_h\setminus \ker \mathcal P_h}\sup_{\boldsymbol v_h \in V_h'} \frac{\Vert \mathcal P_h \boldsymbol v_h \Vert_Q}{\Vert \boldsymbol v_h \Vert_V} = 
     \inf_{V'\subset V_{n_u}\setminus \ker \mathcal P_h \mathcal I_h}\sup_{\boldsymbol v \in V'} \frac{\Vert \mathcal P_h \mathcal I_h \boldsymbol v \Vert_Q}{\Vert \mathcal I_h \boldsymbol v \Vert_V}
@@ -73,7 +76,7 @@
         &\le \inf_{V'\subset V_{n_u}\setminus \ker \mathcal P_h \mathcal I_h} \sup_{\boldsymbol v \in V'} \frac{\Vert \mathcal P \boldsymbol v\Vert_Q}{\Vert \boldsymbol v\Vert_V} + Ch \\
     \end{split}
 \end{equation}
-将等式\eqref{r21},\eqref{r23}替换为\eqref{r1} 可以得到以下关系:
+将等式\eqref{r21}、\eqref{r23}替换为\eqref{r1} 可以得到以下关系:
 \begin{equation}\label{r3}
     \beta \le \beta_s + Ch
 \end{equation}
@@ -82,7 +85,7 @@
     \beta_s = \inf_{V'\subset V_{n_u}\setminus\ker \mathcal P_h \mathcal I_h}\sup_{\boldsymbol v \in V'}\frac{\Vert \mathcal P \boldsymbol v\Vert_Q}{\Vert  \boldsymbol v\Vert_V} 
 \end{equation}
 
-当$\beta_s>0$时,
+根据LBB稳定性条件，$\beta$为……。$\beta_s>0$时,
 \begin{equation}
     \dim(V_{n_u}\setminus\ker \mathcal P_h \mathcal I_h) < \dim(V_{n_u}\setminus \ker \mathcal P)
 \end{equation}

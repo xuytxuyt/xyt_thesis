@@ -270,6 +270,7 @@ Find $\boldsymbol u_h \in V_h$,
 \begin{equation}
     W^{k}:= \mathrm{span}\{\varrho_i \}_{i=1}^{k}
 \end{equation}
+
 对于传统高斯积分方案，$\varrho_i(\boldsymbol x_j) = \delta_{ij}$, $\boldsymbol x_j$是积分点的位置。体积应变可以通过正交插值法表示为：
 \begin{equation}
     \nabla \cdot \boldsymbol u_h(\boldsymbol x) \approx \bar \nabla \cdot \boldsymbol u_h(\boldsymbol x) = \sum_{G=1}^{n_g} \varrho_G(\boldsymbol x) \nabla \cdot \boldsymbol u_h(\boldsymbol x_G), \quad \nabla \cdot \boldsymbol u_h(\boldsymbol x_G) = \bar \nabla \cdot \boldsymbol u_h(\boldsymbol x_G)
@@ -294,7 +295,7 @@ Find $\boldsymbol u_h \in V_h$,
 
 \section{免体积自锁条件}
 \subsection{体积约束比}
-从上文介绍的两种常用的缓解体积自锁方法可知，压力自由度的数量在缓解体积自锁中有关键的作用。文献\citestyle{1}\cite{hughes2000}提出了约束比的概念。约束比是用来衡量变量间的自锁程度的重要指标。对于体积不可压问题而言，约束比定义为位移总自由度与压力总自由度的比值。文献\citestyle{1}\cite{hughes2000}还通过连续控制方程确定了最优的约束比数量。由体积不可压问题连续控制方程\eqref{strong_mix}可知，在第一式当中位移在全域上的约束为$n_d$个方程，而第二式当中位移与压力的关系为$2:1$。在离散形式下也应满足上述关系。
+从上文介绍的两种常用的缓解体积自锁方法可知，压力自由度的数量在缓解体积自锁中有关键的作用。文献{\citestyle{numbers}\cite{hughes2000}}提出了约束比的概念。约束比是用来衡量变量间的自锁程度的重要指标。对于体积不可压问题而言，约束比定义为位移总自由度与压力总自由度的比值。文献{\citestyle{numbers}\cite{hughes2000}}还通过连续控制方程确定了最优的约束比数量。由体积不可压问题连续控制方程\eqref{strong_mix}可知，在第一式当中位移在全域上的约束为$n_d$个方程，而第二式当中位移与压力的关系为$2:1$。在离散形式下也应满足上述关系。
 \begin{equation}
     r = \frac{n_d\times n_u}{n_p}, \quad 
     \begin{cases}
