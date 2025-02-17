@@ -11,6 +11,5 @@
 *.xml
 *.gz
 *.log
-.DS_Store
-*.pdf
 *.synctex.gz
+.DS_Store
