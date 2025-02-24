@@ -181,7 +181,7 @@ n_p\leq \frac{n(n+1)}{2},\quad n = \lfloor\frac{\sqrt{1+8n_u}-3}{2}\rfloor
 \end{equation}
 其中$\lfloor\bullet\rfloor$为向上取整符号。
 
-值得注意的是，上面提到的位移自由度个数$n_u$为施加本质边界条件之后的位移自由度个数。有限元位移节点的布置必须适定(well--pose)，如果位移节点布置不适定，式\eqref{ch_3:eq:best}中的关系则不成立。$n_u$的个数需要减少，相对应的$n_s$也要做出调整。
+值得注意的是，上面提到的位移自由度个数$n_u$为施加本质边界条件之后的位移自由度个数。有限元位移节点的布置必须适定(well--pose)，如果位移节点布置不适定，式\eqref{ch_3:eq:best}中的关系则不成立。此时，$n_u$的个数需要减少，相对应的$n_s$也要做出调整。
 \section{系数估计验证}
 
 同样以图\ref{ch_3:fig:elements_eg}所示的两个二维8位移节点单元混合离散方案为例，图\ref{ch_3:fig:elements_eg}(a)Q8P3单元位移自由度个数$2n_u=6$，根据表\ref{ch_3:tab:constraint}可得其$n=1$，进而$n_s=1$。因此,满足LBB稳定性条件的最优压力约束自由度的数量为1。因此Q8P3单元不满足LBB稳定性条件，而Q8P1单元满足LBB稳定性条件。

@@ -175,9 +175,9 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
 
 采用伽辽金法进行求解时，挠度$w$、转角$\boldsymbol{\varphi}$和剪切应力$\boldsymbol{Q}$可以采用不同的离散方式进行近似，形成混合离散框架。挠度$w$和转角$\boldsymbol{\varphi}$采用有限元形函数\eqref{ch_5:eq:w_h}，\eqref{ch_5:eq:varphi_h}进行近似，剪切应力$\boldsymbol{Q}$通过再生核无网格形函数\eqref{ch_4:eq:mfshapefunction}进行近似，近似的剪切应力$\boldsymbol{Q}^h$及其变分可表示为：
 \begin{equation}\label{ch_5:eq:Q_h}
-    Q^h_\alpha(\boldsymbol x) = \sum_{K=1}^{n_q} \psi_K(\boldsymbol x) \boldsymbol{q}_{K},\quad \delta Q^h_\alpha(\boldsymbol x) = \sum_{K=1}^{n_q} \psi_K(\boldsymbol x) \delta \boldsymbol{q}_{ K}
+    Q^h_\alpha(\boldsymbol x) = \sum_{K=1}^{n_q} \Psi_K(\boldsymbol x) \boldsymbol{q}_{K},\quad \delta Q^h_\alpha(\boldsymbol x) = \sum_{K=1}^{n_q} \Psi_K(\boldsymbol x) \delta \boldsymbol{q}_{ K}
 \end{equation}
-其中，$\boldsymbol{q}_{ K}$是节点系数，$\psi_K$是对应的形函数。
+其中，$\boldsymbol{q}_{ K}$是节点系数，$\Psi_K$是对应的形函数。
 
 根据$\delta\boldsymbol\kappa^h$、$\delta\boldsymbol\gamma^h$和$\delta\boldsymbol Q^h$的任意性，式\eqref{ch_5:eq:weak_mix}可简化为如下离散控制方程：
 \begin{equation} \label{equilibrium_mindlin_mix}
@@ -187,10 +187,10 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
 \end{equation}
 式中，$\boldsymbol K^{sq}$为刚度矩阵中和位移、剪切应力都有关的部分，$\boldsymbol K^{qq}$为刚度矩阵中只和剪切应力相关的部分，其分量分别为:
 \begin{equation} 
-    \boldsymbol K^{sq}_{IK} = \int_\Omega \boldsymbol B^{sT}_I \psi_K d\Omega
+    \boldsymbol K^{sq}_{IK} = \int_\Omega \boldsymbol B^{sT}_I \Psi_K d\Omega
 \end{equation} 
 \begin{equation} 
-    \boldsymbol K^{qq}_{KL} = -\frac{1}{kGh} \int_\Omega \psi_K \psi_L \boldsymbol 1 d\Omega
+    \boldsymbol K^{qq}_{KL} = -\frac{1}{kGh} \int_\Omega \Psi_K \Psi_L \boldsymbol 1 d\Omega
 \end{equation}
 
 
@@ -485,17 +485,10 @@ $Q_1$进行探讨。如图\ref{ch_5:fig:Q1_Tri3}对于Tri3单元，在不同位�
     \caption{\textbf{简支圆板问题Tri6单元应力云图($Q_1$)}}\label{ch_5:fig:YQ1_Tri6}
 \end{figure}
 \begin{figure}[!h]
-    \centering
-    \begin{tabular}{cccc}
-    $\quad$&最优约束比&传统约束比\\
-    $61$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad8_q1_8_6.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad8_q1_8_8.png}}\end{subcaptiongroup}\\ 
-    $217$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad4_q1_16_12.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad8_q1_16_16.png}}\end{subcaptiongroup}\\ 
-    $817$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad4_q1_32_26.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad8_q1_32_32.png}}\end{subcaptiongroup}\\ 
-    \end{tabular}
-    \caption{\textbf{简支圆板问题Quad8单元应力云图($Q_1$)}}\label{ch_5:fig:YQ1_Quad8}
+    \centering 
+        \includegraphics[scale=0.6]{figures/shearlocking/Circular_quad8_q1.png}
+        \caption{简支圆板问题Quad8单元应力云图($Q_1$)}\label{ch_5:fig:Circular_Q1_quad8}
 \end{figure}
 
 \section{小结}
+本章使用有限元无网格混合离散方案解决剪切自锁问题。
