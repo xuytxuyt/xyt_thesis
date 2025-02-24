@@ -4,8 +4,10 @@
 
 \documentclass[engineeringmaster]{hquThesis}
 \usepackage{lineno}
-\usepackage{amsmath,amsfonts,amssymb,textcomp}
+\usepackage{amsmath,amsfonts,amssymb,textcomp,ulem}
 \usepackage{booktabs,multirow,tabularx,float}
+\usepackage{listings}
+
 \hypersetup{colorlinks=true,linkcolor=black,citecolor=black}
 
 \titleZh{自稳定有限元无网格混合离散分析方法及其在自锁问题中的应用}
@@ -24,8 +26,8 @@
 \begin{document}
 
 \makecover
-% \include{decision}
-% \include{declaration}
+\include{decision}
+\include{declaration}
 
 \frontmatter{
 \include{abstract}
@@ -37,11 +39,14 @@
 \include{LBB}
 \include{incompressible}
 \include{shearlocking}
+
+\include{Conclusion}
+
 % \backmatter-页眉另起设置
 \bibliography{references}
 % \include{acknowledgments}-致谢
 % \appendix-附录部分
-% \include{appendixA}-附录章节
+% \include{appendixA}
 % \include{appendixB}-附录章节
 % \include{cv}-个人简历
 
