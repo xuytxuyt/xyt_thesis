@@ -1,5 +1,5 @@
 \chapter{剪切自锁问题}
-本章讨论另一个自锁问题，中厚板的剪切自锁问题。首先，基于中厚板的本构特性，分析了传统有限元分析过程中产生剪切自锁现象的原因。针对剪切自锁问题，有限元无网格混合离散方案同样适用。随后，根据前文介绍的方法，确定剪切自锁问题的最优约束比，并通过典型弹性力学算例验证其正确性。
+本章针对中厚板的剪切自锁问题，提出免剪切自锁的有限元无网格混合离散方案。首先，基于中厚板的本构特性，分析了传统有限元分析过程中产生剪切自锁现象的原因。基于LBB稳定系数误差估计和多项式空间，确定剪切自锁问题的最优约束比取值范围。随后，确定剪切自锁问题的有限元无网格混合离散方案，并通过典型弹性力学算例验证其正确性。
 \section{中厚板问题}    
 考虑如图\ref{ch_5:fig:mindlin_picture}所示中厚板，板厚为$h$，$\Omega$为板中面。在Mindlin假设下,中厚板考虑横向剪切变形,相应的控制方程由下式给出：
 \begin{equation}\label{ch_5:eq:strong_mindlin}
@@ -13,7 +13,7 @@
 \end{equation}
 \begin{figure}[!h]
     \centering 
-        \includegraphics[scale=0.5]{figures/shearlocking/Mindlinplate.png}
+        \includegraphics[scale=0.4]{figures/ch_5/Mindlinplate.png}
         \caption{中厚板运动学及边界条件}\label{ch_5:fig:mindlin_picture}
 \end{figure}
 式中，$M_{\alpha \beta}$ 可表示弯矩张量$ \boldsymbol{M}$ 的弯曲或扭转部分的分量，$Q_\alpha$为剪力张量$\boldsymbol{Q}$的分量，$\bar{q}$ 为垂直于板中面的分布荷载；
@@ -133,10 +133,10 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
     \end{Bmatrix}
 \end{equation}
 
-\section{中厚板问题有限元无网格混合离散方案} 
-同样，由式\eqref{ch_5:eq:equilibrium_penalty}，\eqref{ch_5:eq:stiffness_bending}和\eqref{ch_5:eq:stiffness_shear}可知，对于中厚板，当外力向量具有一定的数值时，厚度$h$减小$h\rightarrow 0$将导致剪切刚度矩阵$\boldsymbol{K^s}$中的所有模态也趋向零。此时，剪切刚度矩阵$\boldsymbol{K^s}$可作为罚函数项将剪切刚度中所有模态约束住，厚度$h$为其中的罚因子。用传统有限元法进行求解时，由于离散的有限元近似阶次较低，导致过多的位移自由度受到剪切约束的限制，位移解将远小于实际情况,即出现剪切自锁现象。  
+\section{中厚板问题有限元无网格混合离散分析方法} 
+从式\eqref{ch_5:eq:equilibrium_penalty}，\eqref{ch_5:eq:stiffness_bending}和\eqref{ch_5:eq:stiffness_shear}可以看出，处理薄板问题时，当外力向量$\boldsymbol{f}$具有一定的数值时，厚度$h\rightarrow 0$剪切刚度矩阵$\boldsymbol{K^s}$和弯曲刚度矩阵所对应量纲的量级差将变大，从而导致大量纲项剪切刚度矩阵$\boldsymbol{K^s}$中的所有模态受到约束。用传统有限元法进行求解时，由于离散的有限元近似阶次较低，导致过多的弯曲自由度受到剪切约束的限制，挠度解将远小于实际情况，即出现剪切自锁现象。  
 
-前文提到的缓解体积自锁问题的方法同样适用于缓解剪切自锁问题。对于剪切自锁问题，同样可以采用有限元无网格混合离散方案，引入剪切应力$\boldsymbol{Q}$作为拉格朗日乘子独立变量，可以得到拉格朗日乘子型剪切约束施加方案。此时能量泛函具有挠度$w$、转角$\boldsymbol{\varphi}$和剪切应力$\boldsymbol{Q}$三个变量，势能泛函的表达式可更改为：
+对于剪切自锁问题，同样可以采用有限元无网格混合离散方案，引入剪切应力$\boldsymbol{Q}$作为拉格朗日乘子独立变量，可以得到拉格朗日乘子型剪切约束施加方案。此时能量泛函具有挠度$w$、转角$\boldsymbol{\varphi}$和剪切应力$\boldsymbol{Q}$三个变量，势能泛函的表达式可更改为：
 \begin{equation}\label{ch_5:eq:potential_energy_mixed}
     \begin{split} 
         \Pi(w,\boldsymbol{\varphi},\boldsymbol{Q})&=\int_{\bar\Omega}\frac{1}{2}\varepsilon_{ij}\sigma_{ij} d\Omega+\frac{1}{2}\int_{\Omega}Q_{\alpha}(\gamma_{\alpha}-\frac{Q_{\alpha}}{kGh})d\Omega-\int_{\Gamma^{t}} u_{i}t_{i}d\Gamma-\int_{\Omega} u_{i}b_{i}d\Omega\\
@@ -185,7 +185,7 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
     \begin{Bmatrix}\boldsymbol{d}\\\boldsymbol{q}\end{Bmatrix}=
     \begin{Bmatrix}\boldsymbol{f}\\\boldsymbol{0}\end{Bmatrix}
 \end{equation}
-式中，$\boldsymbol K^{sq}$为刚度矩阵中和位移、剪切应力都有关的部分，$\boldsymbol K^{qq}$为刚度矩阵中只和剪切应力相关的部分，其分量分别为:
+式中，$\boldsymbol K^{sq}$为刚度矩阵中和挠度、剪切应力都有关的部分，$\boldsymbol K^{qq}$为刚度矩阵中只和剪切应力相关的部分，其分量分别为:
 \begin{equation} 
     \boldsymbol K^{sq}_{IK} = \int_\Omega \boldsymbol B^{sT}_I \Psi_K d\Omega
 \end{equation} 
@@ -193,8 +193,90 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
     \boldsymbol K^{qq}_{KL} = -\frac{1}{kGh} \int_\Omega \Psi_K \Psi_L \boldsymbol 1 d\Omega
 \end{equation}
 
+\section{剪切自锁问题最优体积约束比}
 
+根据文献{\citestyle{numbers}\cite{hughes2000}}中提出的约束比概念，由中厚板问题连续控制方程\eqref{ch_5:eq:strong_mindlin}可知，挠度和剪切应力的关系为$3:2$。在离散形式下也应满足上述关系。
+对于中厚板剪切自锁问题，同样可以结合LBB稳定系数估计式\eqref{ch_3:eq:r3}，与多项式空间确定满足LBB稳定性条件的最优约束比取值范围。接下来以二维问题为例，讨论挠度自由度数量$\bar{n}_u$，剪切应力自由度数量$n_q$和$\beta_s$之间的关系。
+
+在二维弹性中厚板问题中，对于维数为$\bar{n}_u=3$的线性多项式空间$P_3$，对应的挠度空间$V_3$由下式给出：
+
+\begin{equation}\label{ch_5:eq:base}
+    V_3 = \mathrm{span} 
+    \begin{Bmatrix}
+        \underbrace{
+        \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix},
+        \begin{pmatrix} 0 \\ 1 \\-1 \end{pmatrix},
+        \begin{pmatrix} x \\ 1 \\ 0 \end{pmatrix},
+        \begin{pmatrix} x \\ 0 \\ 1 \end{pmatrix},
+        \begin{pmatrix} y \\ 1 \\ 0 \end{pmatrix},
+        \begin{pmatrix} y \\ 0 \\ 1 \end{pmatrix}
+        }_{\ker \mathcal P},
+        \underbrace{
+        \begin{pmatrix} x \\ 0 \\ 0 \end{pmatrix},
+        \begin{pmatrix} y \\ 0 \\ 0 \end{pmatrix}
+        \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}
+        }_{V_3\setminus \ker \mathcal P}
+    \end{Bmatrix}
+\end{equation}
+在这种情况下，$n_s=3$。当$n_q=n_s=3$时，$\beta_s>0$，即满足LBB稳定性条件。当$n_q>n_s=3$时$\beta_s=0$，不满足LBB稳定性条件。
+
+维数为$\bar{n}_u=6$的二次多项式基的挠度空间$V_6$可以表述为：
+\begin{equation}\label{ch_5:eq:base2}
+    V_6 = \mathrm{span}
+    \begin{Bmatrix}
+        \overbrace{
+        \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix},
+        \begin{pmatrix} 0 \\ 1 \\-1 \end{pmatrix},
+        \begin{pmatrix} x \\ 1 \\ 0 \end{pmatrix},
+        \begin{pmatrix} x \\ 0 \\ 1 \end{pmatrix},
+        \begin{pmatrix} y \\ 1 \\ 0 \end{pmatrix},
+        \begin{pmatrix} y \\ 0 \\ 1 \end{pmatrix},
+        \begin{pmatrix} x^2 \\ 2x \\ 0 \end{pmatrix},
+        \begin{pmatrix} x^2 \\ 0 \\ 2x \end{pmatrix},
+        \begin{pmatrix} y^2 \\ 2y \\ 0 \end{pmatrix}
+        }^{\ker \mathcal P}, \\
+        \underbrace{
+        \begin{pmatrix} y^2 \\ 0 \\ 2y \end{pmatrix},
+        \begin{pmatrix} xy  \\ y \\ 0 \end{pmatrix},
+        \begin{pmatrix} xy  \\ 0 \\ x \end{pmatrix}
+        }_{\ker \mathcal P},
+        \underbrace{
+        \begin{pmatrix} x \\ 0 \\ 0 \end{pmatrix},
+        \begin{pmatrix} y \\ 0 \\ 0 \end{pmatrix},
+        \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix},
+        \begin{pmatrix} x^2 \\ -2x \\ 0 \end{pmatrix},
+        \begin{pmatrix} y^2 \\ 0 \\ -2y \end{pmatrix},
+        \begin{pmatrix} xy \\ -x \\ 0 \end{pmatrix}
+        }_{V_6\setminus \ker \mathcal P}
+    \end{Bmatrix}
+\end{equation}
+此时，$n_s=6$。当$n_q=n_s=6$时，$\beta_s>0$，即满足LBB稳定性条件。当$n_q>n_s=6$时，$\beta_s=0$，不满足LBB稳定性条件。更多的多项式阶数下$\bar{n}_u$与$n_s$的关系如表\ref{ch_5:tab:constraint}所示。
+\begin{table}[!h]
+    \centering
+    \caption{体积约束自由度}\label{ch_5:tab:constraint}
+    \setlength{\tabcolsep}{10mm}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{ccc}
+        \toprule
+            $\bar{n}_u$ & $3\bar{n}_u$ &$ n_s$\\
+        \midrule
+        3  & 9  &  3 \\
+        6  & 18 &  6 \\
+        10 & 30 &  10 \\
+        \vdots & \vdots & \vdots \\
+        $\bar{n}_u$ & $3\bar{n}_u$ & $\bar{n}_u$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+根据上述结果，满足LBB稳定性条件的挠度自由度$\bar{n}_u$和剪切应力约束自由度$n_q$的关系为：
+\begin{equation}\label{ch_5:eq:best}
+    n_q\leq \bar{n}_u
+\end{equation}
+
+值得注意的是，上面提到的挠度自由度个数$\bar{n}_u$为施加本质边界条件之后的挠度自由度个数。
 \section{数值算例}
+
 \subsection{固支方板问题}
 如图\ref{ch_5:fig:plate}所示，一固支方板求解域为$\Omega=(0,1)\otimes(0,1)$，边长$L=1$,厚度为$h$，材料系数分别为杨氏模量$E=10.92\times10^6$、泊松比$\nu=0.3$板面内分布如图所示纵向非均布荷载：
 \begin{equation} 
@@ -206,289 +288,236 @@ $n_\alpha$为边界上外法线方向$\pmb{n}$的分量。
 该问题的精确解为：
 \begin{equation} 
     \begin{split} 
-        w(x,y) =&\frac{1}{3}x^3(x-1)^3y^3(y-1)^3-\frac{2h^2}{5(1-\nu)}(y^3(y-1)^3x(x-1)(5x^2-5x+1)+\\
-        &x^3(x-1)^3y(y-1)(5y^2-5y+1))\\
+        w(x,y) =&\frac{1}{3}x^3(x-1)^3y^3(y-1)^3-\frac{2h^2}{5(1-\nu)}(y^3(y-1)^3x(x-1)(5x^2\\
+        &-5x+1)+x^3(x-1)^3y(y-1)(5y^2-5y+1))\\
         \theta_1(x,y) =& y^3(y-1)^3x^2(x-1)^2(2x-1)\\
         \theta_2(x,y) =& x^3(x-1)^3y^2(y-1)^2(2y-1)
-    \end{split} 
+    \end{split}  
 \end{equation}
-\begin{figure}[!h]
+\begin{figure}[H]
     \centering 
-        \includegraphics[scale=0.8]{figures/shearlocking/plate.png}
+        \includegraphics[scale=0.8]{figures/ch_5/plate.png}
         \caption{固支方板问题模型}\label{ch_5:fig:plate}
 \end{figure}
 
-为研究误差收敛性，采用图\ref{ch_5:fig:platemsh}所示的均布的81、289、1089、4225
-的四个疏密不同的节点进行离散，并采用线性单元：三角形三节点单元(Tri3)、四边形四节点单元(Quad4)，二次单元：
-三角形六节点单元(Tri6)、四边形八节点单元(Quad8)。此时对于采用对于线性基函数的固支方板问题其影响域取为1.5倍
-的积分域长度，采用二次基函数时其影响域取为2.5倍积分域长度。
-
-如图\ref{ch_5:fig:linear-l2}为固支方板问题线性单元位移误差对比图。从图中可以看出线性单元传统有限元方法在厚度为$0.1$时能达到理论误差收敛率但计算精度低于混合离散法,在厚度为$0.01$，$0.001$时无法到达理论误差收敛率，产生了剪切自锁现象。混合离散法在三个厚度均能达到理论误差收敛率。图\ref{ch_5:eq:quad-l2}为固支方板问题二次单元位移误差对比图。从图中可以看出二次单元传统有限元方法在厚度为$0.1$时能达到理论误差收敛率且计算精度与混合离散方法相当，在厚度为$0.01$时能达到理论误差收敛率但计算精度低于混合离散方法，在厚度为$0.001$时无法到达理论误差收敛率。
-\begin{figure}[!h]
-    \centering 
-    \includegraphics[scale=0.5]{figures/shearlocking/platemsh.png}
-    \caption{固支方板问题节点离散}\label{ch_5:fig:platemsh}
-\end{figure}
-\begin{figure}[!h]
+\begin{figure}[H]
     \centering
     \begin{subcaptiongroup}
-    \includegraphics[width=0.49\textwidth]{figures/shearlocking/T3-l2-h.png}
-    \phantomcaption\label{T3-l2-h}
-    \includegraphics[width=0.49\textwidth]{figures/shearlocking/Q4-l2-h.png}
-    \phantomcaption\label{Q4-l2-h}
+        \begin{tabular}{c@{\hspace{0pt}}c@{\hspace{0pt}}c}
+          Tri3单元 & Tri6单元 & $n_u$\\
+          \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/l2-ns8.png}}
+        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/t6-l2-ns-4.png}}
+        & \rotatebox{-90}{81 nodes} \\
+          \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/l2-ns16.png}}
+        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/t6-l2-ns-8.png}}
+        & \rotatebox{-90}{289 nodes} \\
+          \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/l2-ns32.png}}
+        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/t6-l2-ns-16.png}}
+        & \rotatebox{-90}{1089 nodes} \\
+          \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/l2-ns64.png}}
+        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/t6-l2-ns-32.png}}
+        & \rotatebox{-90}{4225 nodes} \\
+        \end{tabular}
     \end{subcaptiongroup}
-\caption{\centering{固支方板问题线性单元误差对比：\protect\linebreak \subref{T3-l2-h} Tri3单元$L_2$误差；\subref{Q4-l2-h}Quad4单元 $L_2$误差}}
-\label{ch_5:fig:linear-l2}
-\end{figure}
-\begin{figure}[!h]
-    \centering
-    \begin{subcaptiongroup}
-    \includegraphics[width=0.49\textwidth]{figures/shearlocking/T6-l2-h.png}
-    \phantomcaption\label{T6-l2-h}
-    \includegraphics[width=0.49\textwidth]{figures/shearlocking/Q8-l2-h.png}
-    \phantomcaption\label{Q8-l2-h}
-    \end{subcaptiongroup}
-\caption{\centering{固支方板问题二次单元误差对比：\protect\linebreak \subref{T6-l2-h} Tri6单元$L_2$误差；\subref{Q8-l2-h}Quad8单元 $L_2$误差}}
-\label{ch_5:eq:quad-l2}
+    \caption{固支方板问题误差与剪切应力节点数的关系}\label{ch_5:fig:plate_l2}
 \end{figure}
 
-位移分别采用图\ref{ch_5:fig:platemsh}所示的网格单元，通过改变剪切应力节点的数量，验证剪切应力节点数量与误差的关系。图\ref{ch_5:fig:linear_ns}、\ref{ch_5:fig:quad_ns}为相对应的结果。
-图\ref{ch_5:fig:linear_ns}为线性单元剪切应力节点数量与误差的关系，其中Tri3单元和Quad4单元的位移节点数量一致。
-图(a)，(b)最优应力节点数为，分析结果显示，随着应力节点数量的减少位移误差率先达到最小值，而应力误差虽有所下降但其值始终保持在较高水平。
-图(c)，(d)和图(e)(f)的最优应力节点数分别为。分析结果显示，应力节点数量的减少位移误差同样先达到最小值。
-值得注意的是，在约束比达到最优值附近时，应力误差也会随之达到最小值。
-图\ref{ch_5:fig:quad_ns}为二次单元剪切应力节点数量与误差的关系，图(a),(b)最优应力节点数分别为，对于二次单元同样具有上述效果。这一现象在所有节点数量条件下均得到了验证。
+选取Tri3和Tri6两种离散单元，分别对挠度节点数$n_u=$81、289、1089、4225进行了系统分析。图\ref{ch_5:fig:plate_l2}展示了相应的分析结果，其中虚线表示基于上一节推导的最优约束比下的剪切应力节点数量。从图中可以得出以下结论：对于挠度误差分析，剪切应力节点的数量$n_q$在一个较宽的范围内均能保持较低的挠度误差水平；对于应力误差分析，当$n_q$小于最优值时，应力误差显著降低，结果验证了离散方案在$n_q$小于最优值时能获得高精度的数值解。值得注意的是，与体积不可压问题不同，中厚板剪切自锁问题的约束比增加到一定值后，误差会迅速增大。
+
+基于上述讨论结果以及LBB稳定误差估计的最优约束比取值范围，同时为了降低剪切应力节点布置的计算成本，本文提出了一种如图\ref{ch_5:fig:platemsh}所示的混合离散方案。该方案中，剪切应力节点数量$n_q$由挠度节点数量$n_u$减去最外围可能受到边界条件约束的节点数量确定，因此其约束自由度关系满足$n_q\leq \bar{n}_u$。需要特别说明的是，当问题的边界条件为四边固支时，采用该混合离散方案会导致约束自由度关系为$n_q = \bar{n}_u$，从而导致该方案可能不满足LBB稳定性条件。因此，在处理四边固支问题时，应适当减少剪切应力节点的数量，以确保离散方案的稳定性和计算精度。
+
+图\ref{ch_5:fig:plate_tri3_q}为固支方板问题中Tri3单元的应力云图。从图中可明显观察到，传统混合离散方案存在显著的应力振荡现象，而本文提出的混合离散方案则有效的缓解了这一现象。图\ref{ch_5:fig:plate_tri6_q}为Tri6单元的压力云图，结果表明，对于Tri6单元，本文所提混合离散方案仍然存在应力振荡现象，这是由于$n_u=n_q$时该混合离散方案不满足LBB稳定性条件。此时，将剪切应力节点的数量适当减小，如第三张图所示，离散方案完全消除了应力振荡现象，此时离散方案满足LBB稳定性现象。上述结果充分验证了本文所提最优约束比范围的正确性，同时证明了混合离散方案在缓解应力振荡现象方面的有效性。
+
+图\ref{ch_5:fig:SquarePlate_l2}为固支方板问题Tri3和Tri6单元的挠度误差与应力误差对比结果。从图中可以看出，对于挠度误差，所有方案均能达到理论误差收敛率。然而，对于应力误差,Tri3单元虽然都能达到理论误差收敛率，但传统混合离散方案在网格密度低时的表现出误差很大的现象。对于Tri6单元，两种方案的应力误差均不能收敛，这是由于它们均不满足LBB稳定性条件所致。
 
 \begin{figure}[!h]
     \centering
-    \begin{subcaptiongroup}
-    \includegraphics[width=0.48\textwidth]{figures/shearlocking/T3-l2-ns8.png}
-    \phantomcaption\label{T3-l2-ns8}
-    \includegraphics[width=0.50\textwidth]{figures/shearlocking/Q4-l2-ns8.png}
-    \phantomcaption\label{Q4-l2-ns8}
-    \end{subcaptiongroup}
-    \begin{subcaptiongroup}
-    \includegraphics[width=0.49\textwidth]{figures/shearlocking/T3-l2-ns16.png}
-    \phantomcaption\label{T3-l2-ns16}
-    \includegraphics[width=0.49\textwidth]{figures/shearlocking/Q4-l2-ns16.png}
-    \phantomcaption\label{Q4-l2-ns16}
-    \end{subcaptiongroup}
-    \begin{subcaptiongroup}
-    \includegraphics[width=0.49\textwidth]{figures/shearlocking/T3-l2-ns32.png}
-    \phantomcaption\label{T3-l2-ns32}
-    \includegraphics[width=0.49\textwidth]{figures/shearlocking/Q4-l2-ns32.png}
-    \phantomcaption\label{Q4-l2-ns32}
-    \end{subcaptiongroup}
-\caption{\centering{固支方板问题线性单元$L2$误差与剪切应力节点数量的关系：\protect\linebreak
-\subref{T3-l2-ns8},\subref{Q4-l2-ns8} $8\times 8$单元$L_2$误差； 
-\subref{T3-l2-ns16},\subref{Q4-l2-ns16} $16\times 16$单元$L_2$误差;
-\subref{T3-l2-ns32},\subref{Q4-l2-ns32} $32\times 32$单元$L_2$误差}}
-\label{ch_5:fig:linear_ns}
+        \begin{tabular}{c@{\hspace{24pt}}c}
+            \includegraphics[width=0.45\textwidth]{figures/ch_5/SquarePlate_8_msh.png} &
+            \includegraphics[width=0.45\textwidth]{figures/ch_5/SquarePlate_16_msh.png} \\
+            $n_u=81$,$n_q=49$ & $n_u=289$,$n_q=225$ \\
+            \includegraphics[width=0.45\textwidth]{figures/ch_5/SquarePlate_32_msh.png} &
+            \includegraphics[width=0.45\textwidth]{figures/ch_5/SquarePlate_64_msh.png} \\
+            $n_u=1089$,$n_q=961$ & $n_u=4225$,$n_q=3969$ \\
+            \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_u.png}} ：挠度节点 &
+            \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_q.png}} ：剪切应力节点 
+        \end{tabular}
+        \caption{有限元无网格混合离散方案}\label{ch_5:fig:platemsh}
 \end{figure}
 
 \begin{figure}[!h]
     \centering
     \begin{subcaptiongroup}
-    \includegraphics[width=0.49\textwidth]{figures/shearlocking/T6-l2-ns8.png}
-    \phantomcaption\label{T6-l2-ns8}
-    \includegraphics[width=0.49\textwidth]{figures/shearlocking/Q8-l2-ns8.png}
-    \phantomcaption\label{Q8-l2-ns8}
+        \begin{tabular}{c@{\hspace{0pt}}c@{\hspace{0pt}}c}
+         传统混合离散方案&所提混合离散方案& \\
+         \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/SquarePlate_mix_tri3_q1_8_8.png}}
+         & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/SquarePlate_mix_tri3_q1_8_6.png}}& \\
+         $n_p=81$&$n_p=49$& \\
+         \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/SquarePlate_mix_tri3_q1_16_16.png}}
+        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/SquarePlate_mix_tri3_q1_16_14.png}}& \\
+        $n_p=289$&$n_p=225$&\multirow{4}{*}{\includegraphics[width=0.1\textwidth]{figures/ch_5/SquarePlate_mix_colorbar.png}} \\
+        \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/SquarePlate_mix_tri3_q1_32_32.png}}
+        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/SquarePlate_mix_tri3_q1_32_28.png}}&  \\
+        $n_p=1089$&$n_p=961$& \\
+        \end{tabular}
     \end{subcaptiongroup}
-    \begin{subcaptiongroup}
-    \includegraphics[width=0.49\textwidth]{figures/shearlocking/T6-l2-ns16.png}
-    \phantomcaption\label{T6-l2-ns16}
-    \includegraphics[width=0.49\textwidth]{figures/shearlocking/Q8-l2-ns16.png}
-    \phantomcaption\label{Q8-l2-ns16}
-    \end{subcaptiongroup}
-    \begin{subcaptiongroup}
-    \includegraphics[width=0.49\textwidth]{figures/shearlocking/T6-l2-ns32.png}
-    \phantomcaption\label{T6-l2-ns32}
-    \includegraphics[width=0.49\textwidth]{figures/shearlocking/Q8-l2-ns32.png}
-    \phantomcaption\label{Q8-l2-ns32}
-    \end{subcaptiongroup}
-\caption{\centering{固支方板问题二次单元$L2$误差与剪切应力节点数量的关系：\protect\linebreak 
-\subref{T6-l2-ns8},\subref{Q8-l2-ns8} $8\times 8$单元$L_2$误差； 
-\subref{T6-l2-ns16},\subref{Q8-l2-ns16} $16\times 16$单元$L_2$误差;
-\subref{T6-l2-ns32},\subref{Q8-l2-ns32} $32\times 32$单元$L_2$误差}}
-\label{ch_5:fig:quad_ns}
+    \caption{固支方板问题Tri3单元应力云图}\label{ch_5:fig:plate_tri3_q}
 \end{figure}
 
-分析固支方板问题的应力精确解云图\ref{ch_5:fig:plate_exact_solution}，可以观察到应力$Q_1$、$Q_2$具有相似的性质。在进一步的研究中仅针对
-$Q_1$进行探讨。如图\ref{ch_5:fig:Q1_Tri3}对于Tri3单元，在不同位移节点数量下，传统约束比例与最优约束比例的应力云图存在显著的差异。当节点
-数量按照传统约束比例设置时，会出现明显的应力振荡现象。随着位移节点的增加这种应力振荡现象有所的缓解，但仍然存在。相较之下，在最优
-约束比下没有发生应力振荡现象。Quad4单元的应力云图\ref{ch_5:fig:Q1_Quad4}和Quad8单元图\ref{ch_5:fig:Q1_Quad8}也表现出类似的现象。对于Tri6单元
-图\ref{ch_5:fig:Q1_Tri6}而言，即使位移节点增加，节点数量按照传统约束比设置时，始终会出现应力振荡现象，而最优约束比例时没有发生应力振荡现象。
 \begin{figure}[!h]
     \centering
     \begin{subcaptiongroup}
-    \includegraphics[width=0.46\textwidth]{figures/shearlocking/plate_exactQ1_solution.png}
-    \phantomcaption
-    \includegraphics[width=0.49\textwidth]{figures/shearlocking/plate_exactQ2_solution.png}
-    \phantomcaption
+        \begin{tabular}{c@{\hspace{0pt}}c@{\hspace{0pt}}c}
+         \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/SquarePlate_mix_tri6_q1_16_16.png}}
+         & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/SquarePlate_mix_tri6_q1_16_14.png}}& \\
+         $n_p=1089$&$n_p=841$& \\
+         \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/SquarePlate_mix_tri6_q1_16_12.png}}
+        & & \\
+        $n_p=625$& & \\
+        \end{tabular}
     \end{subcaptiongroup}
-\caption{\centering{固支方板问题应力精确解}}
-\label{ch_5:fig:plate_exact_solution}
-\end{figure}
-
-
-\begin{figure}[!h]
-    \centering
-    \begin{tabular}{cccc}
-    $\quad$&最优约束比&传统约束比\\
-    $81$&\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_T3_q1_8_7.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_T3_q1_8_8.png}}\end{subcaptiongroup}\\
-    $289$&\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_T3_q1_16_13.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_T3_q1_16_16.png}}\end{subcaptiongroup}\\
-    $1089$&\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_T3_q1_32_26.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_T3_q1_32_32.png}}\end{subcaptiongroup}\\
-    \end{tabular}
-    \caption{\textbf{固支方板问题Tri3单元应力云图($Q_1$)}}\label{ch_5:fig:Q1_Tri3}
+    \caption{固支方板问题Tri6单元应力云图}\label{ch_5:fig:plate_tri6_q}
 \end{figure}
 
 \begin{figure}[!h]
     \centering
-    \begin{tabular}{cccc}
-    $\quad$&最优约束比&传统约束比\\
-    $81$&\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_quad4_q1_8_7.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_quad4_q1_8_8.png}}\end{subcaptiongroup}\\
-    $289$&\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_quad4_q1_16_13.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_quad4_q1_16_16.png}}\end{subcaptiongroup}\\
-    $1089$&\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_quad4_q1_32_26.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_quad4_q1_32_32.png}}\end{subcaptiongroup}\\
-    \end{tabular}
-    \caption{\textbf{固支方板问题Quad4单元应力云图($Q_1$)}}\label{ch_5:fig:Q1_Quad4}
+    \begin{subcaptiongroup}
+        \begin{tabular}{c@{\hspace{0pt}}c}
+          \raisebox{-0.8\height}{\includegraphics[width=0.5\textwidth]{figures/ch_5/SquarePlate_l2_u.png}}
+        & \raisebox{-0.8\height}{\includegraphics[width=0.5\textwidth]{figures/ch_5/SquarePlate_l2_p.png}}\\
+        \end{tabular}
+    \end{subcaptiongroup}
+    \caption{固支方板问题误差对比}\label{ch_5:fig:SquarePlate_l2}
 \end{figure}
 
-\begin{figure}[!h]
-    \centering
-    \begin{tabular}{cccc}
-    $\quad$&最优约束比&传统约束比\\
-    $289$&\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_tri6_q1_8_6.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_tri6_q1_8_8.png}}\end{subcaptiongroup}\\
-    $1089$&\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_tri6_q1_16_12.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_tri6_q1_16_16.png}}\end{subcaptiongroup}\\
-    $4225$&\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_tri6_q1_32_25.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.5\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_tri6_q1_32_32.png}}\end{subcaptiongroup}\\  
-    \end{tabular}
-    \caption{\textbf{固支方板问题Tri6单元应力云图($Q_1$)}}\label{ch_5:fig:Q1_Tri6}
-\end{figure}
-
-\begin{figure}[!h]
-    \centering
-    \begin{tabular}{cccc}
-    $\quad$&最优约束比&传统约束比\\
-    $225$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_quad8_q1_8_6.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_quad8_q1_8_8.png}}\end{subcaptiongroup}\\
-    $833$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_quad8_q1_16_14.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_quad8_q1_16_16.png}}\end{subcaptiongroup}\\
-    $3201$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_quad8_q1_32_26.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/SquarePlate_mix_quad8_q1_32_32.png}}\end{subcaptiongroup}\\ 
-    \end{tabular}
-    \caption{\textbf{固支方板问题Quad8单元应力云图($Q_1$)}}\label{ch_5:fig:Q1_Quad8}
-\end{figure}
-
- \subsection{Razzaque斜板问题}
-考虑如图\ref{ch_5:fig:xieplate}所示斜板问题，其中斜板的边长为$L=100$，厚度为$h$，均布荷载作用在板内为$\bar{q}=1$，材料系数分别为杨氏模量$E=1085$、泊松比$\nu=0.31$。该斜板中心A点位移$\bar w_A$的参考解为：
+\clearpage
+\subsection{Razzaque斜板问题}
+考虑如图\ref{ch_5:fig:Razzaque_plate}所示斜板问题，其中斜板的边长为$L=100$，厚度为$h$，板内作用竖直向下的均布荷载作用$\bar{q}=1$，材料系数分别为杨氏模量$E=1085$、泊松比$\nu=0.31$。该斜板中心A点位移$\bar w_A$的参考解为：
 \begin{equation} 
     \bar{w_A}=w_c\times10^2\frac{D}{\bar{q}L^4}
 \end{equation}
-如图\ref{ch_5:fig:xieplatemsh}所示，斜板求解域采用均布离散的81、289、1089、4225四个疏密不同的节点进行离散，同样采用线性单元和二次单元进行数值分析。
 \begin{figure}[!h]
     \centering 
-        \includegraphics[scale=0.6]{figures/shearlocking/xie plate.png}
-        \caption{Razzaque斜板问题模型}\label{ch_5:fig:xieplate}
+        \includegraphics[scale=0.8]{figures/ch_5/skew_plate.png}
+        \caption{Razzaque斜板问题模型}\label{ch_5:fig:Razzaque_plate}
 \end{figure}
+
+根据上文提出的固支方板混合离散方案，Razzaque斜板问题的混合离散方案如图\ref{ch_5:fig:Razzaque_plate_msh}所示。其约束自由度关系满足$n_q<\bar n_u$。
 \begin{figure}[!h]
-    \centering 
-        \includegraphics[scale=0.5]{figures/shearlocking/xieplatemsh.png}
-        \caption{Razzaque斜板问题模型}\label{ch_5:fig:xieplatemsh}
+    \centering
+        \begin{tabular}{c@{\hspace{24pt}}c}
+            \includegraphics[width=0.40\textwidth]{figures/ch_5/SkewPlate_8_msh.png} &
+            \includegraphics[width=0.40\textwidth]{figures/ch_5/SkewPlate_16_msh.png} \\
+            $n_u=81$,$n_q=49$ & $n_u=289$,$n_q=225$ \\
+            \includegraphics[width=0.40\textwidth]{figures/ch_5/SkewPlate_32_msh.png} &
+            \includegraphics[width=0.40\textwidth]{figures/ch_5/SkewPlate_64_msh.png} \\
+            $n_u=1089$,$n_q=961$ & $n_u=4225$,$n_q=3969$ \\
+            \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_u.png}} ：挠度节点 &
+            \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_q.png}} ：剪切应力节点 
+        \end{tabular}
+        \caption{有限元无网格混合离散方案}\label{ch_5:fig:Razzaque_plate_msh}
 \end{figure}
+
+图\ref{ch_5:fig:Razzaque_plate_q}和图\ref{ch_5:fig:Razzaque_plate_q2}为Razzaque斜板问题应力云图。从图中可以看出，无论是线性单元还是二次单元，传统混合离散方案都存在显著的应力振荡现象，而上述混合离散方案则有效的缓解了应力振荡现象。
+
+
 \begin{figure}[!h]
-    \centering 
-        \includegraphics[scale=0.6]{figures/shearlocking/skewplateQ1_quad4.png}
-        \caption{Razzaque斜板问题quad4单元应力云图($Q_1$)}\label{ch_5:fig:skewplateQ1_quad4}
+    \centering
+    \begin{subcaptiongroup}
+        \begin{tabular}{c@{\hspace{0pt}}c@{\hspace{0pt}}c}
+         传统混合离散方案&所提混合离散方案& \\
+         \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/MorleysAcuteSkewPlate_tri3_q1_16_16.png}}
+         & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/MorleysAcuteSkewPlate_tri3_q1_16_12.png}}& \\
+         Tri3单元 $n_p=81$&$n_p=49$&   \\
+         \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/MorleysAcuteSkewPlate_quad4_q1_16_16.png}}
+        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/MorleysAcuteSkewPlate_quad4_q1_16_12.png}}& \\
+        Quad4单元 $n_p=289$&$n_p=225$&\\
+        \end{tabular}
+    \end{subcaptiongroup}
+    \caption{Razzaque斜板问题线性单元应力云图}\label{ch_5:fig:Razzaque_plate_q}
 \end{figure}
 
 \begin{figure}[!h]
-    \centering 
-        \includegraphics[scale=0.6]{figures/shearlocking/skewplateQ1_tri6.png}
-        \caption{Razzaque斜板问题Tri6单元应力云图($Q_1$)}\label{ch_5:fig:skewplateQ1_tri6}
-\end{figure}
-\begin{figure}[!h]
-    \centering 
-        \includegraphics[scale=0.6]{figures/shearlocking/skewplateQ1_quad8.png}
-        \caption{Razzaque斜板问题Quad8单元应力云图($Q_1$)}\label{ch_5:fig:skewplateQ1_quad8}
+    \centering
+    \begin{subcaptiongroup}
+        \begin{tabular}{c@{\hspace{0pt}}c@{\hspace{0pt}}c}
+         传统混合离散方案&所提混合离散方案& \\
+         \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/MorleysAcuteSkewPlate_tri6_q1_16_16.png}}
+         & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/MorleysAcuteSkewPlate_tri6_q1_16_14.png}}& \\
+         Tri6单元 $n_p=1089$&$n_p=841$&  \\
+         \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/MorleysAcuteSkewPlate_quad8_q1_16_16.png}}
+        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/MorleysAcuteSkewPlate_quad8_q1_16_14.png}}& \\
+        Quad8单元 $n_p=833$&$n_p=645$&\\
+        \end{tabular}
+    \end{subcaptiongroup}
+    \caption{Razzaque斜板问题二次单元应力云图}\label{ch_5:fig:Razzaque_plate_q2}
 \end{figure}
 
+
+\clearpage
 \subsection{简支圆板问题}
-考虑如图\ref{ch_5:fig:yuanplate}所示简支圆板问题，其中圆板的半径为$R=5$，厚度为$h$，均匀荷载作用在板内为$\bar{q}=1$,材料系数分别为杨氏模量$E=10.92$、泊松比$\nu=0.3$。该圆板中心A点位移$w_A$的精确解与板厚具有以下关系：
+考虑如图\ref{ch_5:fig:Circular}所示简支圆板问题，其中圆板的半径为$R=5$，厚度为$h=0.1$，均匀荷载作用在板内为$\bar{q}=1$,材料系数分别为杨氏模量$E=10.92$、泊松比$\nu=0.3$。该圆板中心A点位移$w_A$的精确解为：$w_A=39831$。根据圆板的对称性，选取四分之一圆的域作为研究对象。
 
-\begin{table} [!h]
-    \centering
-    \renewcommand\arraystretch{1.2}
-    \caption{均匀荷载下简支圆板中心位移$w_A$}
-    \begin{tabular}{cccc}
-        \hline
-        $h$&0.1   &1      & 2.5   \\
-        $w_A$&39831 &41.599 & 3.262 \\
-        \hline
-    \end{tabular}
-\end{table}
-如图\ref{ch_5:fig:yuanplatemsh}所示，圆板求解域采用均布离散的61、217、817、3169四个疏密不同的节点进行离散，同样采用线性单元和二次单元进行数值分析。
 \begin{figure}[!h]
     \centering 
-        \includegraphics[scale=0.8]{figures/shearlocking/yuan plate.png}
-        \caption{简支圆板问题模型}\label{ch_5:fig:yuanplate}
+        \includegraphics[scale=0.8]{figures/ch_5/Circular.png}
+        \caption{简支圆板问题模型}\label{ch_5:fig:Circular}
 \end{figure}
-\begin{figure}[!h]
-    \centering 
-        \includegraphics[scale=0.5]{figures/shearlocking/yuanplatemsh.png}
-        \caption{简支圆板问题节点离散}\label{ch_5:fig:yuanplatemsh}
-\end{figure}
+
+简支圆板问题的混合离散方案如图\ref{ch_5:fig:Circular_msh}所示。其约束自由度关系满足$n_q<\bar n_u$。
 \begin{figure}[!h]
     \centering
-    \begin{tabular}{cccc}
-    $\quad$&最优约束比&传统约束比\\
-    $61$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri3_q1_8_6.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri3_q1_8_8.png}}\end{subcaptiongroup}\\ 
-    $217$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri3_q1_16_12.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri3_q1_16_16.png}}\end{subcaptiongroup}\\ 
-    $817$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri3_q1_32_26.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri3_q1_32_32.png}}\end{subcaptiongroup}\\ 
-    \end{tabular}
-    \caption{\textbf{简支圆板问题Tri3单元应力云图($Q_1$)}}\label{ch_5:fig:YQ1_Tri3}
+        \begin{tabular}{c@{\hspace{24pt}}c}
+            \includegraphics[width=0.27\textwidth]{figures/ch_5/Circular_8_msh.png} &
+            \includegraphics[width=0.27\textwidth]{figures/ch_5/Circular_16_msh.png} \\
+            $n_u=61$,$n_q=37$ & $n_u=217$,$n_q=169$ \\
+            \includegraphics[width=0.27\textwidth]{figures/ch_5/Circular_32_msh.png} &
+            \includegraphics[width=0.27\textwidth]{figures/ch_5/Circular_64_msh.png} \\
+            $n_u=817$,$n_q=721$ & $n_u=3169$,$n_q=2977$ \\
+            \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_u.png}} ：挠度节点 &
+            \raisebox{-0.3\height}{\includegraphics[width=14pt]{figures/legend_q.png}} ：剪切应力节点 
+        \end{tabular}
+        \caption{有限元无网格混合离散方案}\label{ch_5:fig:Circular_msh}
 \end{figure}
+
+图\ref{ch_5:fig:Circular_q}和图\ref{ch_5:fig:Circular_q2}为简支圆板问题应力云图。从图中可以看出，无论是线性单元还是二次单元，传统混合离散方案都存在显著的应力振荡现象，而上述混合离散方案则有效的缓解了应力振荡现象。
+
+
 \begin{figure}[!h]
     \centering
-    \begin{tabular}{cccc}
-    $\quad$&最优约束比&传统约束比\\
-    $61$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad4_q1_8_6.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad4_q1_8_8.png}}\end{subcaptiongroup}\\ 
-    $217$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad4_q1_16_12.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad4_q1_16_16.png}}\end{subcaptiongroup}\\ 
-    $817$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad4_q1_32_26.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_quad4_q1_32_32.png}}\end{subcaptiongroup}\\ 
-    \end{tabular}
-    \caption{\textbf{简支圆板问题Quad4单元应力云图($Q_1$)}}\label{ch_5:fig:YQ1_Quad4}
+    \begin{subcaptiongroup}
+        \begin{tabular}{c@{\hspace{0pt}}c@{\hspace{0pt}}c}
+         传统混合离散方案&所提混合离散方案& \\
+         \raisebox{-0.5\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/Circular_tri3_q1_32_32.png}}
+         & \raisebox{-0.5\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/Circular_tri3_q1_32_26.png}}& \\
+         Tri3单元 $n_p=817$&$n_p=721$&   \\
+         \raisebox{-0.5\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/Circular_quad4_q1_32_32.png}}
+        & \raisebox{-0.5\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/Circular_quad4_q1_32_26.png}}& \\
+        Quad4单元 $n_p=817$&$n_p=721$&\\
+        \end{tabular}
+    \end{subcaptiongroup}
+    \caption{简支圆板问题线性单元应力云图}\label{ch_5:fig:Circular_q}
 \end{figure}
+
+\clearpage
 \begin{figure}[!h]
     \centering
-    \begin{tabular}{cccc}
-    $\quad$&最优约束比&传统约束比\\
-    $61$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri6_q1_8_6.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri6_q1_8_8.png}}\end{subcaptiongroup}\\ 
-    $217$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri6_q1_16_12.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri6_q1_16_16.png}}\end{subcaptiongroup}\\ 
-    $817$&\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri6_q1_32_26.png}}\end{subcaptiongroup}
-    &\begin{subcaptiongroup}\raisebox{-0.4\height}{\includegraphics[width=0.4\textwidth]{figures/shearlocking/Circular_tri6_q1_32_32.png}}\end{subcaptiongroup}\\ 
-    \end{tabular}
-    \caption{\textbf{简支圆板问题Tri6单元应力云图($Q_1$)}}\label{ch_5:fig:YQ1_Tri6}
-\end{figure}
-\begin{figure}[!h]
-    \centering 
-        \includegraphics[scale=0.6]{figures/shearlocking/Circular_quad8_q1.png}
-        \caption{简支圆板问题Quad8单元应力云图($Q_1$)}\label{ch_5:fig:Circular_Q1_quad8}
+    \begin{subcaptiongroup}
+        \begin{tabular}{c@{\hspace{0pt}}c@{\hspace{0pt}}c}
+         传统混合离散方案&所提混合离散方案& \\
+         \raisebox{-0.5\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/Circular_tri6_q1_16_16.png}}
+         & \raisebox{-0.5\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/Circular_tri6_q1_16_12.png}}& \\
+         Tri6单元 $n_p=817$&$n_p=631$&   \\
+         \raisebox{-0.5\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/Circular_quad8_q1_16_16.png}}
+        & \raisebox{-0.5\height}{\includegraphics[width=0.45\textwidth]{figures/ch_5/Circular_quad8_q1_16_12.png}}& \\
+        Quad8单元 $n_p=625$&$n_p=484$&\\
+        \end{tabular}
+    \end{subcaptiongroup}
+    \caption{简支圆板问二次单元应力云图}\label{ch_5:fig:Circular_q2}
 \end{figure}
 
 \section{小结}
-本章使用有限元无网格混合离散方案解决剪切自锁问题。
+本章深入探讨了基于LBB稳定性条件的有限元无网格混合离散方案在剪切自锁问题中的应用。
+首先，从中厚板问题的本构特性出发，系统分析了传统有限元法在数值求解中厚板问题时产生剪切自锁问题的根本原因。
+随后，结合混合离散公式与再生核无网格近似理论，提出了适用于中厚板问题的有限元无网格混合离散分析方法。基于考虑约束比的LBB稳定系数估计以及中厚板问题的多项式空间，确定了中厚板问题的最优约束比取值范围。
+最后，通过对经典中厚板算例的数值分析，提出了能够缓解中厚板剪切自锁的有限元无网格混合离散方案。数值结果表明，与传统混合离散方案相比，本文所提出的混合离散方案能够显著缓解应力振荡现象，进一步验证了LBB稳定系数估计出的最优约束比范围的正确性以及所提混合离散方案在数值稳定方面的优越性。

@@ -55,22 +55,31 @@
 式\eqref{ch_3:eq:r2}可得到刚度矩阵$\boldsymbol K^v$ 和 $\boldsymbol K^d$的特征值关系\eqref{ch_2:eq:eigenvalue}，即LBB稳定系数估算式\eqref{ch_3:eq:r1}计算考虑最小非零特征值。
 \section{特征值问题与体积约束比}
 
-为了进一步找出最优约束自由度数量，定义$\mathcal I_h$为有限元插值，有$V_h=\mathcal I_h V$。引入$n_u$维完备多项式空间$P_{n_u}$ , $V_{n_u}$ 是相对应的位移多项式空间，且 $V_{n_u} = P_{n_u}^{n_d}$，$V_{n_u} \subset V$的维度为$n_d\times n_u$。此时，$V_h$ 和 $V_{n_u}$的维度相同，即$\dim V_{n_u}=\dim V_h = n_d\times n_u$，有且仅有唯一的$\boldsymbol v \in V_{n_u}$ 满足$\boldsymbol v_h = \mathcal I_h \boldsymbol v$，。于是式\eqref{ch_3:eq:r1}的右边可以改写为：
+为了进一步找出最优约束自由度数量，定义$\mathcal I_h$为有限元插值，有$V_h=\mathcal I_h V$。引入$\bar{n}_u$维完备多项式空间$P_{\bar{n}_u}$ , $V_{\bar{n}_u}$ 是相对应的位移多项式空间，且 $V_{n_u} = P_{\bar{n}_u}^{n_d}$，$V_{\bar{n}_u} \subset V$的维度为$n_d\times \bar{n}_u$。此时，$V_h$ 和 $V_{\bar{n}_u}$的维度相同，即$\dim V_{\bar{n}_u}=\dim V_h = n_d\times \bar{n}_u$，有且仅有唯一的$\boldsymbol v \in V_{\bar{n}_u}$ 满足$\boldsymbol v_h = \mathcal I_h \boldsymbol v$，。于是式\eqref{ch_3:eq:r1}的右边可以改写为：
 \begin{equation}\label{ch_3:eq:r21}
     \inf_{V'_h \subset V_h\setminus \ker \mathcal P_h}\sup_{\boldsymbol v_h \in V_h'} \frac{\Vert \mathcal P_h \boldsymbol v_h \Vert_Q}{\Vert \boldsymbol v_h \Vert_V} = 
-    \inf_{V'\subset V_{n_u}\setminus \ker \mathcal P_h \mathcal I_h}\sup_{\boldsymbol v \in V'} \frac{\Vert \mathcal P_h \mathcal I_h \boldsymbol v \Vert_Q}{\Vert \mathcal I_h \boldsymbol v \Vert_V}
+    \inf_{V'\subset V_{\bar{n}_u}\setminus \ker \mathcal P_h \mathcal I_h}\sup_{\boldsymbol v \in V'} \frac{\Vert \mathcal P_h \mathcal I_h \boldsymbol v \Vert_Q}{\Vert \mathcal I_h \boldsymbol v \Vert_V}
 \end{equation}
 
 根据三角不等式、柯西--施瓦茨不等式和式\eqref{ch_3:eq:Ph}中的等式关系可得：
 \begin{equation}\label{ch_3:eq:interpolation1}
-    \begin{split}
-        \Vert \mathcal P_h \mathcal I_h \boldsymbol v \Vert_Q &= 
-        \sup_{q_h \in Q_h} \frac{\vert (q_h, \mathcal P_h \mathcal I_h \boldsymbol v) \vert}{\Vert q_h \Vert_Q}\quad \text{三角不等式}\\
-        &=\sup_{q_h \in Q_h} \frac{\vert (q_h, \mathcal P \mathcal I_h \boldsymbol v) \vert}{\Vert q_h \Vert_Q} \quad \text{式\eqref{ch_3:eq:Ph}等式关系}\\
-        &\le \sup_{q_h \in Q_h} \frac{\vert (q_h, \mathcal P \boldsymbol v)\vert + \vert (q_h, \mathcal P \boldsymbol v - \mathcal P \mathcal I_h \boldsymbol v) \vert}{\Vert q_h \Vert_Q} \quad \text{柯西--施瓦茨不等式}\\
-        &= \Vert \mathcal P_h \boldsymbol v \Vert_Q
-        + \Vert \mathcal P(\mathcal I - \mathcal I_h) \boldsymbol v \Vert_Q \quad \text{三角不等式}\\
-    \end{split}
+    \begin{matrix}
+        \begin{split}
+            \Vert \mathcal P_h \mathcal I_h \boldsymbol v \Vert_Q &= 
+            \sup_{q_h \in Q_h} \frac{\vert (q_h, \mathcal P_h \mathcal I_h \boldsymbol v) \vert}{\Vert q_h \Vert_Q}\\
+            &=\sup_{q_h \in Q_h} \frac{\vert (q_h, \mathcal P \mathcal I_h \boldsymbol v) \vert}{\Vert q_h \Vert_Q} \\
+            &\le \sup_{q_h \in Q_h} \frac{\vert (q_h, \mathcal P \boldsymbol v)\vert + \vert (q_h, \mathcal P \boldsymbol v -     \mathcal P \mathcal I_h \boldsymbol v) \vert}{\Vert q_h \Vert_Q} \\
+            &= \Vert \mathcal P_h \boldsymbol v \Vert_Q
+            + \Vert \mathcal P(\mathcal I - \mathcal I_h) \boldsymbol v \Vert_Q
+        \end{split}
+        &
+        \begin{split}
+            &\quad \text{(三角不等式)}\\
+            &\quad \text{(式\eqref{ch_3:eq:Ph})}\\
+            &\quad \text{(柯西--施瓦茨不等式)}\\
+            &\quad \text{(三角不等式)}
+        \end{split}
+    \end{matrix}
 \end{equation}
 显然，式\eqref{ch_3:eq:interpolation1}右侧的第二项和第三项是$V_h$中近似值的插值误差和正交投影误差，可以由如下式子估计\cite{yosida1995}：
 \begin{equation}\label{ch_3:eq:interpolation2}
@@ -79,8 +88,8 @@
 根据闭图像定理\cite{quarteroni1994}可得 $\Vert \mathcal I_h \boldsymbol v\Vert_V \ge C\Vert \boldsymbol v \Vert_V$。结合式\eqref{ch_3:eq:interpolation1}、\eqref{ch_3:eq:interpolation2}，式\eqref{ch_3:eq:r21}的右边可以表示为：
 \begin{equation}\label{ch_3:eq:r23}
     \begin{split}
-        \inf_{V'\subset V_{n_u}\setminus \ker \mathcal P_h \mathcal I_h} \sup_{\boldsymbol v \in V'} \frac{\Vert \mathcal P_h\mathcal I_h\boldsymbol v\Vert_Q}{\Vert \mathcal I_h \boldsymbol v\Vert_V} 
-        &\le \inf_{V'\subset V_{n_u}\setminus \ker \mathcal P_h \mathcal I_h} \sup_{\boldsymbol v \in V'} \frac{\Vert \mathcal P \boldsymbol v\Vert_Q}{\Vert \boldsymbol v\Vert_V} + Ch \\
+        \inf_{V'\subset V_{\bar{n}_u}\setminus \ker \mathcal P_h \mathcal I_h} \sup_{\boldsymbol v \in V'} \frac{\Vert \mathcal P_h\mathcal I_h\boldsymbol v\Vert_Q}{\Vert \mathcal I_h \boldsymbol v\Vert_V} 
+        &\le \inf_{V'\subset V_{\bar{n}_u}\setminus \ker \mathcal P_h \mathcal I_h} \sup_{\boldsymbol v \in V'} \frac{\Vert \mathcal P \boldsymbol v\Vert_Q}{\Vert \boldsymbol v\Vert_V} + Ch \\
     \end{split}
 \end{equation}
 将等式\eqref{ch_3:eq:r21}、\eqref{ch_3:eq:r23}带回到\eqref{ch_3:eq:r1} 可以得到以下关系:
@@ -89,7 +98,7 @@
 \end{equation}
 其中
 \begin{equation}\label{ch_3:eq:beta_s}
-    \beta_s = \inf_{V'\subset V_{n_u}\setminus\ker \mathcal P_h \mathcal I_h}\sup_{\boldsymbol v \in V'}\frac{\Vert \mathcal P \boldsymbol v\Vert_Q}{\Vert  \boldsymbol v\Vert_V} 
+    \beta_s = \inf_{V'\subset V_{\bar{n}_u}\setminus\ker \mathcal P_h \mathcal I_h}\sup_{\boldsymbol v \in V'}\frac{\Vert \mathcal P \boldsymbol v\Vert_Q}{\Vert  \boldsymbol v\Vert_V} 
 \end{equation}
 
 根据LBB稳定性条件，$\beta$为与单元尺寸$h$无关且大于零的常数。
@@ -100,9 +109,9 @@
     \item 当$\beta_s= 0$时，$\beta\leq Ch$。$\beta$受到$h$的限制，当$h$逐渐缩小，$\beta$可能与$h$相关。在这种情况下不能确保其是否满足LBB稳定性条件。
 \end{itemize}
 
-$\beta_s$是否为零对判断混合方案是否满足LBB稳定性条件起到关键性作用。由式\eqref{ch_3:eq:beta_s}可知压力自由度的数量为$ n_p = \dim(V_{n_u}\setminus\ker \mathcal P_h \mathcal I_h)$。接下来以二维问题为例，讨论位移自由度数量$n_u$，压力自由度数量$n_p$和$\beta_s$之间的关系。
+$\beta_s$是否为零对判断混合方案是否满足LBB稳定性条件起到关键性作用。由式\eqref{ch_3:eq:beta_s}可知压力自由度的数量为$ n_p = \dim(V_{\bar{n}_u}\setminus\ker \mathcal P_h \mathcal I_h)$。接下来以二维问题为例，讨论位移自由度数量$\bar{n}_u$，压力自由度数量$n_p$和$\beta_s$之间的关系。
 
-在二维弹性体积不可压缩问题中，对于维数为$n_u=3$的线性多项式空间$P^2_3$，对应的位移空间$V_3$由下式给出：
+在二维弹性体积不可压缩问题中，对于维数为$\bar{n}_u=3$的线性多项式空间$P^2_3$，对应的位移空间$V_3$由下式给出：
 \begin{equation}
     V_3 = \mathrm{span} \left \{
     \begin{pmatrix} 1 \\ 0 \end{pmatrix},
@@ -131,7 +140,7 @@ $\beta_s$是否为零对判断混合方案是否满足LBB稳定性条件起到�
 \end{equation}
 令$n_s = \dim(V_{n_u}\setminus \ker \mathcal P)$，此时$n_s=1$。当$n_p=n_s=1$时，$n_s$为最小特征值。这种情况下$\beta_s>0$，即满足LBB稳定性条件。当$n_p>n_s=1$时$\beta_s=0$，不满足LBB稳定性条件。
 
-维数为$n_u=6$的二次多项式基的位移空间$V_6$可以表述为：
+维数为$\bar{n}_u=6$的二次多项式基的位移空间$V_6$可以表述为：
 \begin{equation}\label{ch_3:eq:base2}
     V_6 = \mathrm{span}
     \begin{Bmatrix}
@@ -153,9 +162,9 @@ $\beta_s$是否为零对判断混合方案是否满足LBB稳定性条件起到�
         }_{V_6\setminus \ker \mathcal P}
     \end{Bmatrix}
 \end{equation}
-在这种情况下，$n_s=3$。当$n_p=n_s=3$时，$n_s$为最小特征值.这种情况下$\beta_s>0$，即满足LBB稳定性条件。当$n_p>n_s=3$时，$\beta_s=0$，不满足LBB稳定性条件。
+在这种情况下，$n_s=3$。当$n_p=n_s=3$时，$n_s$为最小特征值。这种情况下$\beta_s>0$，即满足LBB稳定性条件。当$n_p>n_s=3$时，$\beta_s=0$，不满足LBB稳定性条件。
 
-表\ref{ch_3:tab:constraint}中列出了随着多项式空间阶数的增加，各阶空间的约束自由度数量，并总结了$n_u$与$n_s$之间的关系。
+表\ref{ch_3:tab:constraint}中列出了随着多项式空间阶数的增加，各阶空间的约束自由度数量，并总结了$\bar{n}_u$与$n_s$之间的关系。
 \begin{table}[!h]
     \centering
     \caption{体积约束自由度}\label{ch_3:tab:constraint}
@@ -163,28 +172,28 @@ $\beta_s$是否为零对判断混合方案是否满足LBB稳定性条件起到�
     \renewcommand{\arraystretch}{2}
     \begin{tabular}{cccc}
         \toprule
-            $n_u$ & $2n_u$ & $n$ &$ n_s$\\
+            $\bar{n}_u$ & $2\bar{n}_u$ & $n$ &$ n_s$\\
         \midrule
         3  & 6  & 1 & 1 \\
         6  & 12 & 2 & 3 \\
         10 & 20 & 3 & 6 \\
         15 & 30 & 4 & 10 \\
         \vdots & \vdots & \vdots & \vdots \\
-        $n_u$ & $2n_u$ & $\lfloor\frac{\sqrt{1+8n_u}-3}{2}\rfloor$ & $\frac{n(n+1)}{2}$  \\
+        $\bar{n}_u$ & $2\bar{n}_u$ & $\lfloor\frac{\sqrt{1+8\bar{n}_u}-3}{2}\rfloor$ & $\frac{n(n+1)}{2}$  \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-根据上述结果，满足LBB稳定性条件的位移约束自由度$n_u$和压力约束自由度$n_p$的关系为：
+根据上述结果，满足LBB稳定性条件的位移约束自由度$\bar{n}_u$和压力约束自由度$n_p$的关系为：
 \begin{equation}\label{ch_3:eq:best}
-n_p\leq \frac{n(n+1)}{2},\quad n = \lfloor\frac{\sqrt{1+8n_u}-3}{2}\rfloor
+n_p\leq \frac{n(n+1)}{2},\quad n = \lfloor\frac{\sqrt{1+8\bar{n}_u}-3}{2}\rfloor
 \end{equation}
 其中$\lfloor\bullet\rfloor$为向上取整符号。
 
-值得注意的是，上面提到的位移自由度个数$n_u$为施加本质边界条件之后的位移自由度个数。有限元位移节点的布置必须适定(well--pose)，如果位移节点布置不适定，式\eqref{ch_3:eq:best}中的关系则不成立。此时，$n_u$的个数需要减少，相对应的$n_s$也要做出调整。
+值得注意的是，上面提到的位移自由度个数$\bar{n}_u$为施加本质边界条件之后的位移自由度个数。有限元位移节点的布置必须适定(well--pose)，如果位移节点布置不适定，式\eqref{ch_3:eq:best}中的关系则不成立。此时，$\bar{n}_u$的个数需要减少，相对应的$n_s$也要做出调整。
 \section{系数估计验证}
 
-同样以图\ref{ch_3:fig:elements_eg}所示的两个二维8位移节点单元混合离散方案为例，图\ref{ch_3:fig:elements_eg}(a)Q8P3单元位移自由度个数$2n_u=6$，根据表\ref{ch_3:tab:constraint}可得其$n=1$，进而$n_s=1$。因此,满足LBB稳定性条件的最优压力约束自由度的数量为1。因此Q8P3单元不满足LBB稳定性条件，而Q8P1单元满足LBB稳定性条件。
+同样以图\ref{ch_3:fig:elements_eg}所示的两个二维8位移节点单元混合离散方案为例，图\ref{ch_3:fig:elements_eg}(a)Q8P3单元位移自由度个数$2\bar{n}_u=6$，根据表\ref{ch_3:tab:constraint}可得其$n=1$，进而$n_s=1$。因此,满足LBB稳定性条件的最优压力约束自由度的数量为1。因此Q8P3单元不满足LBB稳定性条件，而Q8P1单元满足LBB稳定性条件。
 \begin{figure}[!h]
     \centering
         \begin{tabular}{c@{\hspace{24pt}}c}
@@ -286,5 +295,5 @@ n_p\leq \frac{n(n+1)}{2},\quad n = \lfloor\frac{\sqrt{1+8n_u}-3}{2}\rfloor
 本章从泛函分析的角度出发，再次验证了LBB稳定性系数是主应力刚度矩阵与偏应力刚度矩阵的广义特征值的平方根。
 随后，通过引入适定的完备多项式空间，对LBB稳定性系数的估计式进行了进一步化简，从而建立了一个新的LBB稳定系数估计表达式。
 在这一过程中，将LBB稳定系数表达式中的空间维度与位移和压力的自由度个数联系起来，即与体积约束比建立联系。
-通过对二维和三维空间中位移和压力自由度的详细讨论，总结出了最优约束比的取值范围。
-利用这一新的估计表达式，对已有的二维和三维情况下有限元离散算法进行了验证，并将结果与数值验证结果和解析证明结果进行对比，初步证明了所提方法的可行性。
+通过对二维空间中位移和压力自由度的详细讨论，总结出了最优约束比的取值范围。
+利用这一新的估计表达式，对已有的二维情况下有限元离散方案进行了验证，并将结果与数值验证结果和解析证明结果进行对比，初步证明了所提方法的可行性。

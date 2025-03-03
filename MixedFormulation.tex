@@ -28,7 +28,7 @@
 $\boldsymbol b$为$\Omega$中的体力，$\boldsymbol t$，$\boldsymbol g$ 分别为自然边界$\Gamma_t$和本质边界$\Gamma_g$上的牵引力和位移。
 \begin{figure}[!h]
     \centering 
-        \includegraphics[scale=0.1]{figures/model.png}
+        \includegraphics[scale=0.6]{figures/model.png}
         \caption{不可压缩材料弹性体模型}\label{model}
 \end{figure}
 
@@ -57,7 +57,7 @@ $\delta\boldsymbol \varepsilon^v$和$\delta\boldsymbol \varepsilon^d $分别为$
 其中$N_I$和$\boldsymbol u_I$分别为节点$\boldsymbol{x}_I$处的形函数和节点系数张量。
 \begin{figure}[H]
     \centering 
-        \includegraphics[scale=0.05]{figures/fem.png}
+        \includegraphics[scale=0.5]{figures/fem.png}
         \caption{有限元离散示意图}\label{fem}
 \end{figure}
 
@@ -193,7 +193,7 @@ $\delta\boldsymbol \varepsilon^v$和$\delta\boldsymbol \varepsilon^d $分别为$
 式中，$n_p$分别为压力节点的总数，$p_K$为压力节点系数，$\Psi_K$为离散$p_h$的形函数。
 
 根据$\delta \boldsymbol  u_h$和$\delta p_h$的任意性，式\eqref{ch_2:eq:weak_mix}可得到如下离散控制方程：
-\begin{equation}\label{equilibrium_mix}
+\begin{equation}\label{ch_2:eq:equilibrium_mix}
     \begin{bmatrix}
         \boldsymbol K^{uu} & \boldsymbol K^{up} \\ (\boldsymbol K^{up})^{\mathrm T} & \boldsymbol K^{pp}
     \end{bmatrix}
@@ -212,13 +212,13 @@ $\delta\boldsymbol \varepsilon^v$和$\delta\boldsymbol \varepsilon^d $分别为$
     \boldsymbol{K}^{pp}_{IJ}=-\frac{1}{\kappa}\int_{\Omega}  \Psi^\mathrm{T}_{I}  \Psi_{J}d\Omega
 \end{equation}
 
-为统计约束的自由度个数，将离散控制方程式\eqref{equilibrium_mix}进行变换。
-由式\eqref{equilibrium_mix}可将$\boldsymbol d^p$采用$\boldsymbol d^u$表示：
+为统计约束的自由度个数，将离散控制方程式\eqref{ch_2:eq:equilibrium_mix}进行变换。
+由式\eqref{ch_2:eq:equilibrium_mix}可将$\boldsymbol d^p$采用$\boldsymbol d^u$表示：
 \begin{equation}
     \boldsymbol d^p = (\boldsymbol K^{pp})^{-1} (\boldsymbol K^{up})^{\mathrm T} \boldsymbol d^u
 \end{equation}
 
-将上式代入到式\eqref{equilibrium_mix}的第一式中可得：
+将上式代入到式\eqref{ch_2:eq:equilibrium_mix}的第一式中可得：
 \begin{equation}\label{ch_2:eq:equilibrium_projection}
     \begin{split}
         &(\underbrace{\boldsymbol K^{uu}}_{\boldsymbol K^d} +  \underbrace{\boldsymbol K^{up}(\boldsymbol K^{pp})^{-1}(\boldsymbol K^{up})^{\mathrm T}}_{\tilde{\boldsymbol K}^v}) \boldsymbol d^u = \boldsymbol f \\
@@ -260,7 +260,7 @@ $\delta\boldsymbol \varepsilon^v$和$\delta\boldsymbol \varepsilon^d $分别为$
 \begin{equation}
     \int_\Omega q_h(\nabla \cdot \boldsymbol u_h - \tilde \nabla \cdot \boldsymbol u_h) d\Omega = 0, \quad \forall q_h \in Q_h
 \end{equation}
-将上式代入弱形式\eqref{equilibrium_mix}中，其主应力部分可转化为：
+将上式代入弱形式\eqref{ch_2:eq:equilibrium_mix}中，其主应力部分可转化为：
 \begin{equation}\label{projection_mixed}
     \begin{split}
         \int_\Omega \nabla \cdot \delta \boldsymbol u_h p_h d\Omega &= \underbrace{\int_\Omega (\nabla \cdot \delta  \boldsymbol u_h - \tilde \nabla \cdot \delta \boldsymbol u_h) p_h d\Omega}_0 + \int_\Omega \tilde \nabla \cdot \delta \boldsymbol u_h \underbrace{p_h}_{\tilde \nabla \cdot \boldsymbol u_h} d\Omega \\

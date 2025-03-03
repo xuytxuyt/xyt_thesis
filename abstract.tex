@@ -1,19 +1,34 @@
-% TODO: 设置摘要
+
 \begin{abstract}
-    \LaTeX 是一种强大的排版系统，该系统提供了丰富的功能，包括自动编号、交叉引用、数学公式排版、参考文献管理等。它还支持多种文档类、宏包和模板，使用户能够根据自己的需求定制文档的外观和格式，广泛用于撰写学术论文、科技文档和出版物。
-    本文主要以前期准备、图表设置、使用Zotero管理参考文献、\LaTeX 部分所需包介绍、附录和参考格式等环节进行介绍。
-    首先在前期准备中介绍了Git的相关内容以及VS Code的配置。
-    此外，还介绍了文件和标签的命名规则，为编写论文的命名提供参考，并对在\LaTeX 中的图表设置以例子详细说明如何在论文中插入和设置图表，涵盖了图片的插入、标注、引用和交叉引用等方面的技巧和方法，   
-    也对如何使用Zotero管理参考文献进行了介绍说明。
-    最后，在附录部分给出了参考格式的理解说明。    
-    通过阅读本文，读者将获得关于前期准备、图表设置、参考文献管理、\LaTeX 必需包、附录和参考格式的全面指导，有助于顺利完成论文写作和格式规范要求。
+自锁问题是有限元分析中的一类常见数值问题，主要表现为在模拟某些特定物理现象时，数值解因过度约束而丧失精度或收敛性。
+常见的自锁问题包括以下两类:体积自锁：在模拟不可压缩材料时，由于体积应变能的过度约束，导致数值解出现刚化现象，无法准确描述材料的变形特性；剪切自锁：在模拟中厚板结构时，由于剪切应变能的过度约束，导致数值解无法准确反映结构的实际变形行为。
+混合有限元法是解决自锁问题的常用方法，通过引入额外的场变量（如压力场）来减少过度约束。
+例如，在不可压问题中，使用位移--压力混合离散可以有效缓解体积自锁现象。
+然而，混合有限元法必须满足LBB稳定性条件，才能保证数值解的稳定性，在一定情况下也可能会产生压力振荡现象。因此，选择合适的变量间约束比至关重要。
+尽管混合有限元法常用于解决自锁问题，但并非所有混合离散方案都满足LBB稳定性条件，而已知的满足LBB稳定性条件的混合离散方案常常表现出过度约束的状态。
+无网格法具有不依赖于几何拓扑关系的高阶光滑形函数，能够任意的布置节点，特别适用于变量间的混合离散过程。通过结合无网格法与混合有限元法，可以有效解决传统方法中的问题。
+
+本文针对传统混合离散方案存在的问题，提出了一种有限元无网格混合离散分析方法。
+并在该方法的基础上，研究了体积不可压问题和中厚板剪切自锁问题中离散节点分布与LBB稳定性条件之间的关系，建立了考虑最优约束比的LBB稳定性条件验证方法，从而确定免自锁的最优约束比范围。
+依托再生核无网格法理论框架，通过调整约束比，生成了一种免自锁且满足LBB稳定性条件的有限元无网格混合离散方案。
+最后，通过体积不可压问题和中厚板问题的系列经典算例，验证了所提LBB稳定性条件验证方法的正确性，以及有限元无网格混合离散方案的计算精度和稳定性。
 
 \end{abstract}
-\keywords{\LaTeX；模板学习}
+\keywords{自锁问题；混合离散；最优约束比；LBB稳定性条件；无网格法}
 
+\begin{abstractEn}
+Locking problems are a common class of numerical issues in finite element analysis, primarily manifested as a loss of accuracy or convergence in numerical solutions due to excessive constraints when simulating specific physical phenomena. 
+Typical locking problems include two categories: volumetric locking, where numerical solutions exhibit artificial stiffening due to over-constrained volumetric strain energy in modeling incompressible materials, and shear locking, where numerical solutions fail to accurately reflect the deformation behavior of moderately thick plate structures due to over-constrained shear strain energy. 
+The mixed finite element method is widely used to address locking problems by introducing additional field variables (e.g., pressure fields) to relax excessive constraints. For instance, displacement-pressure mixed discretization effectively mitigates volumetric locking in incompressible problems. 
+However, the mixed finite element method must satisfy the LBB (Ladyzhenskaya-Babuška-Brezzi) stability conditions to ensure numerical stability, and pressure oscillations may still occur under certain circumstances. 
+Therefore, selecting an appropriate constraint ratio between variables is critical. Although the mixed finite element method is commonly employed to resolve locking problems, not all mixed discretization schemes satisfy the LBB stability conditions. Even known LBB-compliant schemes often exhibit over-constrained states.
+Meshfree methods, characterized by high-order smooth shape functions independent of geometric topology and flexible node arrangement, are particularly suitable for mixed discretization processes involving multiple variables. By integrating meshfree methods with the mixed finite element approach, traditional limitations can be effectively addressed.
 
-% NOTE:以下是摘要的英文部分，需要时可取消注释
-% \begin{abstractEn}
-% fdsa
-% \end{abstractEn}
-% \keywordsEn{keyword1; keyword2; keyword3; keyword4; keyword5; keyword6; keyword7; keyword8}
+This study proposes a finite element-meshfree hybrid discretization method to tackle the shortcomings of conventional mixed discretization schemes. 
+Building on this method, the relationship between discrete node distributions and LBB stability conditions is systematically investigated for both incompressible problems and moderately thick plate shear locking problems.
+A verification framework for LBB stability conditions incorporating an optimal constraint ratio is established to determine the optimal constraint range for locking-free solutions. 
+Leveraging the theoretical framework of the reproducing kernel meshfree method, a locking-free hybrid discretization scheme satisfying LBB stability conditions is developed by adjusting the constraint ratio. 
+Finally, a series of benchmark cases for incompressible problems and moderately thick plate problems validate the correctness of the proposed LBB stability verification framework and demonstrate the computational accuracy and stability of the finite element-meshfree hybrid discretization scheme.
+
+\end{abstractEn}
+\keywordsEn{Locking problems; Mixed discretization;  Optimal constraint ratio;LBB stability conditions; Meshfree method}
