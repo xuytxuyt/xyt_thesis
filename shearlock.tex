@@ -1,10 +1,9 @@
-\chapter{中厚板剪切自锁问题}
-本章针对中厚板剪切自锁问题，提出了有限元无网格混合离散分析方法最优约束比例。首先介绍了中厚板问题的混合离散过程，
-其次对比中厚板问题的最优约束比例和传统约束比例。最后通过算例验证该方法的计算精度。
+\chapter{剪切自锁问题的有限元无网格混合离散分析方法}
+本章针对中厚板剪切自锁问题混合离散框架，建立剪切自锁问题的LBB稳定系数估计表达式，并确定满足剪切自锁问题LBB稳定性条件下的最优约束比。同时，将有限元无网格混合离散分析方法推广至中厚板问题，通过LBB稳定性条件特征问题验证LBB稳定系数估计的有效性，确定最优约束比下剪切力节点的布置方案，并用中厚板算例验证所提方法计算精度和稳定性。
 
 \section{剪切自锁问题}    
 \subsection{罚函数法}
-考虑如图\ref{mindlin_picture}所示中厚板，其中中板厚为$h$,$\Omega$为板中面。在Mindlin假设下,中厚板考虑横向剪切变形,相应的混合控制方程由下式给出：
+考虑如图\ref{mindlin_picture}所示中厚板，其中$\Omega$为板中面，板厚度为$h$。在Mindlin假设下\cite{}，中厚板考虑横向剪切变形，相应的混合控制方程由下式给出：
 \begin{equation}\label{strong_mindlin}
     \begin{cases}
         M_{\alpha\beta,\beta} - Q_\alpha = 0 & \textrm{in}\; \Omega \\
@@ -14,10 +13,10 @@
         w = \bar w & \textrm{on}\; \Gamma_w \\
     \end{cases}
 \end{equation}
-\begin{figure}
+\begin{figure}[!h]
     \centering 
-        \includegraphics[scale=0.5]{figures/shearlocking/Mindlinplate.png}
-        \caption{中厚板运动学及边界条件}\label{mindlin_picture}
+        \includegraphics[scale=0.7]{figures/shearlocking/Mindlinplate.png}
+        \caption{中厚板问题及边界条件示意图}\label{mindlin_picture}
 \end{figure}
 式中，$M_{\alpha \beta}$ 可表示弯矩张量$\pmb{M}$ 的弯曲或扭转部分的分量，$\bar{q}$ 为垂直于板中面的分布荷载；
 $\Gamma_w$和$\Gamma_\varphi$为本质边界条件，$\bar{w}$和$\bar{\varphi}_\alpha$分别为本质边界条件上给定的挠度和转角；
