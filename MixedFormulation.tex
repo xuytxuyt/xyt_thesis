@@ -174,7 +174,7 @@ $\delta\boldsymbol \varepsilon^v$和$\delta\boldsymbol \varepsilon^d $分别为$
 \end{equation}
 式中，$a: V\times V\rightarrow \mathbb R$，$b: V\times Q\rightarrow \mathbb R$，$c: V\times V\rightarrow \mathbb R$为双线性算子， $f: V \rightarrow \mathbb R$ 为线性算子，它们具有以下形式：
 \begin{align}
-    a(\delta \boldsymbol u, \boldsymbol u) &= \int_\Omega \nabla^s \delta \boldsymbol u: \nabla^s \boldsymbol u d\Omega \\
+    a(\delta \boldsymbol u, \boldsymbol u) &= 2\mu\int_\Omega \nabla^s \delta \boldsymbol u: \nabla^s \boldsymbol u d\Omega \\
     b(\delta \boldsymbol u, p) &= \int_\Omega \nabla \cdot \delta \boldsymbol u p d\Omega \\
     c(\delta p,p) &= -\frac{1}{\kappa}\int_\Omega\delta p p d\Omega \\
     f(\delta \boldsymbol u) &= \int_{\Gamma_t} \delta \boldsymbol u \cdot \boldsymbol t d\Gamma + \int_{\Omega} \delta \boldsymbol u \cdot \boldsymbol b d\Omega
@@ -205,10 +205,10 @@ $\delta\boldsymbol \varepsilon^v$和$\delta\boldsymbol \varepsilon^d $分别为$
     \end{Bmatrix}
 \end{equation}
 式中，$\boldsymbol K^{uu} = \boldsymbol K^d$， $\boldsymbol{K}^{up}$为刚度矩阵中和位移、压力都有关的部分，$\boldsymbol{K}^{pp}$为刚度矩阵中只和压力相关的部分，其分量分别为：
-\begin{equation}
+\begin{equation}\label{ch_2:eq:equilibrium_up}
     \boldsymbol{K}^{up}_{I J}=\int_{\Omega} \boldsymbol B_{I}^{v\mathrm T} \Psi_{J} {d} \Omega
 \end{equation}
-\begin{equation}  
+\begin{equation}  \label{ch_2:eq:equilibrium_pp}
     \boldsymbol{K}^{pp}_{IJ}=-\frac{1}{\kappa}\int_{\Omega}  \Psi^\mathrm{T}_{I}  \Psi_{J}d\Omega
 \end{equation}
 

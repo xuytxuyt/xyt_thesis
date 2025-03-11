@@ -27,7 +27,7 @@
 \begin{equation}
     \boldsymbol p^{[n]}(\boldsymbol x) = \{ 1, x, y, x^2, xy, y^2,...,y^n\}^\mathrm{T}
 \end{equation}
-对于弹性力学问题，无网格基函数一般选择二阶或者三阶多项式基函数，本文选择二阶多项式基函数:
+对于弹性力学问题,本文选择一阶和二阶多项式基函数:
 \begin{equation}
     \boldsymbol p(\boldsymbol x) = \{ 1, x, y, x^2, xy, y^2\}^\mathrm{T}
 \end{equation}
@@ -66,19 +66,50 @@ $\boldsymbol c$为待定系数向量，可以通过满足下列一致性条件�
     \Psi_K(\boldsymbol x) = \boldsymbol p^{\mathrm{T}}(\boldsymbol 0) \boldsymbol A^{-1}(\boldsymbol x_K-\boldsymbol x)p(\boldsymbol x_K-\boldsymbol x)\phi(\boldsymbol x_K-\boldsymbol x)
 \end{equation}
 
+图\ref{ch_4:fig:mf}为一阶多项式基函数和二阶多项式基函数的无网格形函数图。从图中可以看出，无网格形函数具有全域高阶连续光滑的特点。
+\begin{figure}[!h]
+    \centering
+        \begin{tabular}{c@{\hspace{0pt}}c}
+            $p=1$& $p=2$ \\
+            \includegraphics[width=0.5\textwidth]{figures/ch_4/shapefunction11.png} &
+            \includegraphics[width=0.5\textwidth]{figures/ch_4/shapefunction21.png} \\
+            \includegraphics[width=0.5\textwidth]{figures/ch_4/shapefunction12.png} &
+            \includegraphics[width=0.5\textwidth]{figures/ch_4/shapefunction22.png} \\
+        \end{tabular}
+        \caption{二维无网格形函数}\label{ch_4:fig:mf}
+\end{figure}
+
+无网格形函数近似的压力$p_h$的变分可以表示为：
+\begin{equation}
+    \delta p_h(\boldsymbol x) = \sum_{K=1}^{n_p} \Psi_K(\boldsymbol x) \delta p_K
+\end{equation}
+
+将采用有限元离散的位移$\boldsymbol{u}$和采用无网格离散的压力$p$回代到混合离散方程\eqref{ch_2:eq:weak_mix}，且根据$\delta\boldsymbol{u}_h$和$\delta p_h$的任意性，可得离散控制方程：
+\begin{equation}
+    \begin{bmatrix}
+        \boldsymbol K^{uu} & \boldsymbol K^{up} \\ (\boldsymbol K^{up})^{\mathrm T} & \boldsymbol K^{pp}
+    \end{bmatrix}
+    \begin{Bmatrix}
+        \boldsymbol d^u \\ \boldsymbol d^p 
+    \end{Bmatrix} =
+    \begin{Bmatrix}
+        \boldsymbol f \\ \boldsymbol 0 
+    \end{Bmatrix}
+\end{equation}
+其中各矩阵的表达式见式\eqref{ch_2:eq:equilibrium_up}、\eqref{ch_2:eq:equilibrium_pp}。
 \section{满足LBB稳定性条件的混合离散方案}
 基于考虑约束比的LBB稳定系数估计式\eqref{ch_3:eq:r3}和最优体积约束比取值范围\eqref{ch_3:eq:best}，结合有限元无网格混合离散分析方法，对有限元离散单元在不同约束比例下的LBB稳定系数进行了系统性测试。
 为探究单元类型和网格密度对计算结果的影响，测试选取了四种典型有限元离散单元：Tri3(三角形3节点单元)、Tri6(三角形6节点单元)、Quad4(四边形4节点单元)、Quad8(四边形八节点单元)和四个不同数量的位移节点($n_u=$25、81、289、1089)进行对比分析，旨在寻找出最优的免体积自锁有限元无网格混合离散方案。
 所得测试结果如图\ref{ch_4:fig:infsup_convergence}所示。
 
-以Tri3单元为例，图\eqref{ch_3:eq:best}(a)中的红色曲线反映了在位移节点数$n_u$固定的情况下，压力节点数$n_p$的变化对LBB稳定系数$\beta$的影响。
-$\beta$值越接近于1表示该约束比例下的混合方案稳定性越好，(即满足LBB稳定性条件)。
-图中四个竖向虚线分别表示四个不同位移节点数$n_u$对应的最优体积约束比下压力节点数$n_p$。
-测试结果表明：当压力节点数$n_p$小于最优值(位于虚线左侧)时，离散方案趋于稳定，满足LBB稳定性条件；
-而当$n_p$大于最优值(位于虚线右侧)时，离散方案则表现出不稳定性，无法满足LBB稳定性条件。
+以Tri3单元为例，图\eqref{ch_3:eq:best}(a)中的红色曲线反映了在位移节点数$n_u$固定的情况下，压力节点数$n_p$的变化对LBB稳定系数$\beta$的影响，颜色由浅到深表示位移节点数逐渐增加。
+横坐标为压力节点数的变化，纵坐标为LBB稳定系数$\beta$的值。
+$\beta$值越往下代表$\beta$越接近于零，表明混合方案不稳定。$\beta$值越靠上表示该约束比例下的混合方案稳定性越好(满足LBB稳定性条件)。
+图中四个竖向虚线分别表示四个不同位移节点数$n_u$对应的稳定压力节点数$n_s$。
+测试结果表明：当压力节点数$n_p$小于$n_s$(位于虚线左侧)时，离散方案趋于稳定，满足LBB稳定性条件；
+而当$n_p$大于$n_s$(位于虚线右侧)时，离散方案则表现出不稳定性，无法满足LBB稳定性条件。
 值得注意的是，传统有限元混合离散方案中采用的最优约束比($r=2$)对应的$\beta$值均位于虚线右侧，这表明传统有限元混合离散方案不满足LBB稳定性条件。
-
-如图\ref{ch_4:fig:infsup_convergence}(b)、(c)、(d)所示，Tri6单元、Quad4单元和Quad8单元的测试结果与Tri3单元的基本一致。为保证混合离散方案在满足LBB稳定性条件的同时，避免使用两套网格进行离散而增加计算量，本研究基于上述测试结果，提出了如图\ref{ch_4:fig:mix_scheme}所示的免体积自锁有限元无网格混合离散方案。该方案的压力节点选取直接基于位移节点，从而实现了方案的简易性与稳定性。
+如图\ref{ch_4:fig:infsup_convergence}(b)、(c)、(d)所示，Tri6单元、Quad4单元和Quad8单元的测试结果与Tri3单元的基本一致。为保证混合离散方案在满足LBB稳定性条件的同时，避免使用两套网格进行离散而增加计算量，本研究基于上述测试结果，选取在虚线左边的压力节点数作为离散方案，提出了如图\ref{ch_4:fig:mix_scheme}所示的免体积自锁有限元无网格混合离散方案。该方案的压力节点选取直接基于位移节点，从而实现了方案的简易性与稳定性。
 图\ref{ch_4:fig:infsup_convergence}中实线折现展示了相应方案下的$\beta$取值，初步验证了该方案的可行性。
 
 \begin{figure}[H]
@@ -93,7 +124,9 @@ $\beta$值越接近于1表示该约束比例下的混合方案稳定性越好，
     \caption{\centering 各种有限元方案的LBB稳定性条件测试 \\ \subref{a} mix-Tri3; \subref{b} mix-Tri6; \subref{c} mix-Quad4; \subref{d}mix-Quad8}\label{ch_4:fig:infsup_convergence}
 \end{figure}
 
-\begin{figure}[!ht]
+
+
+\begin{figure}[!h]
     \centering
         \begin{tabular}{c@{\hspace{24pt}}c}
             \includegraphics[width=0.3\textwidth]{figures/ch_4/mix_tri3.png} &
@@ -141,20 +174,16 @@ $\beta$值越接近于1表示该约束比例下的混合方案稳定性越好，
 \begin{figure}[H]
     \centering
     \begin{subcaptiongroup}
-        \begin{tabular}{c@{\hspace{0pt}}c@{\hspace{0pt}}c}
-          $\Vert \boldsymbol u - \boldsymbol u_h \Vert_V$ & $\Vert p - p_h \Vert_Q$ &$n_u$ \\
+        \begin{tabular}{c@{\hspace{0pt}}c}
+          $\Vert \boldsymbol u - \boldsymbol u_h \Vert_V$ & $\Vert p - p_h \Vert_Q$  \\
           \raisebox{-0.8\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cantilever_Hdev_4.png}}
-        & \raisebox{-0.8\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cantilever_L2_p_4.png}}
-        & \rotatebox{-90}{\parbox[b]{4cm}{Quad4: 85 nodes \\ Quad8: 80 nodes}} \\
+        & \raisebox{-0.8\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cantilever_L2_p_4.png}} \\
           \raisebox{-0.85\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cantilever_Hdev_8.png}}
-        & \raisebox{-0.85\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cantilever_L2_p_8.png}}
-        & \rotatebox{-90}{\parbox[b]{4cm}{Quad4: 297 nodes \\ Quad8: 288 nodes}} \\
+        & \raisebox{-0.85\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cantilever_L2_p_8.png}} \\
           \raisebox{-0.85\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cantilever_Hdev_16.png}}
-        & \raisebox{-0.85\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cantilever_L2_p_16.png}}
-        & \rotatebox{-90}{\parbox[b]{4cm}{Quad4: 1105 nodes \\ Quad8: 1088 nodes}} \\
+        & \raisebox{-0.85\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cantilever_L2_p_16.png}}\\
           \raisebox{-0.85\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cantilever_Hdev_32.png}}
-        & \raisebox{-0.85\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cantilever_L2_p_32.png}}
-        & \rotatebox{-90}{\parbox[b]{4cm}{Quad4: 4257 nodes \\ Quad8: 4224 nodes}} \\
+        & \raisebox{-0.85\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cantilever_L2_p_32.png}}\\
         \end{tabular}
     \end{subcaptiongroup}
     \caption{悬臂梁问题误差与压力节点数的关系}\label{ch_4:fig:cantilever_2}
@@ -163,19 +192,18 @@ $\beta$值越接近于1表示该约束比例下的混合方案稳定性越好，
 \begin{figure}[H]
     \centering
     \begin{subcaptiongroup}
-        \begin{tabular}{c@{\hspace{0pt}}c}
+        \begin{tabular}{c}
           \raisebox{-0.8\height}{\includegraphics[width=0.8\textwidth]{figures/ch_4/cantilever_mix_quad_16_1105.png}}
-        &  \\
-        (a)Quad4单元$n_u=n_p=1105$(r=2)& \\
+          \\
+        Quad4单元($r=2$) \\
         \raisebox{-0.8\height}{\includegraphics[width=0.8\textwidth]{figures/ch_4/cantilever_mix_quad_16_742.png}}
-        &  \\
-        (b)Quad4单元$n_u=1105$\,$np=742$& \\
-        \raisebox{-0.8\height}{\includegraphics[width=0.8\textwidth]{figures/ch_4/cantilever_mix_quad8_8_780.png}}
-        & \multirow{4}{*}{\includegraphics[width=0.1\textwidth]{figures/ch_4/cantilever_mix_colorbar.png}} \\
-        (c)Quad8单元$n_u=1088$\,$n_p=780$& \\
+          \\
+        (b)Quad4单元($r=r_{opt}$)\\
+        \raisebox{-0.8\height}{\includegraphics[width=0.8\textwidth]{figures/ch_4/cantilever_mix_quad8_8_780.png}}\\
+        (c)Quad8单元($r=2$) \\
         \raisebox{-0.8\height}{\includegraphics[width=0.8\textwidth]{figures/ch_4/cantilever_mix_quad8_8_768.png}}
-        &  \\
-        (d)Quad8单元$n_u=1088$\,$np=768$& \\
+         \\
+        (d)Quad8单元($r=r_{opt}$) \\
         \end{tabular}
     \end{subcaptiongroup}
     \caption{悬臂梁问题压力云图}\label{ch_4:fig:cantilever_P}
@@ -227,20 +255,16 @@ $\beta$值越接近于1表示该约束比例下的混合方案稳定性越好，
 \begin{figure}[H]
     \centering
     \begin{subcaptiongroup}
-        \begin{tabular}{c@{\hspace{0pt}}c@{\hspace{0pt}}c}
-          $\Vert \boldsymbol u - \boldsymbol u_h \Vert_V$ & $\Vert p - p_h \Vert_Q$ & $n_u$\\
+        \begin{tabular}{c@{\hspace{0pt}}c}
+          $\Vert \boldsymbol u - \boldsymbol u_h \Vert_V$ & $\Vert p - p_h \Vert_Q$ \\
           \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_Hdev_4.png}}
-        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_L2_p_4.png}}
-        & \rotatebox{-90}{81 nodes} \\
+        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_L2_p_4.png}} \\
           \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_Hdev_8.png}}
-        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_L2_p_8.png}}
-        & \rotatebox{-90}{289 nodes} \\
+        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_L2_p_8.png}} \\
           \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_Hdev_16.png}}
-        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_L2_p_16.png}}
-        & \rotatebox{-90}{1089 nodes} \\
+        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_L2_p_16.png}}\\
           \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_Hdev_32.png}}
-        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_L2_p_32.png}}
-        & \rotatebox{-90}{4225 nodes} \\
+        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_L2_p_32.png}} \\
         \end{tabular}
     \end{subcaptiongroup}
     \caption{带孔方板问题误差与压力节点数的关系}\label{ch_4:fig:plate_with_hole_2}
@@ -272,33 +296,31 @@ $\beta$值越接近于1表示该约束比例下的混合方案稳定性越好，
 \begin{figure}[!h]
     \centering
     \begin{subcaptiongroup}
-        \begin{tabular}{c@{\hspace{0pt}}c@{\hspace{0pt}}c}
-         $n_u$&传统混合离散方案&所提混合离散方案 \\
-         \rotatebox{-90}{2145 nodes}& \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_tri3_32_2145.png}}
+        \begin{tabular}{c@{\hspace{0pt}}c}
+        \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_tri3_32_2145.png}}
         & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_tri3_32_561.png}}\\
-        Tri3&$n_p=2145$&$n_p=561$  \\
-        \rotatebox{-90}{2145 nodes} &\raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_quad_32_2145.png}}
-        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_quad_32_561.png}}\\
-        Quad4&$n_p=2145$&$n_p=561$ \\
+        Tri3($r=2$)&Tri3($r=r_{opt}$)  \\
+        \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_tri6_32_8385.png}}
+        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_tri6_32_2145.png}} \\
+        Tri6($r=2$)&Tri6($r=r_{opt}$)  \\
         \end{tabular}
     \end{subcaptiongroup}
-    \caption{Cook membrane 问题线性单元压力云图}\label{ch_4:fig:Cook_membrane_p}
+    \caption{Cook membrane 问题三角形单元压力云图}\label{ch_4:fig:Cook_membrane_p}
 \end{figure}
 
 \begin{figure}[!h]
     \centering
     \begin{subcaptiongroup}
-        \begin{tabular}{c@{\hspace{0pt}}c@{\hspace{0pt}}c}
-        $n_u$&传统混合离散方案&所提混合离散方案 \\
-        \rotatebox{-90}{8385 nodes}& \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_tri6_32_8385.png}}
-        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_tri6_32_2145.png}} \\
-        Tri6&$n_p=8385$&$n_p=2145$  \\
-        \rotatebox{-90}{6337 nodes} & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_quad8_32_6337.png}}
+        \begin{tabular}{c@{\hspace{0pt}}c}
+        \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_quad_32_2145.png}}
+        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_quad_32_561.png}}\\
+        Quad4($r=2$)&Quad4($r=r_{opt}$)  \\
+        \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_quad8_32_6337.png}}
         & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_quad8_32_2145.png}} \\
-        Tri8&$n_p=6337$&$n_p=2145$  \\
+        Quad8($r=2$)&Quad8($r=r_{opt}$)  \\
         \end{tabular}
     \end{subcaptiongroup}
-    \caption{Cook membrane 问题二次单元压力云图}\label{ch_4:fig:Cook_membrane_p2}
+    \caption{Cook membrane 问题四边形单元压力云图}\label{ch_4:fig:Cook_membrane_p2}
 \end{figure}
 \section{小结}
 
