@@ -1,49 +1,56 @@
 \chapter{最优体积约束比}
-针对体积约束比结果不准确和LBB稳定性条件验证过程复杂的问题，本章采用泛函分析的手段，验证LBB稳定性条件与特征值问题的等价性。
-详细讨论特征值问题非零特征值个数与体积约束比之间的联系，从而建立体积约束比和LBB稳定性条件之间的关系。
-以此，构建考虑体积约束比的新型LBB稳定系数估计表达式，从而确定最优体积约束比。
+本章从泛函分析的角度再次验证LBB稳定性条件与特征值问题的等价性。
+详细讨论特征值问题非零特征值个数与体积约束比之间的联系，确定体积约束比和LBB稳定性条件之间的关系。
+从而，建立包含体积约束比的新型LBB稳定系数估计表达式，并以此确定最优体积约束比。
 
 \section{LBB稳定性条件与特征值问题}
 
-基于LBB稳定性条件\eqref{ch:2:eq:LBB}，假设$\mathcal P_h:V_h \rightarrow Q_h$ 是$\mathcal P$的正交投影算子，定义为：
+首先，引入算子$\mathcal P=3\kappa\nabla\cdot$的正交投影算子$\mathcal P_h:V_h \rightarrow Q_h$，有：
 \begin{equation}\label{ch_3:eq:Ph}
-    b(q_h,\boldsymbol v_h) = (q_h, \mathcal P \boldsymbol v_h) = (q_h, \mathcal P_h \boldsymbol v_h), \quad \forall q_h \in Q_h
+    (q_h, \mathcal P \boldsymbol v_h) = (q_h, \mathcal P_h \boldsymbol v_h), \quad \forall q_h \in Q_h
 \end{equation}
-式中散度算子$\mathcal P:V\rightarrow Q$。于是，LBB稳定性条件\eqref{ch:2:eq:LBB}可以改写为：
+将上式关系引入LBB稳定性条件，此时式\eqref{ch:2:eq:LBB}中的$b$算子及LBB稳定性条件可改写为：
+\begin{equation}\label{ch_3:eq:b}
+    b(q_h,\boldsymbol v_h) = \left (q_h, \frac{1}{3\kappa}\mathcal P \boldsymbol v_h \right ) = (q_h, \frac{1}{3\kappa}\mathcal P_h \boldsymbol v_h), \quad \forall q_h \in Q_h
+\end{equation}
 \begin{equation} \label{ch_3:eq:r11}
     \beta \le \inf_{q_h \in Q_h} \sup_{\boldsymbol v_h \in V_h} \frac{\vert b(q_h,\boldsymbol v_h) \vert}{\Vert q_h \Vert_Q \Vert \boldsymbol v_h \Vert_V} 
     \le \inf_{q_h \in Q_h} \sup_{\boldsymbol v_h \in V_h} \frac{\vert (q_h,\mathcal P_h \boldsymbol v_h) \vert}{\Vert q_h \Vert_Q \Vert \boldsymbol v_h \Vert_V}
 \end{equation}
-
-式\eqref{ch_3:eq:r11}对于任意的$q_h \in Q_h$均成立，可知其对于所有的$Q_h$均成立，又有$\mathcal P_h$的相空间$\mathrm{Im}\mathcal P_h \in Q_h$。因此，对于$q_h \in \mathrm{Im}\mathcal P_h$也应成立。LBB稳定性条件可以进一步改写为：
+式\eqref{ch_3:eq:r11}对于任意的$q_h \in Q_h$均成立，由于$\mathcal P_h$的相空间$\mathrm{Im}\mathcal P_h \subseteq Q_h$，因此，对于$q_h \in \mathrm{Im}\mathcal P_h$也应成立。LBB稳定性条件可以进行如下收缩为：
 \begin{equation} \label{ch_3:eq:r12}
-        \beta \le \inf_{q_h \in Q_h} \sup_{\boldsymbol v_h \in V_h} \frac{\vert b(q_h,\boldsymbol v_h) \vert}{\Vert q_h \Vert_Q \Vert \boldsymbol v_h \Vert_V} 
-        \le \inf_{q_h \in \mathrm{Im}\mathcal P_h} \sup_{\boldsymbol v_h \in V_h} \frac{\vert (q_h,\mathcal P_h \boldsymbol v_h) \vert}{\Vert q_h \Vert_Q \Vert \boldsymbol v_h \Vert_V}
+        \beta \le \inf_{q_h \in \mathrm{Im}\mathcal P_h} \sup_{\boldsymbol v_h \in V_h} \frac{\vert (q_h,\mathcal P_h \boldsymbol v_h) \vert}{\Vert q_h \Vert_Q \Vert \boldsymbol v_h \Vert_V}
 \end{equation}
 
-由相空间$\mathrm{Im}\mathcal P_h \in Q_h$，根据柯西--施瓦茨(Cauchy--Schwarz)不等式\cite{philippeg.2013}，有
+由于$\mathcal P_h \boldsymbol v_h \in \mathrm{Im}\mathcal P_h$，$\mathcal P_h \boldsymbol v_h$与$q_h$此时均处于$\mathrm{Im}\mathcal P_h$空间，根据柯西--施瓦茨(Cauchy--Schwarz)不等式\cite{philippeg.2013}，有
 \begin{equation}
     \vert (q_h,\mathcal P_h \boldsymbol v_h) \vert \le \Vert q_h \Vert_Q \Vert \mathcal P_h \boldsymbol v_h \Vert_Q
 \end{equation}
-同时，当且仅当$q_h=\mathcal P_h \boldsymbol v_h$时，等式成立，即
+上式不等式当且仅当在$q_h=\mathcal P_h \boldsymbol v_h$时，等号成立，即
 \begin{equation}\label{ch_3:eq:equality}
     \vert (q_h,\mathcal P_h \boldsymbol v_h) \vert = \Vert q_h \Vert_Q \Vert \mathcal P_h \boldsymbol v_h \Vert_Q, \quad \forall \boldsymbol v_h \in V'_h
 \end{equation}
 对于给定的 $q_h\in \mathrm{Im}\mathcal P_h$，空间$V'_h$定义为：$V'_h = \{ \boldsymbol v_h \in V_h \; \vert \; \mathcal P_h \boldsymbol v_h = q_h \}$。
-当等式成立时，从式\eqref{ch_3:eq:r12}可知，$q_h$和$\boldsymbol v_h$均不可以等于零。因此，空间$V'_h \subset V_h\setminus \ker P_h$，其中 $\ker \mathcal P_h \subset V$ 是 $\mathcal P_h$ 的核，定义为: $\ker \mathcal P_h = \{ \boldsymbol v \in V \;\vert\; \mathcal P_h \boldsymbol v = 0 \}$。
-将式\eqref{ch_3:eq:equality}代回到式\eqref{ch_3:eq:r12}中，此时不等式\eqref{ch_3:eq:r12}的右边可以改写为：
+当等式成立时，从式\eqref{ch_3:eq:r12}可知，$q_h$和$\boldsymbol v_h$均不可以等于零。因此，空间$V'_h \subset V_h\setminus \ker \mathcal P_h$，其中 $\ker \mathcal P_h \subset V$ 是 $\mathcal P_h$ 的核空间，定义为：$\ker \mathcal P_h = \{ \boldsymbol v \in V \;\vert\; \mathcal P_h \boldsymbol v = 0 \}$。
+值得注意的是，$V'_h$空间是个可变的空间，其大小取决于$q_h$的选择。
+将式\eqref{ch_3:eq:equality}代回到式\eqref{ch_3:eq:r12}中，此时，不等式\eqref{ch_3:eq:r12}的右边可以改写为：
 \begin{equation}\label{ch_3:eq:r13}
     \begin{split}
     \inf_{q_h \in \mathrm{Im}\mathcal P_h}\sup_{\boldsymbol v_h\in V_h} \frac{\vert (q_h,\mathcal P_h \boldsymbol v_h) \vert}{\Vert q_h \Vert_Q \Vert \boldsymbol v_h \Vert_V} &=
-    \inf_{q_h \in \mathrm{Im}\mathcal P_h}\sup_{\boldsymbol v_h\in V'_h} \frac{\vert (\Vert q_h \Vert_Q \Vert \mathcal P_h \boldsymbol v_h \Vert_Q}{\Vert q_h \Vert_Q \Vert \boldsymbol v_h \Vert_V} \\
-    &=\inf_{q_h \in \mathrm{Im}\mathcal P_h}\sup_{\boldsymbol v_h\in V'_h} \frac{\Vert \mathcal P_h 
-    \boldsymbol v_h \Vert_Q}{\Vert \boldsymbol v_h \Vert_V} 
+    \inf_{q_h \in \mathrm{Im}\mathcal P_h}\sup_{\boldsymbol v_h\in V'_h} \frac{\Vert q_h \Vert_Q \Vert \mathcal P_h \boldsymbol v_h \Vert_Q}{\Vert q_h \Vert_Q \Vert \boldsymbol v_h \Vert_V} \\
+    &=\inf_{q_h \in \mathrm{Im}\mathcal P_h}\sup_{\boldsymbol v_h\in V'_h} \frac{\Vert \mathcal P_h \boldsymbol v_h \Vert_Q}{\Vert \boldsymbol v_h \Vert_V} \\
+    &=\inf_{V'_h \subset V_h\ker \mathcal P_h} \sup_{\boldsymbol v_h\in V'_h} \frac{\Vert \mathcal P_h \boldsymbol v_h \Vert_Q}{\Vert \boldsymbol v_h \Vert_V} 
     \end{split}
 \end{equation}
-结合式\eqref{ch_3:eq:r12}、\eqref{ch_3:eq:r13}可得LBB稳定系数估算式:
+结合式\eqref{ch_3:eq:r12}、\eqref{ch_3:eq:r13}可得:
 \begin{equation}\label{ch_3:eq:r1}
     \beta \le \inf_{V'_h \subset V_h \setminus \ker \mathcal P_h} \sup_{v_h \in V'_h} \frac{\Vert \mathcal P_h \boldsymbol v_h \Vert_Q}{\Vert \boldsymbol v_h \Vert_V}
 \end{equation}
+式中
+\begin{equation}
+    \Vert \mathcal P_h \boldsymbol v_h \Vert_Q^2 = 
+\end{equation}
+
 根据混合离散里兹–伽辽金变分方程\eqref{ch_2:eq:ritz_mix}，式\eqref{ch_3:eq:r1}可以改写为：
 \begin{equation}\label{ch_3:eq:r2}
     \beta \le \inf_{V'_h \subset V_h \setminus \ker \mathcal P_h} \sup_{v_h \in V'_h} \frac{\Vert\tilde{\varepsilon^v_h}\Vert_Q}{\Vert \varepsilon^d_h\Vert_V}
