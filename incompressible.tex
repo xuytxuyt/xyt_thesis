@@ -1,21 +1,20 @@
 \chapter{体积自锁问题的有限元无网格混合离散分析方法}
 
-本章针对体积不可压问题建立有限元无网格混合离散分析方法，调整体积约束比以达到最优约束比。
-首先介绍了再生核近似无网格法，详细说明了无网格形函数的构造过程.
-其次，结合对LBB稳定系数的分析，提出满足LBB稳定性条件的免体积自锁混合离散方案。
+本章针对体积不可压问题提出了有限元无网格混合离散分析方案，并利用该框架验证第三章所提LBB稳定系数估计表达式的正确性，并确定最终压力节点布置方案。
 最后，通过典型弹性力学算例验证所提混合离散方案的稳定性与正确性。
-\section{再生核近似}
-为达到最优体积约束比，采用如图\ref{ch_4:fig:meshfree}所示的有限元无网格混合离散方案离散位移和压力节点。
+\section{有限元无网格混合离散方案}
+考虑如图\ref{ch_4:fig:meshfree}所示的有限元无网格混合离散方案离散位移和压力节点。
 将伽辽金弱形式\eqref{ch_2:eq:weak_mix}中的位移$\boldsymbol{u}$和压力$p$采用不同的离散方式进行近似。
 位移$\boldsymbol{u}$仍采用有限元形函数\eqref{ch_2:eq:u_h_mix}进行近似，而压力$p$通过再生核无网格形函数进行近似。
 再生核无网格近似将求解域$\Omega$及其边界$\Gamma$由$n_p$个无网格节点离散$\{\boldsymbol x_K\}_{K=1}^{n_p}$。每个无网格节点$\boldsymbol x_K$对应的形函数为$\Psi_K(\boldsymbol{x})$，形函数影响域为$supp(\boldsymbol{x}_K)$。近似的压力$p_h$可表示为：
 \begin{equation}
     p_h(\boldsymbol x) = \sum_{K=1}^{n_p} \Psi_K(\boldsymbol x) p_K
 \end{equation}
-其中$p_K$为与无网格节点$x_K$对应的节点系数。
-\begin{figure}[H]
+其中$p_K$为与无网格节点$\boldsymbol x_K$对应的节点系数。
+
+\begin{figure}[!ht]
     \centering 
-        \includegraphics[scale=0.5]{figures/meshfree.png}
+        \includegraphics[scale=0.55]{figures/meshfree.png}
         \caption{有限元无网格混合离散示意图}\label{ch_4:fig:meshfree}
 \end{figure}
 
@@ -23,20 +22,19 @@
 \begin{equation}\label{ch_4:eq:rkshape}
     \Psi_K(\boldsymbol x) = \boldsymbol c(\boldsymbol x_K-\boldsymbol x) \boldsymbol p^{[n]}(\boldsymbol x_K-\boldsymbol x) \phi(\boldsymbol x_K - \boldsymbol x)
 \end{equation}
-其中$\boldsymbol p$为$n$阶基函数向量，其表达式为：
+其中$\boldsymbol p$为基函数向量，其表达式为：
 \begin{equation}
-    \boldsymbol p^{[n]}(\boldsymbol x) = \{ 1, x, y, x^2, xy, y^2,...,y^n\}^\mathrm{T}
+    \boldsymbol p(\boldsymbol x) = \{ 1, x, y, x^2, xy, y^2,\dots \}^\mathrm{T}
 \end{equation}
-对于弹性力学问题,本文选择一阶和二阶多项式基函数:
-\begin{equation}
-    \boldsymbol p(\boldsymbol x) = \{ 1, x, y, x^2, xy, y^2\}^\mathrm{T}
-\end{equation}
-而$\phi$为核函数，其影响域的大小由影响域尺寸$s$决定，核函数及其影响域的大小共同决定了无网格形函数的局部紧支性和光滑性。在二维情况下，核函数的影响域通常为圆形或者矩形。本文的影响域形状为矩形，矩形影响域的核函数可由下列公式计算得到：
+本文中位移采用三角形三节点（Tri3）和六节点(Tri6)单元、四边形四节点（Quad4）和八节点（Quad8）单元进行近似，压力近似中无网格形函数基向量阶次取相同阶次进行离散，
+即Tri3和Quad4取线性基函数，而Tri6和Quad8取二次基函数。
+
+$\phi$为核函数，其影响域的大小由影响域尺寸决定，核函数及其影响域的大小共同决定了无网格形函数的局部紧支性和光滑性。在二维情况下，核函数的影响域通常为圆形或者矩形。本文的影响域形状为矩形，矩形影响域的核函数可由下列公式计算得到：
 \begin{equation}
     \phi(\boldsymbol x_K-\boldsymbol x) = \phi(r_x) \phi(r_y), \quad r_x = \frac{|x_K - x|}{s_{x}},r_y = \frac{| y_K -  y|}{s_{y}}
 \end{equation}
 其中, $s_x$ 和 $s_y$ 分别为 $x$ 和 $y$ 方向上的影响域尺寸，若节点均匀布置，一般使两个方向上的影响域大小相等，即$s_x = s_y = s$。
-为保证形函数的紧支性和光滑性，$\phi$ 通常取为阶次大于 $n$ 的紧支函数。因此，本文核函数 $\phi(\boldsymbol x_K-\boldsymbol x)$ 取为三次样条函数：
+为保证形函数的紧支性和光滑性，$\phi$ 通常取为阶次大于基函数阶次的紧支函数。因此，本文核函数 $\phi(\boldsymbol x_K-\boldsymbol x)$ 取为三次样条函数：
 \begin{equation}
     \phi(s) =\frac{1}{3!} \begin{cases}
         (2-2s)^3 - 4(1-2s)^3 & s\le\frac{1}{2} \\
@@ -48,7 +46,7 @@ $\boldsymbol c$为待定系数向量，可以通过满足下列一致性条件�
 \begin{equation}\label{ch_4:eq:cc1}
     \sum_{I=1}^{n_p}\Psi_K(\boldsymbol x) \boldsymbol p(\boldsymbol x_K) = \boldsymbol p (\boldsymbol x)
 \end{equation}
-或等效的转换形式：
+或等价于
 \begin{equation}\label{ch_4:eq:cc2}
     \sum_{I=1}^{n_p}\Psi_K(\boldsymbol x) \boldsymbol p(\boldsymbol x_K-\boldsymbol x) = \boldsymbol p(\boldsymbol 0)
 \end{equation}
@@ -66,51 +64,46 @@ $\boldsymbol c$为待定系数向量，可以通过满足下列一致性条件�
     \Psi_K(\boldsymbol x) = \boldsymbol p^{\mathrm{T}}(\boldsymbol 0) \boldsymbol A^{-1}(\boldsymbol x_K-\boldsymbol x)p(\boldsymbol x_K-\boldsymbol x)\phi(\boldsymbol x_K-\boldsymbol x)
 \end{equation}
 
-图\ref{ch_4:fig:mf}为一阶多项式基函数和二阶多项式基函数的无网格形函数图。从图中可以看出，无网格形函数具有全域高阶连续光滑的特点。
-\begin{figure}[!h]
-    \centering
-        \begin{tabular}{c@{\hspace{0pt}}c}
-            $p=1$& $p=2$ \\
-            \includegraphics[width=0.5\textwidth]{figures/ch_4/shapefunction11.png} &
-            \includegraphics[width=0.5\textwidth]{figures/ch_4/shapefunction21.png} \\
-            \includegraphics[width=0.5\textwidth]{figures/ch_4/shapefunction12.png} &
-            \includegraphics[width=0.5\textwidth]{figures/ch_4/shapefunction22.png} \\
-        \end{tabular}
-        \caption{二维无网格形函数}\label{ch_4:fig:mf}
+再生核无网格形函数仅通过节点信息构造形函数，形函数在全域高阶连续光滑，与有限元法混合离散求解时，可直接将有限元单元中进行数值积分计算。
+根据该特性，压力节点的布置可摆脱单元限制在全域上任意布置，可任意调整体积约束比，以满足最优约束比的要求。
+\section{最优约束比数值验证及压力节点布置方案}
+基于所提的LBB稳定系数估计\eqref{ch_3:eq:r3}和最优体积约束比取值范围\eqref{ch_3:eq:best}，结合有限元无网格混合离散分析方法，对有限元Tri3、Tri6、Quad4和Quad8单元在不同约束比例下的LBB稳定系数进行了系统性测试。采用特征值方法对如图\ref{ch_4:fig:test}所示$\Omega = (0,1)\otimes(0,1)$的正方形区域问题进行LBB稳定性条件进行测试，$\Omega$左边施加强制边界条件，其余边界自由。
+
+\begin{figure}[!ht]
+    \centering 
+        \includegraphics[scale=0.6]{figures/ch_4/test.png}
+        \caption{正方形区域问题模型}\label{ch_4:fig:test}
 \end{figure}
 
-无网格形函数近似的压力$p_h$的变分可以表示为：
-\begin{equation}
-    \delta p_h(\boldsymbol x) = \sum_{K=1}^{n_p} \Psi_K(\boldsymbol x) \delta p_K
-\end{equation}
+对$\Omega$区域采用图\ref{ch_4:fig:test_msh}所示的$4\times 4$、$8\times 8$、$16\times 16$和$32\times 32$有限元单元近似位移。为避免非均布节点对计算结果的影响，这里采用均布无网格节点进行离散，针对线性和二次无网格近似，其相对影响域大小分别取作$1.5$和$2.5$。
 
-将采用有限元离散的位移$\boldsymbol{u}$和采用无网格离散的压力$p$回代到混合离散方程\eqref{ch_2:eq:weak_mix}，且根据$\delta\boldsymbol{u}_h$和$\delta p_h$的任意性，可得离散控制方程：
-\begin{equation}
-    \begin{bmatrix}
-        \boldsymbol K^{uu} & \boldsymbol K^{up} \\ (\boldsymbol K^{up})^{\mathrm T} & \boldsymbol K^{pp}
-    \end{bmatrix}
-    \begin{Bmatrix}
-        \boldsymbol d^u \\ \boldsymbol d^p 
-    \end{Bmatrix} =
-    \begin{Bmatrix}
-        \boldsymbol f \\ \boldsymbol 0 
-    \end{Bmatrix}
-\end{equation}
-其中各矩阵的表达式见式\eqref{ch_2:eq:equilibrium_up}、\eqref{ch_2:eq:equilibrium_pp}。
-\section{满足LBB稳定性条件的混合离散方案}
-基于考虑约束比的LBB稳定系数估计式\eqref{ch_3:eq:r3}和最优体积约束比取值范围\eqref{ch_3:eq:best}，结合有限元无网格混合离散分析方法，对有限元离散单元在不同约束比例下的LBB稳定系数进行了系统性测试。
-为探究单元类型和网格密度对计算结果的影响，测试选取了四种典型有限元离散单元：Tri3(三角形3节点单元)、Tri6(三角形6节点单元)、Quad4(四边形4节点单元)、Quad8(四边形八节点单元)和四个不同数量的位移节点($n_u=$25、81、289、1089)进行对比分析，旨在寻找出最优的免体积自锁有限元无网格混合离散方案。
-所得测试结果如图\ref{ch_4:fig:infsup_convergence}所示。
+\begin{figure}[!ht]
+    \centering
+        \begin{tabular}{c@{\hspace{24pt}}c}
+            \includegraphics[width=0.3\textwidth]{figures/ch_4/Square_4_msh.png} &
+            \includegraphics[width=0.3\textwidth]{figures/ch_4/Square_8_msh.png} \\
+            $4\times4$&  $8\times8$ \\
+            \includegraphics[width=0.3\textwidth]{figures/ch_4/Square_16_msh.png} &
+            \includegraphics[width=0.3\textwidth]{figures/ch_4/Square_32_msh.png} \\
+        \end{tabular}
+        \caption{正方形区域问题节点离散}\label{ch_4:fig:test_msh}
+\end{figure}
 
-以Tri3单元为例，图\eqref{ch_3:eq:best}(a)中的红色曲线反映了在位移节点数$n_u$固定的情况下，压力节点数$n_p$的变化对LBB稳定系数$\beta$的影响，颜色由浅到深表示位移节点数逐渐增加。
-横坐标为压力节点数的变化，纵坐标为LBB稳定系数$\beta$的值。
-$\beta$值越往下代表$\beta$越接近于零，表明混合方案不稳定。$\beta$值越靠上表示该约束比例下的混合方案稳定性越好(满足LBB稳定性条件)。
-图中四个竖向虚线分别表示四个不同位移节点数$n_u$对应的稳定压力节点数$n_s$。
-测试结果表明：当压力节点数$n_p$小于$n_s$(位于虚线左侧)时，离散方案趋于稳定，满足LBB稳定性条件；
-而当$n_p$大于$n_s$(位于虚线右侧)时，离散方案则表现出不稳定性，无法满足LBB稳定性条件。
-值得注意的是，传统有限元混合离散方案中采用的最优约束比($r=2$)对应的$\beta$值均位于虚线右侧，这表明传统有限元混合离散方案不满足LBB稳定性条件。
-如图\ref{ch_4:fig:infsup_convergence}(b)、(c)、(d)所示，Tri6单元、Quad4单元和Quad8单元的测试结果与Tri3单元的基本一致。为保证混合离散方案在满足LBB稳定性条件的同时，避免使用两套网格进行离散而增加计算量，本研究基于上述测试结果，选取在虚线左边的压力节点数作为离散方案，提出了如图\ref{ch_4:fig:mix_scheme}所示的免体积自锁有限元无网格混合离散方案。该方案的压力节点选取直接基于位移节点，从而实现了方案的简易性与稳定性。
-图\ref{ch_4:fig:infsup_convergence}中实线折现展示了相应方案下的$\beta$取值，初步验证了该方案的可行性。
+图\ref{ch_4:fig:infsup_convergence}该测试的计算结果，
+红色曲线为在位移节点数$n_u$固定的情况下，LBB稳定系数$\beta$随压力节点数$n_p$的变化的曲线图。
+$\beta$值越往下，表示其趋近于零，不满足LBB稳定性条件。
+同时，对于不同的位移节点下（颜色深浅差异），LBB稳定系数保持在一定范围，表示其大小与网格尺寸无关，满足LBB稳定性条件。
+相反则不满足LBB稳定性条件。
+图中竖直蓝色虚线表示第三章所提LBB稳定系数估计下得到的最优约束比阙值，虚线左边满足LBB稳定性条件，右边则不满足。
+从图中可以看出，当压力节点数在最优约束比范围内（蓝色虚线左边），其$\beta$始终保持在一定的数值，且该值大小不可忽略。
+当压力节点逐步增加，并超过最优约束比范围后，$\beta$迅速减小，此时混合离散方案不满足LBB稳定性条件。
+
+针对上诉分析结果，进一步在图中标出传统最优约束比下的测试结果（$r=2$）。
+结果表明在传统最优约束比下，$\beta$的值已经开始下降，无法保持在一个较大的水平，不能满足LBB稳定性条件。
+为满足LBB稳定性条件，同时考虑编程实现的难易程度，本文针对体积不可压问题的Tri3、Tri6、Quad4和Quad8位移单元提出了图\ref{ch_4:fig:mix_scheme}所示的压力节点布置方案，
+该方案压力节点在已有的位移节点中选取，以减小内存开销。
+同时取隔一个点作为压力节点，整体节点数也满足所提LBB稳定系数估计式\eqref{ch_3:eq:best}的要求。
+将该方案的特征值测试结果也标于图\ref{ch_4:fig:mix_scheme}中，从结果中可以看出，此混合离散方案可满足LBB稳定性条件。在本章的数值算例中，mix--Tri3、mix--Tri6、mix--Quad4和mix--Quad8在不声明约束比的情况下，均采用这套离散方案。
 
 \begin{figure}[H]
     \centering
@@ -125,8 +118,7 @@ $\beta$值越往下代表$\beta$越接近于零，表明混合方案不稳定。
 \end{figure}
 
 
-
-\begin{figure}[!h]
+\begin{figure}[!ht]
     \centering
         \begin{tabular}{c@{\hspace{24pt}}c}
             \includegraphics[width=0.3\textwidth]{figures/ch_4/mix_tri3.png} &
@@ -164,20 +156,32 @@ $\beta$值越往下代表$\beta$越接近于零，表明混合方案不稳定。
        \sigma_{xx}=-\frac{P(L-x)y}{I},\,\sigma_{yy}=0,\,\sigma_{xy}=\frac{P}{2I}(\frac{D^2}{4}-y^2)
 \end{equation}
 
-选取Quad4和Quad8两种离散单元，分别四个不同数量的位移节点数$n_u$进行分析，以验证在$n_u$固定的情况下，压力节点数$n_p$与位移误差和压力误差的关系。图\ref{ch_4:fig:cantilever_2}展示了相应的分析结果，其中虚线表示LBB稳定系数估计的最优约束比下的压力节点数量。
-从图中可以观察到以下规律：由于二次单元Quad8的高阶插值特性，其本身就具有一定缓解自锁的特性，压力节点数$n_p$的变化对位移误差的影响几乎可以忽略；而对于线性单元Quad4，随着$n_p$的逐渐减少，位移误差也呈现减小的趋势，并在达到最优$n_p$时位移误差也达到最小值。值得注意的是，当$n_p$小于最优值时，位移误差仍然保持在较低水平。类似的现象也体现在压力误差的分析中，且随着网格密度的增加，这一趋势更加明显密。
-上述结果表明，当压力节点数$n_p$小于最优值时，离散方案能获得高精度的位移解和压力解。
+悬臂梁求解域采用图\ref{ch_4:fig:cantilever_msh}所示的$4\times 16$、$8\times 32$、$16\times 64$和$32\times 128$有限元单元近似位移。对于采用线性和二次无网格近似的悬臂梁算例，其相对影响域大小分别取作1.5和2.5。
+\begin{figure}[!h]
+    \centering
+    \begin{subcaptiongroup}
+        \begin{tabular}{c}
+          \raisebox{-0.8\height}{\includegraphics[width=0.8\textwidth]{figures/ch_4/cantilever_4_msh.png}}\\
+        $4\times 16$\\
+        \raisebox{-0.8\height}{\includegraphics[width=0.8\textwidth]{figures/ch_4/cantilever_8_msh.png}}\\
+        $8\times 32$ \\
+        \raisebox{-0.8\height}{\includegraphics[width=0.8\textwidth]{figures/ch_4/cantilever_16_msh}}\\
+        $16\times 64$\\
+        \raisebox{-0.8\height}{\includegraphics[width=0.8\textwidth]{figures/ch_4/cantilever_32_msh.png}}\\
+        $32\times 128$  \\
+        \end{tabular}
+    \end{subcaptiongroup}
+    \caption{悬臂梁问题节点模型}\label{ch_4:fig:cantilever_msh}
+\end{figure}
 
-图\ref{ch_4:fig:cantilever_P}为悬臂梁问题的压力云图。图(a)，(b)为Quad4单元的压力云图，其中图(a)传统混合离散方案出现了明显的压力振荡现象，而图(b)本文提出的离散方案则没有出现压力振荡现象，表现出更好的数值稳定性。图(c)，(d)为Quad8单元的压力云图，图(c)为LBB误差估计推出的最优约束比的离散方案，图中仍存在一定的压力振荡现象；相比之下，图(d)所提离散方案则完全没有压力振荡现象。这些结果进一步验证了本文所提离散方案能够获得高精度的压力解，同时有效消除了压力振荡现象。
 
-图\ref{ch_4:fig:cantileve_l2}为悬臂梁问题Quad4和Quad8单元的位移误差和压力误差对比图。从图中可以明显看出：对于位移误差，Quad4单元的传统混合离散方案无法达到理论误差收敛率，而本文所提的离散方案可以达到理论误差收敛率；对于Quad8单元，两种离散方案均能达到理论误差收敛率。对于压力误差，无论是Quad4单元还是Quad8单元，传统混合离散方案均无法达到理论误差收敛率，而本文所提方案则能够达到理论误差收敛率。这些结果进一步验证了本文所提离散方案具有很好的数值精度和稳定性。
 \begin{figure}[H]
     \centering
     \begin{subcaptiongroup}
         \begin{tabular}{c@{\hspace{0pt}}c}
-          $\Vert \boldsymbol u - \boldsymbol u_h \Vert_V$ & $\Vert p - p_h \Vert_Q$  \\
+          $\Vert \boldsymbol u - \boldsymbol u_h \Vert_V$ & $\Vert p - p_h \Vert_Q$ \\
           \raisebox{-0.8\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cantilever_Hdev_4.png}}
-        & \raisebox{-0.8\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cantilever_L2_p_4.png}} \\
+        & \raisebox{-0.8\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cantilever_L2_p_4.png}}\\
           \raisebox{-0.85\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cantilever_Hdev_8.png}}
         & \raisebox{-0.85\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cantilever_L2_p_8.png}} \\
           \raisebox{-0.85\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cantilever_Hdev_16.png}}
@@ -188,8 +192,26 @@ $\beta$值越往下代表$\beta$越接近于零，表明混合方案不稳定。
     \end{subcaptiongroup}
     \caption{悬臂梁问题误差与压力节点数的关系}\label{ch_4:fig:cantilever_2}
 \end{figure}
+首先对有限元Quad4和Quad8单元在不同约束比下的位移和压力误差进行了测试。图\ref{ch_4:fig:cantilever_2}为测试的结果，蓝色和绿色折线为Quad4单元和Quad8单元在位移节点数$n_u$固定的情况下，位移和压力误差随压力节点数$n_p$变化折线图。误差值越往下，表示结果越精确。
+图中竖直虚线表示第三章所提LBB稳定系数估计下得到的最优约束比阙值，虚线左边满足LBB稳定性条件，右边则不满足。
+从图中可以看出，当压力节点数在最优约束比范围内（虚线左边），位移误差始终保持在一定的数值，且该值为最优值；压力误差逐渐减小，且为较低水平。当压力节点逐步增加，并超过最优约束比范围后，Quad4单元位移误差和压力误差均发生明显跳跃，误差快速增大；Quad8单元位移误差保持不变，压力误差发生明显跳跃，误差快速增大；结果与上述LBB稳定系数测试结果一致。
 
-\begin{figure}[H]
+为验证上一节所提出的离散方案，对Quad4和Quad8单元在传统最优约束比（$r=2$）和所提约束比（$r=r_{opt}$）下的误差进行对比。
+图\ref{ch_4:fig:cantilever_2}为悬臂梁问题的位移误差和压力误差对比图。从图中可以看出混合离散方案（$r=r_{opt}$）的计算精度优于传统最优约束比（$r=2$），并且Quad4单元传统最优约束比（$r=2$）下的位移和压力误差，Quad8单元传统最优约束比（$r=2$）下的压力误差无法达到理论误差收敛率，不满足LBB稳定性条件，而混合离散方案（$r=r_{opt}$）下的位移和压力误差，均可达到理论误差收敛率。
+图\ref{ch_4:fig:cantilever_P}为悬臂梁问题的压力云图。从图中可以看出传统最优约束比（$r=2$）下的压力云图出现了明显的压力振荡现象，而混合离散方案（$r=r_{opt}$）完全没有压力振荡现象。
+
+\begin{figure}[!h]
+    \centering
+    \begin{subcaptiongroup}
+        \begin{tabular}{c@{\hspace{0pt}}c}
+          \raisebox{-0.8\height}{\includegraphics[width=0.5\textwidth]{figures/ch_4/cantilever_Hdev.png}}
+        & \raisebox{-0.8\height}{\includegraphics[width=0.5\textwidth]{figures/ch_4/cantilever_L2_p.png}}\\
+        \end{tabular}
+    \end{subcaptiongroup}
+    \caption{悬臂梁问题误差对比}\label{ch_4:fig:cantileve_l2}
+\end{figure}
+
+\begin{figure}[!h]
     \centering
     \begin{subcaptiongroup}
         \begin{tabular}{c}
@@ -209,16 +231,7 @@ $\beta$值越往下代表$\beta$越接近于零，表明混合方案不稳定。
     \caption{悬臂梁问题压力云图}\label{ch_4:fig:cantilever_P}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \begin{subcaptiongroup}
-        \begin{tabular}{c@{\hspace{0pt}}c}
-          \raisebox{-0.8\height}{\includegraphics[width=0.5\textwidth]{figures/ch_4/cantilever_Hdev.png}}
-        & \raisebox{-0.8\height}{\includegraphics[width=0.5\textwidth]{figures/ch_4/cantilever_L2_p.png}}\\
-        \end{tabular}
-    \end{subcaptiongroup}
-    \caption{悬臂梁问题误差对比}\label{ch_4:fig:cantileve_l2}
-\end{figure}
+
 \subsection{带孔无限大平板问题}
 
 考虑经典的带孔无限大平板问题，如图\ref{ch_4:fig:hole}所示，板的的中心存在一半径为$a=1$的圆形小孔，同时平板的无穷远处沿$x$轴方向施加均布荷载$T=1000$。 板的材料系数为杨氏模量$E=3\times10^6$、泊松比$\nu=0.49999$。根据Michell解可以得到该带孔无限大平板问题的解析解为：
@@ -248,31 +261,48 @@ $\beta$值越往下代表$\beta$越接近于零，表明混合方案不稳定。
         \includegraphics[scale=0.5]{figures/ch_4/hole.png}
         \caption{带孔方板问题模型}\label{ch_4:fig:hole}
 \end{figure}
-
-根据带孔无限大平板的对称性，如图\ref{ch_4:fig:hole}所示，取边长$b=5$的四分之一方形域进行研究，求解域的左端与下端约束法向位移，求解域上端和右端根据式\eqref{ch_4:eq:plate_with_hole_exact}施加自然边界条件。
-
+\begin{figure}[H]
+    \centering
+        \begin{tabular}{c@{\hspace{24pt}}c}
+            \includegraphics[width=0.25\textwidth]{figures/ch_4/plate_with_hole_4_msh.png} &
+            \includegraphics[width=0.25\textwidth]{figures/ch_4/plate_with_hole_8_msh.png} \\
+            81 & 289 \\
+            \includegraphics[width=0.25\textwidth]{figures/ch_4/plate_with_hole_16_msh.png} &
+            \includegraphics[width=0.25\textwidth]{figures/ch_4/plate_with_hole_32_msh.png} \\
+            1089 & 4225 \\
+        \end{tabular}
+        \caption{带孔无限大平板问题节点离散}\label{ch_4:fig:plate_msh}
+\end{figure}
 
 \begin{figure}[H]
     \centering
     \begin{subcaptiongroup}
         \begin{tabular}{c@{\hspace{0pt}}c}
-          $\Vert \boldsymbol u - \boldsymbol u_h \Vert_V$ & $\Vert p - p_h \Vert_Q$ \\
+          $\Vert \boldsymbol u - \boldsymbol u_h \Vert_V$ & $\Vert p - p_h \Vert_Q$\\
           \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_Hdev_4.png}}
-        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_L2_p_4.png}} \\
+        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_L2_p_4.png}}\\
           \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_Hdev_8.png}}
-        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_L2_p_8.png}} \\
+        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_L2_p_8.png}}\\
           \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_Hdev_16.png}}
         & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_L2_p_16.png}}\\
           \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_Hdev_32.png}}
-        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_L2_p_32.png}} \\
+        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/plate_L2_p_32.png}}\\
         \end{tabular}
     \end{subcaptiongroup}
     \caption{带孔方板问题误差与压力节点数的关系}\label{ch_4:fig:plate_with_hole_2}
 \end{figure}
 
-同样，选取Tri3和Tri6两种离散单元，分别对位移节点数$n_u=$81、289、1089、4225进行分析。图\ref{ch_4:fig:plate_with_hole_2}为相应的分析结果，其中虚线为本文提出的最优约束比下的压力节点数量。从图中可以看出：对于线性单元Tri3，当压力节点数$n_p$在一定值位移误差就趋于一定的精度，最优处处于稳定趋于之中。而对于二次单元Tri6，当$n_p$小于最优值时，位移误差达保持在较低水平。类似的趋势也体现在压力误差分析中，并且随着网格密度的增加，这一趋势更加明显。这些结果再次验证了当压力节点数$n_p$小于最优值时，离散方案能够获得高精度的数值解。
+根据带孔无限大平板的对称性，如图\ref{ch_4:fig:hole}所示，取边长$b=5$的四分之一方形域进行研究。
+方形域的上端和右端以及圆孔的边界施加自然边界条件$\Gamma^t$，左端与下端约束法向位移，施加本质边界条件$\Gamma^g$。
+该求解域采用图\ref{ch_4:fig:plate_msh}所示的四个疏密不同的有限单元近似位移。对于采用线性和二次无网格近似的带孔无限大平板问题，其相对影响域大小分别取作1.5和2.5。
 
-图\ref{ch_4:fig:plate_l2}为无限大平板问题Tri3和Tri6单元的位移误差和压力误差对比结果。从图中可以看出：在位移误差方面，Tri3单元的两种离散方案均能达到理论误差收敛率，而Tri6单元的传统混合离散方案则无法达到理论误差收敛率，本文所提方案则能达到理论误差收敛率。在压力误差方面，Tri3单元和Tri6单元的传统混合离散方案均无法达到理论误差收敛率，而所提方案则能够达到。这一结果进一步验证了本文所提离散方案在数值精度和稳定性方面的优越性。
+首先对有限元Tri3和Tri6单元在不同约束比下的位移和压力误差进行了测试。图\ref{ch_4:fig:plate_with_hole_2}为测试的结果，蓝色和绿色折线为Tri3单元和Tri6单元在位移节点数$n_u$固定的情况下，位移和压力误差随压力节点数$n_p$变化的折线图。误差值越往下，表示结果越精确。
+图中竖直虚线表示最优约束比阙值，虚线左边满足 LBB 稳定性条件，右边则不满足。从图中可以看出，当压力节点数在最优约束比范围内（虚线左边），位移误差和始终保持在一定的数值，且该值为最优值；压力误差逐渐减小，且为较低水平。
+当压力节点逐步增加，并超过最优约束比范围后，位移误差和压力误差均发生明显跳跃，误差快速增大；结果同样与 LBB 稳定系数测试结果一致。
+
+图\ref{ch_4:fig:plate_l2}为带孔无限大平板问题Tri3和Tri6单元在传统最优约束比（$r=2$）和所提混合离散方案（$r=r_{opt}$）下的误差对比图。
+从图中可以看出混合离散方案（$r=r_{opt}$）的计算精度优于传统最优约束比（$r=2$），并且两种单元传统最优约束比（$r=2$）下的压力误差无法达到理论误差收敛率，不满足LBB稳定性条件，而混合离散方案（$r=r_{opt}$）下的位移和压力误差，均可达到理论误差收敛率。
+
 \begin{figure}[H]
     \centering
     \begin{subcaptiongroup}
@@ -284,44 +314,45 @@ $\beta$值越往下代表$\beta$越接近于零，表明混合方案不稳定。
     \caption{无限大平板问题误差对比}\label{ch_4:fig:plate_l2}
 \end{figure}
 
+\clearpage
 \subsection{Cook membrane 问题}
-考虑经典的Cook membrane 问题，膜的尺寸如图\ref{ch_4:fig:cook}所示，右端沿着$y$轴正方向施加外部荷载$P=6.25$，膜的材料系数为杨氏模量$E=70$、泊松比$\nu=0.5-10^{-8}$。在这种情况下，$A$点的位移参考解为：$u_A=28$。
+考虑经典的Cook membrane 问题，膜的尺寸如图\ref{ch_4:fig:cook}所示，右端沿着$y$轴正方向施加外部荷载$P=6.25$，膜的材料系数为杨氏模量$E=70$、泊松比$\nu=0.5-10^{-8}$。该问题$A$点的位移参考解为：$u_A=28$。
 \begin{figure}[!h]
     \centering 
-        \includegraphics[scale=0.3]{figures/ch_4/cook.png}
+        \includegraphics[scale=0.29]{figures/ch_4/cook.png}
         \caption{Cook membrane 问题模型}\label{ch_4:fig:cook}
 \end{figure}
 
-图\ref{ch_4:fig:Cook_membrane_p}和图\ref{ch_4:fig:Cook_membrane_p2}展示了Cook membrane 问题应力云图。通过对比四种不同离散单元的传统混合离散方案和本文所提混合离散方案，可以明显观察到：传统混合离散方案的压力云图出现了明显的振荡现象，而本文所提的混合离散方案则完全消除了这一振荡现象。这一对比结果充分证实了本文所提离散方案的数值稳定性，能够有效的避免压力振荡，从而获得更高精度的压力解。
+Cook membrane 问题求解域采用如图\ref{ch_4:fig:cook_msh}所示的有限单元近似位移。此时，Tri3和Quad4单元位移节点数$n_u$为2145，Tri6单元位$n_u$为8385，Quad8单元$n_u$为6337。对于采用线性和二次无网格近似的Cook membrane 问题，其相对影响域大小分别取作 1.5 和 2.5。
 \begin{figure}[!h]
-    \centering
-    \begin{subcaptiongroup}
-        \begin{tabular}{c@{\hspace{0pt}}c}
-        \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_tri3_32_2145.png}}
-        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_tri3_32_561.png}}\\
-        Tri3($r=2$)&Tri3($r=r_{opt}$)  \\
-        \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_tri6_32_8385.png}}
-        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_tri6_32_2145.png}} \\
-        Tri6($r=2$)&Tri6($r=r_{opt}$)  \\
-        \end{tabular}
-    \end{subcaptiongroup}
-    \caption{Cook membrane 问题三角形单元压力云图}\label{ch_4:fig:Cook_membrane_p}
+    \centering 
+        \includegraphics[scale=0.4]{figures/ch_4/cook_32_msh.png}
+        \caption{Cook membrane 问题节点离散}\label{ch_4:fig:cook_msh}
 \end{figure}
+
+图\ref{ch_4:fig:Cook_membrane_p}为Cook membrane 问题的Tri3、Tri6、Quad4和Quad8单元传统最优约束比（$r=2$）和所提混合离散方案（$r=r_{opt}$）的压力云图。从图中可以看出，传统最优约束比（$r=2$）下的应力云图出现了明显的压力振荡现象，而混合离散方案（$r=r_{opt}$）完全没有压力振荡现象。
 
 \begin{figure}[!h]
     \centering
     \begin{subcaptiongroup}
-        \begin{tabular}{c@{\hspace{0pt}}c}
-        \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_quad_32_2145.png}}
-        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_quad_32_561.png}}\\
-        Quad4($r=2$)&Quad4($r=r_{opt}$)  \\
-        \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_quad8_32_6337.png}}
-        & \raisebox{-0.7\height}{\includegraphics[width=0.45\textwidth]{figures/ch_4/cook_quad8_32_2145.png}} \\
-        Quad8($r=2$)&Quad8($r=r_{opt}$)  \\
+        \begin{tabular}{c@{\hspace{0pt}}c@{\hspace{0pt}}c@{\hspace{0pt}}c}
+     \raisebox{-0.7\height}{\includegraphics[width=0.25\textwidth]{figures/ch_4/cook_tri3_32_2145.png}}
+        & \raisebox{-0.7\height}{\includegraphics[width=0.25\textwidth]{figures/ch_4/cook_tri3_32_561.png}}
+        &  \raisebox{-0.7\height}{\includegraphics[width=0.25\textwidth]{figures/ch_4/cook_quad_32_2145.png}}
+        & \raisebox{-0.7\height}{\includegraphics[width=0.25\textwidth]{figures/ch_4/cook_quad_32_561.png}}\\
+        Tri3($r=2$)&Tri3($r=r_{opt}$)& Quad4($r=2$) &Quad4($r=r_{opt}$)\\
+        \raisebox{-0.7\height}{\includegraphics[width=0.25\textwidth]{figures/ch_4/cook_tri6_32_8385.png}}
+        & \raisebox{-0.7\height}{\includegraphics[width=0.25\textwidth]{figures/ch_4/cook_tri6_32_2145.png}}
+        & \raisebox{-0.7\height}{\includegraphics[width=0.25\textwidth]{figures/ch_4/cook_quad8_32_6337.png}}
+        & \raisebox{-0.7\height}{\includegraphics[width=0.25\textwidth]{figures/ch_4/cook_quad8_32_2145.png}}\\
+        Tri6($r=2$)&Tri6($r=r_{opt}$)& Quad8($r=2$) &Quad8($r=r_{opt}$)\\
+
         \end{tabular}
     \end{subcaptiongroup}
-    \caption{Cook membrane 问题四边形单元压力云图}\label{ch_4:fig:Cook_membrane_p2}
+    \caption{Cook membrane 问题压力云图}\label{ch_4:fig:Cook_membrane_p}
 \end{figure}
+
+
 \section{小结}
 
 本章提出了一种基于LBB稳定性条件的有限元无网格混合离散方案，用于求解体积不可压材料体积自锁问题。

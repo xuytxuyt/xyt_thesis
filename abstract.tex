@@ -1,61 +1,60 @@
 
 \begin{abstract}
-    自锁问题是数值仿真分析中常见的数值问题，主要表现为由于过度约束导致数值解的精度或收敛性丧失，并且应力解产生严重的振荡现象。
-    常见的自锁问题包括不可压材料结构分析中的体积自锁问题和中厚板结构分析中剪切自锁问题。
-    在混合离散框架下，约束的数量通过压力或剪切力自由度数量衡量，其余总自由度数量比值称之为约束比。
-    通过改变约束比可缓解自锁问题，但目前最优约束比尚不明确。
-    Ladyzhenskaya-Babuška-Brezzi(LBB)稳定性条件则是获得稳定数值解的理论基础，满足该条件可避免自锁问题。
-    然而LBB稳定条件理论验证困难，通常仅能通过特征值问题进行数值验证，且该条件与约束比的关系并不明确。
-    针对自锁问题目前的瓶颈，本文做了如下工作：
-    
-    首先，本文针对体积不可压问题LBB稳定性条件提出了一种新型的LBB稳定系数的估计方法。
-    该方法基于泛函分析的手段，将LBB稳定性条件进行一定的转换，并引入最大最小值原理，验证其与特征值问题数值验证LBB稳定性条件方法的等价性。
-    同时，引入与位移自由度数量相同维度的完备多项式空间，并在该空间中分析LBB稳定系数的取值上界与压力个数之间的关系，从而确定体积不可压问题最优约束比取值范围。
-    利用新型LBB稳定系数误差估计，通过简单统计混合离散分析中约束比数量是否达到最优约束比范围，即可判断该方法是否发生自锁现象。
-    本文通过对比传统免体积自锁方案方法的最优约束比、LBB稳定性条件数值验证和理论验证，验证了所提方法的有效性。
-    
-    其次，本文提出体积不可压问题的有限元无网格混合离散伽辽金法，该方法中的位移采用传统有限元近似离散，而压力则采用再生核无网格近似离散。
-    再生核无网格近似可不依赖于单元几何拓扑关系，构造全域连续光滑的形函数。
-    依据该特点可对压力自由度数量进行任意调整，以满足最优约束比要求。
-    通过所提有限元无网格混合离散分析方法结合LBB稳定性条件特征值问题数值验证方法，测试了不同约束比下LBB稳定系数的大小，以此验证了所提LBB稳定系数估计表达式和最优约束比的有效性。
-    为方便数值实现，最终压力无网格节点的位置在位移节点的基础上进行选取，在位移节点上每隔一点取作压力节点以满足最优约束比的要求。
-    本文通过系列体积不可压问题弹性力学问题验证了所提方法的精度、误差收敛性和压力解的稳定性。
-    
-    最后，本文提出了中厚板剪切自锁问题的LBB稳定性系数估计表达式，并分析了满足该条件下的最优约束比范围。
-    建立中厚板问题的有限元无网格混合离散伽辽金法，其中板的挠度和转角采用有限元近似离散，而剪切力则采用再生核无网格近似离散。
-    同样通过该混合离散方法结合LBB稳定性条件特征值问题验证了所提最优约束比的有效性。
-    由于剪切自锁问题的最优约束比取值范围不同于体积自锁问题，取本质边界条件以外的挠度、转角节点作为剪切力节点，以满足LBB稳定性条件。
-    通过中厚板问题的典型算例，验证了所提有限元无网格混合离散分析方法能满足理论误差收敛性要求，并且能有效避免剪切自锁问题。
-    
-    \end{abstract}
-    \keywords{自锁问题；混合离散；最优约束比；LBB稳定性条件；再生核近似}
-    
-    \begin{abstractEn}
-    
-    Numerical locking, like volumetric locking in incompressible material formulations or shear locking in Mindlin plate formulations, is a common issue in computational mechanics.
-    Due to the over-constraint, it primarily manifests as a loss of accuracy or convergence in numerical solutions, and often accompanied by severe oscillations in stress solutions.
-    For the mixed formulation framework, the constraint level can be measured by the ratio of degrees of freedom (DOFs) associated with the displacement DOFs to pressure or shear forces DOFs, known as the constraint ratio.
-    A properly chosen constraint ratio can alleviate locking, but the optimal constraint ratio remains unclear.
-    The Ladyzhenskaya-Babuška-Brezzi (LBB) condition provides a theoretical foundation for obtaining stable numerical solutions, and satisfying this condition will prevent the locking problem.
-    However, verifying the LBB condition analytically is challenging, often requiring numerical validation via a eigenvalue problem. 
-    Moreover, the relationship between the LBB condition and the constraint ratio is still unknown. To address these bottlenecks, this thesis makes the following contributions:
-    
-    Firstly, this work proposes a novel LBB coefficient estimator for incompressibe elasticity problems. Using functional analysis and the max-min principle, it is demonstrated that LBB condition is equivalent to the eigenvalue problems.
-    Furthermore, by introducing a complete polynomial space with the same dimensions as the displacement DOFs, the relationship between the upper bound of the LBB coefficient and the number of pressure DOFs is analyzed, allowing for the determination of the optimal constraint ratio for the volumetric locking.
-    The proposed LBB coefficient estimator enables an easy and effective way to assess volumetric locking by checking whether the constraint ratio in a mixed formulation falls within the optimal range. The effectiveness of the proposed estimator is validated through comparisons with conventional constraint ratios, numerical eigenvalue problem and theoretical validation of LBB condition.
-    
-    Subsequently, a mixed finite element and meshfree method is introduced for incompressible problems, where displacements are discretized using traditional finite elements, while pressure fields are discretized using a reproducing kernel meshfree approximation.
-    The meshfree approximation provides globally continuous and smoothed shape functions independent of element topology, allowing arbitrary adjustment of the number of pressure DOFs to achieve the optimal constraint ratio.
-    By using the proposed mixed formulation with LBB condition's eigenvalue problem, the LBB coefficient is evaluated under different constraint ratios, verifying the effect of the proposed LBB coefficient estimator and the optimal constraint ratio.
-    For numerical implementation, meshfree pressure nodes are strategically selected based on displacement nodes, ensuring that every other displacement node serves as a pressure node to satisfy the optimal constraint ratio.
-    The accuracy, error convergence and stability of pressure solutions of proposed mixed formulation are verified through a series of incompressible elasticity problems.
-    
-    Finally, this thesis further extends the LBB coefficient estimator to shear locking problems in Mindlin thick plates, analyzing the corresponding optimal constraint ratio range.
-    A finite element meshfree mixed formulation method is developed for Mindlin thick plates, where plate deflections and rotations are approximated using finite elements, while shear forces are discretized using reproducing kernel meshfree approximation.
-    The effectiveness of the proposed optimal constraint ratio is validated through eigenvalue problem of LBB condition.
-    Since the optimal constraint ratio for shear locking differs from that for volumetric locking, deflection and rotation nodes (excluding those constrained by essential boundary conditions) are selected as shear force nodes to satisfy the LBB stability condition.
-    Numerical examples on thick plate problems confirm that the proposed mixed finite element and meshfree method achieves theoretical error convergence rates and effectively mitigates shear locking.
-    
-    \end{abstractEn}
-    \keywordsEn{Locking problems; Mixed formulation;  Optimal constraint ratio;LBB stability condition; Reproducing kernel approximation}
-    
+自锁问题是数值仿真分析中常见的数值问题，主要表现为由于过度约束导致数值解的精度或收敛性丧失，并且应力解产生严重的振荡现象。
+常见的自锁问题包括不可压材料结构分析中的体积自锁问题和中厚板结构分析中剪切自锁问题。
+在混合离散框架下，约束的数量通过压力或剪切力自由度数量衡量，其余总自由度数量比值称之为约束比。
+通过改变约束比可缓解自锁问题，但目前最优约束比尚不明确。
+Ladyzhenskaya-Babuška-Brezzi(LBB)稳定性条件则是获得稳定数值解的理论基础，满足该条件可避免自锁问题。
+然而LBB稳定条件理论验证困难，通常仅能通过特征值问题进行数值验证，且该条件与约束比的关系并不明确。
+针对自锁问题目前的瓶颈，本文做了如下工作：
+
+首先，本文针对体积不可压问题LBB稳定性条件提出了一种新型的LBB稳定系数的估计方法。
+该方法基于泛函分析的手段，将LBB稳定性条件进行一定的转换，并引入最大最小值原理，验证其与特征值问题数值验证LBB稳定性条件方法的等价性。
+同时，引入与位移自由度数量相同维度的完备多项式空间，并在该空间中分析LBB稳定系数的取值上界与压力个数之间的关系，从而确定体积不可压问题最优约束比取值范围。
+利用新型LBB稳定系数误差估计，通过简单统计混合离散分析中约束比数量是否达到最优约束比范围，即可判断该方法是否发生自锁现象。
+本文通过对比传统免体积自锁方案方法的最优约束比、LBB稳定性条件数值验证和理论验证，验证了所提方法的有效性。
+
+其次，本文提出体积不可压问题的有限元无网格混合离散伽辽金法，该方法中的位移采用传统有限元近似离散，而压力则采用再生核无网格近似离散。
+再生核无网格近似可不依赖于单元几何拓扑关系，构造全域连续光滑的形函数。
+依据该特点可对压力自由度数量进行任意调整，以满足最优约束比要求。
+通过所提有限元无网格混合离散分析方法结合LBB稳定性条件特征值问题数值验证方法，测试了不同约束比下LBB稳定系数的大小，以此验证了所提LBB稳定系数估计表达式和最优约束比的有效性。
+为方便数值实现，最终压力无网格节点的位置在位移节点的基础上进行选取，在位移节点上每隔一点取作压力节点以满足最优约束比的要求。
+本文通过系列体积不可压问题弹性力学问题验证了所提方法的精度、误差收敛性和压力解的稳定性。
+
+最后，本文提出了中厚板剪切自锁问题的LBB稳定性系数估计表达式，并分析了满足该条件下的最优约束比范围。
+建立中厚板问题的有限元无网格混合离散伽辽金法，其中板的挠度和转角采用有限元近似离散，而剪切力则采用再生核无网格近似离散。
+同样通过该混合离散方法结合LBB稳定性条件特征值问题验证了所提最优约束比的有效性。
+由于剪切自锁问题的最优约束比取值范围不同于体积自锁问题，取本质边界条件以外的挠度、转角节点作为剪切力节点，以满足LBB稳定性条件。
+通过中厚板问题的典型算例，验证了所提有限元无网格混合离散分析方法能满足理论误差收敛性要求，并且能有效避免剪切自锁问题。
+
+\end{abstract}
+\keywords{自锁问题；混合离散；最优约束比；LBB稳定性条件；再生核近似}
+
+\begin{abstractEn}
+
+Numerical locking, like volumetric locking in incompressible material formulations or shear locking in Mindlin plate formulations, is a common issue in computational mechanics.
+Due to the over-constraint, it primarily manifests as a loss of accuracy or convergence in numerical solutions, and often accompanied by severe oscillations in stress solutions.
+For the mixed formulation framework, the constraint level can be measured by the ratio of degrees of freedom (DOFs) associated with the displacement DOFs to pressure or shear forces DOFs, known as the constraint ratio.
+A properly chosen constraint ratio can alleviate locking, but the optimal constraint ratio remains unclear.
+The Ladyzhenskaya-Babuška-Brezzi (LBB) condition provides a theoretical foundation for obtaining stable numerical solutions, and satisfying this condition will prevent the locking problem.
+However, verifying the LBB condition analytically is challenging, often requiring numerical validation via a eigenvalue problem. 
+Moreover, the relationship between the LBB condition and the constraint ratio is still unknown. To address these bottlenecks, this thesis makes the following contributions:
+
+Firstly, this work proposes a novel LBB coefficient estimator for incompressibe elasticity problems. Using functional analysis and the max-min principle, it is demonstrated that LBB condition is equivalent to the eigenvalue problems.
+Furthermore, by introducing a complete polynomial space with the same dimensions as the displacement DOFs, the relationship between the upper bound of the LBB coefficient and the number of pressure DOFs is analyzed, allowing for the determination of the optimal constraint ratio for the volumetric locking.
+The proposed LBB coefficient estimator enables an easy and effective way to assess volumetric locking by checking whether the constraint ratio in a mixed formulation falls within the optimal range. The effectiveness of the proposed estimator is validated through comparisons with conventional constraint ratios, numerical eigenvalue problem and theoretical validation of LBB condition.
+
+Subsequently, a mixed finite element and meshfree method is introduced for incompressible problems, where displacements are discretized using traditional finite elements, while pressure fields are discretized using a reproducing kernel meshfree approximation.
+The meshfree approximation provides globally continuous and smoothed shape functions independent of element topology, allowing arbitrary adjustment of the number of pressure DOFs to achieve the optimal constraint ratio.
+By using the proposed mixed formulation with LBB condition's eigenvalue problem, the LBB coefficient is evaluated under different constraint ratios, verifying the effect of the proposed LBB coefficient estimator and the optimal constraint ratio.
+For numerical implementation, meshfree pressure nodes are strategically selected based on displacement nodes, ensuring that every other displacement node serves as a pressure node to satisfy the optimal constraint ratio.
+The accuracy, error convergence and stability of pressure solutions of proposed mixed formulation are verified through a series of incompressible elasticity problems.
+
+Finally, this thesis further extends the LBB coefficient estimator to shear locking problems in Mindlin thick plates, analyzing the corresponding optimal constraint ratio range.
+A finite element meshfree mixed formulation method is developed for Mindlin thick plates, where plate deflections and rotations are approximated using finite elements, while shear forces are discretized using reproducing kernel meshfree approximation.
+The effectiveness of the proposed optimal constraint ratio is validated through eigenvalue problem of LBB condition.
+Since the optimal constraint ratio for shear locking differs from that for volumetric locking, deflection and rotation nodes (excluding those constrained by essential boundary conditions) are selected as shear force nodes to satisfy the LBB stability condition.
+Numerical examples on thick plate problems confirm that the proposed mixed finite element and meshfree method achieves theoretical error convergence rates and effectively mitigates shear locking.
+
+\end{abstractEn}
+\keywordsEn{Locking problems; Mixed formulation;  Optimal constraint ratio;LBB stability condition; Reproducing kernel approximation}
