@@ -75,7 +75,7 @@
 $\beta$的平方为\eqref{ch_2:eq:equilibrium_projection}中$\tilde{\boldsymbol K}^v$与$\boldsymbol K^d$的最小非零特征值。
 该证明过程从泛函分析的角度再次验证了LBB稳定性条件与特征值问题的等价性。
 
-\section{特征值问题与体积约束比}
+\section{考虑约束比的LBB稳定系数估计}
 
 上节从泛函分析的角度再次验证了特征值问题与LBB稳定性条件之间的联系，本节将进一步对特征值问题进行估计，以建立考虑约束比的LBB稳定系数的新型估计方法。在特征值问题中，约束比中的位移自由度数量和压力自由度数量可表示为：
 \begin{equation}
@@ -155,6 +155,8 @@ $\beta_s$是否为零取决于是否存在一个$\boldsymbol v \in V_{n_u}\setmi
 \begin{equation}
     r_{opt} \ge \frac{n_d\times n_u}{n_s} 
 \end{equation}
+
+\section{二维体积不可压问题的最优约束比}
 
 接下来讨论位移自由度数为$n_u$时，稳定压力自由度数$n_s$如何确定。
 以二维问题为例，对于维数为$n_u=3$的位移空间$V_3$为线性完备多项式空间：
@@ -236,9 +238,7 @@ $\beta_s$是否为零取决于是否存在一个$\boldsymbol v \in V_{n_u}\setmi
 
 值得注意的是，上面提到的位移自由度个数$n_u$为施加本质边界条件之后的位移自由度个数。并且，有限元位移节点与压力节点布置相对均匀，所以式\eqref{ch_3:eq:best}为满足LBB稳定性条件的必要条件。
 
-\section{系数估计验证}
-
-本节针对所提全新LBB稳定系数估计对经典的不可压混合离散方案进行验证，并与传统最优约束比和LBB稳定性条件解析及数值验证结果进行对比。
+本节最后针对所提全新LBB稳定系数估计对经典的不可压混合离散方案进行验证，并与传统最优约束比和LBB稳定性条件解析及数值验证结果进行对比。
 以图\ref{ch_3:fig:elements_eg}所示的两个二维8节点单元混合离散方案为例，图\ref{ch_3:fig:elements_eg}(a)Q8P3单元位移自由度个数$2\bar{n}_u=6$，根据表\eqref{ch_3:eq:best}可得$n_s=1$。因此,满足LBB稳定性条件的最优压力约束自由度的数量为1。因此Q8P3单元不满足LBB稳定性条件，而Q8P1单元满足LBB稳定性条件。
 \begin{figure}[!h]
     \centering
