@@ -1,21 +1,20 @@
 \chapter{体积自锁问题的有限元无网格混合离散分析方法}
 
-本章针对体积不可压问题建立有限元无网格混合离散分析方法，调整体积约束比以达到最优约束比。
-首先介绍了再生核近似无网格法，详细说明了无网格形函数的构造过程.
-其次，结合对LBB稳定系数的分析，提出满足LBB稳定性条件的免体积自锁混合离散方案。
+本章针对体积不可压问题提出了有限元无网格混合离散分析方案，并利用该框架验证第三章所提LBB稳定系数估计表达式的正确性，并确定最终压力节点布置方案。
 最后，通过典型弹性力学算例验证所提混合离散方案的稳定性与正确性。
-\section{再生核近似}
-为达到最优体积约束比，采用如图\ref{ch_4:fig:meshfree}所示的有限元无网格混合离散方案离散位移和压力节点。
+\section{有限元无网格混合离散方案}
+考虑如图\ref{ch_4:fig:meshfree}所示的有限元无网格混合离散方案离散位移和压力节点。
 将伽辽金弱形式\eqref{ch_2:eq:weak_mix}中的位移$\boldsymbol{u}$和压力$p$采用不同的离散方式进行近似。
 位移$\boldsymbol{u}$仍采用有限元形函数\eqref{ch_2:eq:u_h_mix}进行近似，而压力$p$通过再生核无网格形函数进行近似。
 再生核无网格近似将求解域$\Omega$及其边界$\Gamma$由$n_p$个无网格节点离散$\{\boldsymbol x_K\}_{K=1}^{n_p}$。每个无网格节点$\boldsymbol x_K$对应的形函数为$\Psi_K(\boldsymbol{x})$，形函数影响域为$supp(\boldsymbol{x}_K)$。近似的压力$p_h$可表示为：
 \begin{equation}
     p_h(\boldsymbol x) = \sum_{K=1}^{n_p} \Psi_K(\boldsymbol x) p_K
 \end{equation}
-其中$p_K$为与无网格节点$x_K$对应的节点系数。
-\begin{figure}[H]
+其中$p_K$为与无网格节点$\boldsymbol x_K$对应的节点系数。
+
+\begin{figure}[!ht]
     \centering 
-        \includegraphics[scale=0.5]{figures/meshfree.png}
+        \includegraphics[scale=0.55]{figures/meshfree.png}
         \caption{有限元无网格混合离散示意图}\label{ch_4:fig:meshfree}
 \end{figure}
 
@@ -23,20 +22,19 @@
 \begin{equation}\label{ch_4:eq:rkshape}
     \Psi_K(\boldsymbol x) = \boldsymbol c(\boldsymbol x_K-\boldsymbol x) \boldsymbol p^{[n]}(\boldsymbol x_K-\boldsymbol x) \phi(\boldsymbol x_K - \boldsymbol x)
 \end{equation}
-其中$\boldsymbol p$为$n$阶基函数向量，其表达式为：
+其中$\boldsymbol p$为基函数向量，其表达式为：
 \begin{equation}
-    \boldsymbol p^{[n]}(\boldsymbol x) = \{ 1, x, y, x^2, xy, y^2,...,y^n\}^\mathrm{T}
+    \boldsymbol p(\boldsymbol x) = \{ 1, x, y, x^2, xy, y^2,\dots \}^\mathrm{T}
 \end{equation}
-对于弹性力学问题，无网格基函数一般选择二阶或者三阶多项式基函数，本文选择二阶多项式基函数:
-\begin{equation}
-    \boldsymbol p(\boldsymbol x) = \{ 1, x, y, x^2, xy, y^2\}^\mathrm{T}
-\end{equation}
-而$\phi$为核函数，其影响域的大小由影响域尺寸$s$决定，核函数及其影响域的大小共同决定了无网格形函数的局部紧支性和光滑性。在二维情况下，核函数的影响域通常为圆形或者矩形。本文的影响域形状为矩形，矩形影响域的核函数可由下列公式计算得到：
+本文中位移采用三角形三节点（Tri3）和六节点(Tri6)单元、四边形四节点（Quad4）和八节点（Quad8）单元进行近似，压力近似中无网格形函数基向量阶次取相同阶次进行离散，
+即Tri3和Quad4取线性基函数，而Tri6和Quad8取二次基函数。
+
+$\phi$为核函数，其影响域的大小由影响域尺寸决定，核函数及其影响域的大小共同决定了无网格形函数的局部紧支性和光滑性。在二维情况下，核函数的影响域通常为圆形或者矩形。本文的影响域形状为矩形，矩形影响域的核函数可由下列公式计算得到：
 \begin{equation}
     \phi(\boldsymbol x_K-\boldsymbol x) = \phi(r_x) \phi(r_y), \quad r_x = \frac{|x_K - x|}{s_{x}},r_y = \frac{| y_K -  y|}{s_{y}}
 \end{equation}
 其中, $s_x$ 和 $s_y$ 分别为 $x$ 和 $y$ 方向上的影响域尺寸，若节点均匀布置，一般使两个方向上的影响域大小相等，即$s_x = s_y = s$。
-为保证形函数的紧支性和光滑性，$\phi$ 通常取为阶次大于 $n$ 的紧支函数。因此，本文核函数 $\phi(\boldsymbol x_K-\boldsymbol x)$ 取为三次样条函数：
+为保证形函数的紧支性和光滑性，$\phi$ 通常取为阶次大于基函数阶次的紧支函数。因此，本文核函数 $\phi(\boldsymbol x_K-\boldsymbol x)$ 取为三次样条函数：
 \begin{equation}
     \phi(s) =\frac{1}{3!} \begin{cases}
         (2-2s)^3 - 4(1-2s)^3 & s\le\frac{1}{2} \\
@@ -48,7 +46,7 @@ $\boldsymbol c$为待定系数向量，可以通过满足下列一致性条件�
 \begin{equation}\label{ch_4:eq:cc1}
     \sum_{I=1}^{n_p}\Psi_K(\boldsymbol x) \boldsymbol p(\boldsymbol x_K) = \boldsymbol p (\boldsymbol x)
 \end{equation}
-或等效的转换形式：
+或等价于
 \begin{equation}\label{ch_4:eq:cc2}
     \sum_{I=1}^{n_p}\Psi_K(\boldsymbol x) \boldsymbol p(\boldsymbol x_K-\boldsymbol x) = \boldsymbol p(\boldsymbol 0)
 \end{equation}
@@ -66,20 +64,22 @@ $\boldsymbol c$为待定系数向量，可以通过满足下列一致性条件�
     \Psi_K(\boldsymbol x) = \boldsymbol p^{\mathrm{T}}(\boldsymbol 0) \boldsymbol A^{-1}(\boldsymbol x_K-\boldsymbol x)p(\boldsymbol x_K-\boldsymbol x)\phi(\boldsymbol x_K-\boldsymbol x)
 \end{equation}
 
-\section{满足LBB稳定性条件的混合离散方案}
-基于考虑约束比的LBB稳定系数估计式\eqref{ch_3:eq:r3}和最优体积约束比取值范围\eqref{ch_3:eq:best}，结合有限元无网格混合离散分析方法，对有限元离散单元在不同约束比例下的LBB稳定系数进行了系统性测试。
-为探究单元类型和网格密度对计算结果的影响，测试选取了四种典型有限元离散单元：Tri3(三角形3节点单元)、Tri6(三角形6节点单元)、Quad4(四边形4节点单元)、Quad8(四边形八节点单元)和四个不同数量的位移节点($n_u=$25、81、289、1089)进行对比分析，旨在寻找出最优的免体积自锁有限元无网格混合离散方案。
-所得测试结果如图\ref{ch_4:fig:infsup_convergence}所示。
+再生核无网格形函数仅通过节点信息构造形函数，形函数在全域高阶连续光滑，与有限元法混合离散求解时，可直接将有限元单元中进行数值积分计算。
+根据该特性，压力节点的布置可摆脱单元限制在全域上任意布置，可任意调整体积约束比，以满足最优约束比的要求。
 
-以Tri3单元为例，图\eqref{ch_3:eq:best}(a)中的红色曲线反映了在位移节点数$n_u$固定的情况下，压力节点数$n_p$的变化对LBB稳定系数$\beta$的影响。
-$\beta$值越接近于1表示该约束比例下的混合方案稳定性越好，(即满足LBB稳定性条件)。
-图中四个竖向虚线分别表示四个不同位移节点数$n_u$对应的最优体积约束比下压力节点数$n_p$。
-测试结果表明：当压力节点数$n_p$小于最优值(位于虚线左侧)时，离散方案趋于稳定，满足LBB稳定性条件；
-而当$n_p$大于最优值(位于虚线右侧)时，离散方案则表现出不稳定性，无法满足LBB稳定性条件。
-值得注意的是，传统有限元混合离散方案中采用的最优约束比($r=2$)对应的$\beta$值均位于虚线右侧，这表明传统有限元混合离散方案不满足LBB稳定性条件。
+\section{最优约束比数值验证及压力节点布置方案}
+基于所提的LBB稳定系数估计\eqref{ch_3:eq:r3}和最优体积约束比取值范围\eqref{ch_3:eq:best}，结合有限元无网格混合离散分析方法，对有限元Tri3、Tri6、Quad4和Quad8单元在不同约束比例下的LBB稳定系数进行了系统性测试。采用特征值方法对如图\ref{}所示$\Omega = (0,1)\otimes(0,1)$的正方形区域问题进行LBB稳定性条件进行测试，$\Omega$左边施加强制边界条件，其余边界自由。
 
-如图\ref{ch_4:fig:infsup_convergence}(b)、(c)、(d)所示，Tri6单元、Quad4单元和Quad8单元的测试结果与Tri3单元的基本一致。为保证混合离散方案在满足LBB稳定性条件的同时，避免使用两套网格进行离散而增加计算量，本研究基于上述测试结果，提出了如图\ref{ch_4:fig:mix_scheme}所示的免体积自锁有限元无网格混合离散方案。该方案的压力节点选取直接基于位移节点，从而实现了方案的简易性与稳定性。
-图\ref{ch_4:fig:infsup_convergence}中实线折现展示了相应方案下的$\beta$取值，初步验证了该方案的可行性。
+对$\Omega$区域采用图\ref{}所示的$4\times 4$、$8\times 8$、$16\times 16$和$32\times 32$有限元单元近似位移。为避免非均布节点对计算结果的影响，这里采用均布无网格节点进行离散，针对线性和二次无网格近似，其相对影响域大小分别取作$1.5$和$2.5$。
+
+图\ref{ch_4:fig:infsup_convergence}该测试的计算结果，
+红色曲线为在位移节点数$n_u$固定的情况下，LBB稳定系数$\beta$随压力节点数$n_p$的变化的曲线图。
+$\beta$值越往下，表示其趋近于零，不满足LBB稳定性条件。
+同时，对于不同的位移节点下（颜色深浅差异），LBB稳定系数保持在一定范围，表示其大小与网格尺寸无关，满足LBB稳定性条件。
+相反则不满足LBB稳定性条件。
+图中竖直蓝色虚线表示第三章所提LBB稳定系数估计下得到的最优约束比阙值，虚线左边满足LBB稳定性条件，右边则不满足。
+从图中可以看出，当压力节点数在最优约束比范围内（蓝色虚线左边），其$\beta$始终保持在一定的数值，且该值大小不可忽略。
+当压力节点逐步增加，并超过最优约束比范围后，$\beta$迅速减小，此时混合离散方案不满足LBB稳定性条件。
 
 \begin{figure}[H]
     \centering
@@ -92,6 +92,13 @@ $\beta$值越接近于1表示该约束比例下的混合方案稳定性越好，
     \captionsetup{aboveskip=0pt}
     \caption{\centering 各种有限元方案的LBB稳定性条件测试 \\ \subref{a} mix-Tri3; \subref{b} mix-Tri6; \subref{c} mix-Quad4; \subref{d}mix-Quad8}\label{ch_4:fig:infsup_convergence}
 \end{figure}
+
+针对上诉分析结果，进一步在图中标出传统最优约束比下的测试结果（$r=2$）。
+结果表明在传统最优约束比下，$\beta$的值已经开始下降，无法保持在一个较大的水平，不能满足LBB稳定性条件。
+为满足LBB稳定性条件，同时考虑编程实现的难易程度，本文针对体积不可压问题的Tri3、Tri6、Quad4和Quad8位移单元提出了图\ref{ch_4:fig:mix_scheme}所示的压力节点布置方案，
+该方案压力节点在已有的位移节点中选取，以减小内存开销。
+同时取隔一个点作为压力节点，整体节点数也满足所提LBB稳定系数估计式\eqref{ch_3:eq:best}的要求。
+将该方案的特征值测试结果也标于图\ref{ch_4:fig:mix_scheme}中，从结果中可以看出，此混合离散方案可满足LBB稳定性条件。在本章的数值算例中，mix--Tri3、mix--Tri6、mix--Quad4和mix--Quad8在不声明约束比的情况下，均采用这套离散方案。
 
 \begin{figure}[!ht]
     \centering

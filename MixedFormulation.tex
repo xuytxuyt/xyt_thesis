@@ -249,7 +249,11 @@ $\delta\boldsymbol \varepsilon^v$和$\delta\boldsymbol \varepsilon^d $分别为$
     (q_h,\mathcal P_h \boldsymbol u_h) = (q_h, \nabla \cdot \boldsymbol u_h), \quad \forall q_h \in Q_h
 \end{equation}
 其中，$(\bullet,\bullet)$为内积算子。
-为表示方便，可将投影后的位移散度写作$p_h=\mathcal P_h \boldsymbol u_h = 3\kappa \tilde \nabla \cdot \boldsymbol u_h$。且有$3\kappa\tilde \nabla \cdot \boldsymbol u_h \in \mathrm{Im} \mathcal P_h$，$\mathrm{Im} \mathcal P_h \subseteq Q_h$为$\mathcal P_h$的相空间\cite{philippeg.2013}。
+为表示方便，可将投影后的压力写作：
+\begin{equation}\label{ch_2:eq:pressure_projection}
+p_h=\mathcal P_h \boldsymbol u_h = 3\kappa \tilde \nabla \cdot \boldsymbol u_h
+\end{equation}
+由于$3\kappa\tilde \nabla \cdot \boldsymbol u_h \in \mathrm{Im} \mathcal P_h$，$\mathrm{Im} \mathcal P_h \subseteq Q_h$为$\mathcal P_h$的相空间\cite{philippeg.2013}，
 此时，式\eqref{ch_2:eq:orthogonal}可改写为：
 \begin{equation}
     \int_\Omega q_h(\nabla \cdot \boldsymbol u_h - \tilde \nabla \cdot \boldsymbol u_h) d\Omega = 0, \quad \forall q_h \in Q_h
