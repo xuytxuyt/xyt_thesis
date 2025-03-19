@@ -35,13 +35,19 @@ $\boldsymbol b$为$\Omega$中的体力，$\boldsymbol t$，$\boldsymbol g$ 分�
 对于体积不可压缩材料，其泊松比$\nu \rightarrow 0.5$。 在这种情况下，式\eqref{modulus}中体积模量$\kappa \rightarrow \infty$，而剪切模量$\mu$的变化相对较小，从而导致$\kappa\gg\mu$。
 根据体积不可压缩材料本构关系\eqref{stress_penalty}，当$\kappa \rightarrow \infty$时，体积应变$\boldsymbol \varepsilon^v$被约束，导致体积的变化$\nabla \cdot \boldsymbol u\rightarrow 0$。
 
-采用伽辽金法进行求解时，体积不可压问题相对应的伽辽金问题为：
+弹性力学方程组\eqref{strong_penalty}相对应的能量泛函$\Pi$具有如下形式：
+\begin{equation}
+    \Pi(\boldsymbol u) = \int_\Omega \frac{1}{2}\boldsymbol \varepsilon : \boldsymbol \sigma d\Omega
+    - \int_{\Gamma_t} \boldsymbol u\cdot \boldsymbol t d\Gamma
+    - \int_\Omega \boldsymbol u \cdot \boldsymbol b d\Omega
+\end{equation}
+对上式进行变分，并采用伽辽金法进行求解时，体积不可压问题相对应的伽辽金问题为：
 \begin{equation}\label{weak_penalty}
     \text{find}\, \boldsymbol u \in V, \quad
     a(\delta \boldsymbol u, \boldsymbol u) + a^v(\delta \boldsymbol u, \boldsymbol u) = f(\delta \boldsymbol u),
     \quad \forall \delta \boldsymbol u \in V
 \end{equation}
-其中，$a: V\times V\rightarrow \mathbb R$，$a^v: V\times V\rightarrow \mathbb R$为双线性算子，$f: V \rightarrow \mathbb R$为线性算子，它们具有以下形式：
+式中使用了本构关系式\eqref{stress_penalty}进行分解，$a: V\times V\rightarrow \mathbb R$，$a^v: V\times V\rightarrow \mathbb R$为双线性算子，$f: V \rightarrow \mathbb R$为线性算子，它们具有以下形式：
 \begin{align}
     a(\delta \boldsymbol u, \boldsymbol u) &=
     \int_\Omega 2\mu \delta \boldsymbol \varepsilon^d : \boldsymbol \varepsilon^d d\Omega \\
@@ -157,7 +163,16 @@ $\delta\boldsymbol \varepsilon^v$和$\delta\boldsymbol \varepsilon^d $分别为$
 \begin{equation}\label{stress_mix}
     \boldsymbol \sigma(\boldsymbol u, p) = p \boldsymbol 1 + 2\mu \boldsymbol \varepsilon^d(\boldsymbol u)
 \end{equation}
-其中$p\in Q$，$Q = \{q \in L^2(\Omega) \vert \int_{\Omega} q d\Omega = 0\}$。此时，能量泛函具有位移$\boldsymbol u$和压力$p$两个变量，分别对两变量进行变分，可得相对应的伽辽金弱形式为：
+其中$p\in Q$，$Q = \{q \in L^2(\Omega) \vert \int_{\Omega} q d\Omega = 0\}$。此时，能量泛函具有位移$\boldsymbol u$和压力$p$两个变量：
+\begin{multline}
+    \Pi(\boldsymbol u, p) =
+    \int_\Omega \mu \boldsymbol \varepsilon^d:\boldsymbol \varepsilon^d d\Omega + 
+    \frac{1}{2} \int_\Omega \nabla \cdot \boldsymbol u p d\Omega \\ +
+    \int_\Omega \frac{1}{2}p(\frac{p}{\kappa} + \nabla \cdot \boldsymbol u) d\Omega
+    - \int_{\Gamma_t} \boldsymbol u\cdot \boldsymbol t d\Gamma
+    - \int_\Omega \boldsymbol u \cdot \boldsymbol b d\Omega
+\end{multline}
+分别对两变量进行变分，可得相对应的伽辽金弱形式为：
 \begin{equation}\label{ch_2:eq:weak_mix}
     \text{find}\, \boldsymbol u \in V, p \in Q, \quad
     \left \{
