@@ -416,72 +416,72 @@ p_h=\mathcal P_h \boldsymbol u_h = 3\kappa \tilde \nabla \cdot \boldsymbol u_h
     \caption{LBB稳定性条件验证} \label{infsuptest}
     \begin{tabular}{cccc}
         \hline
-        \multirow{2}{*}{离散方案}&体积&\multicolumn{2}{c}{LBB稳定性条件}\\
-        & 约束比&数值验证&解析证明\\
+        \multirow{2}{*}{离散方案}&约束比&\multicolumn{2}{c}{LBB稳定性条件}\\
+        & $r\geq n_d$&数值验证&解析证明\\
         \hline
         \begin{tabular}{c}
             \begin{minipage}{0.13\columnwidth}
                 \centering
                 \includegraphics[width=0.9\textwidth]{figures/mix_T3P1.png}
-            \end{minipage}\\T3P1
+            \end{minipage}\\T3P1($r=1$)
         \end{tabular}
-        &$\times$(1)&$\times$ & $\times$\\
+        &$\times$&$\times$ & $\times$\\
         \begin{tabular}{c}
             \begin{minipage}{0.13\columnwidth}
                 \centering
                 \includegraphics[width=0.9\textwidth]{figures/mix_Q4P1.png}
-            \end{minipage}\\Q4P1
+            \end{minipage}\\Q4P1($r=2$)
         \end{tabular}
-        &\checkmark(2)&$\times$ & $\times$\\
+        &\checkmark&$\times$ & $\times$\\
         \begin{tabular}{c}
             \begin{minipage}{0.13\columnwidth}
                 \centering
                 \includegraphics[width=0.9\textwidth]{figures/mix_Q8P3.png}
-            \end{minipage}\\Q8P3
+            \end{minipage}\\Q8P3($r=2$)
         \end{tabular}
-        &\checkmark(2)&$\times$ & $\times$\\
+        &\checkmark&$\times$ & $\times$\\
         \begin{tabular}{c}
             \begin{minipage}{0.13\columnwidth}
                 \centering
                 \includegraphics[width=0.9\textwidth]{figures/mix_Q8P1.png}
-            \end{minipage}\\Q8P1
+            \end{minipage}\\Q8P1($r=6$)
         \end{tabular}
-        &$\times$(6)&\checkmark & \checkmark\\
+        &\checkmark&\checkmark & \checkmark\\
         \begin{tabular}{c}
             \begin{minipage}{0.13\columnwidth}
                 \centering
                 \includegraphics[width=0.9\textwidth]{figures/mix_Q9P3.png}
-            \end{minipage}\\Q9P3
+            \end{minipage}\\Q9P3($r=\frac{8}{3}$)
         \end{tabular}
-        &$\times$$(\frac{8}{3})$&\checkmark & \checkmark\\
+        &\checkmark&\checkmark&\checkmark\\
         \begin{tabular}{c}
             \begin{minipage}{0.13\columnwidth}
                 \centering
                 \includegraphics[width=0.9\textwidth]{figures/mini.png}
-            \end{minipage}\\MINI element \cite{arnold1984,auricchio2005}
+            \end{minipage}\\MINI element \cite{arnold1984,auricchio2005}($r=6$)
         \end{tabular}
-        &$\times$ (6)&\checkmark & \checkmark\\
+        &\checkmark&\checkmark & \checkmark\\
         \begin{tabular}{c}
             \begin{minipage}{0.13\columnwidth}
                 \centering
                 \includegraphics[width=0.9\textwidth]{figures/TaylorHood.png}
-            \end{minipage}\\Taylor--Hood element \cite{hood1974}
+            \end{minipage}\\Taylor--Hood element \cite{hood1974}($r=8$)
         \end{tabular}
-        &$\times$(8)&\checkmark & \checkmark\\
+        &\checkmark&\checkmark & \checkmark\\
         \begin{tabular}{c}
             \begin{minipage}{0.13\columnwidth}
                 \centering
                 \includegraphics[width=0.9\textwidth]{figures/mix_T6C3.png}
-            \end{minipage}\\T6C3
+            \end{minipage}\\T6C3($r=8$)
         \end{tabular}
-        &$\times$(8)&\checkmark & \\
+        &\checkmark&\checkmark & \\
         \begin{tabular}{c}
             \begin{minipage}{0.13\columnwidth}
                 \centering
                 \includegraphics[width=0.9\textwidth]{figures/CrouzeixRaviart.png}
-            \end{minipage}\\Crouzeix-Raviart element \cite{crouzeix1973}
+            \end{minipage}\\Crouzeix-Raviart element \cite{crouzeix1973}($r=\frac{2}{3}$)
         \end{tabular}
-        &$\times$$(\frac{2}{3})$&\checkmark & \\
+        &$\times$&\checkmark & \\
         \hline
         \multicolumn{4}{c}{
                 \begin{tabular}{c@{\hspace{24pt}}c}
